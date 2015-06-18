@@ -61,24 +61,26 @@ public class BudgetPlanGUI extends JFrame {
 	protected void initWindow() {
 
 		// Tabelle mit Uebersicht der Ausgaben
-		Object[][] data = new Object[budget.ausgaben.size()][3];
+		Object[][] data = new Object[budget.ausgaben.size()][5];
 		int i = 0;
 		for (Posten p : budget.ausgaben) {
 			data[i][0] = new SimpleDateFormat("dd/MM/yyyy")
 					.format(p.getDatum());
 			data[i][1] = p.getBezeichnung();
 			data[i][2] = String.format("%.2f", p.getBetrag());
+			data[i][3] =  p.getKategorie();
+			data[i][4] =  p.getArt();
 			i++;
 		}
 
 		table = new JTable(data, new Object[] { "Datum", "Bezeichnung",
-				"Betrag" });
+				"Betrag", "Kategorie", "Art" });
 		scrollpane = new JScrollPane(table);
 
 		// Kreisdiagramm
 		DefaultPieDataset pd = new DefaultPieDataset();
 		for (Posten p : budget.ausgaben) {
-			pd.setValue(p.getBezeichnung(), p.getBetrag());
+			pd.setValue(p.getKategorie(), p.getBetrag());
 		}
 		JFreeChart pie = ChartFactory.createPieChart("Ausgaben", pd);
 		ChartPanel panel = new ChartPanel(pie);
