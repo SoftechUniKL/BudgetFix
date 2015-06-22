@@ -46,7 +46,7 @@ public class BudgetPlanGUI extends JFrame {
 	 *            Modell der Daten
 	 */
 	public BudgetPlanGUI(BudgetPlanModel budget) {
-		super("BudgetPlan");
+		super("BudgetFix");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new FlowLayout());
 
@@ -85,6 +85,9 @@ public class BudgetPlanGUI extends JFrame {
 		JFreeChart pie = ChartFactory.createPieChart("Ausgaben", pd);
 		ChartPanel panel = new ChartPanel(pie);
 
+		
+		
+		
 		// Button
 		button = new JButton("TestButton!");
 
