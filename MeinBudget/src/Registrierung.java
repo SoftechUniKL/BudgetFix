@@ -48,7 +48,7 @@ public class Registrierung {
 		Registrierung.setBounds(100, 100, 450, 300);
 		Registrierung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Registrierung.getContentPane().setLayout(null);
-		Registrierung.setTitle("Registrierung");
+		Registrierung.setTitle("BudgetFix - Registrierung");
 	
 		JLabel label = new JLabel("Melden Sie sich bitte an!");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
