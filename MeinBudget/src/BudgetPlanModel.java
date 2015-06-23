@@ -51,19 +51,16 @@ public class BudgetPlanModel {
 					.println("Formatfehler: Die Datei konnte nicht eingelesen werden!");
 			System.exit(1);
 		}
-	}
+	//}
+/*/Neue Ausgaben 
 
-
-
-//Neue Ausgaben 
-
-/*public Schreiben(){
-	this.ausgaben = new ArrayList<Posten>();
-	try {
+	//public Schreiben(){
+		//this.ausgaben = new ArrayList<Posten>();
+	//	try {
 		// Zeilenweises Einschreiben der Daten
 		CSVWriter writer = new CSVWriter(new FileWriter("data/budget.csv"));
 		String[] nextLine;
-		for (int i=0, i ((nextLine =writer.()) != null) {
+		for (int i=0, i ((nextLine = writer.writeNext()) = null) {
 			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMAN);
 			Date datum = df.parse(nextLine[0]);
 			String bezeichnung = nextLine[1];
@@ -86,5 +83,5 @@ public class BudgetPlanModel {
 		System.err
 				.println("Formatfehler: Die Datei konnte nicht eingelesen werden!");
 		System.exit(1);
-	}*/
+	*/}
 }

@@ -46,6 +46,10 @@ public class Posten {
 	 *            Kurze Beschreibung
 	 * @param betrag
 	 *            Hoehe des Postens
+	 * @param kategoie
+	 * 			  Gruppierung
+	 * @param art
+	 * 			  Fixkosten oder Variable Kosten
 	 */
 	public Posten(Date datum, String bezeichnung, double betrag, String kategorie, String art) {
 		this.bezeichnung = bezeichnung;
