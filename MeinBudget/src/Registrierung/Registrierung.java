@@ -100,14 +100,22 @@ public class Registrierung extends JFrame {
 		
 		//Registrieren mit Mausklick oder Leertaste
 		JButton btnRegistrieren = new JButton("Registrieren");
-		btnRegistrieren.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				registrieren();
+		btnRegistrieren.addActionListener(new ActionListener()) {
+			public void ActionPerformed(ActionEvent e) {
+				registrieren ();
 			}
+			
 
 			private void registrieren() {
 				String einBenutzername;
 				einBenutzername.setName(txtBenutzername.getText());
+			}
+
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 		/*//Benutzernamendaten zur Laufzeit speichern
