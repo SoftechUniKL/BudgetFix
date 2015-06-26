@@ -1,3 +1,5 @@
+package Registrierung;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -21,7 +23,7 @@ import java.awt.event.MouseEvent;
 
 
 
-public class Registrierung extends JFrame {
+public class RFenster extends JFrame {
 
 	/**
 	 * 
@@ -39,7 +41,7 @@ public class Registrierung extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Registrierung frame = new Registrierung();
+					RFenster frame = new RFenster();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +53,7 @@ public class Registrierung extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Registrierung() {
+	public RFenster() {
 		setTitle("BudgetFix - Registrierung");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -91,26 +93,10 @@ public class Registrierung extends JFrame {
 		contentPane.add(PW2);
 		
 		
-		/* //Registerobjekt deklarieren
-		private Benutzername einBenutzername;
-								
-		//Registerobjekt instanziieren
-		private einBenutzername = new Benutzername(); */
-		
 		
 		//Registrieren mit Mausklick oder Leertaste
 		JButton btnRegistrieren = new JButton("Registrieren");
-		btnRegistrieren.addActionListener(new ActionListener()) {
-			public void ActionPerformed(ActionEvent e) {
-				registrieren ();
-			}
-			
-
-			private void registrieren() {
-				String einBenutzername;
-				einBenutzername.setName(txtBenutzername.getText());
-			}
-
+		btnRegistrieren.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -118,29 +104,20 @@ public class Registrierung extends JFrame {
 				
 			}
 			
-		/*//Benutzernamendaten zur Laufzeit speichern
-		//Eingabefehler prüfen
-			private void registrieren() {
-				einBenutzername.setName(txtBenutzer.getText());
-				
-				 if(txtBenutzer.getText().equals("")) {
-					fehlermeldung ("Text eingeben!");
-				}
-				else {
-					einBenutzername.setName(txtName.getTest());
-				} */
-			});
+		});
 		btnRegistrieren.setBounds(70, 200, 104, 23);
 		contentPane.add(btnRegistrieren);
 		
 		//Abbrechen mit Mausklick
 		JButton btnAbbrechen = new JButton("Abbrechen");
+		btnAbbrechen.setBounds(260, 200, 104, 23);
+		contentPane.add(btnAbbrechen);
+		
 		btnAbbrechen.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
 			}
 		});
-		btnAbbrechen.setBounds(260, 200, 104, 23);
-		contentPane.add(btnAbbrechen);
+		
 	}
 }
