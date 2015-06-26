@@ -84,6 +84,12 @@ public class RegisterFenster extends JFrame {
 		contentPane.add(PasswortWdhLabel);
 		
 		JLabel Registrieren = new JLabel("New label");
+		Registrieren.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Tu was
+			}
+		});
 		Registrieren.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/Registrieren.png")));
 		Registrieren.setBounds(78, 240, 146, 38);
 		contentPane.add(Registrieren);

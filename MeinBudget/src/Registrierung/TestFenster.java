@@ -23,8 +23,8 @@ import java.awt.event.MouseEvent;
 
 
 
-public class RFenster extends JFrame {
-
+public class TestFenster extends JFrame {
+	
 	/**
 	 * 
 	 */
@@ -41,7 +41,7 @@ public class RFenster extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RFenster frame = new RFenster();
+					TestFenster frame = new TestFenster();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class RFenster extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RFenster() {
+	public TestFenster() {
 		setTitle("BudgetFix - Registrierung");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -68,7 +68,7 @@ public class RFenster extends JFrame {
 		contentPane.add(lblBitteGebenSie);
 		
 		JLabel lblBenutzername = new JLabel("Benutzername:");
-		lblBenutzername.setBounds(50, 60, 84, 14);
+		lblBenutzername.setBounds(50, 60, 104, 14);
 		contentPane.add(lblBenutzername);
 		
 		JLabel lblPW1 = new JLabel("Passwort:");
@@ -76,7 +76,7 @@ public class RFenster extends JFrame {
 		contentPane.add(lblPW1);
 		
 		JLabel lblPW2 = new JLabel("Passwort wiederholen:");
-		lblPW2.setBounds(50, 140, 124, 14);
+		lblPW2.setBounds(50, 140, 151, 14);
 		contentPane.add(lblPW2);
 		
 		txtBenutzername = new JTextField();

@@ -55,6 +55,13 @@ public class LoginFenster extends JFrame {
 		contentPane.add(PasswortLabel);
 		
 		JLabel btnAnmelden = new JLabel("btnAnmelden");
+		btnAnmelden.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			//Tu was
+				
+			}
+		});
 		btnAnmelden.setIcon(new ImageIcon(LoginFenster.class.getResource("/Login/Anmelden_Knopf.png")));
 		btnAnmelden.setBounds(78, 219, 146, 38);
 		contentPane.add(btnAnmelden);
