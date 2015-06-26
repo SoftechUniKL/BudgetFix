@@ -60,8 +60,7 @@ public class RegisterFenster extends JFrame {
 			//Schlieﬂt das Fenster
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.ex
-				it(0);
+				System.exit(0);
 			}
 			
 		});
