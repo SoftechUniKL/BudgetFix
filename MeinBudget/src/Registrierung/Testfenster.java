@@ -98,8 +98,7 @@ public class RFenster extends JFrame {
 		JButton btnRegistrieren = new JButton("Registrieren");
 		btnRegistrieren.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+			@Override			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
 			}
