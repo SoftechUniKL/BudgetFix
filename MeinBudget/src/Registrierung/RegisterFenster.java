@@ -1,6 +1,6 @@
 package Registrierung;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,16 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class RegisterFenster extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -47,7 +38,8 @@ public class RegisterFenster extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		final JLabel btnSchliessen = new JLabel("New label");
+//Button Fenster-Schliessen		
+		final JLabel btnSchliessen = new JLabel();
 		btnSchliessen.addMouseListener(new MouseAdapter() {
 			//Schliessenbutton ist grau
 			@Override
@@ -61,7 +53,7 @@ public class RegisterFenster extends JFrame {
 				btnSchliessen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrierung/Schliessen_Button.png")));
 			}
 			
-			//Schlieﬂt das Fenster
+			//Schliesst das Fenster
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.exit(0);
@@ -72,38 +64,43 @@ public class RegisterFenster extends JFrame {
 		btnSchliessen.setBounds(265, 10, 25, 25);
 		contentPane.add(btnSchliessen);
 		
-		JLabel BenutzerLabel = new JLabel("New label");
+//Textfeld Benutzername		
+		JLabel BenutzerLabel = new JLabel();
 		BenutzerLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/txtfeld.png")));
 		BenutzerLabel.setBounds(78, 120, 145, 30);
 		contentPane.add(BenutzerLabel);
 		
-		JLabel PasswortLabel = new JLabel("New label");
+//Textfeld Passwort		
+		JLabel PasswortLabel = new JLabel();
 		PasswortLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/txtfeld.png")));
 		PasswortLabel.setBounds(78, 160, 145, 30);
 		contentPane.add(PasswortLabel);
 		
-		JLabel PasswortWdhLabel = new JLabel("New label");
+//Textfeld Passwort wiederholen		
+		JLabel PasswortWdhLabel = new JLabel();
 		PasswortWdhLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/txtfeld.png")));
 		PasswortWdhLabel.setBounds(78, 200, 145, 30);
 		contentPane.add(PasswortWdhLabel);
 		
-		JLabel Registrieren = new JLabel("New label");
+//Button Registrieren		
+		JLabel Registrieren = new JLabel();
 		Registrieren.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Tu was
+				//Bei Mausklick auf Registrieren speichert er Daten in SQL ein
 			}
 		});
 		Registrieren.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/Registrieren.png")));
 		Registrieren.setBounds(78, 240, 146, 38);
 		contentPane.add(Registrieren);
 		
+//Hintergrund		
 		JLabel Hintergrund = new JLabel("New label");
 		Hintergrund.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/register.png")));
 		Hintergrund.setBounds(0, 0, 300, 300);
 		contentPane.add(Hintergrund);
 		
-		//Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
+//Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 				setUndecorated(true);
 				setLocationRelativeTo(null);
 	}
