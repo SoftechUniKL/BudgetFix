@@ -14,6 +14,10 @@ import java.awt.event.MouseEvent;
 
 public class RegisterFenster extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
