@@ -1,5 +1,5 @@
 import java.awt.EventQueue;
-import Login.LoginFenster;
+import Anmelden.AnmeldenFenster;
 
 /**
  * Anwendung BudgetPlan
@@ -12,7 +12,7 @@ public class BudgetPlan {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							LoginFenster frame = new LoginFenster();
+							AnmeldenFenster frame = new AnmeldenFenster();
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
