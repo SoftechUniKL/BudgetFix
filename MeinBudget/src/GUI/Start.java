@@ -28,16 +28,19 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import java.awt.Font;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 
 //Graphische Benutzeroberflaeche des BudgetFix
 public class Start extends JFrame {
 	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable tableGesamt;
 	
 		
 	/**
@@ -97,16 +100,40 @@ public class Start extends JFrame {
 		btnSchliessen.setBounds(1310, 20, 40, 40);
 		contentPane.add(btnSchliessen);
 		
+		JLabel lblMenue = new JLabel();
+		lblMenue.setIcon(new ImageIcon(Start.class.getResource("/Design/Menuebutton.png")));
+		lblMenue.setBounds(30, 30, 75, 75);
+		contentPane.add(lblMenue);
+		
+		JLabel lblMen = new JLabel("Men\u00FC");
+		lblMen.setFont(new Font("Tahoma", Font.BOLD, 34));
+		lblMen.setForeground(Color.WHITE);
+		lblMen.setBounds(100, 50, 147, 34);
+		contentPane.add(lblMen);
+		
+		tableGesamt = new JTable();
+		tableGesamt.setBounds(40, 120, 200, 200);
+		contentPane.add(tableGesamt);
+		
+		JLabel lblStart = new JLabel("New label");
+		lblStart.setIcon(new ImageIcon(Start.class.getResource("/Design/Start.png")));
+		lblStart.setBounds(30, 340, 50, 50);
+		contentPane.add(lblStart);
+		
+		JLabel lblStart_1 = new JLabel("Start");
+		lblStart_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblStart_1.setForeground(Color.WHITE);
+		lblStart_1.setBounds(85, 355, 80, 25);
+		contentPane.add(lblStart_1);
+		
+		
 //Hintergrund		
-		JLabel Hintergrund = new JLabel("");
+		JLabel Hintergrund = new JLabel();
 		Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI.png")));
 		Hintergrund.setBounds(0, 0, 1365, 767);
-		contentPane.add(Hintergrund);
+		contentPane.add (Hintergrund);
 		
-		
-//Fullscreen Bildschirm
-		setExtendedState(Frame.MAXIMIZED_BOTH);
-//Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
+//Hintergrundrame Design und lege die Lage in Mitten des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 	}
