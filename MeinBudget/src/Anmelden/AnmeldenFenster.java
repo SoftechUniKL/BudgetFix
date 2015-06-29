@@ -1,19 +1,33 @@
 package Anmelden;
 
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class AnmeldenFenster extends JFrame {
+	
+	Connection connect = null;
+	
 	private JPanel contentPane;
+	private JTextField txtBenutzer;
+	private JPasswordField txtPasswort;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,6 +45,9 @@ public class AnmeldenFenster extends JFrame {
 	 * Create the frame.
 	 */
 	public AnmeldenFenster() {
+		
+		connect = AnmeldeDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 300);
 		contentPane = new JPanel();
@@ -60,6 +77,25 @@ public class AnmeldenFenster extends JFrame {
 			}
 			
 		});
+		
+//Textfeld für Benutzereingabe		
+		txtBenutzer = new JTextField();
+		txtBenutzer.setBorder(null);
+		txtBenutzer.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBenutzer.setForeground(Color.GRAY);
+		txtBenutzer.setFont(new Font("Tahoma", Font.BOLD, 16));
+		txtBenutzer.setBounds(82, 125, 136, 20);
+		contentPane.add(txtBenutzer);
+		txtBenutzer.setColumns(10);
+		
+		txtPasswort = new JPasswordField();
+		txtPasswort.setBorder(null);
+		txtPasswort.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPasswort.setForeground(Color.GRAY);
+		txtPasswort.setFont(new Font("Tahoma", Font.BOLD, 16));
+		txtPasswort.setBounds(82, 165, 136, 20);
+		contentPane.add(txtPasswort);
+		
 		btnSchliessen.setIcon(new ImageIcon(AnmeldenFenster.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(265, 10, 25, 25);
 		contentPane.add(btnSchliessen);
@@ -81,7 +117,64 @@ public class AnmeldenFenster extends JFrame {
 		btnAnmelden.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-			//Benutzer hat sich erfolgreich angemeldet und BudgetFix-Fenster öffnet sich
+			
+//SQL Abfrage	
+				try{
+				String sqlQuery = "SELECT * FROM Benutzer WHERE Benutzername=? and Passwortkombination=?";
+
+//Passwort Char in String konvertieren					
+				char[] passInput = txtPasswort.getPassword();
+				String passString = new String(passInput);
+				
+//Benutzer Eingabe in der Console anzeigen
+				System.out.println("USER INPUT - Benutzername " + txtBenutzer.getText().toLowerCase());
+				System.out.println("USER INPUT - Passwort " + passString);
+				
+//Abfrage unterbrechen
+				PreparedStatement stm = connect.prepareStatement(sqlQuery);
+				stm.setString(1, txtBenutzer.getText().toLowerCase());
+				stm.setString(2, passString);
+				
+				ResultSet result = stm.executeQuery();
+				
+//wenn das Resultat = null tu etwas sonst starte den Login
+				
+					if(!result.next()){
+						System.out.println("Überprüfe deinen Benutzernamen und dein Passwort!");
+						JOptionPane.showMessageDialog(null, "Überprüfe deinen Benutzernamen und dein Passwort!");
+					}
+					else{
+						
+						do{
+							String Benutzer = result.getString("Benutzername");
+							String Passwort = result.getString("Passwortkombination");
+							System.out.println("Datebase data Benutzer: " + Benutzer);
+							System.out.println("Datebase data Benutzer: " + Passwort);
+							
+							if (txtBenutzer.equals(Benutzer) || passString.equals(Passwort)){
+								System.out.println("Anmeldung erfolgreich");
+//Fenster verschwindet 									
+								dispose();
+								
+								/*BudgetPlanModel budget = new BudgetPlanModel(); // Modell
+								new BudgetPlanGUI(budget); // View und Controller*/
+								
+							}
+							
+						}while(result.next());
+					}
+				
+				stm.close();
+				result.close();
+				
+				
+				
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}				
+				
+//Benutzer hat sich erfolgreich angemeldet und BudgetFix-Fenster öffnet sich
 			}
 		});
 		btnAnmelden.setIcon(new ImageIcon(AnmeldenFenster.class.getResource("/Design/Anmelden_Knopf.png")));
