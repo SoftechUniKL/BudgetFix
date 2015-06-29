@@ -14,27 +14,20 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-/**
- * Graphische Benutzeroberflaeche des BudgetPlaners
- * 
- */
+//Graphische Benutzeroberflaeche des BudgetPlaners
 public class BudgetPlanGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * Tabelle mit Uebersicht der Ausgaben
-	 */
+	
+//Tabelle mit Uebersicht der Ausgaben
 	private JTable table;
-	/**
-	 * Scrollelemente, das die Tabelle umfasst
-	 */
+
+//Scrollelemente, das die Tabelle umfasst
 	private JScrollPane scrollpane;
-	/**
-	 * Schaltflaeche, die beim Klicken einen Dialog anzeigt
-	 */
+	
+//Schaltflaeche, die beim Klicken einen Dialog anzeigt
 	private JButton button;
-	/**
-	 * Modell der Daten
-	 */
+	
+//Modell der Daten
 	private BudgetPlanModel budget;
 
 	/**
@@ -53,7 +46,7 @@ public class BudgetPlanGUI extends JFrame {
 		this.budget = budget;
 		initWindow(); // Initialisierung des Frameinhalts
 		addBehavior(); // Verhalten der GUI Elemente dieses Frames
-		setBounds(10, 10, 800, 800); // Groesse des Frames
+		setBounds(10, 10, 1000, 1000); // Groesse des Frames
 		setVisible(true); // Frame wird sichtbar
 	}
 

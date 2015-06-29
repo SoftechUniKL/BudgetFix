@@ -44,13 +44,13 @@ public class RegisterFenster extends JFrame {
 			//Schliessenbutton ist grau
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				btnSchliessen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrierung/schliessen_button2.png")));
+				btnSchliessen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/schliessen_button2.png")));
 			}
 			
 			//Schliessenbutton ist blau
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				btnSchliessen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrierung/Schliessen_Button.png")));
+				btnSchliessen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Schliessen_Button.png")));
 			}
 			
 			//Schliesst das Fenster
@@ -60,25 +60,25 @@ public class RegisterFenster extends JFrame {
 			}
 			
 		});
-		btnSchliessen.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/Schliessen_Button.png")));
+		btnSchliessen.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(265, 10, 25, 25);
 		contentPane.add(btnSchliessen);
 		
 //Textfeld Benutzername		
 		JLabel BenutzerLabel = new JLabel();
-		BenutzerLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/txtfeld.png")));
+		BenutzerLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/txtfeld.png")));
 		BenutzerLabel.setBounds(78, 120, 145, 30);
 		contentPane.add(BenutzerLabel);
 		
 //Textfeld Passwort		
 		JLabel PasswortLabel = new JLabel();
-		PasswortLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/txtfeld.png")));
+		PasswortLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/txtfeld.png")));
 		PasswortLabel.setBounds(78, 160, 145, 30);
 		contentPane.add(PasswortLabel);
 		
 //Textfeld Passwort wiederholen		
 		JLabel PasswortWdhLabel = new JLabel();
-		PasswortWdhLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/txtfeld.png")));
+		PasswortWdhLabel.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/txtfeld.png")));
 		PasswortWdhLabel.setBounds(78, 200, 145, 30);
 		contentPane.add(PasswortWdhLabel);
 		
@@ -90,13 +90,13 @@ public class RegisterFenster extends JFrame {
 				//Bei Mausklick auf Registrieren speichert er Daten in SQL ein
 			}
 		});
-		Registrieren.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/Registrieren.png")));
+		Registrieren.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/Registrieren.png")));
 		Registrieren.setBounds(78, 240, 146, 38);
 		contentPane.add(Registrieren);
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel("New label");
-		Hintergrund.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Registrierung/register.png")));
+		Hintergrund.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/login.png")));
 		Hintergrund.setBounds(0, 0, 300, 300);
 		contentPane.add(Hintergrund);
 		
