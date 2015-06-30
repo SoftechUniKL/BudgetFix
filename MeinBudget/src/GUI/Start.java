@@ -71,96 +71,96 @@ public class Start extends JFrame {
 					}
 				});
 				btnSchliessen.setIcon(new ImageIcon(Start.class.getResource("/Design/schliessengross.png")));
-				btnSchliessen.setBounds(1310, 20, 40, 40);
+				btnSchliessen.setBounds(1305, 21, 40, 40);
 				contentPane.add(btnSchliessen);
 		
 		//Button Menue		
 				JLabel btnMenue = new JLabel();
-				btnMenue.setIcon(new ImageIcon(Start.class.getResource("/Design/Menuebutton.png")));
-				btnMenue.setBounds(30, 30, 63, 75);
+				btnMenue.setIcon(new ImageIcon(Start.class.getResource("/Design/Men\u00FC.png")));
+				btnMenue.setBounds(50, 30, 66, 75);
 				contentPane.add(btnMenue);
 				
 		//lblMenue		
 				JLabel txtMenue = new JLabel("Men\u00FC");
 				txtMenue.setFont(new Font("Tahoma", Font.BOLD, 34));
 				txtMenue.setForeground(Color.WHITE);
-				txtMenue.setBounds(100, 50, 150, 34);
+				txtMenue.setBounds(130, 50, 150, 34);
 				contentPane.add(txtMenue);
 				
 		//Tabelle für Gesamtübersicht		
 				JTable tableGesamt = new JTable();			
-				tableGesamt.setBounds(40, 120, 200, 200);
+				tableGesamt.setBounds(50, 116, 200, 200);
 				contentPane.add(tableGesamt);
 				
 		//btnStart		
 				JLabel btnStart = new JLabel();
 				btnStart.setIcon(new ImageIcon(Start.class.getResource("/Design/Start.png")));
-				btnStart.setBounds(30, 340, 50, 50);
+				btnStart.setBounds(50, 340, 50, 50);
 				contentPane.add(btnStart);
 				
 		//lblStart
 				JLabel lblStart = new JLabel("Start");
-				lblStart.setFont(new Font("Tahoma", Font.BOLD, 20));
+				lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 				lblStart.setForeground(Color.WHITE);
-				lblStart.setBounds(85, 355, 80, 25);
+				lblStart.setBounds(110, 352, 80, 25);
 				contentPane.add(lblStart);
 				
 		//Button Wiederholung		
 				JLabel btnWiederholung = new JLabel();
 				btnWiederholung.setIcon(new ImageIcon(Start.class.getResource("/Design/wiederholung.png")));
-				btnWiederholung.setBounds(30, 400, 50, 50);
+				btnWiederholung.setBounds(50, 410, 50, 50);
 				contentPane.add(btnWiederholung);
 				
 		//lblWiederholung für fixe Beträge		
 				JLabel lblWiederholung = new JLabel("Wiederholung");
 				lblWiederholung.setForeground(Color.WHITE);
 				lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblWiederholung.setBounds(85, 415, 174, 25);
+				lblWiederholung.setBounds(110, 422, 174, 25);
 				contentPane.add(lblWiederholung);
 				
 		//Button Charts		
 				JLabel btnCharts = new JLabel();
 				btnCharts.setIcon(new ImageIcon(Start.class.getResource("/Design/Charts.png")));
-				btnCharts.setBounds(30, 460, 50, 50);
+				btnCharts.setBounds(50, 480, 50, 50);
 				contentPane.add(btnCharts);
 				
 		//lblCharts		
 				JLabel lblCharts = new JLabel("Charts");
 				lblCharts.setForeground(Color.WHITE);
 				lblCharts.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblCharts.setBounds(85, 471, 174, 25);
+				lblCharts.setBounds(110, 492, 174, 25);
 				contentPane.add(lblCharts);
 				
 		//Button Sparziele		
 				JLabel btnSparziele = new JLabel();
 				btnSparziele.setIcon(new ImageIcon(Start.class.getResource("/Design/Sparziele.png")));
-				btnSparziele.setBounds(30, 520, 50, 50);
+				btnSparziele.setBounds(50, 550, 50, 50);
 				contentPane.add(btnSparziele);
 				
 		//lblSparziele		
 				JLabel lblSparziele = new JLabel("Sparziele");
 				lblSparziele.setForeground(Color.WHITE);
 				lblSparziele.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblSparziele.setBounds(85, 532, 174, 25);
+				lblSparziele.setBounds(110, 562, 174, 25);
 				contentPane.add(lblSparziele);
 				
 		//Button Tools		
 				JLabel btnTools = new JLabel("New label");
 				btnTools.setIcon(new ImageIcon(Start.class.getResource("/Design/Tools.png")));
-				btnTools.setBounds(30, 580, 50, 50);
+				btnTools.setBounds(50, 620, 50, 50);
 				contentPane.add(btnTools);
 				
 		//lblTools		
 				JLabel lblTools = new JLabel("Tools");
 				lblTools.setForeground(Color.WHITE);
 				lblTools.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblTools.setBounds(85, 592, 174, 25);
+				lblTools.setBounds(110, 631, 174, 25);
 				contentPane.add(lblTools);
 				
 		//Button Einstellungen		
 				JLabel btnEinstellungen = new JLabel("New label");
 				btnEinstellungen.setIcon(new ImageIcon(Start.class.getResource("/Design/Einstellungen.png")));
-				btnEinstellungen.setBounds(30, 640, 50, 50);
+				btnEinstellungen.setBounds(50, 690, 50, 50);
 				contentPane.add(btnEinstellungen);
 				
 		//lblEinstellungen		
@@ -168,21 +168,27 @@ public class Start extends JFrame {
 				lblEinstellungen.setIcon(null);
 				lblEinstellungen.setForeground(Color.WHITE);
 				lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblEinstellungen.setBounds(85, 653, 174, 25);
+				lblEinstellungen.setBounds(110, 700, 174, 25);
 				contentPane.add(lblEinstellungen);
 				
 		//Haupt"klasse"-Start		
-				JLabel lblHauptStart = new JLabel("START");
+				JLabel lblHauptStart = new JLabel("<html><u>START</u><HTML>");
 				lblHauptStart.setForeground(Color.WHITE);
 				lblHauptStart.setFont(new Font("Tahoma", Font.BOLD, 34));
-				lblHauptStart.setBounds(380, 50, 150, 34);
+				lblHauptStart.setBounds(510, 50, 150, 34);
 				contentPane.add(lblHauptStart);
+				
+		//Haupt"klasse" Button Start		
+				JLabel btnHauptStart = new JLabel();
+				btnHauptStart.setIcon(new ImageIcon(Start.class.getResource("/Design/Startgross.png")));
+				btnHauptStart.setBounds(430, 30, 66, 75);
+				contentPane.add(btnHauptStart);
 				
 				
 		//Hintergrund		
 				JLabel Hintergrund = new JLabel();
-				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI.png")));
-				Hintergrund.setBounds(0, -22, 1378, 815);
+				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI2.png")));
+				Hintergrund.setBounds(-10, -24, 1378, 815);
 				contentPane.add(Hintergrund);
 		
 		
