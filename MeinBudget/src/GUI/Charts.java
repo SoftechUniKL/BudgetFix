@@ -70,13 +70,13 @@ public class Charts extends JFrame {
 					}
 				});
 				
-				btnSchliessen.setIcon(new ImageIcon(Start.class.getResource("/Design/schliessengross.png")));
+				btnSchliessen.setIcon(new ImageIcon(Charts.class.getResource("/Design/schliessengross.png")));
 				btnSchliessen.setBounds(1310, 20, 40, 40);
 				contentPane.add(btnSchliessen);
 				
 				//Button Menue		
 				JLabel btnMenue = new JLabel();
-				btnMenue.setIcon(new ImageIcon(Start.class.getResource("/Design/Menuebutton.png")));
+				btnMenue.setIcon(new ImageIcon(Charts.class.getResource("/Design/Menuebutton.png")));
 				btnMenue.setBounds(30, 30, 63, 75);
 				contentPane.add(btnMenue);
 				
@@ -94,7 +94,7 @@ public class Charts extends JFrame {
 				
 		//btnStart		
 				JLabel btnStart = new JLabel();
-				btnStart.setIcon(new ImageIcon(Start.class.getResource("/Design/Start.png")));
+				btnStart.setIcon(new ImageIcon(Charts.class.getResource("/Design/Start.png")));
 				btnStart.setBounds(30, 340, 50, 50);
 				contentPane.add(btnStart);
 				
@@ -107,7 +107,7 @@ public class Charts extends JFrame {
 				
 		//Button Wiederholung		
 				JLabel btnWiederholung = new JLabel();
-				btnWiederholung.setIcon(new ImageIcon(Start.class.getResource("/Design/wiederholung.png")));
+				btnWiederholung.setIcon(new ImageIcon(Charts.class.getResource("/Design/wiederholung.png")));
 				btnWiederholung.setBounds(30, 400, 50, 50);
 				contentPane.add(btnWiederholung);
 				
@@ -120,7 +120,7 @@ public class Charts extends JFrame {
 				
 		//Button Charts		
 				JLabel btnCharts = new JLabel();
-				btnCharts.setIcon(new ImageIcon(Start.class.getResource("/Design/Charts.png")));
+				btnCharts.setIcon(new ImageIcon(Charts.class.getResource("/Design/Charts.png")));
 				btnCharts.setBounds(30, 460, 50, 50);
 				contentPane.add(btnCharts);
 				
@@ -133,7 +133,7 @@ public class Charts extends JFrame {
 				
 		//Button Sparziele		
 				JLabel btnSparziele = new JLabel();
-				btnSparziele.setIcon(new ImageIcon(Start.class.getResource("/Design/Sparziele.png")));
+				btnSparziele.setIcon(new ImageIcon(Charts.class.getResource("/Design/Sparziele.png")));
 				btnSparziele.setBounds(30, 520, 50, 50);
 				contentPane.add(btnSparziele);
 				
@@ -146,7 +146,7 @@ public class Charts extends JFrame {
 				
 		//Button Tools		
 				JLabel btnTools = new JLabel("New label");
-				btnTools.setIcon(new ImageIcon(Start.class.getResource("/Design/Tools.png")));
+				btnTools.setIcon(new ImageIcon(Charts.class.getResource("/Design/Tools.png")));
 				btnTools.setBounds(30, 580, 50, 50);
 				contentPane.add(btnTools);
 				
@@ -159,6 +159,7 @@ public class Charts extends JFrame {
 				
 		//Button Einstellungen		
 				JLabel btnEinstellungen = new JLabel("New label");
+				btnEinstellungen.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einstellungen.png")));
 				btnEinstellungen.setBounds(30, 640, 50, 50);
 				contentPane.add(btnEinstellungen);
 				
@@ -169,22 +170,16 @@ public class Charts extends JFrame {
 				lblEinstellungen.setBounds(85, 649, 174, 25);
 				contentPane.add(lblEinstellungen);
 				
-		//Haupt"klasse"-Start		
-				JLabel lblHauptStart = new JLabel("START");
+		//Haupt"klasse"-Charts		
+				JLabel lblHauptStart = new JLabel("CHARTS");
 				lblHauptStart.setForeground(Color.WHITE);
 				lblHauptStart.setFont(new Font("Tahoma", Font.BOLD, 34));
 				lblHauptStart.setBounds(380, 50, 150, 34);
 				contentPane.add(lblHauptStart);
 				
-		//Zur Trennung von Menue und Start (erstmal; später Design ich den Hintergrund in Photoshop nochmal um)	
-				Component verticalStrut = Box.createVerticalStrut(20);
-				verticalStrut.setBackground(Color.BLUE);
-				verticalStrut.setBounds(269, 11, 13, 743);
-				contentPane.add(verticalStrut);
-				
 		//Hintergrund		
-				JLabel Hintergrund = new JLabel("");
-				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI.png")));
+				JLabel Hintergrund = new JLabel();
+				Hintergrund.setIcon(new ImageIcon(Charts.class.getResource("/Design/GUI.png")));
 				Hintergrund.setBounds(0, 0, 1365, 767);
 				contentPane.add(Hintergrund);
 				

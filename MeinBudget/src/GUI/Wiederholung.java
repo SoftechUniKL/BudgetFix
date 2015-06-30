@@ -37,7 +37,7 @@ public class Wiederholung extends JFrame {
 	 */
 	public Wiederholung() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1378, 745);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -70,9 +70,9 @@ public class Wiederholung extends JFrame {
 				contentPane.add(btnSchliessen);
 				
 		//Hintergrund		
-				JLabel Hintergrund = new JLabel("");
+				JLabel Hintergrund = new JLabel();
 				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI.png")));
-				Hintergrund.setBounds(0, 0, 1365, 767);
+				Hintergrund.setBounds(0, -22, 1378, 815);
 				contentPane.add(Hintergrund);
 				
 				
