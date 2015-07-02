@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+import GUI.Start;
 import Registrierung.RegisterFenster;
 
 import java.awt.event.MouseAdapter;
@@ -227,7 +228,17 @@ public class AnmeldenFenster extends JFrame {
 //Fenster verschwindet 									
 						dispose();
 						
-//BudgetPan öffnet sich						
+//BudgetPan öffnet sich					
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Start frame = new Start();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
 						//BudgetPlanModel budget = new BudgetPlanModel(); // Modell
 						//new BudgetPlanGUI(budget); // View und Controller*/
 						

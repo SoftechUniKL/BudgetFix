@@ -192,6 +192,22 @@ public class Tools extends JFrame {
 		
 //lblEinstellungen		
 		JLabel lblEinstellungen = new JLabel("Einstellungen");
+		lblEinstellungen.addMouseListener(new MouseAdapter() {
+			@Override
+//Einstellungen öffnen					
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Einstellungen frame = new Einstellungen();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		lblEinstellungen.setIcon(null);
 		lblEinstellungen.setForeground(Color.WHITE);
 		lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));
