@@ -220,8 +220,9 @@ public class Start extends JFrame {
 				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI2.png")));
 				Hintergrund.setBounds(-10, -24, 1378, 815);
 				contentPane.add(Hintergrund);
-		
-		
+
+				
+				
 		//Fullscreen Bildschirm
 				setExtendedState(Frame.MAXIMIZED_BOTH);
 		//Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
