@@ -21,9 +21,9 @@ public class BudgetPlan {
 				});
 				
 		
-		BudgetPlanModel budget = new BudgetPlanModel(); // Modell
+		/*BudgetPlanModel budget = new BudgetPlanModel(); // Modell
 		new BudgetPlanGUI(budget); // View und Controller
-		
+		*/
 		
 	}
 

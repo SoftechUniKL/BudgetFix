@@ -1,6 +1,7 @@
 package Anmelden;
 
 
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,11 +16,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+import Registrierung.RegisterFenster;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AnmeldenFenster extends JFrame {
 	
@@ -89,6 +94,21 @@ public class AnmeldenFenster extends JFrame {
 		txtBenutzer.setColumns(10);
 		
 		txtPasswort = new JPasswordField();
+		txtPasswort.addKeyListener(new KeyAdapter() {
+			@Override
+			
+			public void keyPressed(KeyEvent e) {
+			
+				if (e.getKeyCode() == KeyEvent.VK_ENTER ){
+					
+//Benutzer hat sich erfolgreich angemeldet und BudgetFix-Fenster öffnet sich					
+					anmeldung();			
+				
+				}				
+			}
+			
+		});
+		
 		txtPasswort.setBorder(null);
 		txtPasswort.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPasswort.setForeground(Color.GRAY);
@@ -117,66 +137,12 @@ public class AnmeldenFenster extends JFrame {
 		btnAnmelden.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-			
-//SQL Abfrage	
-				try{
-				String sqlQuery = "SELECT * FROM Benutzer WHERE Benutzername=? and Passwortkombination=?";
-
-//Passwort Char in String konvertieren					
-				char[] passInput = txtPasswort.getPassword();
-				String passString = new String(passInput);
-				
-//Benutzer Eingabe in der Console anzeigen
-				System.out.println("USER INPUT - Benutzername " + txtBenutzer.getText().toLowerCase());
-				System.out.println("USER INPUT - Passwort " + passString);
-				
-//Abfrage unterbrechen
-				PreparedStatement stm = connect.prepareStatement(sqlQuery);
-				stm.setString(1, txtBenutzer.getText().toLowerCase());
-				stm.setString(2, passString);
-				
-				ResultSet result = stm.executeQuery();
-				
-//wenn das Resultat = null tu etwas sonst starte den Login
-				
-					if(!result.next()){
-						System.out.println("Überprüfe deinen Benutzernamen und dein Passwort!");
-						JOptionPane.showMessageDialog(null, "Überprüfe deinen Benutzernamen und dein Passwort!");
-					}
-					else{
-						
-						do{
-							String Benutzer = result.getString("Benutzername");
-							String Passwort = result.getString("Passwortkombination");
-							System.out.println("Datebase data Benutzer: " + Benutzer);
-							System.out.println("Datebase data Benutzer: " + Passwort);
-							
-							if (txtBenutzer.equals(Benutzer) || passString.equals(Passwort)){
-								System.out.println("Anmeldung erfolgreich");
-//Fenster verschwindet 									
-								dispose();
-								
-								/*BudgetPlanModel budget = new BudgetPlanModel(); // Modell
-								new BudgetPlanGUI(budget); // View und Controller*/
-								
-							}
-							
-						}while(result.next());
-					}
-				
-				stm.close();
-				result.close();
-				
-				
-				
-				
-			}catch(Exception e){
-				e.printStackTrace();
-			}				
-				
+				anmeldung();			
 //Benutzer hat sich erfolgreich angemeldet und BudgetFix-Fenster öffnet sich
 			}
 		});
+		
+		
 		btnAnmelden.setIcon(new ImageIcon(AnmeldenFenster.class.getResource("/Design/Anmelden_Knopf.png")));
 		btnAnmelden.setBounds(78, 200, 146, 38);
 		contentPane.add(btnAnmelden);
@@ -186,7 +152,21 @@ public class AnmeldenFenster extends JFrame {
 		btnRegistrieren.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Bei Mausklick RegisterFenster zum Registrieren anmelden
+
+//Bei Mausklick RegisterFenster zum Registrieren anmelden				
+				
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							RegisterFenster frame = new RegisterFenster();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
 			}
 		});
 		btnRegistrieren.setIcon(new ImageIcon(AnmeldenFenster.class.getResource("/Design/Registrieren_Login.png")));
@@ -203,6 +183,70 @@ public class AnmeldenFenster extends JFrame {
 				setUndecorated(true);
 				setLocationRelativeTo(null);
 	}
+	
+
+	
+	
+//Anmeldung BN und PW abfrage
+	
+	private void anmeldung() {
+		try{
+		String sqlQuery = "SELECT * FROM Benutzer WHERE Benutzername=? and Passwortkombination=?";
+
+//Passwort Char in String konvertieren					
+		char[] passInput = txtPasswort.getPassword();
+		String passString = new String(passInput);
+		
+//Benutzer Eingabe in der Console anzeigen
+		System.out.println("USER INPUT - Benutzername " + txtBenutzer.getText());
+		System.out.println("USER INPUT - Passwort " + passString);
+		
+//Abfrage unterbrechen
+		PreparedStatement stm = connect.prepareStatement(sqlQuery);
+		stm.setString(1, txtBenutzer.getText().toLowerCase());
+		stm.setString(2, passString);
+		
+		ResultSet result = stm.executeQuery();
+		
+//wenn das Resultat = null tu etwas sonst starte den Login
+		
+			if(!result.next()){
+				System.out.println("Überprüfe deinen Benutzernamen und dein Passwort!");
+				JOptionPane.showMessageDialog(null, "Überprüfe deinen Benutzernamen und dein Passwort!");
+			}
+			else{
+				
+				do{
+					String Benutzer = result.getString("Benutzername");
+					String Passwort = result.getString("Passwortkombination");
+					System.out.println("Datebase data Benutzer: " + Benutzer);
+					System.out.println("Datebase data Benutzer: " + Passwort);
+					
+					if (txtBenutzer.equals(Benutzer) || passString.equals(Passwort)){
+						System.out.println("Anmeldung erfolgreich");
+//Fenster verschwindet 									
+						dispose();
+						
+//BudgetPan öffnet sich						
+						//BudgetPlanModel budget = new BudgetPlanModel(); // Modell
+						//new BudgetPlanGUI(budget); // View und Controller*/
+						
+					}
+					
+				}while(result.next());
+			}
+		
+		stm.close();
+		result.close();
+		
+		
+		
+		
+}catch(Exception ex){
+		ex.printStackTrace();
+}
+	}
+
 }
 
 
