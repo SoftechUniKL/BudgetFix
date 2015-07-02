@@ -91,6 +91,11 @@ public class Einstellungen extends JFrame {
 		
 //btnStart		
 		JLabel btnStart = new JLabel();
+		btnStart.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnStart.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Start.png")));
 		btnStart.setBounds(50, 340, 50, 50);
 		contentPane.add(btnStart);
@@ -104,6 +109,11 @@ public class Einstellungen extends JFrame {
 		
 //Button Wiederholung		
 		JLabel btnWiederholung = new JLabel();
+		btnWiederholung.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnWiederholung.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/wiederholung.png")));
 		btnWiederholung.setBounds(50, 410, 50, 50);
 		contentPane.add(btnWiederholung);
@@ -117,6 +127,11 @@ public class Einstellungen extends JFrame {
 		
 //Button Charts		
 		JLabel btnCharts = new JLabel();
+		btnCharts.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnCharts.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Charts.png")));
 		btnCharts.setBounds(50, 480, 50, 50);
 		contentPane.add(btnCharts);
@@ -130,6 +145,11 @@ public class Einstellungen extends JFrame {
 		
 //Button Sparziele		
 		JLabel btnSparziele = new JLabel();
+		btnSparziele.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnSparziele.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Sparziele.png")));
 		btnSparziele.setBounds(50, 550, 50, 50);
 		contentPane.add(btnSparziele);
@@ -143,6 +163,11 @@ public class Einstellungen extends JFrame {
 		
 //Button Tools		
 		JLabel btnTools = new JLabel("New label");
+		btnTools.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnTools.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Tools.png")));
 		btnTools.setBounds(50, 620, 50, 50);
 		contentPane.add(btnTools);
@@ -156,6 +181,11 @@ public class Einstellungen extends JFrame {
 		
 //Button Einstellungen		
 		JLabel btnEinstellungen = new JLabel();
+		btnEinstellungen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnEinstellungen.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Einstellungen.png")));
 		btnEinstellungen.setBounds(50, 690, 50, 50);
 		contentPane.add(btnEinstellungen);
