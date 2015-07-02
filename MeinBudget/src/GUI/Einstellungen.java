@@ -1,4 +1,3 @@
-//<<<<<<< HEAD
 package GUI;
 
 import java.awt.BorderLayout;
