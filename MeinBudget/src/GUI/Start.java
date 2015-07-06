@@ -107,6 +107,23 @@ public class Start extends JFrame {
 				
 		//lblStart
 				JLabel lblStart = new JLabel("Start");
+				lblStart.addMouseListener(new MouseAdapter() {
+					@Override
+//Start öffnet sich					
+					public void mouseClicked(MouseEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Start frame = new Start();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
+				
 				lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 				lblStart.setForeground(Color.WHITE);
 				lblStart.setBounds(110, 352, 80, 25);
@@ -116,7 +133,18 @@ public class Start extends JFrame {
 				JLabel btnWiederholung = new JLabel();
 				btnWiederholung.addMouseListener(new MouseAdapter() {
 					@Override
+//Wiederholung öffnet sich	Bild			
 					public void mouseClicked(MouseEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Wiederholung frame = new Wiederholung();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
 					}
 				});
 				btnWiederholung.setIcon(new ImageIcon(Start.class.getResource("/Design/wiederholung.png")));
@@ -125,6 +153,22 @@ public class Start extends JFrame {
 				
 		//lblWiederholung für fixe Beträge		
 				JLabel lblWiederholung = new JLabel("Wiederholung");
+				lblWiederholung.addMouseListener(new MouseAdapter() {
+					@Override
+//Wiederholung öffnet sich					
+					public void mouseClicked(MouseEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Wiederholung frame = new Wiederholung();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
 				lblWiederholung.setForeground(Color.WHITE);
 				lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
 				lblWiederholung.setBounds(110, 422, 174, 25);
