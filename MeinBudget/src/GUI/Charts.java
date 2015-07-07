@@ -47,7 +47,7 @@ public class Charts extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		//Button Schliessen		
+//Button Schliessen		
 		final JLabel btnSchliessen = new JLabel();
 		btnSchliessen.addMouseListener(new MouseAdapter() {
 			@Override
@@ -95,7 +95,28 @@ public class Charts extends JFrame {
 		JLabel btnStart = new JLabel();
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
+			//Start öffnet sich					
 			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Start frame = new Start();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			//Start-Icon wird blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/StartBlau.png")));
+			}
+			//Start-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Start.png")));
 			}
 		});
 		btnStart.setIcon(new ImageIcon(Charts.class.getResource("/Design/Start.png")));
@@ -106,7 +127,7 @@ public class Charts extends JFrame {
 		JLabel lblStart = new JLabel("Start");
 		lblStart.addMouseListener(new MouseAdapter() {
 			@Override
-//Start öffnet sich					
+			//Start öffnet sich					
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -129,7 +150,7 @@ public class Charts extends JFrame {
 		JLabel btnWiederholung = new JLabel();
 		btnWiederholung.addMouseListener(new MouseAdapter() {
 			@Override
-//Wiederholung öffnet sich	Bild			
+			//Wiederholung öffnet sich	Bild			
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -141,6 +162,16 @@ public class Charts extends JFrame {
 						}
 					}
 				});
+			}
+			//Wiederholung-Icon ist blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnWiederholung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/WiederholungenBlau.png")));
+			}	
+			//Wiederholung-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnWiederholung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/wiederholung.png")));
 			}
 		});
 		btnWiederholung.setIcon(new ImageIcon(Charts.class.getResource("/Design/wiederholung.png")));
@@ -149,22 +180,6 @@ public class Charts extends JFrame {
 		
 //lblWiederholung für fixe Beträge		
 		JLabel lblWiederholung = new JLabel("Wiederholung");
-		lblWiederholung.addMouseListener(new MouseAdapter() {
-			@Override
-//Wiederholung öffnet sich					
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Wiederholung frame = new Wiederholung();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
 		lblWiederholung.setForeground(Color.WHITE);
 		lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblWiederholung.setBounds(110, 422, 174, 25);
@@ -172,18 +187,13 @@ public class Charts extends JFrame {
 		
 //Button Charts		
 		JLabel btnCharts = new JLabel();
-		btnCharts.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnCharts.setIcon(new ImageIcon(Charts.class.getResource("/Design/Charts.png")));
+		btnCharts.setIcon(new ImageIcon(Charts.class.getResource("/Design/ChartsBlau.png")));
 		btnCharts.setBounds(50, 480, 50, 50);
 		contentPane.add(btnCharts);
 		
 //lblCharts		
 		JLabel lblCharts = new JLabel("Charts");
-		lblCharts.setForeground(Color.WHITE);
+		lblCharts.setForeground(Color.BLUE);
 		lblCharts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblCharts.setBounds(110, 492, 174, 25);
 		contentPane.add(lblCharts);
@@ -191,8 +201,29 @@ public class Charts extends JFrame {
 //Button Sparziele		
 		JLabel btnSparziele = new JLabel();
 		btnSparziele.addMouseListener(new MouseAdapter() {
+			//Sparziele öffnet sich
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Sparziele frame = new Sparziele();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			//Sparziele-Icon wird blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnSparziele.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/SparzieleBlau.png")));
+			}
+			//Sparziele-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnSparziele.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Sparziele.png")));
 			}
 		});
 		btnSparziele.setIcon(new ImageIcon(Charts.class.getResource("/Design/Sparziele.png")));
@@ -210,7 +241,28 @@ public class Charts extends JFrame {
 		JLabel btnTools = new JLabel();
 		btnTools.addMouseListener(new MouseAdapter() {
 			@Override
+			//Tools öffnet sich	Bild			
 			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Tools frame = new Tools();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			//Tools-Icon wird blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnTools.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/ToolsBlau.png")));
+			}
+			//Tools-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnTools.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Tools.png")));
 			}
 		});
 		btnTools.setIcon(new ImageIcon(Charts.class.getResource("/Design/Tools.png")));
@@ -228,7 +280,28 @@ public class Charts extends JFrame {
 		JLabel btnEinstellungen = new JLabel("New label");
 		btnEinstellungen.addMouseListener(new MouseAdapter() {
 			@Override
+			//Einstellungen öffnet sich	Bild			
 			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Einstellungen frame = new Einstellungen();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			//Einstellungen-Icon wird blau bei drübergehen der Maus			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnEinstellungen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/EinstellungenBlau.png")));
+			}
+			//Einstellungen-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnEinstellungen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Einstellungen.png")));
 			}
 		});
 		btnEinstellungen.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einstellungen.png")));
@@ -237,22 +310,6 @@ public class Charts extends JFrame {
 		
 //lblEinstellungen		
 		JLabel lblEinstellungen = new JLabel("Einstellungen");
-		lblEinstellungen.addMouseListener(new MouseAdapter() {
-			@Override
-//Einstellungen öffnen					
-				public void mouseClicked(MouseEvent e) {
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								Einstellungen frame = new Einstellungen();
-								frame.setVisible(true);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-			}
-		});
 		lblEinstellungen.setIcon(null);
 		lblEinstellungen.setForeground(Color.WHITE);
 		lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));

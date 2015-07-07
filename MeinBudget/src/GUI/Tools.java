@@ -93,18 +93,7 @@ public class Tools extends JFrame {
 		JLabel btnStart = new JLabel();
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnStart.setIcon(new ImageIcon(Tools.class.getResource("/Design/Start.png")));
-		btnStart.setBounds(50, 340, 50, 50);
-		contentPane.add(btnStart);
-		
-//lblStart
-		JLabel lblStart = new JLabel("Start");
-		lblStart.addMouseListener(new MouseAdapter() {
-			@Override
-//Start öffnet sich					
+			//Start öffnet sich					
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -117,7 +106,23 @@ public class Tools extends JFrame {
 					}
 				});
 			}
+			//Start-Icon wird blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/StartBlau.png")));
+			}
+			//Start-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Start.png")));
+			}
 		});
+		btnStart.setIcon(new ImageIcon(Tools.class.getResource("/Design/Start.png")));
+		btnStart.setBounds(50, 340, 50, 50);
+		contentPane.add(btnStart);
+		
+//lblStart
+		JLabel lblStart = new JLabel("Start");
 		lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblStart.setForeground(Color.WHITE);
 		lblStart.setBounds(110, 352, 80, 25);
@@ -127,7 +132,7 @@ public class Tools extends JFrame {
 		JLabel btnWiederholung = new JLabel();
 		btnWiederholung.addMouseListener(new MouseAdapter() {
 			@Override
-//Wiederholung öffnet sich	Bild			
+			//Wiederholung öffnet sich	Bild			
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -139,6 +144,16 @@ public class Tools extends JFrame {
 						}
 					}
 				});
+			}
+			//Wiederholung-Icon ist blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnWiederholung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/WiederholungenBlau.png")));
+			}	
+			//Wiederholung-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnWiederholung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/wiederholung.png")));
 			}
 		});
 		btnWiederholung.setIcon(new ImageIcon(Tools.class.getResource("/Design/wiederholung.png")));
@@ -147,22 +162,6 @@ public class Tools extends JFrame {
 		
 //lblWiederholung für fixe Beträge		
 		JLabel lblWiederholung = new JLabel("Wiederholung");
-		lblWiederholung.addMouseListener(new MouseAdapter() {
-			@Override
-//Wiederholung öffnet sich	Schriftzug				
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Wiederholung frame = new Wiederholung();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
 		lblWiederholung.setForeground(Color.WHITE);
 		lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblWiederholung.setBounds(110, 422, 174, 25);
@@ -172,7 +171,28 @@ public class Tools extends JFrame {
 		JLabel btnCharts = new JLabel();
 		btnCharts.addMouseListener(new MouseAdapter() {
 			@Override
+			//Charts öffnet sich
 			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Charts frame = new Charts();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}					
+			//Charts-Icon wird blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnCharts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/ChartsBlau.png")));
+			}
+			//Charts-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnCharts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Charts.png")));
 			}
 		});
 		btnCharts.setIcon(new ImageIcon(Tools.class.getResource("/Design/Charts.png")));
@@ -189,8 +209,29 @@ public class Tools extends JFrame {
 //Button Sparziele		
 		JLabel btnSparziele = new JLabel();
 		btnSparziele.addMouseListener(new MouseAdapter() {
+			//Sparziele öffnet sich
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Sparziele frame = new Sparziele();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			//Sparziele-Icon wird blau bei drübergehen der Maus
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnSparziele.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/SparzieleBlau.png")));
+			}
+			//Sparziele-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnSparziele.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Sparziele.png")));
 			}
 		});
 		btnSparziele.setIcon(new ImageIcon(Tools.class.getResource("/Design/Sparziele.png")));
@@ -206,18 +247,13 @@ public class Tools extends JFrame {
 		
 //Button Tools		
 		JLabel btnTools = new JLabel();
-		btnTools.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnTools.setIcon(new ImageIcon(Tools.class.getResource("/Design/Tools.png")));
+		btnTools.setIcon(new ImageIcon(Tools.class.getResource("/Design/ToolsBlau.png")));
 		btnTools.setBounds(50, 620, 50, 50);
 		contentPane.add(btnTools);
 		
 //lblTools		
 		JLabel lblTools = new JLabel("Tools");
-		lblTools.setForeground(Color.WHITE);
+		lblTools.setForeground(Color.BLUE);
 		lblTools.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblTools.setBounds(110, 631, 174, 25);
 		contentPane.add(lblTools);
@@ -226,18 +262,7 @@ public class Tools extends JFrame {
 		JLabel btnEinstellungen = new JLabel();
 		btnEinstellungen.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnEinstellungen.setIcon(new ImageIcon(Tools.class.getResource("/Design/Einstellungen.png")));
-		btnEinstellungen.setBounds(50, 690, 50, 50);
-		contentPane.add(btnEinstellungen);
-		
-//lblEinstellungen		
-		JLabel lblEinstellungen = new JLabel("Einstellungen");
-		lblEinstellungen.addMouseListener(new MouseAdapter() {
-			@Override
-//Einstellungen öffnen					
+			//Einstellungen öffnet sich	Bild			
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -250,7 +275,23 @@ public class Tools extends JFrame {
 					}
 				});
 			}
+			//Einstellungen-Icon wird blau bei drübergehen der Maus			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnEinstellungen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/EinstellungenBlau.png")));
+			}
+			//Einstellungen-Icon ist gelb
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnEinstellungen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Einstellungen.png")));
+			}
 		});
+		btnEinstellungen.setIcon(new ImageIcon(Tools.class.getResource("/Design/Einstellungen.png")));
+		btnEinstellungen.setBounds(50, 690, 50, 50);
+		contentPane.add(btnEinstellungen);
+		
+//lblEinstellungen		
+		JLabel lblEinstellungen = new JLabel("Einstellungen");
 		lblEinstellungen.setIcon(null);
 		lblEinstellungen.setForeground(Color.WHITE);
 		lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));
