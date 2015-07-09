@@ -19,10 +19,12 @@ import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import java.awt.List;
+import javax.swing.JTextField;
 
 public class KategorieAnlegen extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtKategorie;
 
 	/**
 	 * Launch the application.
@@ -75,7 +77,7 @@ public class KategorieAnlegen extends JFrame {
 			});
 			
 //Überschrift "Kategorie Anlegen"			
-			JLabel lblKategorienAnlegen = new JLabel("Kategorien Anlegen");
+			JLabel lblKategorienAnlegen = new JLabel("<html><u>Kategorien Anlegen</u></html>");
 			lblKategorienAnlegen.setForeground(Color.WHITE);
 			lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
 			lblKategorienAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,6 +86,15 @@ public class KategorieAnlegen extends JFrame {
 			btnSchliessen.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Schliessen_Button.png")));
 			btnSchliessen.setBounds(440, 15, 25, 25);
 			contentPane.add(btnSchliessen);
+		
+//Textfeld für Kategorie		
+		txtKategorie = new JTextField();
+		txtKategorie.setBorder(null);
+		txtKategorie.setForeground(Color.GRAY);
+		txtKategorie.setBackground(Color.WHITE);
+		txtKategorie.setBounds(222, 105, 144, 30);
+		contentPane.add(txtKategorie);
+		txtKategorie.setColumns(10);
 		
 //Kategorie		
 		JLabel lblKategorie = new JLabel();
@@ -145,7 +156,7 @@ public class KategorieAnlegen extends JFrame {
 //Button Speichern		
 		JLabel btnSpeichern = new JLabel();
 		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(148, 372, 188, 38);
+		btnSpeichern.setBounds(170, 372, 188, 38);
 		contentPane.add(btnSpeichern);
 		
 //Combobox Auswahl der Icons		
@@ -251,6 +262,9 @@ public class KategorieAnlegen extends JFrame {
 				
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
+		Hintergrund.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Hintergrund.setHorizontalAlignment(SwingConstants.CENTER);
+		Hintergrund.setForeground(Color.BLACK);
 		Hintergrund.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
 		contentPane.add(Hintergrund);
