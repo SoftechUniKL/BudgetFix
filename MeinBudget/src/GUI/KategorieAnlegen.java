@@ -11,9 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 
 public class KategorieAnlegen extends JFrame {
 
@@ -69,6 +72,7 @@ public class KategorieAnlegen extends JFrame {
 					
 			});
 			
+//Überschrift "Kategorie Anlegen"			
 			JLabel lblKategorienAnlegen = new JLabel("Kategorien Anlegen");
 			lblKategorienAnlegen.setForeground(Color.WHITE);
 			lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -85,36 +89,51 @@ public class KategorieAnlegen extends JFrame {
 		lblKategorie.setBounds(222, 105, 145, 30);
 		contentPane.add(lblKategorie);
 		
+//Typ für Kategorie		
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
 		Kategorie.setBounds(100, 105, 91, 27);
 		contentPane.add(Kategorie);
 		
+//Typ für Ausgaben oder Einnahmen		
 		JLabel Typ = new JLabel("Typ:");
 		Typ.setForeground(Color.WHITE);
 		Typ.setFont(new Font("Tahoma", Font.BOLD, 14));
 		Typ.setBounds(100, 170, 91, 27);
 		contentPane.add(Typ);
 		
+//Auswahl Ausgaben		
 		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
 		rdbtnAusgaben.setBounds(222, 174, 145, 30);
 		contentPane.add(rdbtnAusgaben);
 		
+//Auswahl Einnahmen		
 		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
 		rdbtnEinnahmen.setBounds(222, 207, 145, 30);
 		contentPane.add(rdbtnEinnahmen);
 		
+//Button Auswahl für Icons		
 		JLabel lblIcon = new JLabel("Icon:");
 		lblIcon.setForeground(Color.WHITE);
 		lblIcon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblIcon.setBounds(100, 274, 91, 27);
 		contentPane.add(lblIcon);
 		
-		JLabel btnIcon = new JLabel();
-		btnIcon.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Textfeldgross.png")));
-		btnIcon.setBounds(222, 271, 145, 30);
-		contentPane.add(btnIcon);
+		JLabel lblAuswahl = new JLabel("Auswahl");
+		lblAuswahl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		lblAuswahl.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAuswahl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAuswahl.setBounds(222, 272, 124, 30);
+		contentPane.add(lblAuswahl);
+		
+		JComboBox<Object> cboAuswahl = new JComboBox<Object>();
+		cboAuswahl.setBounds(222, 272, 145, 30);
+		contentPane.add(cboAuswahl);
 		
 //Button Speichern		
 		JLabel btnSpeichern = new JLabel();
