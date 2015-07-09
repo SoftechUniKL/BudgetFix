@@ -522,29 +522,15 @@ public class Start extends JFrame {
 //*	//private void Erträgetabelle(){
 		try{
 			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='2') ";
+			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='2')  ";
 			PreparedStatement stm = connection.prepareStatement(sqlQuery);
+			PreparedStatement pstmt = connec.prepareStatement(sqlQuery2);
 			ResultSet result = stm.executeQuery();
-			
-			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));
-	
+			ResultSet rs = pstmt.executeQuery();
+			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));	
+			tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
 	
 	}catch(Exception exc){
 		exc.printStackTrace();
 }	
-}//*/
-	{
-//Verbindung zur BPDatenbank - Aufwendungen
-//private void Aufwendungstabelle(){
-	try{
-		String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='2')  ";
-		PreparedStatement pstmt = connec.prepareStatement(sqlQuery2);
-		ResultSet rs = pstmt.executeQuery();
-		
-		tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
-
-
-}catch(Exception exce){
-	exce.printStackTrace();
-}	
-}
-}//}
+}}

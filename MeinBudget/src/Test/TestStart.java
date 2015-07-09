@@ -28,6 +28,7 @@ import javax.swing.Box;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+import GUI.BPDatenbank;
 import GUI.Charts;
 import GUI.Einstellungen;
 import GUI.Sparziele;
@@ -41,7 +42,7 @@ import java.awt.event.ActionEvent;
 
 public class TestStart extends JFrame {
 	
-	//Connection connection = null;
+	Connection connection = null;
 
 	private JPanel contentPane;
 	private JTable table;
@@ -67,7 +68,7 @@ public class TestStart extends JFrame {
 	 */
 	public TestStart() {
 		
-		//connection = BPDatenbank.dbCon();
+		connection = BPDatenbank.dbCon();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1378, 745);
@@ -392,10 +393,10 @@ public class TestStart extends JFrame {
 
 	}
 	
-/*	
+	
 //Verbindung zur BPDatenbank
 	private void Budgedtabelle(){
-	//private void Erträgetabelle(){
+	
 		try{
 			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge WHERE (BenutzerID='2')  ";
 			PreparedStatement stm = connection.prepareStatement(sqlQuery);
@@ -409,4 +410,3 @@ public class TestStart extends JFrame {
 }	
 }
 }
-*/
