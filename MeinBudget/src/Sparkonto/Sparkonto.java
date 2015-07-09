@@ -1,3 +1,4 @@
+package Sparkonto;
 
 public class Sparkonto {
 	
@@ -19,6 +20,13 @@ public class Sparkonto {
 	
 	double getDifferenz()
 	{
+		
+		/* Kontostand - Sparziel = Differenz*/
+		
 		return Differenz;
 	}
+	
+	
+
+	
 }

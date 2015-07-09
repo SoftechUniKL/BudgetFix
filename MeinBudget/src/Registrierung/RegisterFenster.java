@@ -81,10 +81,20 @@ public class RegisterFenster extends JFrame {
 			//Schliesst das Fenster
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.exit(0);
-			}
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							AnmeldenFenster frame = new AnmeldenFenster();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+					}
+				});
 			
-		});
 		btnSchliessen.setIcon(new ImageIcon(RegisterFenster.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(265, 10, 25, 25);
 		contentPane.add(btnSchliessen);
@@ -167,7 +177,7 @@ public class RegisterFenster extends JFrame {
 				setUndecorated(true);
 				setLocationRelativeTo(null);
 	}
-
+		
 
 //Registrierung
 	public void registrierung() {
