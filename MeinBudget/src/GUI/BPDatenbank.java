@@ -12,13 +12,13 @@ public class BPDatenbank {
 		public static Connection dbCon(){
 			try{
 				Class.forName("org.sqlite.JDBC");
-				String db = "jdbc:sqlite:src/BugetPlan/BudgetÜbersicht";
+				String db = "jdbc:sqlite:src/BudgetPlan/BudgetÜbersicht";
 				conn = DriverManager.getConnection(db);
-				System.out.println("---> Verbidung zur Datenbank OK!");
+				System.out.println("---> Verbindung zur Budget-Datenbank OK!");
 				return conn;
 			}catch(Exception e){
 				
-				System.out.println("---> Verbidung zur Datenbank gescheitert!");
+				System.out.println("---> Verbindung zur Budget-Datenbank gescheitert!");
 				System.out.println("Exception " + e);
 				
 				return null;
