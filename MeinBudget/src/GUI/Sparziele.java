@@ -16,6 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import Registrierung.RegisterFenster;
+import Sparkonto.SparzielEingabefenster;
 
 public class Sparziele extends JFrame {
 
@@ -25,6 +32,9 @@ public class Sparziele extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		int KontostandSparkonto = 0;
+				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -119,6 +129,26 @@ public class Sparziele extends JFrame {
 				btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Start.png")));
 			}
 		});
+		
+		JButton btnNewZiel = new JButton("Neues Sparziel anlegen");
+		btnNewZiel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							SparzielEingabefenster frame = new SparzielEingabefenster();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
+		btnNewZiel.setBounds(465, 131, 174, 23);
+		contentPane.add(btnNewZiel);
 		btnStart.setIcon(new ImageIcon(Sparziele.class.getResource("/Design/Start.png")));
 		btnStart.setBounds(50, 340, 50, 50);
 		contentPane.add(btnStart);
@@ -328,5 +358,4 @@ public class Sparziele extends JFrame {
 		setLocationRelativeTo(null);
 
 	}
-
 }
