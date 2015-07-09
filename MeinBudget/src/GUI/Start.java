@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
@@ -19,10 +20,17 @@ import javax.swing.JMenuBar;
 import java.awt.Component;
 
 import javax.swing.Box;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Start extends JFrame {
 
 	private JPanel contentPane;
+	private JTable tableEinnahmen;
+	private JTextField txtAusgaben;
+	private JTextField txtEinnahmen;
+	private JTextField txtGesamtbilanz;
+	private JTable tableAusgaben;
 
 	/**
 	 * Launch the application.
@@ -50,6 +58,7 @@ public class Start extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		 
 		
 //Button Schliessen		
 				final JLabel btnSchliessen = new JLabel();
@@ -83,11 +92,11 @@ public class Start extends JFrame {
 				contentPane.add(btnMenue);
 				
 //lblMenue		
-				JLabel txtMenue = new JLabel("Men\u00FC");
-				txtMenue.setFont(new Font("Tahoma", Font.BOLD, 34));
-				txtMenue.setForeground(Color.WHITE);
-				txtMenue.setBounds(130, 50, 150, 34);
-				contentPane.add(txtMenue);
+				JLabel Menue = new JLabel("Men\u00FC");
+				Menue.setFont(new Font("Tahoma", Font.BOLD, 34));
+				Menue.setForeground(Color.WHITE);
+				Menue.setBounds(130, 50, 150, 34);
+				contentPane.add(Menue);
 				
 //Tabelle für Gesamtübersicht		
 				JTable tableGesamt = new JTable();			
@@ -334,11 +343,146 @@ public class Start extends JFrame {
 				btnHauptStart.setBounds(430, 30, 66, 75);
 				contentPane.add(btnHauptStart);
 				
+//Neue Kategorie Text				
+				JLabel txtNeueKategorie = new JLabel("Neue Kategorie");
+				txtNeueKategorie.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtNeueKategorie.setBounds(490, 150, 117, 34);
+				contentPane.add(txtNeueKategorie);
+				
+//Button um "Neue Kategorie"-Fenster zu öffnen				
+				JLabel btnNeueKategorie = new JLabel();
+				btnNeueKategorie.addMouseListener(new MouseAdapter() {
+					@Override
+					//Plusbutton wird grau bei drübergehen der Maus
+					public void mouseEntered(MouseEvent arg0) {
+						btnNeueKategorie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus2.png")));
+					}
+					
+					//Plusbutton ist blau
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						btnNeueKategorie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
+					}
+					//Öffnet Fenster Anlegen
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									KategorieAnlegen frame = new KategorieAnlegen();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
+				btnNeueKategorie.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
+				btnNeueKategorie.setBounds(460, 155, 25, 25);
+				contentPane.add(btnNeueKategorie);
+				
+//Neue Kategorie Label				
+				JLabel lblNeueKategorie = new JLabel();
+				lblNeueKategorie.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross2.png")));
+				lblNeueKategorie.setBounds(440, 150, 160, 34);
+				contentPane.add(lblNeueKategorie);
+				
+//Transaktionsliste				
+				JLabel txtTransaktionsliste = new JLabel("Transaktionsliste");
+				txtTransaktionsliste.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtTransaktionsliste.setBounds(675, 150, 117, 34);
+				contentPane.add(txtTransaktionsliste);
+				
+				JLabel btnTransaktionsliste = new JLabel();
+				btnTransaktionsliste.addMouseListener(new MouseAdapter() {
+					@Override
+					//Plusbutton wird grau bei drübergehen der Maus
+					public void mouseEntered(MouseEvent arg0) {
+						btnTransaktionsliste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus2.png")));
+					}
+					
+					//Plusbutton ist blau
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						btnTransaktionsliste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
+					}
+				});
+				btnTransaktionsliste.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
+				btnTransaktionsliste.setBounds(645, 155, 25, 25);
+				contentPane.add(btnTransaktionsliste);
+				
+				JLabel lblTransaktionsliste = new JLabel();
+				lblTransaktionsliste.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross2.png")));
+				lblTransaktionsliste.setBounds(630, 150, 160, 34);
+				contentPane.add(lblTransaktionsliste);
+				
+				JLabel Gesamtbilanz = new JLabel("Gesamtbilanz:");
+				Gesamtbilanz.setForeground(Color.WHITE);
+				Gesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 14));
+				Gesamtbilanz.setBounds(900, 150, 117, 34);
+				contentPane.add(Gesamtbilanz);
+				
+				txtGesamtbilanz = new JTextField();
+				txtGesamtbilanz.setBorder(null);
+				txtGesamtbilanz.setColumns(10);
+				txtGesamtbilanz.setBounds(1000, 152, 247, 30);
+				contentPane.add(txtGesamtbilanz);
+				
+				JLabel lblGesamtbilanz = new JLabel();
+				lblGesamtbilanz.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
+				lblGesamtbilanz.setBounds(997, 150, 253, 34);
+				contentPane.add(lblGesamtbilanz);
+				
+				JLabel Ausgaben = new JLabel("Ausgaben:");
+				Ausgaben.setForeground(Color.WHITE);
+				Ausgaben.setFont(new Font("Tahoma", Font.BOLD, 14));
+				Ausgaben.setBounds(440, 230, 117, 34);
+				contentPane.add(Ausgaben);
+				
+				txtAusgaben = new JTextField();
+				txtAusgaben.setBorder(null);
+				txtAusgaben.setHorizontalAlignment(SwingConstants.CENTER);
+				txtAusgaben.setForeground(Color.GRAY);
+				txtAusgaben.setBounds(528, 232, 262, 30);
+				contentPane.add(txtAusgaben);
+				txtAusgaben.setColumns(10);
+				
+				JLabel lblAusgaben = new JLabel();
+				lblAusgaben.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
+				lblAusgaben.setBounds(528, 230, 262, 34);
+				contentPane.add(lblAusgaben);
+				
+				tableAusgaben = new JTable();
+				tableAusgaben.setBounds(440, 310, 352, 346);
+				contentPane.add(tableAusgaben);
+				
+				JLabel Einnahmen = new JLabel("Einnahmen:");
+				Einnahmen.setForeground(Color.WHITE);
+				Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
+				Einnahmen.setBounds(900, 230, 87, 34);
+				contentPane.add(Einnahmen);
+				
+				txtEinnahmen = new JTextField();
+				txtEinnahmen.setBorder(null);
+				txtEinnahmen.setColumns(10);
+				txtEinnahmen.setBounds(1000, 232, 247, 30);
+				contentPane.add(txtEinnahmen);
+				
+				JLabel lblEinnahmen = new JLabel();
+				lblEinnahmen.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
+				lblEinnahmen.setBounds(997, 230, 253, 34);
+				contentPane.add(lblEinnahmen);
+				
+				tableEinnahmen = new JTable();
+				tableEinnahmen.setBounds(900, 310, 352, 346);
+				contentPane.add(tableEinnahmen);
+				
 				
 //Hintergrund		
 				JLabel Hintergrund = new JLabel();
 				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI2.png")));
-				Hintergrund.setBounds(-10, -24, 1378, 815);
+				Hintergrund.setBounds(-10, -23, 1378, 815);
 				contentPane.add(Hintergrund);
 
 				
