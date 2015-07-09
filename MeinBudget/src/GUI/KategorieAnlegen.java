@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JRadioButton;
 
 public class KategorieAnlegen extends JFrame {
 
@@ -81,8 +82,45 @@ public class KategorieAnlegen extends JFrame {
 //Kategorie		
 		JLabel lblKategorie = new JLabel();
 		lblKategorie.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Textfeldgross.png")));
-		lblKategorie.setBounds(273, 104, 145, 30);
+		lblKategorie.setBounds(222, 105, 145, 30);
 		contentPane.add(lblKategorie);
+		
+		JLabel Kategorie = new JLabel("Kategorie:");
+		Kategorie.setForeground(Color.WHITE);
+		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
+		Kategorie.setBounds(100, 105, 91, 27);
+		contentPane.add(Kategorie);
+		
+		JLabel Typ = new JLabel("Typ:");
+		Typ.setForeground(Color.WHITE);
+		Typ.setFont(new Font("Tahoma", Font.BOLD, 14));
+		Typ.setBounds(100, 170, 91, 27);
+		contentPane.add(Typ);
+		
+		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
+		rdbtnAusgaben.setBounds(222, 174, 145, 30);
+		contentPane.add(rdbtnAusgaben);
+		
+		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
+		rdbtnEinnahmen.setBounds(222, 207, 145, 30);
+		contentPane.add(rdbtnEinnahmen);
+		
+		JLabel lblIcon = new JLabel("Icon:");
+		lblIcon.setForeground(Color.WHITE);
+		lblIcon.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblIcon.setBounds(100, 274, 91, 27);
+		contentPane.add(lblIcon);
+		
+		JLabel btnIcon = new JLabel();
+		btnIcon.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Textfeldgross.png")));
+		btnIcon.setBounds(222, 271, 145, 30);
+		contentPane.add(btnIcon);
+		
+//Button Speichern		
+		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Speichern.png")));
+		btnSpeichern.setBounds(148, 372, 188, 38);
+		contentPane.add(btnSpeichern);
 				
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
@@ -94,5 +132,4 @@ public class KategorieAnlegen extends JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);	
 	}
-
 }
