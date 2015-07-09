@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Color;
 
 public class KategorieAnlegen extends JFrame {
 
@@ -64,11 +67,19 @@ public class KategorieAnlegen extends JFrame {
 			}
 					
 			});
+			
+			JLabel lblKategorienAnlegen = new JLabel("Kategorien Anlegen");
+			lblKategorienAnlegen.setForeground(Color.WHITE);
+			lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
+			lblKategorienAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
+			lblKategorienAnlegen.setBounds(10, 15, 460, 38);
+			contentPane.add(lblKategorienAnlegen);
 			btnSchliessen.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Schliessen_Button.png")));
 			btnSchliessen.setBounds(440, 15, 25, 25);
 			contentPane.add(btnSchliessen);
 		
-		JLabel lblKategorie = new JLabel("New label");
+//Kategorie		
+		JLabel lblKategorie = new JLabel();
 		lblKategorie.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Textfeldgross.png")));
 		lblKategorie.setBounds(273, 104, 145, 30);
 		contentPane.add(lblKategorie);
