@@ -192,7 +192,7 @@ public class AnmeldenFenster extends JFrame {
 	
 	private void anmeldung() {
 		try{
-		String sqlQuery = "SELECT * FROM Benutzer WHERE id=? and Benutzername=? and Passwortkombination=?";
+		String sqlQuery = "SELECT * FROM Benutzer WHERE Benutzername=? and Passwortkombination=?";
 		
 //Passwort Char in String konvertieren					
 		char[] passInput = txtPasswort.getPassword();
@@ -204,9 +204,9 @@ public class AnmeldenFenster extends JFrame {
 		
 //execute Query
 		PreparedStatement stm = connect.prepareStatement(sqlQuery);
-		stm.setString(1, txtBenutzer.getText().toLowerCase());
+		stm.setString(1, txtBenutzer.getText());
 		stm.setString(2, passString);
-		//stm.setString(0);
+		
 		
 		ResultSet result = stm.executeQuery();
 		
@@ -221,10 +221,10 @@ public class AnmeldenFenster extends JFrame {
 				do{
 					String Benutzer = result.getString("Benutzername");
 					String Passwort = result.getString("Passwortkombination");
+					int id = result.getInt("ID");
 					System.out.println("Datebase data Benutzer: " + Benutzer);
 					System.out.println("Datebase data Passwort: " + Passwort);
-					/*int id = result.getInt("id");
-					System.out.println("Datebase data id: " + id);*/
+					System.out.println("Datebase data id: " + id);
 					if (txtBenutzer.equals(Benutzer) || passString.equals(Passwort)){
 						System.out.println("Anmeldung erfolgreich");
 //Fenster verschwindet 									
