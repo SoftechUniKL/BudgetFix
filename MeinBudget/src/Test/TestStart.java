@@ -1,4 +1,4 @@
-package GUI;
+package Test;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,6 +28,13 @@ import javax.swing.Box;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+import GUI.BPDatenbank;
+import GUI.Charts;
+import GUI.Einstellungen;
+import GUI.Sparziele;
+import GUI.Start;
+import GUI.Tools;
+import GUI.Wiederholung;
 import net.proteanit.sql.DbUtils;
 
 import java.awt.event.ActionListener;
@@ -389,6 +396,7 @@ public class TestStart extends JFrame {
 	
 //Verbindung zur BPDatenbank
 	private void Budgedtabelle(){
+	
 		try{
 			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge WHERE (BenutzerID='2')  ";
 			PreparedStatement stm = connection.prepareStatement(sqlQuery);

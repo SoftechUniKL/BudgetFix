@@ -18,13 +18,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.Box;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+
+import net.proteanit.sql.DbUtils;
 
 public class Start extends JFrame {
-
+	
+	Connection connection = null;
+	Connection connec = null;
+	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
 	private JTextField txtAusgaben;
@@ -52,6 +61,13 @@ public class Start extends JFrame {
 	 * Create the frame.
 	 */
 	public Start() {
+		
+		connection = BPDatenbank.dbCon();
+		connec = BPDatenbank.dbCon();
+		
+		//Erträgetabelle();
+	//	Aufwendungstabelle();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1378, 745);
 		contentPane = new JPanel();
@@ -389,12 +405,11 @@ public class Start extends JFrame {
 				contentPane.add(lblNeueKategorie);
 				
 //Transaktionsliste				
-				JLabel Transaktionsliste = new JLabel("Transaktionsliste");
-				Transaktionsliste.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				Transaktionsliste.setBounds(675, 150, 117, 34);
-				contentPane.add(Transaktionsliste);
+				JLabel txtTransaktionsliste = new JLabel("Transaktionsliste");
+				txtTransaktionsliste.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtTransaktionsliste.setBounds(675, 150, 117, 34);
+				contentPane.add(txtTransaktionsliste);
 				
-//Button Transaktionsliste				
 				JLabel btnTransaktionsliste = new JLabel();
 				btnTransaktionsliste.addMouseListener(new MouseAdapter() {
 					@Override
@@ -413,40 +428,34 @@ public class Start extends JFrame {
 				btnTransaktionsliste.setBounds(645, 155, 25, 25);
 				contentPane.add(btnTransaktionsliste);
 				
-//lblTransaktionsliste				
 				JLabel lblTransaktionsliste = new JLabel();
 				lblTransaktionsliste.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross2.png")));
 				lblTransaktionsliste.setBounds(630, 150, 160, 34);
 				contentPane.add(lblTransaktionsliste);
 				
-//Gesamtbilanz				
 				JLabel Gesamtbilanz = new JLabel("Gesamtbilanz:");
 				Gesamtbilanz.setForeground(Color.WHITE);
 				Gesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Gesamtbilanz.setBounds(900, 150, 117, 34);
 				contentPane.add(Gesamtbilanz);
 				
-//Textfeld Gesamtbilanz --> Eingaben - Ausgaben = Gesamtbilanz des Monats				
 				txtGesamtbilanz = new JTextField();
 				txtGesamtbilanz.setBorder(null);
 				txtGesamtbilanz.setColumns(10);
 				txtGesamtbilanz.setBounds(1000, 152, 247, 30);
 				contentPane.add(txtGesamtbilanz);
 				
-//lblGesamtbilanz				
 				JLabel lblGesamtbilanz = new JLabel();
 				lblGesamtbilanz.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
 				lblGesamtbilanz.setBounds(997, 150, 253, 34);
 				contentPane.add(lblGesamtbilanz);
 				
-//Ausgaben				
 				JLabel Ausgaben = new JLabel("Ausgaben:");
 				Ausgaben.setForeground(Color.WHITE);
 				Ausgaben.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Ausgaben.setBounds(440, 230, 117, 34);
 				contentPane.add(Ausgaben);
 				
-//Ausgaben-Feld: Hier kann man die Werte eintragen				
 				txtAusgaben = new JTextField();
 				txtAusgaben.setBorder(null);
 				txtAusgaben.setHorizontalAlignment(SwingConstants.CENTER);
@@ -455,41 +464,41 @@ public class Start extends JFrame {
 				contentPane.add(txtAusgaben);
 				txtAusgaben.setColumns(10);
 				
-//lblAusgaben				
 				JLabel lblAusgaben = new JLabel();
 				lblAusgaben.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
 				lblAusgaben.setBounds(528, 230, 262, 34);
 				contentPane.add(lblAusgaben);
 				
-//Tabelle der Ausgaben			
-				tableAusgaben = new JTable();
-				tableAusgaben.setBounds(440, 310, 352, 346);
-				contentPane.add(tableAusgaben);
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(440, 310, 352, 346);
+				contentPane.add(scrollPane);
 				
-//Einnahmen			
+				tableAusgaben = new JTable();
+				scrollPane.setViewportView(tableAusgaben);
+				
 				JLabel Einnahmen = new JLabel("Einnahmen:");
 				Einnahmen.setForeground(Color.WHITE);
 				Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Einnahmen.setBounds(900, 230, 87, 34);
 				contentPane.add(Einnahmen);
 				
-//Einnahme-Feld: Hier kann man die Werte eintragen					
 				txtEinnahmen = new JTextField();
 				txtEinnahmen.setBorder(null);
 				txtEinnahmen.setColumns(10);
 				txtEinnahmen.setBounds(1000, 232, 247, 30);
 				contentPane.add(txtEinnahmen);
 				
-//lblEinnahmen				
 				JLabel lblEinnahmen = new JLabel();
 				lblEinnahmen.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
 				lblEinnahmen.setBounds(997, 230, 253, 34);
 				contentPane.add(lblEinnahmen);
 				
-//Tabelle der Einnahmen				
+				JScrollPane scrollPane_1 = new JScrollPane();
+				scrollPane_1.setBounds(900, 310, 352, 346);
+				contentPane.add(scrollPane_1);
+				
 				tableEinnahmen = new JTable();
-				tableEinnahmen.setBounds(900, 310, 352, 346);
-				contentPane.add(tableEinnahmen);
+				scrollPane_1.setViewportView(tableEinnahmen);
 				
 				
 //Hintergrund		
@@ -506,5 +515,22 @@ public class Start extends JFrame {
 				setUndecorated(true);
 				setLocationRelativeTo(null);		
 
-	}
-}
+//	}
+
+//Verbindung zur BPDatenbank - Erträge
+	
+//*	//private void Erträgetabelle(){
+		try{
+			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='2') ";
+			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='2')  ";
+			PreparedStatement stm = connection.prepareStatement(sqlQuery);
+			PreparedStatement pstmt = connec.prepareStatement(sqlQuery2);
+			ResultSet result = stm.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
+			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));	
+			tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
+	
+	}catch(Exception exc){
+		exc.printStackTrace();
+}	
+}}
