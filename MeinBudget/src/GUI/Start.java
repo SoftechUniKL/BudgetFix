@@ -18,13 +18,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.Box;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+
+import net.proteanit.sql.DbUtils;
 
 public class Start extends JFrame {
-
+	
+	Connection connection = null;
+	Connection connec = null;
+	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
 	private JTextField txtAusgaben;
@@ -52,6 +61,13 @@ public class Start extends JFrame {
 	 * Create the frame.
 	 */
 	public Start() {
+		
+		connection = BPDatenbank.dbCon();
+		connec = BPDatenbank.dbCon();
+		
+		//Erträgetabelle();
+	//	Aufwendungstabelle();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1378, 745);
 		contentPane = new JPanel();
@@ -453,9 +469,12 @@ public class Start extends JFrame {
 				lblAusgaben.setBounds(528, 230, 262, 34);
 				contentPane.add(lblAusgaben);
 				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(440, 310, 352, 346);
+				contentPane.add(scrollPane);
+				
 				tableAusgaben = new JTable();
-				tableAusgaben.setBounds(440, 310, 352, 346);
-				contentPane.add(tableAusgaben);
+				scrollPane.setViewportView(tableAusgaben);
 				
 				JLabel Einnahmen = new JLabel("Einnahmen:");
 				Einnahmen.setForeground(Color.WHITE);
@@ -474,9 +493,12 @@ public class Start extends JFrame {
 				lblEinnahmen.setBounds(997, 230, 253, 34);
 				contentPane.add(lblEinnahmen);
 				
+				JScrollPane scrollPane_1 = new JScrollPane();
+				scrollPane_1.setBounds(900, 310, 352, 346);
+				contentPane.add(scrollPane_1);
+				
 				tableEinnahmen = new JTable();
-				tableEinnahmen.setBounds(900, 310, 352, 346);
-				contentPane.add(tableEinnahmen);
+				scrollPane_1.setViewportView(tableEinnahmen);
 				
 				
 //Hintergrund		
@@ -493,5 +515,36 @@ public class Start extends JFrame {
 				setUndecorated(true);
 				setLocationRelativeTo(null);		
 
-	}
+//	}
+
+//Verbindung zur BPDatenbank - Erträge
+	
+//*	//private void Erträgetabelle(){
+		try{
+			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='2') ";
+			PreparedStatement stm = connection.prepareStatement(sqlQuery);
+			ResultSet result = stm.executeQuery();
+			
+			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));
+	
+	
+	}catch(Exception exc){
+		exc.printStackTrace();
+}	
+}//*/
+	{
+//Verbindung zur BPDatenbank - Aufwendungen
+//private void Aufwendungstabelle(){
+	try{
+		String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='2')  ";
+		PreparedStatement pstmt = connec.prepareStatement(sqlQuery2);
+		ResultSet rs = pstmt.executeQuery();
+		
+		tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+}catch(Exception exce){
+	exce.printStackTrace();
+}	
 }
+}//}
