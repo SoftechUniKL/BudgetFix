@@ -98,8 +98,9 @@ public class Tools extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Start frame = new Start();
+							Start frame = new Start(Start.id);
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -139,6 +140,7 @@ public class Tools extends JFrame {
 						try {
 							Wiederholung frame = new Wiederholung();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -178,6 +180,7 @@ public class Tools extends JFrame {
 						try {
 							Charts frame = new Charts();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -217,6 +220,7 @@ public class Tools extends JFrame {
 						try {
 							Sparziele frame = new Sparziele();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -269,6 +273,7 @@ public class Tools extends JFrame {
 						try {
 							Einstellungen frame = new Einstellungen();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

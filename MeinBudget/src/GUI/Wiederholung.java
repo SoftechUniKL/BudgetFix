@@ -99,8 +99,9 @@ public class Wiederholung extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Start frame = new Start(); // !!!!!!!!!!!!!!!!
+							Start frame = new Start(Start.id); // !!!!!!!!!!!!!!!!
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -153,6 +154,7 @@ public class Wiederholung extends JFrame {
 						try {
 							Charts frame = new Charts();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -192,6 +194,7 @@ public class Wiederholung extends JFrame {
 						try {
 							Sparziele frame = new Sparziele();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -231,6 +234,7 @@ public class Wiederholung extends JFrame {
 						try {
 							Tools frame = new Tools();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -270,6 +274,7 @@ public class Wiederholung extends JFrame {
 						try {
 							Einstellungen frame = new Einstellungen();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

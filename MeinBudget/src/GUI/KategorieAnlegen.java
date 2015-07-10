@@ -18,7 +18,9 @@ import java.awt.Color;
 
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+
 import java.awt.List;
+
 import javax.swing.JTextField;
 
 public class KategorieAnlegen extends JFrame {
@@ -156,8 +158,32 @@ public class KategorieAnlegen extends JFrame {
 //Button Speichern		
 		JLabel btnSpeichern = new JLabel();
 		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(170, 372, 188, 38);
+		btnSpeichern.setBounds(170, 372, 144, 38);
 		contentPane.add(btnSpeichern);
+			
+//Button Zurück zu z.B. Start			
+			JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
+			btnZurueck.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								Start frame = new Start(Start.id);
+								frame.setVisible(true);
+								dispose();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+			});
+			btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
+			btnZurueck.setForeground(Color.WHITE);
+			btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			btnZurueck.setBounds(170, 410, 144, 14);
+			contentPane.add(btnZurueck);
 		
 //Combobox Auswahl der Icons		
 			JComboBox<Object> cboAuswahl = new JComboBox<Object>();
