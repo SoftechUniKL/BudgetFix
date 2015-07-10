@@ -30,6 +30,7 @@ import java.awt.event.KeyEvent;
 public class AnmeldenFenster extends JFrame {
 	
 	Connection connect = null;
+	Connection connect2 = null;	
 	
 	private JPanel contentPane;
 	private JTextField txtBenutzer;
@@ -53,6 +54,7 @@ public class AnmeldenFenster extends JFrame {
 	public AnmeldenFenster() {
 		
 		connect = AnmeldeDatenbank.dbCon();
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 300);
@@ -190,7 +192,7 @@ public class AnmeldenFenster extends JFrame {
 	
 //Anmeldung BN und PW abfrage
 	
-	private void anmeldung() {
+	public void anmeldung() {
 		try{
 		String sqlQuery = "SELECT * FROM Benutzer WHERE Benutzername=? and Passwortkombination=?";
 		
@@ -219,14 +221,27 @@ public class AnmeldenFenster extends JFrame {
 			else{
 				
 				do{
+					
 					String Benutzer = result.getString("Benutzername");
 					String Passwort = result.getString("Passwortkombination");
-					int id = result.getInt("ID");
+					int BenutzerID = result.getInt("ID");
 					System.out.println("Datebase data Benutzer: " + Benutzer);
 					System.out.println("Datebase data Passwort: " + Passwort);
-					System.out.println("Datebase data id: " + id);
+					System.out.println("Datebase data id: " + BenutzerID);
 					if (txtBenutzer.equals(Benutzer) || passString.equals(Passwort)){
 						System.out.println("Anmeldung erfolgreich");
+					
+					connect2 = AnmeldeDatenbank.dbCon();	
+					try{	
+					String sqlQuery2 =	"INSERT INTO AngemeldeterNutzer (Nutzer) VALUES (?) ";
+					PreparedStatement Pstm = connect2.prepareStatement(sqlQuery2);
+					Pstm.setInt(1, BenutzerID);
+					Pstm.execute();
+					}catch(Exception ex){
+						ex.printStackTrace();
+				}
+					
+					
 //Fenster verschwindet 									
 						dispose();
 						
@@ -258,7 +273,8 @@ public class AnmeldenFenster extends JFrame {
 }catch(Exception ex){
 		ex.printStackTrace();
 }
-	}
+
+}
 
 }
 
