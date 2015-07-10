@@ -99,7 +99,7 @@ public class Start extends JFrame {
 					}
 				});
 				btnSchliessen.setIcon(new ImageIcon(Start.class.getResource("/Design/schliessengross.png")));
-				btnSchliessen.setBounds(1280, 15, 40, 40);
+				btnSchliessen.setBounds(1280, 20, 40, 40);
 				contentPane.add(btnSchliessen);
 		
 //Button Menue		
