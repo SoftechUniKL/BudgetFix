@@ -33,7 +33,7 @@ public class Start extends JFrame {
 	
 	Connection connection = null;
 	Connection connec = null;
-	private int id;
+	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
 	private JTextField txtAusgaben;
@@ -60,9 +60,8 @@ public class Start extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Start(int id) {
+	public Start() {
 		
-		this.id = id;
 		connection = BPDatenbank.dbCon();
 		connec = BPDatenbank.dbCon();
 		
@@ -535,8 +534,8 @@ public class Start extends JFrame {
 	
 //*	//private void Erträgetabelle(){
 		try{
-			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='"+this.id+"') ";
-			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')  ";
+			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='2') ";
+			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='2')  ";
 			PreparedStatement stm = connection.prepareStatement(sqlQuery);
 			PreparedStatement pstmt = connec.prepareStatement(sqlQuery2);
 			ResultSet result = stm.executeQuery();

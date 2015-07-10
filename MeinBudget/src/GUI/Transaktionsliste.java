@@ -1,7 +1,7 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,11 +15,11 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 
 public class Transaktionsliste extends JFrame {
 
 	private JPanel contentPane;
+
 	/**
 	 * Launch the application.
 	 */
@@ -46,16 +46,6 @@ public class Transaktionsliste extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		/*
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-		frame.add(datePicker);
-		*/
-	
-		
-		
 		
 //Schliessen Button		
 		JLabel btnSchliessen = new JLabel();
@@ -91,6 +81,15 @@ public class Transaktionsliste extends JFrame {
 		btnSchliessen.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
+		
+		/*
+		UtilDateModel model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		 
+		Container frame;
+		frame.add(datePicker);
+		*/
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
