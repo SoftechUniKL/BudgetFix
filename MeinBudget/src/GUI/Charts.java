@@ -100,8 +100,9 @@ public class Charts extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Start frame = new Start();
+							Start frame = new Start(Start.id);
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -125,22 +126,6 @@ public class Charts extends JFrame {
 		
 //lblStart
 		JLabel lblStart = new JLabel("Start");
-		lblStart.addMouseListener(new MouseAdapter() {
-			@Override
-			//Start öffnet sich					
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Start frame = new Start();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
 		lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblStart.setForeground(Color.WHITE);
 		lblStart.setBounds(110, 332, 80, 25);
@@ -157,6 +142,7 @@ public class Charts extends JFrame {
 						try {
 							Wiederholung frame = new Wiederholung();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -209,6 +195,7 @@ public class Charts extends JFrame {
 						try {
 							Sparziele frame = new Sparziele();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -248,6 +235,7 @@ public class Charts extends JFrame {
 						try {
 							Tools frame = new Tools();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -287,6 +275,7 @@ public class Charts extends JFrame {
 						try {
 							Einstellungen frame = new Einstellungen();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

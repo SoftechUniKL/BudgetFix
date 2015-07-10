@@ -101,8 +101,9 @@ public class Einstellungen extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Start frame = new Start();
+							Start frame = new Start(Start.id);
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -142,6 +143,7 @@ public class Einstellungen extends JFrame {
 						try {
 							Wiederholung frame = new Wiederholung();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -181,6 +183,7 @@ public class Einstellungen extends JFrame {
 						try {
 							Charts frame = new Charts();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -220,6 +223,7 @@ public class Einstellungen extends JFrame {
 						try {
 							Sparziele frame = new Sparziele();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -259,6 +263,7 @@ public class Einstellungen extends JFrame {
 						try {
 							Tools frame = new Tools();
 							frame.setVisible(true);
+							dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

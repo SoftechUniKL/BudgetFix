@@ -31,9 +31,11 @@ import net.proteanit.sql.DbUtils;
 
 public class Start extends JFrame {
 	
+	//Damit id nur für den Benutzer geöffnet wird! Und um die anderen Fenster auch öffnen zu können
 	Connection connection = null;
 	Connection connec = null;
-	private static int id;
+	static int id;
+	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
 	private JTextField txtAusgaben;
@@ -144,6 +146,7 @@ public class Start extends JFrame {
 								try {
 									Wiederholung frame = new Wiederholung();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -185,6 +188,7 @@ public class Start extends JFrame {
 								try {
 									Charts frame = new Charts();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -224,6 +228,7 @@ public class Start extends JFrame {
 								try {
 									Sparziele frame = new Sparziele();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -263,6 +268,7 @@ public class Start extends JFrame {
 								try {
 									Tools frame = new Tools();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -302,6 +308,7 @@ public class Start extends JFrame {
 								try {
 									Einstellungen frame = new Einstellungen();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -334,6 +341,7 @@ public class Start extends JFrame {
 								try {
 									Einstellungen frame = new Einstellungen();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -388,6 +396,7 @@ public class Start extends JFrame {
 								try {
 									KategorieAnlegen frame = new KategorieAnlegen();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -434,6 +443,7 @@ public class Start extends JFrame {
 								try {
 									Transaktionsliste frame = new Transaktionsliste();
 									frame.setVisible(true);
+									dispose();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
