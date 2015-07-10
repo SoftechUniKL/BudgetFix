@@ -33,6 +33,7 @@ public class Start extends JFrame {
 	
 	Connection connection = null;
 	Connection connec = null;
+	private static int id;
 	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
@@ -48,7 +49,7 @@ public class Start extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Start frame = new Start();
+					Start frame = new Start(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,10 +61,11 @@ public class Start extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Start() {
+	public Start(int BenutzerID) {
 		
 		connection = BPDatenbank.dbCon();
 		connec = BPDatenbank.dbCon();
+		this.id = BenutzerID;
 		
 		//Erträgetabelle();
 	//	Aufwendungstabelle();
@@ -522,18 +524,10 @@ public class Start extends JFrame {
 //
 				
 		try{
-			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID=?) ";
-			
-			
-			
-			
-			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID=?)  ";
+			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='"+this.id+"') ";
+			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')  ";
 			PreparedStatement stm = connection.prepareStatement(sqlQuery);
 			PreparedStatement pstmt = connec.prepareStatement(sqlQuery2);
-			
-			
-			stm.setLong(1,  Anmelden.AnmeldenFenster.anmeldung( BenutzerID));
-			pstmt.setLong(1, 2);
 			
 			
 			ResultSet result = stm.executeQuery();

@@ -30,7 +30,6 @@ import java.awt.event.KeyEvent;
 public class AnmeldenFenster extends JFrame {
 	
 	Connection connect = null;
-	Connection connect2 = null;	
 	
 	private JPanel contentPane;
 	private JTextField txtBenutzer;
@@ -231,16 +230,8 @@ public class AnmeldenFenster extends JFrame {
 					if (txtBenutzer.equals(Benutzer) || passString.equals(Passwort)){
 						System.out.println("Anmeldung erfolgreich");
 					
-					connect2 = AnmeldeDatenbank.dbCon();	
-					try{	
-					String sqlQuery2 =	"INSERT INTO AngemeldeterNutzer (Nutzer) VALUES (?) ";
-					PreparedStatement Pstm = connect2.prepareStatement(sqlQuery2);
-					Pstm.setInt(1, BenutzerID);
-					Pstm.execute();
-					}catch(Exception ex){
-						ex.printStackTrace();
-				}
 					
+				
 					
 //Fenster verschwindet 									
 						dispose();
@@ -249,7 +240,7 @@ public class AnmeldenFenster extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									Start frame = new Start();
+									Start frame = new Start(BenutzerID);
 									frame.setVisible(true);
 								} catch (Exception e) {
 									e.printStackTrace();
