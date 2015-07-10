@@ -33,7 +33,7 @@ public class Start extends JFrame {
 	
 	Connection connection = null;
 	Connection connec = null;
-	private int id;
+	private static int id;
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
 	private JTextField txtAusgaben;
@@ -48,7 +48,7 @@ public class Start extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Start frame = new Start();
+					Start frame = new Start(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,7 +70,7 @@ public class Start extends JFrame {
 	//	Aufwendungstabelle();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1378, 745);
+		setBounds(100, 100, 1338, 713);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,7 +99,7 @@ public class Start extends JFrame {
 					}
 				});
 				btnSchliessen.setIcon(new ImageIcon(Start.class.getResource("/Design/schliessengross.png")));
-				btnSchliessen.setBounds(1305, 21, 40, 40);
+				btnSchliessen.setBounds(1280, 15, 40, 40);
 				contentPane.add(btnSchliessen);
 		
 //Button Menue		
@@ -117,20 +117,20 @@ public class Start extends JFrame {
 				
 //Tabelle für Gesamtübersicht		
 				JTable tableGesamt = new JTable();			
-				tableGesamt.setBounds(50, 116, 200, 200);
+				tableGesamt.setBounds(50, 107, 200, 200);
 				contentPane.add(tableGesamt);
 				
 //btnStart		
 				JLabel btnStart = new JLabel();
 				btnStart.setIcon(new ImageIcon(Start.class.getResource("/Design/StartBlau.png")));
-				btnStart.setBounds(50, 340, 50, 50);
+				btnStart.setBounds(50, 320, 50, 50);
 				contentPane.add(btnStart);
 				
 //lblStart
 				JLabel lblStart = new JLabel("Start");
 				lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 				lblStart.setForeground(Color.BLUE);
-				lblStart.setBounds(110, 352, 80, 25);
+				lblStart.setBounds(110, 332, 80, 25);
 				contentPane.add(lblStart);
 				
 //Button Wiederholung		
@@ -164,14 +164,14 @@ public class Start extends JFrame {
 
 				});
 				btnWiederholung.setIcon(new ImageIcon(Start.class.getResource("/Design/wiederholung.png")));
-				btnWiederholung.setBounds(50, 410, 50, 50);
+				btnWiederholung.setBounds(50, 380, 50, 50);
 				contentPane.add(btnWiederholung);
 				
 //lblWiederholung für fixe Beträge		
 				JLabel lblWiederholung = new JLabel("Wiederholung");
 				lblWiederholung.setForeground(Color.WHITE);
 				lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblWiederholung.setBounds(110, 422, 174, 25);
+				lblWiederholung.setBounds(110, 392, 174, 25);
 				contentPane.add(lblWiederholung);
 				
 //Button Charts		
@@ -203,14 +203,14 @@ public class Start extends JFrame {
 					}
 				});
 				btnCharts.setIcon(new ImageIcon(Start.class.getResource("/Design/Charts.png")));
-				btnCharts.setBounds(50, 480, 50, 50);
+				btnCharts.setBounds(50, 440, 50, 50);
 				contentPane.add(btnCharts);
 				
 //lblCharts		
 				JLabel lblCharts = new JLabel("Charts");
 				lblCharts.setForeground(Color.WHITE);
 				lblCharts.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblCharts.setBounds(110, 492, 174, 25);
+				lblCharts.setBounds(110, 452, 174, 25);
 				contentPane.add(lblCharts);
 				
 //Button Sparziele		
@@ -242,14 +242,14 @@ public class Start extends JFrame {
 					}
 				});
 				btnSparziele.setIcon(new ImageIcon(Start.class.getResource("/Design/Sparziele.png")));
-				btnSparziele.setBounds(50, 550, 50, 50);
+				btnSparziele.setBounds(50, 500, 50, 50);
 				contentPane.add(btnSparziele);
 				
 //lblSparziele		
 				JLabel lblSparziele = new JLabel("Sparziele");
 				lblSparziele.setForeground(Color.WHITE);
 				lblSparziele.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblSparziele.setBounds(110, 562, 174, 25);
+				lblSparziele.setBounds(110, 512, 174, 25);
 				contentPane.add(lblSparziele);
 				
 //Button Tools		
@@ -281,14 +281,14 @@ public class Start extends JFrame {
 					}
 				});
 				btnTools.setIcon(new ImageIcon(Start.class.getResource("/Design/Tools.png")));
-				btnTools.setBounds(50, 620, 50, 50);
+				btnTools.setBounds(50, 560, 50, 50);
 				contentPane.add(btnTools);
 				
 //lblTools		
 				JLabel lblTools = new JLabel("Tools");
 				lblTools.setForeground(Color.WHITE);
 				lblTools.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblTools.setBounds(110, 631, 174, 25);
+				lblTools.setBounds(110, 572, 174, 25);
 				contentPane.add(lblTools);
 				
 //Button Einstellungen		
@@ -320,7 +320,7 @@ public class Start extends JFrame {
 					}
 				});
 				btnEinstellungen.setIcon(new ImageIcon(Start.class.getResource("/Design/Einstellungen.png")));
-				btnEinstellungen.setBounds(50, 690, 50, 50);
+				btnEinstellungen.setBounds(50, 620, 50, 50);
 				contentPane.add(btnEinstellungen);
 				
 //lblEinstellungen		
@@ -344,7 +344,7 @@ public class Start extends JFrame {
 				lblEinstellungen.setIcon(null);
 				lblEinstellungen.setForeground(Color.WHITE);
 				lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));
-				lblEinstellungen.setBounds(110, 700, 174, 25);
+				lblEinstellungen.setBounds(110, 632, 174, 25);
 				contentPane.add(lblEinstellungen);
 				
 //Haupt"klasse"-Start		
@@ -363,12 +363,12 @@ public class Start extends JFrame {
 //Neue Kategorie Text				
 				JLabel txtNeueKategorie = new JLabel("Neue Kategorie");
 				txtNeueKategorie.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				txtNeueKategorie.setBounds(490, 150, 117, 34);
+				txtNeueKategorie.setBounds(490, 130, 117, 34);
 				contentPane.add(txtNeueKategorie);
 				
 //Button um "Neue Kategorie"-Fenster zu öffnen				
 				JLabel btnNeueKategorie = new JLabel();
-				btnNeueKategorie.addMouseListener(new MouseAdapter() {
+				btnNeueKategorie.addMouseListener(new MouseAdapter() {									
 					@Override
 					//Plusbutton wird grau bei drübergehen der Maus
 					public void mouseEntered(MouseEvent arg0) {
@@ -396,19 +396,19 @@ public class Start extends JFrame {
 					}
 				});
 				btnNeueKategorie.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
-				btnNeueKategorie.setBounds(460, 155, 25, 25);
+				btnNeueKategorie.setBounds(460, 135, 25, 25);
 				contentPane.add(btnNeueKategorie);
 				
 //Neue Kategorie Label				
 				JLabel lblNeueKategorie = new JLabel();
 				lblNeueKategorie.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross2.png")));
-				lblNeueKategorie.setBounds(440, 150, 160, 34);
+				lblNeueKategorie.setBounds(440, 130, 160, 34);
 				contentPane.add(lblNeueKategorie);
 				
 //Transaktionsliste				
 				JLabel txtTransaktionsliste = new JLabel("Transaktionsliste");
 				txtTransaktionsliste.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				txtTransaktionsliste.setBounds(675, 150, 117, 34);
+				txtTransaktionsliste.setBounds(675, 130, 117, 34);
 				contentPane.add(txtTransaktionsliste);
 				
 //btnTransaktionsliste				
@@ -425,42 +425,57 @@ public class Start extends JFrame {
 					public void mouseExited(MouseEvent arg0) {
 						btnTransaktionsliste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
 					}
+					
+					//Öffnet Fenster Transaktionsliste
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Transaktionsliste frame = new Transaktionsliste();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
 				});
 				btnTransaktionsliste.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
-				btnTransaktionsliste.setBounds(645, 155, 25, 25);
+				btnTransaktionsliste.setBounds(645, 135, 25, 25);
 				contentPane.add(btnTransaktionsliste);
 				
 //lblTransaktionsliste				
 				JLabel lblTransaktionsliste = new JLabel();
 				lblTransaktionsliste.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross2.png")));
-				lblTransaktionsliste.setBounds(630, 150, 160, 34);
+				lblTransaktionsliste.setBounds(630, 130, 160, 34);
 				contentPane.add(lblTransaktionsliste);
 				
 //Gesamtbilanz				
 				JLabel Gesamtbilanz = new JLabel("Gesamtbilanz:");
 				Gesamtbilanz.setForeground(Color.WHITE);
 				Gesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 14));
-				Gesamtbilanz.setBounds(900, 150, 117, 34);
+				Gesamtbilanz.setBounds(900, 130, 117, 34);
 				contentPane.add(Gesamtbilanz);
 				
 //Gesamtbilanz Textfeld --> Einnahmen - Ausgaben = Gesamtbilanz des Monats				
 				txtGesamtbilanz = new JTextField();
 				txtGesamtbilanz.setBorder(null);
 				txtGesamtbilanz.setColumns(10);
-				txtGesamtbilanz.setBounds(1000, 152, 247, 30);
+				txtGesamtbilanz.setBounds(1000, 132, 247, 30);
 				contentPane.add(txtGesamtbilanz);
 				
 //lblGesamtbilanz				
 				JLabel lblGesamtbilanz = new JLabel();
 				lblGesamtbilanz.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
-				lblGesamtbilanz.setBounds(997, 150, 253, 34);
+				lblGesamtbilanz.setBounds(997, 130, 253, 34);
 				contentPane.add(lblGesamtbilanz);
 				
 //Ausgaben				
 				JLabel Ausgaben = new JLabel("Ausgaben:");
 				Ausgaben.setForeground(Color.WHITE);
 				Ausgaben.setFont(new Font("Tahoma", Font.BOLD, 14));
-				Ausgaben.setBounds(440, 230, 117, 34);
+				Ausgaben.setBounds(440, 210, 117, 34);
 				contentPane.add(Ausgaben);
 				
 //Ausgaben Textefeld zur Eingabe der Ausgaben				
@@ -468,63 +483,59 @@ public class Start extends JFrame {
 				txtAusgaben.setBorder(null);
 				txtAusgaben.setHorizontalAlignment(SwingConstants.CENTER);
 				txtAusgaben.setForeground(Color.GRAY);
-				txtAusgaben.setBounds(528, 232, 262, 30);
+				txtAusgaben.setBounds(528, 212, 262, 30);
 				contentPane.add(txtAusgaben);
 				txtAusgaben.setColumns(10);
 				
 //lblAusgaben				
 				JLabel lblAusgaben = new JLabel();
 				lblAusgaben.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
-				lblAusgaben.setBounds(528, 230, 262, 34);
+				lblAusgaben.setBounds(528, 210, 262, 34);
 				contentPane.add(lblAusgaben);
 								
-				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(440, 310, 352, 346);
-				contentPane.add(scrollPane);
+				JScrollPane scrollPane_TabelleAusgaben = new JScrollPane();
+				scrollPane_TabelleAusgaben.setBounds(440, 290, 352, 346);
+				contentPane.add(scrollPane_TabelleAusgaben);
 				
 //Tabelle Ausgaben Übersicht				
 				tableAusgaben = new JTable();
-				scrollPane.setViewportView(tableAusgaben);
+				scrollPane_TabelleAusgaben.setViewportView(tableAusgaben);
 				
 //Einnahmen				
 				JLabel Einnahmen = new JLabel("Einnahmen:");
 				Einnahmen.setForeground(Color.WHITE);
 				Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
-				Einnahmen.setBounds(900, 230, 87, 34);
+				Einnahmen.setBounds(900, 210, 87, 34);
 				contentPane.add(Einnahmen);
 
 //Einnahmen als Eingabe				
 				txtEinnahmen = new JTextField();
 				txtEinnahmen.setBorder(null);
 				txtEinnahmen.setColumns(10);
-				txtEinnahmen.setBounds(1000, 232, 247, 30);
+				txtEinnahmen.setBounds(1000, 212, 247, 30);
 				contentPane.add(txtEinnahmen);
 				
 //lblEinnahmen			
 				JLabel lblEinnahmen = new JLabel();
 				lblEinnahmen.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
-				lblEinnahmen.setBounds(997, 230, 253, 34);
+				lblEinnahmen.setBounds(997, 210, 253, 34);
 				contentPane.add(lblEinnahmen);
 				
-				JScrollPane scrollPane_1 = new JScrollPane();
-				scrollPane_1.setBounds(900, 310, 352, 346);
-				contentPane.add(scrollPane_1);
+				JScrollPane scrollPane_TabelleEinnahmen = new JScrollPane();
+				scrollPane_TabelleEinnahmen.setBounds(900, 290, 352, 346);
+				contentPane.add(scrollPane_TabelleEinnahmen);
 				
 //Einnahmen Tabellenübersicht				
 				tableEinnahmen = new JTable();
-				scrollPane_1.setViewportView(tableEinnahmen);
+				scrollPane_TabelleEinnahmen.setViewportView(tableEinnahmen);
 				
 				
 //Hintergrund		
 				JLabel Hintergrund = new JLabel();
-				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI2.png")));
-				Hintergrund.setBounds(-10, -23, 1378, 815);
+				Hintergrund.setIcon(new ImageIcon(Start.class.getResource("/Design/GUI5.png")));
+				Hintergrund.setBounds(-11, -53, 1378, 820);
 				contentPane.add(Hintergrund);
 
-				
-				
-//Fullscreen Bildschirm
-				setExtendedState(Frame.MAXIMIZED_BOTH);
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 				setUndecorated(true);
 				setLocationRelativeTo(null);		
