@@ -411,6 +411,7 @@ public class Start extends JFrame {
 				txtTransaktionsliste.setBounds(675, 150, 117, 34);
 				contentPane.add(txtTransaktionsliste);
 				
+//btnTransaktionsliste				
 				JLabel btnTransaktionsliste = new JLabel();
 				btnTransaktionsliste.addMouseListener(new MouseAdapter() {
 					@Override
@@ -429,34 +430,40 @@ public class Start extends JFrame {
 				btnTransaktionsliste.setBounds(645, 155, 25, 25);
 				contentPane.add(btnTransaktionsliste);
 				
+//lblTransaktionsliste				
 				JLabel lblTransaktionsliste = new JLabel();
 				lblTransaktionsliste.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross2.png")));
 				lblTransaktionsliste.setBounds(630, 150, 160, 34);
 				contentPane.add(lblTransaktionsliste);
 				
+//Gesamtbilanz				
 				JLabel Gesamtbilanz = new JLabel("Gesamtbilanz:");
 				Gesamtbilanz.setForeground(Color.WHITE);
 				Gesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Gesamtbilanz.setBounds(900, 150, 117, 34);
 				contentPane.add(Gesamtbilanz);
 				
+//Gesamtbilanz Textfeld --> Einnahmen - Ausgaben = Gesamtbilanz des Monats				
 				txtGesamtbilanz = new JTextField();
 				txtGesamtbilanz.setBorder(null);
 				txtGesamtbilanz.setColumns(10);
 				txtGesamtbilanz.setBounds(1000, 152, 247, 30);
 				contentPane.add(txtGesamtbilanz);
 				
+//lblGesamtbilanz				
 				JLabel lblGesamtbilanz = new JLabel();
 				lblGesamtbilanz.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
 				lblGesamtbilanz.setBounds(997, 150, 253, 34);
 				contentPane.add(lblGesamtbilanz);
 				
+//Ausgaben				
 				JLabel Ausgaben = new JLabel("Ausgaben:");
 				Ausgaben.setForeground(Color.WHITE);
 				Ausgaben.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Ausgaben.setBounds(440, 230, 117, 34);
 				contentPane.add(Ausgaben);
 				
+//Ausgaben Textefeld zur Eingabe der Ausgaben				
 				txtAusgaben = new JTextField();
 				txtAusgaben.setBorder(null);
 				txtAusgaben.setHorizontalAlignment(SwingConstants.CENTER);
@@ -465,30 +472,35 @@ public class Start extends JFrame {
 				contentPane.add(txtAusgaben);
 				txtAusgaben.setColumns(10);
 				
+//lblAusgaben				
 				JLabel lblAusgaben = new JLabel();
 				lblAusgaben.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
 				lblAusgaben.setBounds(528, 230, 262, 34);
 				contentPane.add(lblAusgaben);
-				
+								
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(440, 310, 352, 346);
 				contentPane.add(scrollPane);
 				
+//Tabelle Ausgaben Übersicht				
 				tableAusgaben = new JTable();
 				scrollPane.setViewportView(tableAusgaben);
 				
+//Einnahmen				
 				JLabel Einnahmen = new JLabel("Einnahmen:");
 				Einnahmen.setForeground(Color.WHITE);
 				Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Einnahmen.setBounds(900, 230, 87, 34);
 				contentPane.add(Einnahmen);
-				
+
+//Einnahmen als Eingabe				
 				txtEinnahmen = new JTextField();
 				txtEinnahmen.setBorder(null);
 				txtEinnahmen.setColumns(10);
 				txtEinnahmen.setBounds(1000, 232, 247, 30);
 				contentPane.add(txtEinnahmen);
 				
+//lblEinnahmen			
 				JLabel lblEinnahmen = new JLabel();
 				lblEinnahmen.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
 				lblEinnahmen.setBounds(997, 230, 253, 34);
@@ -498,6 +510,7 @@ public class Start extends JFrame {
 				scrollPane_1.setBounds(900, 310, 352, 346);
 				contentPane.add(scrollPane_1);
 				
+//Einnahmen Tabellenübersicht				
 				tableEinnahmen = new JTable();
 				scrollPane_1.setViewportView(tableEinnahmen);
 				
