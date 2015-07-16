@@ -337,6 +337,20 @@ public class Wiederholung extends JFrame {
 			public void mouseExited(MouseEvent arg0) {
 					btnFixeTransaktion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
 				}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							TransaktionAnlegen frame = new TransaktionAnlegen();
+							frame.setVisible(true);
+							dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
 		});
 		btnFixeTransaktion.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Plus.png")));
 		btnFixeTransaktion.setBounds(527, 156, 25, 25);
