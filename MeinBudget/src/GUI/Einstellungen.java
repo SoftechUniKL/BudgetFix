@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class Einstellungen extends JFrame {
 
@@ -21,6 +24,9 @@ public class Einstellungen extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
+	private JPasswordField passwordField_2;
 
 	/**
 	 * Launch the application.
@@ -319,6 +325,56 @@ public class Einstellungen extends JFrame {
 		btnHauptEinstellungen.setBounds(430, 30, 66, 75);
 		contentPane.add(btnHauptEinstellungen);
 		
+		JLabel lblAltesPasswortEingeben = new JLabel("altes Passwort eingeben:");
+		lblAltesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAltesPasswortEingeben.setForeground(Color.WHITE);
+		lblAltesPasswortEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAltesPasswortEingeben.setBounds(430, 130, 460, 38);
+		contentPane.add(lblAltesPasswortEingeben);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBorder(null);
+		passwordField.setForeground(Color.GRAY);
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passwordField.setBounds(529, 180, 262, 30);
+		contentPane.add(passwordField);
+		
+		JLabel lblNeuesPasswortEingeben = new JLabel("neues Passwort eingeben:");
+		lblNeuesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNeuesPasswortEingeben.setForeground(Color.WHITE);
+		lblNeuesPasswortEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNeuesPasswortEingeben.setBounds(430, 260, 460, 38);
+		contentPane.add(lblNeuesPasswortEingeben);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBorder(null);
+		passwordField_1.setForeground(Color.GRAY);
+		passwordField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passwordField_1.setBounds(529, 310, 262, 30);
+		contentPane.add(passwordField_1);
+		
+		JLabel lblNeuesPasswortWiederholen = new JLabel("neues Passwort wiederholen:");
+		lblNeuesPasswortWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNeuesPasswortWiederholen.setForeground(Color.WHITE);
+		lblNeuesPasswortWiederholen.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNeuesPasswortWiederholen.setBounds(430, 390, 460, 38);
+		contentPane.add(lblNeuesPasswortWiederholen);
+		
+		passwordField_2 = new JPasswordField();
+		passwordField_2.setBorder(null);
+		passwordField_2.setForeground(Color.GRAY);
+		passwordField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passwordField_2.setBounds(529, 440, 262, 30);
+		contentPane.add(passwordField_2);
+		
+		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Speichern.png")));
+		btnSpeichern.setBounds(587, 540, 144, 38);
+		contentPane.add(btnSpeichern);
+		
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
@@ -331,6 +387,5 @@ public class Einstellungen extends JFrame {
 		setLocationRelativeTo(null);		
 		
 	}
-
 }
 

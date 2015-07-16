@@ -79,7 +79,7 @@ public class KategorieAnlegen extends JFrame {
 			});
 			
 //Überschrift "Kategorie Anlegen"			
-			JLabel lblKategorienAnlegen = new JLabel("<html><u>Kategorien Anlegen</u></html>");
+			JLabel lblKategorienAnlegen = new JLabel("<html><u>Kategorien anlegen</u></html>");
 			lblKategorienAnlegen.setForeground(Color.WHITE);
 			lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
 			lblKategorienAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
@@ -91,6 +91,7 @@ public class KategorieAnlegen extends JFrame {
 		
 //Textfeld für Kategorie		
 		txtKategorie = new JTextField();
+		txtKategorie.setHorizontalAlignment(SwingConstants.CENTER);
 		txtKategorie.setBorder(null);
 		txtKategorie.setForeground(Color.GRAY);
 		txtKategorie.setBackground(Color.WHITE);
@@ -181,7 +182,7 @@ public class KategorieAnlegen extends JFrame {
 			});
 			btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 			btnZurueck.setForeground(Color.WHITE);
-			btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			btnZurueck.setBounds(170, 410, 144, 14);
 			contentPane.add(btnZurueck);
 		

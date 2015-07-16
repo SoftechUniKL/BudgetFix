@@ -470,6 +470,7 @@ public class Start extends JFrame {
 				
 //Gesamtbilanz Textfeld --> Einnahmen - Ausgaben = Gesamtbilanz des Monats				
 				txtGesamtbilanz = new JTextField();
+				txtGesamtbilanz.setHorizontalAlignment(SwingConstants.CENTER);
 				txtGesamtbilanz.setBorder(null);
 				txtGesamtbilanz.setColumns(10);
 				txtGesamtbilanz.setBounds(1000, 132, 247, 30);
@@ -520,6 +521,7 @@ public class Start extends JFrame {
 
 //Einnahmen als Eingabe				
 				txtEinnahmen = new JTextField();
+				txtEinnahmen.setHorizontalAlignment(SwingConstants.CENTER);
 				txtEinnahmen.setBorder(null);
 				txtEinnahmen.setColumns(10);
 				txtEinnahmen.setBounds(1000, 212, 247, 30);
