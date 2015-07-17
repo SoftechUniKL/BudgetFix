@@ -4,12 +4,17 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -17,8 +22,13 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class Einstellungen extends JFrame {
+import Anmelden.AnmeldeDatenbank;
+import Anmelden.AnmeldenFenster;
 
+public class Einstellungen extends JFrame {
+	
+	Connection connect = null;
+	
 	/**
 	 * 
 	 */
@@ -48,6 +58,9 @@ public class Einstellungen extends JFrame {
 	 * Create the frame.
 	 */
 	public Einstellungen() {
+		
+		connect = Anmelden.AnmeldeDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 707);
 		contentPane = new JPanel();
@@ -363,6 +376,16 @@ public class Einstellungen extends JFrame {
 		contentPane.add(lblNeuesPasswortWiederholen);
 		
 		passwordField_2 = new JPasswordField();
+		passwordField_2.addKeyListener(new KeyAdapter() {
+			//Passwort ändern über Enter			
+						@Override
+						public void keyPressed(KeyEvent e) {
+							if (e.getKeyCode() == KeyEvent.VK_ENTER ){
+			// Passwort speichern ausführen
+								neuesPasswort();
+							}
+						}
+					});
 		passwordField_2.setBorder(null);
 		passwordField_2.setForeground(Color.GRAY);
 		passwordField_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -371,6 +394,13 @@ public class Einstellungen extends JFrame {
 		contentPane.add(passwordField_2);
 		
 		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+//Bei Mausklick auf Speichern speichert er Daten in SQL ein
+			neuesPasswort();
+			}
+		});
 		btnSpeichern.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Speichern.png")));
 		btnSpeichern.setBounds(587, 540, 144, 38);
 		contentPane.add(btnSpeichern);
@@ -387,5 +417,46 @@ public class Einstellungen extends JFrame {
 		setLocationRelativeTo(null);		
 		
 	}
-}
+	
+//Passwort ändern
+		public void neuesPasswort() {
+			try{
+				
+				char[] passInput3 = passwordField.getPassword();
+				String passString3 = new String(passInput3);
+				
+				char[] passInput = passwordField_1.getPassword();
+				String passString = new String(passInput);
+				
+				char[] passInput2 = passwordField_2.getPassword();
+				String passString2 = new String(passInput2);
+				
+				if (passString.equals(passString2) ){
+					System.out.println("Passwortänderung erfolgreich");
+					JOptionPane.showMessageDialog(null, "Passwort erfolgreich geändert!");
+					String sqlQuery = "UPDATE Benutzer set Passwortkombination='"+passString+"' WHERE Passwortkombination='"+passString3+"' " ;
+					PreparedStatement stm = connect.prepareStatement(sqlQuery);
+					//stm.setString(1, passString);
+					
+//ResultSet result = stm.executeQuery();
+					stm.execute();
+				
+					//Anmelden.AnmeldenFenster frame = new AnmeldenFenster();
+					//frame.setVisible(true);
+					
+	//Fenster verschwindet 									
+					//dispose();				
+					}
+					else{
+						System.out.println("Passwörter stimmen nicht überein!");
+						JOptionPane.showMessageDialog(null, "Überprüfe deine Eingabe!");
+					}
+				
+				
+			}catch(Exception exc){
+				exc.printStackTrace();
+		}
+	
+	
+}}
 
