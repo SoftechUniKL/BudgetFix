@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 
 public class Tools extends JFrame {
 
@@ -315,6 +316,31 @@ public class Tools extends JFrame {
 		btnHauptTools.setIcon(new ImageIcon(Tools.class.getResource("/Design/ToolsGross.png")));
 		btnHauptTools.setBounds(430, 30, 66, 75);
 		contentPane.add(btnHauptTools);
+		
+		JLabel lblDatenexport = new JLabel("Datenexport:");
+		lblDatenexport.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDatenexport.setForeground(Color.WHITE);
+		lblDatenexport.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblDatenexport.setBounds(430, 150, 460, 38);
+		contentPane.add(lblDatenexport);
+		
+//Button zum Exportieren in die Cloud
+		JLabel btnCloud = new JLabel();
+		btnCloud.setIcon(new ImageIcon(Tools.class.getResource("/Design/Cloud.png")));
+		btnCloud.setBounds(548, 250, 232, 38);
+		contentPane.add(btnCloud);
+		
+//Button zum exportieren in Dropbox		
+		JLabel btnDropbox = new JLabel();
+		btnDropbox.setIcon(new ImageIcon(Tools.class.getResource("/Design/Dropbox.png")));
+		btnDropbox.setBounds(548, 350, 232, 38);
+		contentPane.add(btnDropbox);
+		
+//Button zum exportieren als CSV-Datei		
+		JLabel btnCSV = new JLabel();
+		btnCSV.setIcon(new ImageIcon(Tools.class.getResource("/Design/csv.png")));
+		btnCSV.setBounds(548, 450, 232, 38);
+		contentPane.add(btnCSV);
 		
 		
 //Hintergrund		

@@ -24,9 +24,9 @@ public class Einstellungen extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JPasswordField passwordField_2;
+	private JPasswordField pwAltes;
+	private JPasswordField pwNeues;
+	private JPasswordField pwNeuesWiederholen;
 
 	/**
 	 * Launch the application.
@@ -325,6 +325,7 @@ public class Einstellungen extends JFrame {
 		btnHauptEinstellungen.setBounds(430, 30, 66, 75);
 		contentPane.add(btnHauptEinstellungen);
 		
+//lblAltesPasswortEingeben		
 		JLabel lblAltesPasswortEingeben = new JLabel("altes Passwort eingeben:");
 		lblAltesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAltesPasswortEingeben.setForeground(Color.WHITE);
@@ -332,14 +333,16 @@ public class Einstellungen extends JFrame {
 		lblAltesPasswortEingeben.setBounds(430, 130, 460, 38);
 		contentPane.add(lblAltesPasswortEingeben);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBorder(null);
-		passwordField.setForeground(Color.GRAY);
-		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		passwordField.setBounds(529, 180, 262, 30);
-		contentPane.add(passwordField);
+//Password-Feld altes PW eingeben		
+		pwAltes = new JPasswordField();
+		pwAltes.setBorder(null);
+		pwAltes.setForeground(Color.GRAY);
+		pwAltes.setHorizontalAlignment(SwingConstants.CENTER);
+		pwAltes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		pwAltes.setBounds(529, 180, 262, 30);
+		contentPane.add(pwAltes);
 		
+//lblNeuesPasswortEingeben		
 		JLabel lblNeuesPasswortEingeben = new JLabel("neues Passwort eingeben:");
 		lblNeuesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortEingeben.setForeground(Color.WHITE);
@@ -347,14 +350,16 @@ public class Einstellungen extends JFrame {
 		lblNeuesPasswortEingeben.setBounds(430, 260, 460, 38);
 		contentPane.add(lblNeuesPasswortEingeben);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBorder(null);
-		passwordField_1.setForeground(Color.GRAY);
-		passwordField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		passwordField_1.setBounds(529, 310, 262, 30);
-		contentPane.add(passwordField_1);
+//Password-Feld neues PW eingeben		
+		pwNeues = new JPasswordField();
+		pwNeues.setBorder(null);
+		pwNeues.setForeground(Color.GRAY);
+		pwNeues.setHorizontalAlignment(SwingConstants.CENTER);
+		pwNeues.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		pwNeues.setBounds(529, 310, 262, 30);
+		contentPane.add(pwNeues);
 		
+//lblNeuesPasswortWiederholen		
 		JLabel lblNeuesPasswortWiederholen = new JLabel("neues Passwort wiederholen:");
 		lblNeuesPasswortWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortWiederholen.setForeground(Color.WHITE);
@@ -362,14 +367,16 @@ public class Einstellungen extends JFrame {
 		lblNeuesPasswortWiederholen.setBounds(430, 390, 460, 38);
 		contentPane.add(lblNeuesPasswortWiederholen);
 		
-		passwordField_2 = new JPasswordField();
-		passwordField_2.setBorder(null);
-		passwordField_2.setForeground(Color.GRAY);
-		passwordField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordField_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		passwordField_2.setBounds(529, 440, 262, 30);
-		contentPane.add(passwordField_2);
+//Password-Feld neues PW wiederholen eingeben		
+		pwNeuesWiederholen = new JPasswordField();
+		pwNeuesWiederholen.setBorder(null);
+		pwNeuesWiederholen.setForeground(Color.GRAY);
+		pwNeuesWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
+		pwNeuesWiederholen.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		pwNeuesWiederholen.setBounds(529, 440, 262, 30);
+		contentPane.add(pwNeuesWiederholen);
 		
+//btnSpeichern		
 		JLabel btnSpeichern = new JLabel();
 		btnSpeichern.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Speichern.png")));
 		btnSpeichern.setBounds(587, 540, 144, 38);
