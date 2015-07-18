@@ -321,11 +321,11 @@ public class Wiederholung extends JFrame {
 //lblFixeTransaktion		
 		JLabel lblFixeTransaktion = new JLabel("neue wiederholende Transaktion");
 		lblFixeTransaktion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFixeTransaktion.setBounds(559, 150, 199, 35);
+		lblFixeTransaktion.setBounds(580, 149, 199, 35);
 		contentPane.add(lblFixeTransaktion);
 		
 //Button FixeTransaktion		
-		JLabel btnFixeTransaktion = new JLabel("New label");
+		JLabel btnFixeTransaktion = new JLabel();
 		btnFixeTransaktion.addMouseListener(new MouseAdapter() {
 			//Plusbutton wird grau bei drübergehen der Maus
 			@Override
@@ -353,13 +353,13 @@ public class Wiederholung extends JFrame {
 			}
 		});
 		btnFixeTransaktion.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Plus.png")));
-		btnFixeTransaktion.setBounds(527, 156, 25, 25);
+		btnFixeTransaktion.setBounds(538, 156, 25, 25);
 		contentPane.add(btnFixeTransaktion);
 		
 //FixeTransaktion		
 		JLabel FixeTransaktion = new JLabel();
 		FixeTransaktion.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Textfeldgross3.png")));
-		FixeTransaktion.setBounds(510, 150, 262, 35);
+		FixeTransaktion.setBounds(510, 150, 291, 35);
 		contentPane.add(FixeTransaktion);
 		
 //Übersicht einer Tabelle der fixen Beiträge		
