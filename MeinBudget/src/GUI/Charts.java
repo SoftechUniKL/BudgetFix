@@ -6,8 +6,6 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,18 +13,9 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 public class Charts extends JFrame {
 
@@ -53,7 +42,7 @@ public class Charts extends JFrame {
 	 */
 	public Charts() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 985, 707);
+		setBounds(100, 100, 1337, 714);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,7 +70,7 @@ public class Charts extends JFrame {
 		});
 		contentPane.setLayout(null);
 		btnSchliessen.setIcon(new ImageIcon(Charts.class.getResource("/Design/schliessengross.png")));
-		btnSchliessen.setBounds(930, 15, 40, 40);
+		btnSchliessen.setBounds(1280, 15, 40, 40);
 		contentPane.add(btnSchliessen);
 
 //Button Menue		
@@ -329,122 +318,10 @@ public class Charts extends JFrame {
 		btnHauptCharts.setBounds(430, 30, 66, 75);
 		contentPane.add(btnHauptCharts);
 		
-//Button Kategorie im Detail		
-		JLabel btnKategorieImDetail = new JLabel();
-		btnKategorieImDetail.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnKategorieImDetail.setIcon(new ImageIcon(Charts.class.getResource("/Design/KategorienImDetail.png")));
-		btnKategorieImDetail.setBounds(550, 120, 282, 38);
-		contentPane.add(btnKategorieImDetail);
-		
-//Button Zahlungsmittelauswertung		
-		JLabel btnZahlungsmittel = new JLabel();
-		btnZahlungsmittel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					String query = "select Datum,Betrag from Benutzererträge";
-					JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-					JFreeChart chart=ChartFactory.createLineChart("Zahlungsmittelauswertung", "Datum", "Einnahmen", dataset, PlotOrientation.VERTICAL, false, true, true);
-					BarRenderer renderer = null;
-					CategoryPlot plot = null;
-					renderer=new BarRenderer();
-					ChartFrame  frame=new ChartFrame("Zahlungsmittelauswertung", chart);
-					frame.setVisible(true);
-					frame.setSize(400,650);
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, e1);
-				}
-			}
-		});
-		btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
-		btnZahlungsmittel.setBounds(550, 180, 282, 38);
-		contentPane.add(btnZahlungsmittel);
-		
-//Button Monatsauswertung		
-		JLabel btnMonatsauswertung = new JLabel();
-		btnMonatsauswertung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnMonatsauswertung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Monatsauswertung.png")));
-		btnMonatsauswertung.setBounds(550, 240, 282, 38);
-		contentPane.add(btnMonatsauswertung);
-		
-//Button Jahresauswertung		
-		JLabel btnJahresauswertung = new JLabel();
-		btnJahresauswertung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnJahresauswertung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Jahresauswertung.png")));
-		btnJahresauswertung.setBounds(550, 300, 282, 38);
-		contentPane.add(btnJahresauswertung);
-		
-//Button Ausgabeentwicklung		
-		JLabel btnAusgabenentwicklung = new JLabel();
-		btnAusgabenentwicklung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnAusgabenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Ausgabenentwicklung.png")));
-		btnAusgabenentwicklung.setBounds(550, 360, 282, 38);
-		contentPane.add(btnAusgabenentwicklung);
-		
-//Button Einnahmenentwicklung		
-		JLabel btnEinnahmenentwicklung = new JLabel();
-		btnEinnahmenentwicklung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnEinnahmenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenentwicklung.png")));
-		btnEinnahmenentwicklung.setBounds(550, 420, 282, 38);
-		contentPane.add(btnEinnahmenentwicklung);
-		
-//Button Liquiditätsentwicklung		
-		JLabel btnLiquidität = new JLabel();
-		btnLiquidität.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnLiquidität.setIcon(new ImageIcon(Charts.class.getResource("/Design/Liquidit\u00E4tsentwicklung.png")));
-		btnLiquidität.setBounds(550, 480, 282, 38);
-		contentPane.add(btnLiquidität);
-		
-//Button Ausgabeverteilung		
-		JLabel btnAusgabeverteilung = new JLabel();
-		btnAusgabeverteilung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnAusgabeverteilung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Ausgabenverteilung.png")));
-		btnAusgabeverteilung.setBounds(550, 540, 282, 38);
-		contentPane.add(btnAusgabeverteilung);
-		
-//Button Einnahmenverteilung		
-		JLabel btnEinnahmenverteilung = new JLabel();
-		btnEinnahmenverteilung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnEinnahmenverteilung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenverteilung.png")));
-		btnEinnahmenverteilung.setBounds(550, 600, 282, 38);
-		contentPane.add(btnEinnahmenverteilung);
-		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
-		Hintergrund.setIcon(new ImageIcon(Charts.class.getResource("/Design/GUI4.png")));
-		Hintergrund.setBounds(0, -31, 1381, 767);
+		Hintergrund.setIcon(new ImageIcon(Charts.class.getResource("/Design/GUI5.png")));
+		Hintergrund.setBounds(-13, -27, 1381, 767);
 		contentPane.add(Hintergrund);
 
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
