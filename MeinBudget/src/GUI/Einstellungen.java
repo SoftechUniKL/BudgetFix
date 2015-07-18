@@ -37,6 +37,7 @@ public class Einstellungen extends JFrame {
 	private JPasswordField pwAltes;
 	private JPasswordField pwNeuesWiederholen;
 	private JPasswordField pwNeues;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -338,11 +339,27 @@ public class Einstellungen extends JFrame {
 		btnHauptEinstellungen.setBounds(430, 30, 66, 75);
 		contentPane.add(btnHauptEinstellungen);
 		
+		JLabel lblBenutzernamenEingeben = new JLabel("Benutzernamen eingeben:");
+		lblBenutzernamenEingeben.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBenutzernamenEingeben.setForeground(Color.WHITE);
+		lblBenutzernamenEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblBenutzernamenEingeben.setBounds(430, 110, 460, 38);
+		contentPane.add(lblBenutzernamenEingeben);
+		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setForeground(Color.GRAY);
+		textField.setColumns(10);
+		textField.setBorder(null);
+		textField.setBackground(Color.WHITE);
+		textField.setBounds(529, 160, 262, 30);
+		contentPane.add(textField);
+		
 		JLabel lblAltesPasswortEingeben = new JLabel("altes Passwort eingeben:");
 		lblAltesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAltesPasswortEingeben.setForeground(Color.WHITE);
 		lblAltesPasswortEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblAltesPasswortEingeben.setBounds(430, 130, 460, 38);
+		lblAltesPasswortEingeben.setBounds(430, 190, 460, 38);
 		contentPane.add(lblAltesPasswortEingeben);
 		
 		pwAltes = new JPasswordField();
@@ -350,14 +367,14 @@ public class Einstellungen extends JFrame {
 		pwAltes.setForeground(Color.GRAY);
 		pwAltes.setHorizontalAlignment(SwingConstants.CENTER);
 		pwAltes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pwAltes.setBounds(529, 180, 262, 30);
+		pwAltes.setBounds(529, 240, 262, 30);
 		contentPane.add(pwAltes);
 		
 		JLabel lblNeuesPasswortEingeben = new JLabel("neues Passwort eingeben:");
 		lblNeuesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortEingeben.setForeground(Color.WHITE);
 		lblNeuesPasswortEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNeuesPasswortEingeben.setBounds(430, 260, 460, 38);
+		lblNeuesPasswortEingeben.setBounds(430, 330, 460, 38);
 		contentPane.add(lblNeuesPasswortEingeben);
 		
 		pwNeues = new JPasswordField();
@@ -365,14 +382,14 @@ public class Einstellungen extends JFrame {
 		pwNeues.setForeground(Color.GRAY);
 		pwNeues.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pwNeues.setBorder(null);
-		pwNeues.setBounds(529, 310, 262, 30);
+		pwNeues.setBounds(529, 380, 262, 30);
 		contentPane.add(pwNeues);
 		
 		JLabel lblNeuesPasswortWiederholen = new JLabel("neues Passwort wiederholen:");
 		lblNeuesPasswortWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortWiederholen.setForeground(Color.WHITE);
 		lblNeuesPasswortWiederholen.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNeuesPasswortWiederholen.setBounds(430, 390, 460, 38);
+		lblNeuesPasswortWiederholen.setBounds(430, 410, 460, 38);
 		contentPane.add(lblNeuesPasswortWiederholen);
 		
 
@@ -392,7 +409,7 @@ public class Einstellungen extends JFrame {
 		pwNeuesWiederholen.setForeground(Color.GRAY);
 		pwNeuesWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
 		pwNeuesWiederholen.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pwNeuesWiederholen.setBounds(529, 440, 262, 30);
+		pwNeuesWiederholen.setBounds(529, 460, 262, 30);
 		contentPane.add(pwNeuesWiederholen);
 
 
@@ -406,7 +423,7 @@ public class Einstellungen extends JFrame {
 			}
 		});
 		btnSpeichern.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(587, 540, 144, 38);
+		btnSpeichern.setBounds(587, 550, 144, 38);
 		contentPane.add(btnSpeichern);
 		
 		
