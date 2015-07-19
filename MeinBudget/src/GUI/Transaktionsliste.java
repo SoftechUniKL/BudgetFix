@@ -16,10 +16,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
+import javax.swing.JTextField;
 
 public class Transaktionsliste extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtDatum;
 	/**
 	 * Launch the application.
 	 */
@@ -81,7 +83,7 @@ public class Transaktionsliste extends JFrame {
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
 
-		//Überschrift "Transaktionsliste"			
+//Überschrift "Transaktionsliste"			
 		JLabel lblKategorienAnlegen = new JLabel("<html><u>Transaktionsliste</u></html>");
 		lblKategorienAnlegen.setForeground(Color.WHITE);
 		lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -91,6 +93,25 @@ public class Transaktionsliste extends JFrame {
 		btnSchliessen.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
+		
+		txtDatum = new JTextField();
+		txtDatum.setHorizontalAlignment(SwingConstants.CENTER);
+		txtDatum.setForeground(Color.GRAY);
+		txtDatum.setColumns(10);
+		txtDatum.setBorder(null);
+		txtDatum.setBackground(Color.WHITE);
+		txtDatum.setBounds(151, 78, 144, 30);
+		contentPane.add(txtDatum);
+		
+		JLabel lblDatum = new JLabel();
+		lblDatum.setIcon(new ImageIcon(Transaktionsliste.class.getResource("/Design/Textfeldgross.png")));
+		lblDatum.setBounds(150, 78, 145, 30);
+		contentPane.add(lblDatum);
+		
+		JLabel btnDatum = new JLabel("New label");
+		btnDatum.setIcon(new ImageIcon(Transaktionsliste.class.getResource("/Design/Kalender.png")));
+		btnDatum.setBounds(305, 78, 30, 30);
+		contentPane.add(btnDatum);
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
@@ -102,5 +123,4 @@ public class Transaktionsliste extends JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 	}
-
 }
