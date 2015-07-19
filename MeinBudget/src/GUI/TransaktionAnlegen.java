@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
 
 public class TransaktionAnlegen extends JFrame {
 
@@ -154,6 +155,11 @@ public class TransaktionAnlegen extends JFrame {
 		lblNchsteFlligkeit.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNchsteFlligkeit.setBounds(75, 222, 135, 27);
 		contentPane.add(lblNchsteFlligkeit);
+		
+//Datum auswählen		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(222, 220, 183, 30);
+		contentPane.add(dateChooser);
 		
 //Betrag		
 		JLabel lblBetrag = new JLabel("Betrag:");

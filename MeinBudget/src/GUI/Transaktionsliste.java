@@ -17,11 +17,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import javax.swing.JTextField;
+import org.jdatepicker.impl.DateComponentFormatter;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JTable;
+
 
 public class Transaktionsliste extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtDatum;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -94,24 +98,15 @@ public class Transaktionsliste extends JFrame {
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
 		
-		txtDatum = new JTextField();
-		txtDatum.setHorizontalAlignment(SwingConstants.CENTER);
-		txtDatum.setForeground(Color.GRAY);
-		txtDatum.setColumns(10);
-		txtDatum.setBorder(null);
-		txtDatum.setBackground(Color.WHITE);
-		txtDatum.setBounds(151, 78, 144, 30);
-		contentPane.add(txtDatum);
+//Datum auswählen		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(150, 150, 180, 30);
+		contentPane.add(dateChooser);
 		
-		JLabel lblDatum = new JLabel();
-		lblDatum.setIcon(new ImageIcon(Transaktionsliste.class.getResource("/Design/Textfeldgross.png")));
-		lblDatum.setBounds(150, 78, 145, 30);
-		contentPane.add(lblDatum);
-		
-		JLabel btnDatum = new JLabel("New label");
-		btnDatum.setIcon(new ImageIcon(Transaktionsliste.class.getResource("/Design/Kalender.png")));
-		btnDatum.setBounds(305, 78, 30, 30);
-		contentPane.add(btnDatum);
+//zeigt an, welche Ausgaben man hatte, wenn man Datum auswählt		
+		table = new JTable();
+		table.setBounds(140, 230, 200, 50);
+		contentPane.add(table);
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
