@@ -53,7 +53,7 @@ public class TransaktionAnlegen extends JFrame {
 		contentPane.setLayout(null);
 		
 //Schliessenbutton		
-		final JLabel btnSchliessen = new JLabel();
+		JLabel btnSchliessen = new JLabel();
 		btnSchliessen.addMouseListener(new MouseAdapter() {
 		//Schliessenbutton ist grau
 		@Override
@@ -74,17 +74,18 @@ public class TransaktionAnlegen extends JFrame {
 		}
 				
 		});
-		
-//Überschrift "wiederholene Transaktionen Anlegen"			
-		JLabel lblKategorienAnlegen = new JLabel("<html><u>wiederholene Transaktionen anlegen</u></html>");
-		lblKategorienAnlegen.setForeground(Color.WHITE);
-		lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblKategorienAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
-		lblKategorienAnlegen.setBounds(10, 15, 460, 38);
-		contentPane.add(lblKategorienAnlegen);
 		btnSchliessen.setIcon(new ImageIcon(TransaktionAnlegen.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(440, 15, 25, 25);
-		contentPane.add(btnSchliessen);
+		contentPane.add(btnSchliessen);	
+		
+//Überschrift "wiederholene Transaktionen Anlegen"			
+		JLabel lblTransaktionAnlegen = new JLabel("<html><u>wiederholene Transaktionen anlegen</u></html>");
+		lblTransaktionAnlegen.setForeground(Color.WHITE);
+		lblTransaktionAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTransaktionAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTransaktionAnlegen.setBounds(10, 15, 460, 38);
+		contentPane.add(lblTransaktionAnlegen);
+
 		
 //Bezeichung		
 		JLabel Bezeichnung = new JLabel("Bezeichnung:");

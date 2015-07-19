@@ -39,11 +39,7 @@ public class Start extends JFrame {
 	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
-	private JTextField txtGesamtbilanz;
 	private JTable tableAusgaben;
-
-	private JTextField txtAusgaben;
-	private JTextField txtEinnahmen;
 
 
 	/**
@@ -471,14 +467,6 @@ public class Start extends JFrame {
 				Gesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 14));
 				contentPane.add(Gesamtbilanz);
 				
-//Gesamtbilanz Textfeld --> Einnahmen - Ausgaben = Gesamtbilanz des Monats				
-				txtGesamtbilanz = new JTextField();
-				txtGesamtbilanz.setBounds(1000, 132, 247, 30);
-				txtGesamtbilanz.setHorizontalAlignment(SwingConstants.CENTER);
-				txtGesamtbilanz.setBorder(null);
-				txtGesamtbilanz.setColumns(10);
-				contentPane.add(txtGesamtbilanz);
-				
 //lblGesamtbilanz				
 				JLabel lblGesamtbilanz = new JLabel();
 				lblGesamtbilanz.setBounds(997, 130, 253, 34);
@@ -492,20 +480,57 @@ public class Start extends JFrame {
 				Ausgaben.setBounds(440, 210, 117, 34);
 				contentPane.add(Ausgaben);
 				
-//Ausgaben Textefeld zur Eingabe der Ausgaben				
-				txtAusgaben = new JTextField();
-				txtAusgaben.setBorder(null);
-				txtAusgaben.setHorizontalAlignment(SwingConstants.CENTER);
-				txtAusgaben.setForeground(Color.GRAY);
-				txtAusgaben.setBounds(528, 212, 262, 30);
-				contentPane.add(txtAusgaben);
-				txtAusgaben.setColumns(10);
-				
 //lblAusgaben				
 				JLabel lblAusgaben = new JLabel();
 				lblAusgaben.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
-				lblAusgaben.setBounds(528, 210, 262, 34);
+				lblAusgaben.setBounds(528, 210, 125, 34);
 				contentPane.add(lblAusgaben);
+				
+//Ausgaben hinzufügem				
+				JLabel lblHinzufgen = new JLabel("Hinzuf\u00FCgen");
+				lblHinzufgen.setHorizontalAlignment(SwingConstants.CENTER);
+				lblHinzufgen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				lblHinzufgen.setBounds(689, 210, 103, 34);
+				contentPane.add(lblHinzufgen);
+				
+//Button Ausgaben hinzufügen				
+				JLabel btnHinzuA = new JLabel();
+				btnHinzuA.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						btnHinzuA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus2.png")));
+					}
+					
+					//Plusbutton ist blau
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						btnHinzuA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
+					}
+					//Beim Klicken öffnet sich HinzufuegenAusgaben-Fenster
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									HinzufuegenAusgaben frame = new HinzufuegenAusgaben();
+									frame.setVisible(true);
+									dispose();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});	
+					}
+				});
+				btnHinzuA.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
+				btnHinzuA.setBounds(674, 216, 25, 25);
+				contentPane.add(btnHinzuA);
+				
+//lblHinzuA				
+				JLabel lblHinzuA = new JLabel();
+				lblHinzuA.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross.png")));
+				lblHinzuA.setBounds(662, 210, 125, 34);
+				contentPane.add(lblHinzuA);
 								
 				JScrollPane scrollPane_TabelleAusgaben = new JScrollPane();
 				scrollPane_TabelleAusgaben.setBounds(440, 290, 352, 346);
@@ -522,19 +547,59 @@ public class Start extends JFrame {
 				Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Einnahmen.setBounds(900, 210, 87, 34);
 				contentPane.add(Einnahmen);
-
-//Einnahmen als Eingabe				
-				txtEinnahmen = new JTextField();
-				txtEinnahmen.setBorder(null);
-				txtEinnahmen.setColumns(10);
-				txtEinnahmen.setBounds(1000, 212, 247, 30);
-				contentPane.add(txtEinnahmen);
 				
 //lblEinnahmen			
 				JLabel lblEinnahmen = new JLabel();
 				lblEinnahmen.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
-				lblEinnahmen.setBounds(997, 210, 253, 34);
+				lblEinnahmen.setBounds(997, 210, 125, 34);
 				contentPane.add(lblEinnahmen);
+				
+//Einnahmen hinzufügen				
+				JLabel lblHinzufuegen = new JLabel("Hinzuf\u00FCgen");
+				lblHinzufuegen.setHorizontalAlignment(SwingConstants.CENTER);
+				lblHinzufuegen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				lblHinzufuegen.setBounds(1157, 210, 103, 34);
+				contentPane.add(lblHinzufuegen);
+
+//Button für hinzufügen der Einnahmen				
+				JLabel btnHinzuE = new JLabel();
+				btnHinzuE.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						btnHinzuE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus2.png")));
+					}
+					
+					//Plusbutton ist blau
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						btnHinzuE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
+					}
+					
+					//Öffnet HinzufuegenEinnahmen-Fenster
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen();
+									frame.setVisible(true);
+									dispose();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});	
+					}
+				});
+				btnHinzuE.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
+				btnHinzuE.setBounds(1141, 216, 25, 25);
+				contentPane.add(btnHinzuE);
+				
+//lblHinzuE				
+				JLabel lblHinzuE = new JLabel();
+				lblHinzuE.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross.png")));
+				lblHinzuE.setBounds(1128, 210, 125, 34);
+				contentPane.add(lblHinzuE);
 				
 				JScrollPane scrollPane_TabelleEinnahmen = new JScrollPane();
 				scrollPane_TabelleEinnahmen.setBounds(900, 290, 352, 346);
@@ -569,9 +634,6 @@ public class Start extends JFrame {
 			ResultSet rs = pstmt.executeQuery();
 			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));	
 			tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
-			
-			JEditorPane editorPane = new JEditorPane();
-			scrollPane_TabelleAusgaben.setColumnHeaderView(editorPane);
 	
 	}catch(Exception exc){
 		exc.printStackTrace();
