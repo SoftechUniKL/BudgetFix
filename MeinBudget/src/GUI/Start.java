@@ -533,11 +533,15 @@ public class Start extends JFrame {
 				contentPane.add(lblHinzuA);
 								
 				JScrollPane scrollPane_TabelleAusgaben = new JScrollPane();
+				scrollPane_TabelleAusgaben.setForeground(Color.GRAY);
+				scrollPane_TabelleAusgaben.setBorder(null);
 				scrollPane_TabelleAusgaben.setBounds(440, 290, 352, 346);
+				scrollPane_TabelleAusgaben.getViewport().setBackground(new Color (27, 109, 220));
 				contentPane.add(scrollPane_TabelleAusgaben);
 				
 //Tabelle Ausgaben Übersicht				
 				tableAusgaben = new JTable();
+				tableAusgaben.setBackground(new Color (27, 109, 220));				
 				scrollPane_TabelleAusgaben.setViewportView(tableAusgaben);
 		
 				
@@ -602,11 +606,15 @@ public class Start extends JFrame {
 				contentPane.add(lblHinzuE);
 				
 				JScrollPane scrollPane_TabelleEinnahmen = new JScrollPane();
+				scrollPane_TabelleEinnahmen.setForeground(Color.GRAY);
+				scrollPane_TabelleEinnahmen.setBorder(null);
 				scrollPane_TabelleEinnahmen.setBounds(900, 290, 352, 346);
+				scrollPane_TabelleEinnahmen.getViewport().setBackground(new Color (27, 109, 220));
 				contentPane.add(scrollPane_TabelleEinnahmen);				
 				
 //Einnahmen Tabellenübersicht				
 				tableEinnahmen = new JTable();
+				tableEinnahmen.setBackground(new Color (27, 109, 220));
 				scrollPane_TabelleEinnahmen.setViewportView(tableEinnahmen);
 				
 				
