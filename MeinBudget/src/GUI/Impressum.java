@@ -79,6 +79,30 @@ public class Impressum extends JFrame {
 		lblHinzuA.setBounds(10, 11, 460, 38);
 		contentPane.add(lblHinzuA);
 		
+//btnZurueck		
+		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
+		btnZurueck.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Einstellungen frame = new Einstellungen();
+							frame.setVisible(true);
+							dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
+		btnZurueck.setForeground(Color.WHITE);
+		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnZurueck.setBounds(170, 430, 144, 14);
+		contentPane.add(btnZurueck);
+		
 //Text für Impressum		
 		JLabel lblText = new JLabel("<html><b>BudgetFix Version 1.2.0 Beta </b><p/><p/>"
 									+"Fachbereich Informatik am Lehrstuhl AG Softwaretechnik <p/>"
@@ -107,34 +131,13 @@ public class Impressum extends JFrame {
 									+ "persönlichen Daten sehr ernst. Wir behandeln Ihre<p/>"
 									+ "personenbezogenen Daten vertraulich und entsprechend <p/>"
 									+ "der gesetzlichen Datenschutzvorschriften sowie <p/>"
-									+ "dieser Datenschutzerklärung.</html>");
-
-
+									+ "dieser Datenschutzerklärung.</html>");				
 		lblText.setHorizontalAlignment(SwingConstants.CENTER);
 		lblText.setForeground(Color.WHITE);
 		lblText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblText.setBounds(40, 70, 400, 300);
-		//contentPane.add(lblText);
-		
-//btnZurueck		
-		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
-		btnZurueck.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Einstellungen frame = new Einstellungen();
-							frame.setVisible(true);
-							dispose();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		
+
+//JScrollPane für Impressum-Text		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(null);
 		scrollPane.setViewportBorder(null);
@@ -142,12 +145,6 @@ public class Impressum extends JFrame {
 		scrollPane.setBounds(31, 70, 420, 330);
 		contentPane.add(scrollPane);
 		scrollPane.setViewportView(lblText);
-		
-		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
-		btnZurueck.setForeground(Color.WHITE);
-		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 430, 144, 14);
-		contentPane.add(btnZurueck);		
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
