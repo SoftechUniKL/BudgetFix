@@ -23,6 +23,7 @@ public class HinzufuegenAusgaben extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtBetrag;
 	private JTextField txtBemerkung;
+	private JTextField txtBezeichnung;
 
 	/**
 	 * Launch the application.
@@ -72,7 +73,7 @@ public class HinzufuegenAusgaben extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnSchliessen.setIcon(new ImageIcon(TransaktionAnlegen.class.getResource("/Design/Schliessen_Button.png")));
+		btnSchliessen.setIcon(new ImageIcon(HinzufuegenAusgaben.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
 		
@@ -88,7 +89,7 @@ public class HinzufuegenAusgaben extends JFrame {
 		JLabel lblBetrag = new JLabel("Betrag:");
 		lblBetrag.setForeground(Color.WHITE);
 		lblBetrag.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBetrag.setBounds(100, 100, 86, 27);
+		lblBetrag.setBounds(100, 70, 86, 27);
 		contentPane.add(lblBetrag);
 				
 //txtBetrag		
@@ -98,27 +99,38 @@ public class HinzufuegenAusgaben extends JFrame {
 		txtBetrag.setColumns(10);
 		txtBetrag.setBorder(null);
 		txtBetrag.setBackground(Color.WHITE);
-		txtBetrag.setBounds(223, 100, 144, 30);
+		txtBetrag.setBounds(223, 70, 144, 30);
 		contentPane.add(txtBetrag);
-				
-//lblBetrag		
-		JLabel Betrag = new JLabel();
-		Betrag.setIcon(new ImageIcon(HinzufuegenEinnahmen.class.getResource("/Design/Textfeldgross.png")));
-		Betrag.setBounds(222, 100, 145, 30);
-		contentPane.add(Betrag);
+		
+//lblBezeichnung		
+		JLabel lblBezeichnung = new JLabel("Bezeichnung:");
+		lblBezeichnung.setForeground(Color.WHITE);
+		lblBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBezeichnung.setBounds(100, 130, 100, 27);
+		contentPane.add(lblBezeichnung);
+		
+//Bezeichnung		
+		txtBezeichnung = new JTextField();
+		txtBezeichnung.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBezeichnung.setForeground(Color.GRAY);
+		txtBezeichnung.setColumns(10);
+		txtBezeichnung.setBorder(null);
+		txtBezeichnung.setBackground(Color.WHITE);
+		txtBezeichnung.setBounds(223, 130, 144, 30);
+		contentPane.add(txtBezeichnung);
 								
 //Datum	
 		JLabel lblDatum = new JLabel("Datum:");
 		lblDatum.setForeground(Color.WHITE);
 		lblDatum.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDatum.setBounds(100, 160, 81, 27);
+		lblDatum.setBounds(100, 190, 81, 27);
 		contentPane.add(lblDatum);
 				
 //Datum auswählen		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setForeground(Color.GRAY);
 		dateChooser.getCalendarButton().setForeground(Color.GRAY);
-		dateChooser.setBounds(222, 160, 145, 30);
+		dateChooser.setBounds(222, 190, 145, 30);
 		contentPane.add(dateChooser);
 						
 						
@@ -126,19 +138,19 @@ public class HinzufuegenAusgaben extends JFrame {
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
-		Kategorie.setBounds(100, 220, 118, 27);
+		Kategorie.setBounds(100, 250, 118, 27);
 		contentPane.add(Kategorie);
 						
 //Kategorie Combobox, die bereits angelegten Kategorien hier als Auswahl wählen		
 		JComboBox cboKategorie = new JComboBox();
-		cboKategorie.setBounds(222, 220, 145, 30);
+		cboKategorie.setBounds(222, 250, 145, 30);
 		contentPane.add(cboKategorie);
 						
 //Bemerkung		
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
 		lblBemerkung.setForeground(Color.WHITE);
 		lblBemerkung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBemerkung.setBounds(100, 280, 118, 27);
+		lblBemerkung.setBounds(100, 310, 118, 27);
 		contentPane.add(lblBemerkung);
 
 //txtBemerkung		
@@ -148,19 +160,13 @@ public class HinzufuegenAusgaben extends JFrame {
 		txtBemerkung.setColumns(10);
 		txtBemerkung.setBorder(null);
 		txtBemerkung.setBackground(Color.WHITE);
-		txtBemerkung.setBounds(222, 280, 144, 30);
+		txtBemerkung.setBounds(222, 310, 144, 30);
 		contentPane.add(txtBemerkung);
-				
-//lblBemerkung		
-		JLabel Bemerkung = new JLabel();
-		Bemerkung.setIcon(new ImageIcon(HinzufuegenEinnahmen.class.getResource("/Design/Textfeldgross.png")));
-		Bemerkung.setBounds(222, 280, 145, 30);
-		contentPane.add(Bemerkung);
 
 //btnSpeichern		
 		JLabel btnSpeichern = new JLabel();
-		btnSpeichern.setIcon(new ImageIcon(TransaktionAnlegen.class.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(175, 350, 144, 38);
+		btnSpeichern.setIcon(new ImageIcon(HinzufuegenAusgaben.class.getResource("/Design/Speichern.png")));
+		btnSpeichern.setBounds(175, 370, 144, 38);
 		contentPane.add(btnSpeichern);
 						
 //btnZurueck		
@@ -184,7 +190,7 @@ public class HinzufuegenAusgaben extends JFrame {
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 390, 144, 14);
+		btnZurueck.setBounds(170, 410, 144, 14);
 		contentPane.add(btnZurueck);		
 			
 //Hintergrund		
@@ -192,7 +198,7 @@ public class HinzufuegenAusgaben extends JFrame {
 		Hintergrund.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Hintergrund.setHorizontalAlignment(SwingConstants.CENTER);
 		Hintergrund.setForeground(Color.BLACK);
-		Hintergrund.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/GUI3.png")));
+		Hintergrund.setIcon(new ImageIcon(HinzufuegenAusgaben.class.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
 		contentPane.add(Hintergrund);
 								

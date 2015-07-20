@@ -374,7 +374,7 @@ public class Einstellungen extends JFrame {
 		lblNeuesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortEingeben.setForeground(Color.WHITE);
 		lblNeuesPasswortEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNeuesPasswortEingeben.setBounds(430, 330, 460, 38);
+		lblNeuesPasswortEingeben.setBounds(430, 320, 460, 38);
 		contentPane.add(lblNeuesPasswortEingeben);
 		
 		pwNeues = new JPasswordField();
@@ -382,14 +382,14 @@ public class Einstellungen extends JFrame {
 		pwNeues.setForeground(Color.GRAY);
 		pwNeues.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pwNeues.setBorder(null);
-		pwNeues.setBounds(529, 380, 262, 30);
+		pwNeues.setBounds(529, 370, 262, 30);
 		contentPane.add(pwNeues);
 		
 		JLabel lblNeuesPasswortWiederholen = new JLabel("neues Passwort wiederholen:");
 		lblNeuesPasswortWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortWiederholen.setForeground(Color.WHITE);
 		lblNeuesPasswortWiederholen.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNeuesPasswortWiederholen.setBounds(430, 410, 460, 38);
+		lblNeuesPasswortWiederholen.setBounds(430, 400, 460, 38);
 		contentPane.add(lblNeuesPasswortWiederholen);
 		
 
@@ -409,7 +409,7 @@ public class Einstellungen extends JFrame {
 		pwNeuesWiederholen.setForeground(Color.GRAY);
 		pwNeuesWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
 		pwNeuesWiederholen.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pwNeuesWiederholen.setBounds(529, 460, 262, 30);
+		pwNeuesWiederholen.setBounds(529, 450, 262, 30);
 		contentPane.add(pwNeuesWiederholen);
 
 
@@ -423,8 +423,31 @@ public class Einstellungen extends JFrame {
 			}
 		});
 		btnSpeichern.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(587, 550, 144, 38);
+		btnSpeichern.setBounds(587, 530, 144, 38);
 		contentPane.add(btnSpeichern);
+		
+//Button Impressum der Gruppe		
+		JLabel btnImpressum = new JLabel();
+		btnImpressum.addMouseListener(new MouseAdapter() {
+			//Impressum-Fenster wird geöffnet
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Impressum frame = new Impressum();
+							frame.setVisible(true);
+							dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnImpressum.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Impressum.png")));
+		btnImpressum.setBounds(587, 580, 144, 38);
+		contentPane.add(btnImpressum);
 		
 		
 //Hintergrund		

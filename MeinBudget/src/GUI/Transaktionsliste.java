@@ -94,7 +94,7 @@ public class Transaktionsliste extends JFrame {
 		lblKategorienAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblKategorienAnlegen.setBounds(10, 15, 460, 38);
 		contentPane.add(lblKategorienAnlegen);
-		btnSchliessen.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Schliessen_Button.png")));
+		btnSchliessen.setIcon(new ImageIcon(Transaktionsliste.class.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
 		
@@ -110,7 +110,7 @@ public class Transaktionsliste extends JFrame {
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
-		Hintergrund.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/GUI3.png")));
+		Hintergrund.setIcon(new ImageIcon(Transaktionsliste.class.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
 		contentPane.add(Hintergrund);
 						

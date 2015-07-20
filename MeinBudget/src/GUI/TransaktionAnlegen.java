@@ -242,7 +242,7 @@ public class TransaktionAnlegen extends JFrame {
 		Hintergrund.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Hintergrund.setHorizontalAlignment(SwingConstants.CENTER);
 		Hintergrund.setForeground(Color.BLACK);
-		Hintergrund.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/GUI3.png")));
+		Hintergrund.setIcon(new ImageIcon(TransaktionAnlegen.class.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
 		contentPane.add(Hintergrund);
 						
