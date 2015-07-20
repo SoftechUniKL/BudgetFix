@@ -541,6 +541,8 @@ public class Start extends JFrame {
 				
 //Tabelle Ausgaben Übersicht				
 				tableAusgaben = new JTable();
+				tableAusgaben.setFont(new Font("Tahoma", Font.BOLD, 11));
+				tableAusgaben.setForeground(Color.WHITE);
 				tableAusgaben.setBackground(new Color (27, 109, 220));				
 				scrollPane_TabelleAusgaben.setViewportView(tableAusgaben);
 		
@@ -614,6 +616,8 @@ public class Start extends JFrame {
 				
 //Einnahmen Tabellenübersicht				
 				tableEinnahmen = new JTable();
+				tableEinnahmen.setFont(new Font("Tahoma", Font.BOLD, 11));
+				tableEinnahmen.setForeground(Color.WHITE);
 				tableEinnahmen.setBackground(new Color (27, 109, 220));
 				scrollPane_TabelleEinnahmen.setViewportView(tableEinnahmen);
 				
