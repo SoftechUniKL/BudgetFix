@@ -80,32 +80,35 @@ public class Impressum extends JFrame {
 		contentPane.add(lblHinzuA);
 		
 //Text für Impressum		
-		JLabel lblText = new JLabel("<html><b>BudgetFix Version 1.1.0 Alpha </b> <p/>" + 
-									"<p/>" +							
-									"Fachbereich Informatik am Lehrstuhl AG Softwaretechnik <p/>" +
-									"der Technischen Universiät Kaiserslautern <p/>" +
-									"Erwin-Schrödinger-Straße 1 <p/>" +
-									"67663 Kaiserslautern <p/>" +
-									"<p/>" +
-									"Programmierprojekt SoSe 2015 - Betreuerin: Dr. Annette Bieniusa <p/>" +
-									"Programmier(in): Que Ly Dong, Patrick Drucks & Patric Kleine <p/>" +
-									"Copyright 2015<p/>" + 
-									"<p/><p/>" +
-									"<u>Haftung für Inhalte:</u>" +
-									" Die Inhalte des BudgetFix wurden mit <p/>"
-									+ "größter Sorgfalt erstellt. Für die Richtigkeit,<p/>"
-									+ " Vollständigkeit und Aktualität der Inhalte können<p/> "
-									+ "wir jedoch keine Gewähr übernehmen.<p/>" +
-									"<p/>" +
-									"<u>Urheberrecht:</u>" +
-									" Die durch die Seitenbetreiber erstellten Inhalte <p/>"
+		JLabel lblText = new JLabel("<html><b>BudgetFix Version 1.2.0 Beta </b><p/><p/>"
+									+"Fachbereich Informatik am Lehrstuhl AG Softwaretechnik <p/>"
+									+"der Technischen Universiät Kaiserslautern <p/>"
+									+"Erwin-Schrödinger-Straße 1 <p/>"
+									+"67663 Kaiserslautern <p/><p/>"
+									+"Programmierprojekt SoSe 2015 - Betreuerin: Dr. Annette Bieniusa <p/>"
+									+"Programmier(in): Que Ly Dong, Patrick Drucks & Patric Kleine <p/>"
+									+"Copyright 2015<p/><p/><p/>"
+									+"<u>Haftung für Inhalte:</u>"
+									+" Die Inhalte des BudgetFix wurden mit <p/>"
+									+"größter Sorgfalt erstellt. Für die Richtigkeit,<p/>"
+									+" Vollständigkeit und Aktualität der Inhalte können<p/> "
+									+"wir jedoch keine Gewähr übernehmen.<p/><p/>"
+									+"<u>Urheberrecht:</u>"
+									+" Die durch die Betreiber erstellten Inhalte <p/>"
 									+ "und Werke auf diesen Seiten unterliegen <p/>"
 									+ "dem deutschen Urheberrecht.<p/>"
 									+ "Beiträge Dritter sind als solche gekennzeichnet.<p/>"
 									+ "Die Vervielfältigung, Bearbeitung, Verbreitung und <p/>"
 									+ " jede Art der Verwertung außerhalb der Grenzen <p/> "
 									+ "des Urheberrechtes bedürfen der schriftlichen<p/>"
-									+ "Zustimmung des jeweiligen Erstellers.<p/> </html>");
+									+ "Zustimmung des jeweiligen Erstellers.<p/><p/>"
+									+ "<u>Datenschutz:</u>"
+									+ " Die Betreiber dieser Seiten nehmen den Schutz Ihrer<p/> "
+									+ "persönlichen Daten sehr ernst. Wir behandeln Ihre<p/>"
+									+ "personenbezogenen Daten vertraulich und entsprechend <p/>"
+									+ "der gesetzlichen Datenschutzvorschriften sowie <p/>"
+									+ "dieser Datenschutzerklärung.</html>");
+
 
 		lblText.setHorizontalAlignment(SwingConstants.CENTER);
 		lblText.setForeground(Color.WHITE);
