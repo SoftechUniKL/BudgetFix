@@ -109,7 +109,10 @@ public class Einstellungen extends JFrame {
 		
 //Tabelle für Gesamtübersicht		
 		JTable tableGesamt = new JTable();			
+		tableGesamt.setForeground(Color.WHITE);
+		tableGesamt.setFont(new Font("Tahoma", Font.BOLD, 11));
 		tableGesamt.setBounds(50, 107, 200, 200);
+		tableGesamt.setBackground(new Color (27, 109, 220));	
 		contentPane.add(tableGesamt);
 		
 //btnStart		

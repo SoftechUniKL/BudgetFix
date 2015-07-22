@@ -109,7 +109,10 @@ public class Transaktionsliste extends JFrame {
 		
 //zeigt an, welche Ausgaben man hatte, wenn man Datum auswählt		
 		table = new JTable();
+		table.setForeground(Color.WHITE);
+		table.setFont(new Font("Tahoma", Font.BOLD, 11));
 		table.setBounds(140, 230, 200, 50);
+		//table.setBackground(new Color (27, 109, 220));	
 		contentPane.add(table);
 		
 		JLabel label = new JLabel("<html><u>Zur\u00FCck</u></html>");

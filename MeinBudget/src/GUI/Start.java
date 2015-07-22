@@ -118,7 +118,10 @@ public class Start extends JFrame {
 				
 //Tabelle für Gesamtübersicht		
 				JTable tableGesamt = new JTable();
+				tableGesamt.setFont(new Font("Tahoma", Font.BOLD, 11));
+				tableGesamt.setForeground(Color.WHITE);
 				tableGesamt.setBounds(50, 107, 200, 200);
+				tableGesamt.setBackground(new Color (27, 109, 220));	
 				contentPane.add(tableGesamt);
 				
 //btnStart		
