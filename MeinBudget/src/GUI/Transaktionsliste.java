@@ -16,9 +16,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
+
 import javax.swing.JTextField;
+
 import org.jdatepicker.impl.DateComponentFormatter;
+
 import com.toedter.calendar.JDateChooser;
+
 import javax.swing.JTable;
 
 
@@ -107,6 +111,29 @@ public class Transaktionsliste extends JFrame {
 		table = new JTable();
 		table.setBounds(140, 230, 200, 50);
 		contentPane.add(table);
+		
+		JLabel label = new JLabel("<html><u>Zur\u00FCck</u></html>");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Start frame = new Start(Start.id);
+							frame.setVisible(true);
+							dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		label.setBounds(170, 410, 144, 14);
+		contentPane.add(label);
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
