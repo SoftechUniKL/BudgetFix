@@ -650,8 +650,8 @@ public class Start extends JFrame {
 			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));	
 			tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
 	
-	}catch(Exception exc){
+		}catch(Exception exc){
 		exc.printStackTrace();
-}	
-}	
+		}	
+	}	
 }

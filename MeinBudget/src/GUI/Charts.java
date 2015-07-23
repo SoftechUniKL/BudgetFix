@@ -25,6 +25,9 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Charts extends JFrame {
 
@@ -342,14 +345,14 @@ public class Charts extends JFrame {
 				contentPane.add(btnKategorieImDetail);
 				
 		//Button Zahlungsmittelauswertung		
-				JLabel btnZahlungsmittel = new JLabel();
-				btnZahlungsmittel.addMouseListener(new MouseAdapter() {
+				JLabel btnZahlungsmittel2 = new JLabel();
+				btnZahlungsmittel2.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						try {
 							String query = "select Datum,Betrag from Benutzererträge";
 							JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-							JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, false, true, true);
+							JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
 							BarRenderer renderer = null;
 							CategoryPlot plot = null;
 							renderer = new BarRenderer();
@@ -361,9 +364,9 @@ public class Charts extends JFrame {
 						}
 					}
 				});
-				btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
-				btnZahlungsmittel.setBounds(550, 180, 282, 38);
-				contentPane.add(btnZahlungsmittel);
+				btnZahlungsmittel2.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
+				btnZahlungsmittel2.setBounds(550, 180, 282, 38);
+				contentPane.add(btnZahlungsmittel2);
 				
 		//Button Monatsauswertung		
 				JLabel btnMonatsauswertung = new JLabel();
@@ -453,5 +456,4 @@ public class Charts extends JFrame {
 		setLocationRelativeTo(null);		
 		
 	}
-
 }
