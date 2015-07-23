@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import net.proteanit.sql.DbUtils;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -25,13 +27,21 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Charts extends JFrame {
-
+	Connection connection = null;
+	static int id;
+	
 	private JPanel contentPane;
+	private JLabel btnZahlungsmittel;
 
 	/**
 	 * Launch the application.
@@ -40,7 +50,7 @@ public class Charts extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Charts frame = new Charts();
+					Charts frame = new Charts(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +62,11 @@ public class Charts extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Charts() {
+	public Charts(int id) {
+		
+		this.id = id;
+		connection = BPDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 707);
 		contentPane = new JPanel();
@@ -345,28 +359,30 @@ public class Charts extends JFrame {
 				contentPane.add(btnKategorieImDetail);
 				
 		//Button Zahlungsmittelauswertung		
-				JLabel btnZahlungsmittel2 = new JLabel();
-				btnZahlungsmittel2.addMouseListener(new MouseAdapter() {
+				JLabel btnZahlungsmittel = new JLabel();
+				btnZahlungsmittel.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						//zahlungsmittel();
 						try {
-							String query = "select Datum,Betrag from Benutzererträge";
-							JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-							JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
-							BarRenderer renderer = null;
-							CategoryPlot plot = null;
-							renderer = new BarRenderer();
-							ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", chart);
-							frame.setVisible(true);
-							frame.setSize(400,650);
+						String query = "SELECT * FROM BenutzerErträge WHERE Datum AND Betrag";
+						JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
+						JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+						BarRenderer renderer = null;
+						CategoryPlot plot = null;
+						renderer = new BarRenderer();
+						ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", chart);
+						frame.setVisible(true);
+						frame.setSize(400,650);
+					
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null, e1);
-						}
+						JOptionPane.showMessageDialog(null, e1);
+						}						
 					}
 				});
-				btnZahlungsmittel2.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
-				btnZahlungsmittel2.setBounds(550, 180, 282, 38);
-				contentPane.add(btnZahlungsmittel2);
+				btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
+				btnZahlungsmittel.setBounds(550, 180, 282, 38);
+				contentPane.add(btnZahlungsmittel);
 				
 		//Button Monatsauswertung		
 				JLabel btnMonatsauswertung = new JLabel();
@@ -454,6 +470,29 @@ public class Charts extends JFrame {
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);		
+	
 		
+//Zahlungsmittelauswertung
+		
+	/*
+		private void zahlungsmittel(){
+		try {
+			//this.id = id;
+			String query = "SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement stm = connection.prepareStatement(query);
+			ResultSet result = stm.executeQuery();
+			
+			JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
+			JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+			BarRenderer renderer = null;
+			CategoryPlot plot = null;
+			renderer = new BarRenderer();
+			ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", chart);
+			frame.setVisible(true);
+			frame.setSize(400,650);
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1);
+		}
+	*/	
 	}
 }
