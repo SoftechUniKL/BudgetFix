@@ -349,11 +349,11 @@ public class Charts extends JFrame {
 						try {
 							String query = "select Datum,Betrag from Benutzererträge";
 							JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-							JFreeChart chart=ChartFactory.createLineChart("Zahlungsmittelauswertung", "Datum", "Einnahmen", dataset, PlotOrientation.VERTICAL, false, true, true);
+							JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, false, true, true);
 							BarRenderer renderer = null;
 							CategoryPlot plot = null;
-							renderer=new BarRenderer();
-							ChartFrame  frame=new ChartFrame("Zahlungsmittelauswertung", chart);
+							renderer = new BarRenderer();
+							ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", chart);
 							frame.setVisible(true);
 							frame.setSize(400,650);
 						} catch (Exception e1) {
