@@ -22,11 +22,15 @@ import net.proteanit.sql.DbUtils;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
+
+import BudgetPlan.Posten;
 
 import javax.swing.JButton;
 
@@ -35,6 +39,8 @@ import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Charts extends JFrame {
 	Connection connection = null;
@@ -42,6 +48,7 @@ public class Charts extends JFrame {
 	
 	private JPanel contentPane;
 	private JLabel btnZahlungsmittel;
+	private JPanel DiagrammPanel;
 
 	/**
 	 * Launch the application.
@@ -68,7 +75,7 @@ public class Charts extends JFrame {
 		connection = BPDatenbank.dbCon();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 985, 707);
+		setBounds(100, 100, 1338, 713);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -96,7 +103,7 @@ public class Charts extends JFrame {
 		});
 		contentPane.setLayout(null);
 		btnSchliessen.setIcon(new ImageIcon(Charts.class.getResource("/Design/schliessengross.png")));
-		btnSchliessen.setBounds(930, 15, 40, 40);
+		btnSchliessen.setBounds(1280, 20, 40, 40);
 		contentPane.add(btnSchliessen);
 
 //Button Menue		
@@ -352,10 +359,11 @@ public class Charts extends JFrame {
 				btnKategorieImDetail.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						
 					}
 				});
 				btnKategorieImDetail.setIcon(new ImageIcon(Charts.class.getResource("/Design/KategorienImDetail.png")));
-				btnKategorieImDetail.setBounds(550, 120, 282, 38);
+				btnKategorieImDetail.setBounds(400, 120, 282, 38);
 				contentPane.add(btnKategorieImDetail);
 				
 		//Button Zahlungsmittelauswertung		
@@ -363,25 +371,11 @@ public class Charts extends JFrame {
 				btnZahlungsmittel.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						//zahlungsmittel();
-						try {
-						String query = "SELECT * FROM BenutzerErträge WHERE Datum AND Betrag";
-						JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-						JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
-						BarRenderer renderer = null;
-						CategoryPlot plot = null;
-						renderer = new BarRenderer();
-						ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", chart);
-						frame.setVisible(true);
-						frame.setSize(400,650);
-					
-						} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null, e1);
-						}						
+						zahlungsmittel();			
 					}
 				});
 				btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
-				btnZahlungsmittel.setBounds(550, 180, 282, 38);
+				btnZahlungsmittel.setBounds(400, 180, 282, 38);
 				contentPane.add(btnZahlungsmittel);
 				
 		//Button Monatsauswertung		
@@ -392,7 +386,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnMonatsauswertung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Monatsauswertung.png")));
-				btnMonatsauswertung.setBounds(550, 240, 282, 38);
+				btnMonatsauswertung.setBounds(400, 240, 282, 38);
 				contentPane.add(btnMonatsauswertung);
 				
 		//Button Jahresauswertung		
@@ -403,7 +397,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnJahresauswertung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Jahresauswertung.png")));
-				btnJahresauswertung.setBounds(550, 300, 282, 38);
+				btnJahresauswertung.setBounds(400, 300, 282, 38);
 				contentPane.add(btnJahresauswertung);
 				
 		//Button Ausgabeentwicklung		
@@ -414,7 +408,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnAusgabenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Ausgabenentwicklung.png")));
-				btnAusgabenentwicklung.setBounds(550, 360, 282, 38);
+				btnAusgabenentwicklung.setBounds(400, 360, 282, 38);
 				contentPane.add(btnAusgabenentwicklung);
 				
 		//Button Einnahmenentwicklung		
@@ -425,7 +419,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnEinnahmenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenentwicklung.png")));
-				btnEinnahmenentwicklung.setBounds(550, 420, 282, 38);
+				btnEinnahmenentwicklung.setBounds(400, 420, 282, 38);
 				contentPane.add(btnEinnahmenentwicklung);
 				
 		//Button Liquiditätsentwicklung		
@@ -436,7 +430,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnLiquidität.setIcon(new ImageIcon(Charts.class.getResource("/Design/Liquidit\u00E4tsentwicklung.png")));
-				btnLiquidität.setBounds(550, 480, 282, 38);
+				btnLiquidität.setBounds(400, 480, 282, 38);
 				contentPane.add(btnLiquidität);
 				
 		//Button Ausgabeverteilung		
@@ -447,7 +441,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnAusgabeverteilung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Ausgabenverteilung.png")));
-				btnAusgabeverteilung.setBounds(550, 540, 282, 38);
+				btnAusgabeverteilung.setBounds(400, 540, 282, 38);
 				contentPane.add(btnAusgabeverteilung);
 				
 		//Button Einnahmenverteilung		
@@ -458,41 +452,59 @@ public class Charts extends JFrame {
 					}
 				});
 				btnEinnahmenverteilung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenverteilung.png")));
-				btnEinnahmenverteilung.setBounds(550, 600, 282, 38);
+				btnEinnahmenverteilung.setBounds(400, 600, 282, 38);
 				contentPane.add(btnEinnahmenverteilung);
+		
+//JPanel für die Diagramme		
+		JPanel DiagrammPanel = new JPanel();
+		DiagrammPanel.setBounds(725, 190, 560, 330);
+		contentPane.add(DiagrammPanel);
+		DiagrammPanel.setLayout(new BorderLayout(0, 0));
+		
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
-		Hintergrund.setIcon(new ImageIcon(Charts.class.getResource("/Design/GUI4.png")));
-		Hintergrund.setBounds(0, -31, 1381, 767);
+		Hintergrund.setIcon(new ImageIcon(Charts.class.getResource("/Design/GUI5.png")));
+		Hintergrund.setBounds(-12, -25, 1381, 767);
 		contentPane.add(Hintergrund);
 
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);		
-	
+	}
 		
 //Zahlungsmittelauswertung
 		
-	/*
+	
 		private void zahlungsmittel(){
 		try {
-			//this.id = id;
 			String query = "SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
 			PreparedStatement stm = connection.prepareStatement(query);
 			ResultSet result = stm.executeQuery();
 			
 			JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-			JFreeChart chart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+			//dataset.setValue(1000, "SELECT Betrag FROM BenutzerErträge", "SELECT Datum FROM BenutzerErträge");
+			dataset.setValue(1000,"Betrag", "Datum");
+			String Datum = new SimpleDateFormat("dd/MM/yyyy").format("SELECT Datum FROM BenutzerErträge");
+			
+			JFreeChart BarChart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
 			BarRenderer renderer = null;
-			CategoryPlot plot = null;
+			CategoryPlot barchrt= BarChart.getCategoryPlot();
 			renderer = new BarRenderer();
-			ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", chart);
+			barchrt .setRangeGridlinePaint(Color.ORANGE);
+			ChartFrame  frame = new ChartFrame("Zahlungsmittelauswertung", BarChart);
 			frame.setVisible(true);
 			frame.setSize(400,650);
+			//ChartPanel barPanel = new ChartPanel (BarChart);
+			//DiagrammPanel.removeAll();
+			//DiagrammPanel.add(barPanel, BorderLayout.CENTER);
+			//DiagrammPanel.validate();
+			
+			
+			
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1);
 		}
-	*/	
+		
 	}
 }
