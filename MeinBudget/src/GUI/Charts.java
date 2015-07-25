@@ -27,6 +27,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
 
@@ -39,6 +40,7 @@ import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -355,28 +357,27 @@ public class Charts extends JFrame {
 		contentPane.add(btnHauptCharts);
 		
 		//Button Kategorie im Detail		
-				JLabel btnKategorieImDetail = new JLabel();
-				btnKategorieImDetail.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						
-					}
-				});
-				btnKategorieImDetail.setIcon(new ImageIcon(Charts.class.getResource("/Design/KategorienImDetail.png")));
-				btnKategorieImDetail.setBounds(400, 120, 282, 38);
-				contentPane.add(btnKategorieImDetail);
+		JButton btnKategorieImDetail = new JButton();
+		btnKategorieImDetail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnKategorieImDetail.setBorder(null);
+		btnKategorieImDetail.setIcon(new ImageIcon(Charts.class.getResource("/Design/KategorienImDetail.png")));
+		btnKategorieImDetail.setBounds(400, 120, 282, 38);
+		contentPane.add(btnKategorieImDetail);
 				
 		//Button Zahlungsmittelauswertung		
-				JLabel btnZahlungsmittel = new JLabel();
-				btnZahlungsmittel.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						zahlungsmittel();			
-					}
-				});
-				btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
-				btnZahlungsmittel.setBounds(400, 180, 282, 38);
-				contentPane.add(btnZahlungsmittel);
+		JButton btnZahlungsmittel = new JButton();
+		btnZahlungsmittel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zahlungsmittel();
+			}
+		});
+		btnZahlungsmittel.setBorder(null);
+		btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
+		btnZahlungsmittel.setBounds(400, 180, 282, 38);
+		contentPane.add(btnZahlungsmittel);
 				
 		//Button Monatsauswertung		
 				JLabel btnMonatsauswertung = new JLabel();
@@ -482,10 +483,25 @@ public class Charts extends JFrame {
 			PreparedStatement stm = connection.prepareStatement(query);
 			ResultSet result = stm.executeQuery();
 			
-			JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
+		
+		    ResultSetMetaData rsmd = result.getMetaData();
+		    System.out.println("querying SELECT * FROM XXX");
+		    int columnsNumber = rsmd.getColumnCount();
+		    while (result.next()) {
+		        for (int i = 1; i <= columnsNumber; i++) {
+		            if (i > 1) System.out.print(",  ");
+		            String columnValue = result.getString(i);
+		            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		        }
+		        System.out.println("");
+		    }
+			
+			JDBCCategoryDataset data = new JDBCCategoryDataset (connection);
+			data.executeQuery(query);
+		    CategoryDataset dataset = data;
 			//dataset.setValue(1000, "SELECT Betrag FROM BenutzerErträge", "SELECT Datum FROM BenutzerErträge");
-			dataset.setValue(1000,"Betrag", "Datum");
-			String Datum = new SimpleDateFormat("dd/MM/yyyy").format("SELECT Datum FROM BenutzerErträge");
+			//dataset.setValue(1000,"Betrag", "Datum");
+			//String Datum = new SimpleDateFormat("dd/MM/yyyy").format("SELECT Datum FROM BenutzerErträge");
 			
 			JFreeChart BarChart=ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
 			BarRenderer renderer = null;
