@@ -199,8 +199,8 @@ public class AnmeldenFenster extends JFrame {
 		String passString = new String(passInput);
 		
 //Benutzer Eingabe in der Console anzeigen
-		System.out.println("USER INPUT - Benutzername " + txtBenutzer.getText());
-		System.out.println("USER INPUT - Passwort " + passString);
+		System.out.println("Benutzer Eingabe - Benutzername " + txtBenutzer.getText());
+		System.out.println("Benutzer Eingabe - Passwort " + passString);
 		
 //execute Query
 		PreparedStatement stm = connect.prepareStatement(sqlQuery);

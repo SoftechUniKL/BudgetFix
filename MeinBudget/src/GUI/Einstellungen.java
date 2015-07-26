@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ import Anmelden.AnmeldenFenster;
 public class Einstellungen extends JFrame {
 	
 	Connection connect = null;
-	
+	Connection connection = null;
 	/**
 	 * 
 	 */
@@ -61,6 +62,7 @@ public class Einstellungen extends JFrame {
 	public Einstellungen() {
 		
 		connect = Anmelden.AnmeldeDatenbank.dbCon();
+		connection = Anmelden.AnmeldeDatenbank.dbCon();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 707);
@@ -468,7 +470,9 @@ public class Einstellungen extends JFrame {
 //Passwort ändern
 		public void neuesPasswort() {
 			try{
+				String sqlQuery = "SELECT * FROM Benutzer WHERE Benutzername=? and Passwortkombination=?";
 				
+//Passwörter umwandeln				
 				char[] passInput3 = pwAltes.getPassword();
 				String passString3 = new String(passInput3);
 				
@@ -478,32 +482,72 @@ public class Einstellungen extends JFrame {
 				char[] passInput2 = pwNeuesWiederholen.getPassword();
 				String passString2 = new String(passInput2);
 				
-				if (passString.equals(passString2) ){
-					System.out.println("Passwortänderung erfolgreich");
-					JOptionPane.showMessageDialog(null, "Passwort erfolgreich geändert!");
-					String sqlQuery = "UPDATE Benutzer set Passwortkombination='"+passString+"' WHERE Passwortkombination='"+passString3+"' " ;
-					PreparedStatement stm = connect.prepareStatement(sqlQuery);
-					//stm.setString(1, passString);
-					
-//ResultSet result = stm.executeQuery();
-					stm.execute();
+//Ausgabe der Eingaben				
+				System.out.println("Benutzer Eingabe - Benutzername " + textField.getText());
+				System.out.println("Benutzer Eingabe - altes Passwort " + passString3);
+				System.out.println("Benutzer Eingabe - neues Passwort " + passString);
+				System.out.println("Benutzer Eingabe - neues Passwort wiederholen " + passString2);
 				
-					//Anmelden.AnmeldenFenster frame = new AnmeldenFenster();
-					//frame.setVisible(true);
-					
-	//Fenster verschwindet 									
-					//dispose();				
+	
+				PreparedStatement stm = connect.prepareStatement(sqlQuery);
+				stm.setString(1, textField.getText());
+				stm.setString(2, passString3);
+				
+				
+				ResultSet result = stm.executeQuery();
+				
+		//wenn das Resultat = null dann Benutzer oder Passwort falsch 
+				
+					if(!result.next()){
+						System.out.println("Überprüfe deinen Benutzernamen und dein Passwort!");
+						JOptionPane.showMessageDialog(null, "Überprüfe deinen Benutzernamen und dein Passwort!");
 					}
 					else{
-						System.out.println("Passwörter stimmen nicht überein!");
-						JOptionPane.showMessageDialog(null, "Überprüfe deine Eingabe!");
+		//überprüfe Benutzer und PW mit der DB				
+						do{
+							String Benutzer = result.getString("Benutzername");
+							String Passwort = result.getString("Passwortkombination");
+							int id = result.getInt("ID");
+							System.out.println("Datebase data Benutzer: " + Benutzer);
+							System.out.println("Datebase data Passwort: " + Passwort);
+							System.out.println("Datebase data id: " + id);
+							if (textField.equals(Benutzer) || passString3.equals(Passwort)){
+								System.out.println("Abfrage erfolgreich");
+		//wenn ok, update die DB					
+								try{
+								if (passString.equals(passString2)  ){
+									System.out.println("Passwortänderung erfolgreich");
+									JOptionPane.showMessageDialog(null, "Passwort erfolgreich geändert!");
+									String sqlQuery2 = "UPDATE Benutzer set Passwortkombination='"+passString+"' WHERE Benutzername='"+textField.getText()+"' " ;
+									PreparedStatement pst = connect.prepareStatement(sqlQuery2);
+															
+									pst.execute();
+								
+									}
+		//wenn nicht ok, eingabe überprüfen						
+								else{
+										System.out.println("Passwörter stimmen nicht überein!");
+										JOptionPane.showMessageDialog(null, "Überprüfe deine Eingabe!");
+								}
+								
+								}catch(Exception exc){
+								exc.printStackTrace();
+						}
+								
+							}
+							
+						}while(result.next());
 					}
 				
+				stm.close();
+				result.close();
 				
-			}catch(Exception exc){
-				exc.printStackTrace();
-		}
-	
-	
+				
+				
+				
+		}catch(Exception ex){
+				ex.printStackTrace();
+		}				
+
 }	
 }
