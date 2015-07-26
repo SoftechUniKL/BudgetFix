@@ -189,7 +189,7 @@ public class Start extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									Charts frame = new Charts();
+									Charts frame = new Charts(id);
 									frame.setVisible(true);
 									dispose();
 								} catch (Exception e) {
@@ -650,8 +650,8 @@ public class Start extends JFrame {
 			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));	
 			tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
 	
-	}catch(Exception exc){
+		}catch(Exception exc){
 		exc.printStackTrace();
-}	
-}	
+		}	
+	}	
 }
