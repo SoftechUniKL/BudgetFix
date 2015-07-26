@@ -24,11 +24,19 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.DatasetRenderingOrder;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 import BudgetPlan.Posten;
@@ -362,24 +370,12 @@ public class Charts extends JFrame {
 		btnKategorieImDetail.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Kategorie();
 			}
 		});
 		btnKategorieImDetail.setIcon(new ImageIcon(Charts.class.getResource("/Design/KategorienImDetail.png")));
 		btnKategorieImDetail.setBounds(550, 120, 282, 38);
 		contentPane.add(btnKategorieImDetail);
-				
-		//Button Zahlungsmittelauswertung		
-		JLabel btnZahlungsmittel = new JLabel();
-		btnZahlungsmittel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				zahlungsmittel();
-			}
-		});
-		btnZahlungsmittel.setBorder(null);
-		btnZahlungsmittel.setIcon(new ImageIcon(Charts.class.getResource("/Design/Zahlungsmittelauswertung.png")));
-		btnZahlungsmittel.setBounds(550, 180, 282, 38);
-		contentPane.add(btnZahlungsmittel);
 				
 		//Button Monatsauswertung		
 				JLabel btnMonatsauswertung = new JLabel();
@@ -419,6 +415,7 @@ public class Charts extends JFrame {
 				btnEinnahmenentwicklung.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Einnahmen();
 					}
 				});
 				btnEinnahmenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenentwicklung.png")));
@@ -469,19 +466,32 @@ public class Charts extends JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);		
 	}
-		
-//Zahlungsmittelauswertung
-		
-	
-		private void zahlungsmittel(){
-		try {
-			String query = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')"; //Einnahmen
-			PreparedStatement stm = connection.prepareStatement(query);
+//Kategorie
+	private void Kategorie(){
+		try{
+			String queryKat = "SELECT Kategorie,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement stm = connection.prepareStatement(queryKat);
 			ResultSet result = stm.executeQuery();
 			
-			String query2 = "SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')"; //Ausgaben
-			PreparedStatement smt = connection.prepareStatement(query2);
-			ResultSet rs = stm.executeQuery();
+			JDBCCategoryDataset data = new JDBCCategoryDataset (connection);
+			data.executeQuery(queryKat);
+			CategoryDataset dataset = data;
+			
+			JFreeChart PieChart = ChartFactory.createPieChart("Kategorie im Detail",(PieDataset) dataset, false, true, true);
+			
+			
+		}catch (Exception e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+	
+	
+//Einnahmenentwicklung	
+		private void Einnahmen(){
+		try {
+			String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')"; //Einnahmen
+			PreparedStatement stm = connection.prepareStatement(queryEin);
+			ResultSet result = stm.executeQuery();
 			
 		    //Prüfung für die Konsole
 			ResultSetMetaData rsmd = result.getMetaData();
@@ -498,13 +508,39 @@ public class Charts extends JFrame {
 			
 		    //Einnahmen Barchart
 		    JDBCCategoryDataset data = new JDBCCategoryDataset (connection);
-			data.executeQuery(query);
+			data.executeQuery(queryEin);
 		    CategoryDataset dataset = data;
-		    
 		    //Ausgaben Barchart
 		    //JDBCCategoryDataset data2 = new JDBCCategoryDataset (connec);
-		    //data2.executeQuery(query2);
+			//data2.executeQuery(query2);
 		    //CategoryDataset dataset2 = data2;
+		
+		   
+		    /*
+		    //Ausgaben und Einnahmen in ein Barchart
+		    final CategoryItemRenderer renderer = new LineAndShapeRenderer();
+		    renderer.setItemLabelsVisible(false);
+		    
+		    final CategoryPlot plot = new CategoryPlot();
+	        plot.setDataset(dataset);
+	        plot.setRenderer(renderer);
+	       
+	        plot.setDomainAxis(new CategoryAxis("Datum"));
+	        plot.setRangeAxis(new NumberAxis("Betrag"));
+	        
+	        plot.setOrientation(PlotOrientation.VERTICAL);
+	        plot.setRangeGridlinesVisible(true);
+	        plot.setDomainGridlinesVisible(true);
+	        
+	        final CategoryItemRenderer renderer2 = new LineAndShapeRenderer();
+	        plot.setDataset(1, dataset2);
+	        plot.setRenderer(1, renderer2);
+	        
+	        plot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
+	        plot.getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.UP_45);
+	        final JFreeChart Barchart = new JFreeChart(plot);
+	        Barchart.setTitle("Zahlungsmittelauswertung");
+		    */
 		    
 		    
 			//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
@@ -514,6 +550,7 @@ public class Charts extends JFrame {
 			ChartFrame  frame = new ChartFrame("", BarChart);
 			frame.setVisible(true);
 			frame.setSize(400,650);
+
 			
 			//ChartPanel barPanel = new ChartPanel (BarChart);
 			//DiagrammPanel.removeAll();
