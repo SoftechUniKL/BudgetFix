@@ -29,17 +29,22 @@ import javax.swing.JScrollPane;
 
 import net.proteanit.sql.DbUtils;
 import javax.swing.JEditorPane;
+import java.awt.SystemColor;
 
 public class Start extends JFrame {
 	
 	//Damit id nur für den Benutzer geöffnet wird! Und um die anderen Fenster auch öffnen zu können
 	Connection connection = null;
 	Connection connec = null;
+	Connection conn	= null;
+	Connection con = null;
 	static int id;
 	
 	private JPanel contentPane;
 	private JTable tableEinnahmen;
 	private JTable tableAusgaben;
+	private JTextField txtEinnahmenSumme;
+	private JTextField txtAusgabenSumme;
 
 
 	/**
@@ -64,8 +69,11 @@ public class Start extends JFrame {
 	public Start(int id) {
 		
 		this.id = id;
+		//Verbindung zur BPDatenbank - Erträge und Aufwendungen
 		connection = BPDatenbank.dbCon();
 		connec = BPDatenbank.dbCon();
+		conn = BPDatenbank.dbCon();
+		con = BPDatenbank.dbCon();
 		
 		//Erträgetabelle();
 	//	Aufwendungstabelle();
@@ -483,6 +491,17 @@ public class Start extends JFrame {
 				Ausgaben.setBounds(440, 210, 117, 34);
 				contentPane.add(Ausgaben);
 				
+				txtAusgabenSumme = new JTextField();
+				txtAusgabenSumme.setBorder(null);
+				//txtAusgabenSumme.setText("<dynamic>");
+				txtAusgabenSumme.setBackground(new Color(240, 240, 240));
+				txtAusgabenSumme.setHorizontalAlignment(SwingConstants.CENTER);
+				txtAusgabenSumme.setForeground(Color.GRAY);
+				txtAusgabenSumme.setFont(new Font("Tahoma", Font.BOLD, 11));
+				txtAusgabenSumme.setColumns(10);
+				txtAusgabenSumme.setBounds(528, 210, 125, 34);
+				contentPane.add(txtAusgabenSumme);
+				
 //lblAusgaben				
 				JLabel lblAusgaben = new JLabel();
 				lblAusgaben.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross3.png")));
@@ -556,6 +575,17 @@ public class Start extends JFrame {
 				Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
 				Einnahmen.setBounds(900, 210, 87, 34);
 				contentPane.add(Einnahmen);
+				
+				txtEinnahmenSumme = new JTextField();
+				txtEinnahmenSumme.setBorder(null);
+				txtEinnahmenSumme.setFont(new Font("Tahoma", Font.BOLD, 11));
+				txtEinnahmenSumme.setForeground(Color.GRAY);
+				txtEinnahmenSumme.setHorizontalAlignment(SwingConstants.CENTER);
+				txtEinnahmenSumme.setBackground(new Color(240, 240, 240));
+				txtEinnahmenSumme.setBounds(997, 210, 125, 34);
+				contentPane.add(txtEinnahmenSumme);
+				txtEinnahmenSumme.setColumns(10);
+				//txtEinnahmenSumme.setText(sum);
 				
 //lblEinnahmen			
 				JLabel lblEinnahmen = new JLabel();
@@ -635,11 +665,11 @@ public class Start extends JFrame {
 				setUndecorated(true);
 				setLocationRelativeTo(null);		
 
-//	}
 
-//Verbindung zur BPDatenbank - Erträge
+
+
 	
-//*	//private void Erträgetabelle(){
+		//Einnahmen und Ausgaben Tabelle
 		try{
 			String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerErträge  WHERE (BenutzerID='"+this.id+"') ";
 			String sqlQuery2 = "SELECT Datum,Bezeichnung,Kategorie,Art,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')  ";
@@ -652,6 +682,30 @@ public class Start extends JFrame {
 	
 		}catch(Exception exc){
 		exc.printStackTrace();
-		}	
+		}
+		//Einnahmen und Ausgaben Summe
+		try{
+			String sqlQuery3 = "SELECT ROUND(SUM(Betrag), 2)  FROM BenutzerErträge  WHERE (BenutzerID='"+this.id+"') ";
+			String sqlQuery4 = "SELECT ROUND(SUM(Betrag), 2)  FROM BenutzerAufwendungen  WHERE (BenutzerID='"+this.id+"') ";
+			PreparedStatement pst = conn.prepareStatement(sqlQuery3);
+			PreparedStatement pstm = con.prepareStatement(sqlQuery4);
+			ResultSet res = pst.executeQuery();
+			ResultSet resSet = pstm.executeQuery();
+			//Einnahmensumme
+			res.next();
+				String sum = res.getString(1);
+				System.out.println(sum);
+				txtEinnahmenSumme.setText(sum +"€");
+		  // Ausgabensumme
+		     resSet.next();
+		     	String summe = resSet.getString(1);
+		     	System.out.println(summe);
+		     	txtAusgabenSumme.setText(summe +"€");
+		     	
+		     
+		}catch(Exception ex){
+			ex.printStackTrace();
+			
+		}
 	}	
 }

@@ -206,7 +206,7 @@ public class Einstellungen extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Charts frame = new Charts();
+							Charts frame = new Charts(Start.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

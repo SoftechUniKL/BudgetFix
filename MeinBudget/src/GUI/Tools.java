@@ -182,7 +182,7 @@ public class Tools extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Charts frame = new Charts();
+							Charts frame = new Charts(Start.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -335,6 +335,12 @@ public class Tools extends JFrame {
 				
 		//Button zum exportieren in Dropbox		
 				JLabel btnDropbox = new JLabel();
+				btnDropbox.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Dropbox = Dropbox.DropboxCon();
+					}
+				});
 				btnDropbox.setIcon(new ImageIcon(Tools.class.getResource("/Design/Dropbox.png")));
 				btnDropbox.setBounds(548, 350, 232, 38);
 				contentPane.add(btnDropbox);
