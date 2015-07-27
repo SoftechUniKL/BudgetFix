@@ -489,7 +489,10 @@ public class Charts extends JFrame {
 //Einnahmenentwicklung	
 		private void Einnahmen(){
 		try {
-			String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')"; //Einnahmen
+			String queryEin = 	"SELECT BenutzerAufwendungen.Datum,BenutzerAufwendungen.Betrag "
+								+ "FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') "
+								+ "UNION SELECT BenutzerErträge.Datum,BenutzerErträge.Betrag "
+								+ "FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')"; 
 			PreparedStatement stm = connection.prepareStatement(queryEin);
 			ResultSet result = stm.executeQuery();
 			
