@@ -338,7 +338,7 @@ public class Tools extends JFrame {
 				btnDropbox.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Dropbox = Dropbox.DropboxCon();
+					//	Dropbox = Dropbox.DropboxCon();											------------->>>>>>DROPBOX
 					}
 				});
 				btnDropbox.setIcon(new ImageIcon(Tools.class.getResource("/Design/Dropbox.png")));

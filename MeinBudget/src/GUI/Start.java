@@ -28,7 +28,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
 import net.proteanit.sql.DbUtils;
+
 import javax.swing.JEditorPane;
+
 import java.awt.SystemColor;
 
 public class Start extends JFrame {
@@ -45,6 +47,7 @@ public class Start extends JFrame {
 	private JTable tableAusgaben;
 	private JTextField txtEinnahmenSumme;
 	private JTextField txtAusgabenSumme;
+	private JTextField txtGesamtbilanz;
 
 
 	/**
@@ -478,6 +481,17 @@ public class Start extends JFrame {
 				Gesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 14));
 				contentPane.add(Gesamtbilanz);
 				
+				txtGesamtbilanz = new JTextField();
+				//txtGesamtbilanz.setText("<dynamic>\u20AC");
+				txtGesamtbilanz.setHorizontalAlignment(SwingConstants.CENTER);
+				txtGesamtbilanz.setForeground(Color.GRAY);
+				txtGesamtbilanz.setFont(new Font("Tahoma", Font.BOLD, 11));
+				txtGesamtbilanz.setColumns(10);
+				txtGesamtbilanz.setBorder(null);
+				txtGesamtbilanz.setBackground(SystemColor.menu);
+				txtGesamtbilanz.setBounds(997, 130, 253, 34);
+				contentPane.add(txtGesamtbilanz);
+				
 //lblGesamtbilanz				
 				JLabel lblGesamtbilanz = new JLabel();
 				lblGesamtbilanz.setBounds(997, 130, 253, 34);
@@ -534,7 +548,7 @@ public class Start extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									HinzufuegenAusgaben frame = new HinzufuegenAusgaben();
+									HinzufuegenAusgaben frame = new HinzufuegenAusgaben(id);
 									frame.setVisible(true);
 									dispose();
 								} catch (Exception e) {
@@ -620,7 +634,7 @@ public class Start extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen();
+									HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen(id);
 									frame.setVisible(true);
 									dispose();
 								} catch (Exception e) {
@@ -679,7 +693,10 @@ public class Start extends JFrame {
 			ResultSet rs = pstmt.executeQuery();
 			tableEinnahmen.setModel(DbUtils.resultSetToTableModel(result));	
 			tableAusgaben.setModel(DbUtils.resultSetToTableModel(rs));
-	
+			result.close();
+			stm.close();
+			rs.close();
+			pstmt.close();
 		}catch(Exception exc){
 		exc.printStackTrace();
 		}
@@ -693,16 +710,26 @@ public class Start extends JFrame {
 			ResultSet resSet = pstm.executeQuery();
 			//Einnahmensumme
 			res.next();
-				String sum = res.getString(1);
-				System.out.println(sum);
-				txtEinnahmenSumme.setText(sum +"€");
+				String summe1 = res.getString(1);
+				System.out.println(summe1);
+				txtEinnahmenSumme.setText(summe1 +"€");
 		  // Ausgabensumme
 		     resSet.next();
-		     	String summe = resSet.getString(1);
-		     	System.out.println(summe);
-		     	txtAusgabenSumme.setText(summe +"€");
+		     	String summe2 = resSet.getString(1);
+		     	System.out.println(summe2);
+		     	txtAusgabenSumme.setText(summe2 +"€");
 		     	
-		     
+		     	
+		 //Gesamtbilanz
+		     	double summe3 = Double.parseDouble(summe1);
+		     	double summe4 = Double.parseDouble(summe2);
+		     	double gesamtbilanz;
+				gesamtbilanz= summe3-summe4;
+		     	txtGesamtbilanz.setText(gesamtbilanz +"€");
+		     	res.close();
+				pst.close();
+				resSet.close();
+				pstm.close();
 		}catch(Exception ex){
 			ex.printStackTrace();
 			

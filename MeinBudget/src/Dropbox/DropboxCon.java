@@ -1,10 +1,50 @@
 package Dropbox;
 import com.dropbox.core.*;
+
+import java.awt.Desktop;
 import java.io.*;
+import java.net.URI;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class DropboxCon {
-    public static void main(String[] args) throws IOException, DbxException {
+    public static void main(String[] args){
+    	try{
+    		DbxAppInfo appInfo = new DbxAppInfo("rhgubiix1gpndk4","s43r8gxhp7bnjyg");
+    		DbxRequestConfig config = new DbxRequestConfig("BudgetFix", Locale.getDefault().toString());
+    		DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
+    		
+    		Desktop.getDesktop().browse(new URI(webAuth.start()));
+    		
+    		System.out.println("Bitte geben sie ihren Code nun unten ein:");
+    		
+    		Scanner scanner = new scanner(system.in);
+    		
+    		String code = scanner.next();
+    		
+    		System.out.println();
+    		System.out.println("Dies ist ihr Acces-Token:");
+    		
+    		System.out.println(webAuth.finish(code).accessToken);
+    		
+    		scanner.close();
+    	}
+    	catch (Exception ex){
+    		ex.printStackTrace();
+    	}
+    }
+}    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* throws IOException, DbxException {
         // Get your app key and secret from the Dropbox developers website.
         final String APP_KEY = "INSERT_APP_KEY";
         final String APP_SECRET = "INSERT_APP_SECRET";
@@ -55,4 +95,4 @@ public class DropboxCon {
             outputStream.close();
         }
     }
-}
+}*/

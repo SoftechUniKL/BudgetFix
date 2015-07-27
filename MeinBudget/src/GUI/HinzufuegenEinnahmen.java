@@ -6,11 +6,15 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -18,8 +22,18 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-public class HinzufuegenEinnahmen extends JFrame {
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
+
+public class HinzufuegenEinnahmen extends JFrame {
+	
+	Connection connection = null;
+	Connection conn = null;
+	static int id;
+	
 	private JPanel contentPane;
 	private JTextField txtBetrag;
 	private JTextField txtBemerkung;
@@ -32,7 +46,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen();
+					HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +58,15 @@ public class HinzufuegenEinnahmen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HinzufuegenEinnahmen() {
+	public HinzufuegenEinnahmen(int id) {
+		
+		this.id = id;
+		
+//Verbindung zur BPDatenbank - Erträge 
+		connection = BPDatenbank.dbCon();
+//Verbindung zur BPDB - Kategorien
+		conn = BPDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -127,11 +149,12 @@ public class HinzufuegenEinnahmen extends JFrame {
 		contentPane.add(lblDatum);
 		
 //Datum auswählen		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setForeground(Color.GRAY);
-		dateChooser.getCalendarButton().setForeground(Color.GRAY);
-		dateChooser.setBounds(222, 190, 145, 30);
-		contentPane.add(dateChooser);
+		JDateChooser Datum = new JDateChooser();
+		Datum.setDateFormatString("yyyy-MM-dd");
+		Datum.setForeground(Color.GRAY);
+		Datum.getCalendarButton().setForeground(Color.GRAY);
+		Datum.setBounds(222, 190, 145, 30);
+		contentPane.add(Datum);
 				
 				
 //Kategorie		
@@ -143,8 +166,33 @@ public class HinzufuegenEinnahmen extends JFrame {
 				
 //Kategorie Combobox, die bereits angelegten Kategorien hier als Auswahl wählen		
 		JComboBox cboKategorie = new JComboBox();
+		cboKategorie.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				String selectedItem = (String)cboKategorie.getSelectedItem();
+				System.out.println(selectedItem);
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
 		cboKategorie.setBounds(222, 250, 145, 30);
 		contentPane.add(cboKategorie);
+		
+		try{
+			String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Einkommen' ";
+			PreparedStatement stm = conn.prepareStatement(sql);
+			ResultSet result = stm.executeQuery();
+			
+			while(result.next()){
+				String kategorie = result.getString("Kategorie");
+				cboKategorie.addItem(kategorie);
+			}
+			result.close();
+			stm.close();
+		}catch(Exception ex){
+			ex.printStackTrace();				
+		}
 				
 //Bemerkung		
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
@@ -155,6 +203,17 @@ public class HinzufuegenEinnahmen extends JFrame {
 
 //txtBemerkung		
 		txtBemerkung = new JTextField();
+		txtBemerkung.addKeyListener(new KeyAdapter() {
+//speichern über Enter			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER ){
+//speichern  ausführen
+					
+				
+				}
+			}
+			});
 		txtBemerkung.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBemerkung.setForeground(Color.GRAY);
 		txtBemerkung.setColumns(10);
@@ -165,6 +224,47 @@ public class HinzufuegenEinnahmen extends JFrame {
 
 //btnSpeichern		
 		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try{
+					
+					String sqlQuery = "INSERT INTO BenutzerErträge (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
+					PreparedStatement pst = connection.prepareStatement(sqlQuery);
+					
+					//Datum
+					pst.setString(1, ((JTextField)Datum.getDateEditor().getUiComponent()).getText());
+					
+					//Bezeichnung
+					pst.setString(2, txtBezeichnung.getText());
+					
+					//Kategorie
+					String ausgewaelteKategorie = cboKategorie.getSelectedItem().toString();
+					pst.setString(3, ausgewaelteKategorie);
+					
+					//Art
+					pst.setString(4, "variabel");
+					
+					//Betrag
+					pst.setString(5, txtBetrag.getText());
+					
+					//BenutzerID
+					pst.setLong(6, id);
+					
+					//Bemerkung
+					pst.setString(7, txtBemerkung.getText() );
+					
+					
+					pst.execute();
+				
+					JOptionPane.showMessageDialog(null, "Erfolgreich gespeichert!");
+					
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+			}
+		});
 		btnSpeichern.setIcon(new ImageIcon(HinzufuegenEinnahmen.class.getResource("/Design/Speichern.png")));
 		btnSpeichern.setBounds(175, 370, 144, 38);
 		contentPane.add(btnSpeichern);
@@ -205,5 +305,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);		
+	
 	}
+
 }
