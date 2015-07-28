@@ -28,8 +28,11 @@ import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HinzufuegenAusgaben extends JFrame {
 
@@ -156,12 +159,20 @@ public class HinzufuegenAusgaben extends JFrame {
 				
 //Datum auswählen		
 		JDateChooser Datum = new JDateChooser();
+		Datum.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String datum1 =  ((JTextField)Datum.getDateEditor().getUiComponent()).getText().toString();
+				//String d1  = ((JTextField)Datum.getDateEditor().getUiComponent()).getText();
+				System.out.println(datum1);
+			}
+		});
 		Datum.setDateFormatString("yyyy-MM-dd");
 		Datum.setForeground(Color.GRAY);
 		Datum.getCalendarButton().setForeground(Color.GRAY);
 		Datum.setBounds(222, 190, 145, 30);
 		contentPane.add(Datum);
 						
+		
 						
 //Kategorie		
 		JLabel Kategorie = new JLabel("Kategorie:");
@@ -199,8 +210,8 @@ public class HinzufuegenAusgaben extends JFrame {
 		}catch(Exception ex){
 			ex.printStackTrace();				
 		}
-	
-		
+	/////////////////////////////////////////////////////////////////////////////////////////////////7
+		String ausgewaelteKategorie = cboKategorie.getSelectedItem().toString();
 		
 			
 //Bemerkung		
@@ -218,7 +229,7 @@ public class HinzufuegenAusgaben extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER ){
 //speichern  ausführen
-					//neueAusgaben(selectedItem, Datum);
+					//neueAusgaben();
 				}
 			}
 		});
@@ -236,8 +247,8 @@ public class HinzufuegenAusgaben extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				
-				try{
+				neueAusgaben(ausgewaelteKategorie, datum1);
+		/*		try{
 					
 					String sqlQuery = "INSERT INTO BenutzerAufwendungen (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
 					PreparedStatement pst = connection.prepareStatement(sqlQuery);
@@ -273,7 +284,7 @@ public class HinzufuegenAusgaben extends JFrame {
 				}catch(Exception ex){
 					ex.printStackTrace();
 				}
-			
+			*/
 			}
 		});
 		btnSpeichern.setIcon(new ImageIcon(HinzufuegenAusgaben.class.getResource("/Design/Speichern.png")));
@@ -321,67 +332,52 @@ public class HinzufuegenAusgaben extends JFrame {
 	}
 
 
-}/*
-		public void neueAusgaben(String selectedItem, double Datum) {
+
+		public void neueAusgaben(String ausgewaelteKategorie, String datum1) {
 			
-			
-			this.Datum = Datum;
-			this.selectedItem = selectedItem;
 			
 		try{
-			
-			//char[] datechooser = dateChooser.getDate();
-			//String passString = new String(passInput);
-			
-			String sqlQuery = "INSERT INTO BenutzerAufwendungen (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
-			PreparedStatement pst = connection.prepareStatement(sqlQuery);
-			
-			//Datum
-			pst.setString(1, ((JTextField)HinzufuegenAusgaben.Datum.getDateEditor().getUiComponent()).getText());
-			//Bezeichnung
-			pst.setString(2, txtBezeichnung.getText());
-			//Kategorie
-			pst.setString(3, selectedItem);
-			//Art
-			pst.setString(4, "variabel");
-			//Betrag
-			pst.setString(5, txtBetrag.getText());
-			//BenutzerID
-			pst.setLong(6, id);
-			//Bemerkung
-			pst.setString(7, txtBemerkung.getText() );
-			
-			//WHERE (BenutzerID='"+this.id+"')  
-			pst.execute();
-		
-		
-			
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
+					
+					String sqlQuery = "INSERT INTO BenutzerAufwendungen (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
+					PreparedStatement pst = connection.prepareStatement(sqlQuery);
+					
+					//Datum
+					pst.setString(1, datum1);
+					
+					//Bezeichnung
+					pst.setString(2, txtBezeichnung.getText());
+					
+					//Kategorie
+					
+					pst.setString(3, ausgewaelteKategorie);
+					
+					//Art
+					pst.setString(4, "variabel");
+					
+					//Betrag
+					pst.setString(5, txtBetrag.getText());
+					
+					//BenutzerID
+					pst.setLong(6, id);
+					
+					//Bemerkung
+					pst.setString(7, txtBemerkung.getText() );
+					
+					
+					pst.execute();
+				
+					JOptionPane.showMessageDialog(null, "Erfolgreich gespeichert!");
+					
+					
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 	
 	
 	}
 
-/*
-private void comboBox(){
-			
-			try{
-				String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Ausgaben' ";
-				PreparedStatement stm = conn.prepareStatement(sql);
-				ResultSet result = stm.executeQuery();
-				
-				while(result.next()){
-					String kategorie = result.getString("Kategorie");
-					//cboKategorie.addItem(kategorie);
-					cboKategorie.addItem(kategorie);
-				}
-				
-			}catch(Exception ex){
-				ex.printStackTrace();				
-			}
-		}
+
 }
 
-*/
+
 		

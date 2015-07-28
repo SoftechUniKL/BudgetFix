@@ -22,6 +22,8 @@ import javax.swing.JComboBox;
 import java.awt.List;
 
 import javax.swing.JTextField;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
 
 public class KategorieAnlegen extends JFrame {
 
@@ -188,6 +190,16 @@ public class KategorieAnlegen extends JFrame {
 		
 //Combobox Auswahl der Icons		
 			JComboBox<Object> cboAuswahl = new JComboBox<Object>();
+			cboAuswahl.addPopupMenuListener(new PopupMenuListener() {
+				public void popupMenuCanceled(PopupMenuEvent e) {
+				}
+				public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+					String selectedItem = (String)cboAuswahl.getSelectedItem();
+					System.out.println(selectedItem);
+				}
+				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				}
+			});
 			cboAuswahl.addItem(new ImageIcon(KategorieAnlegen.class.getResource("/Icons/backpack.png")));
 			cboAuswahl.addItem(new ImageIcon(KategorieAnlegen.class.getResource("/Icons/bomb.png")));
 			cboAuswahl.addItem(new ImageIcon(KategorieAnlegen.class.getResource("/Icons/book.png")));

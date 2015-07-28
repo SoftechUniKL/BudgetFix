@@ -257,7 +257,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 					
 					
 					pst.execute();
-				
+					pst.close();
 					JOptionPane.showMessageDialog(null, "Erfolgreich gespeichert!");
 					
 					
