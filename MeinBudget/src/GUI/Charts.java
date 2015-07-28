@@ -23,13 +23,17 @@ import net.proteanit.sql.DbUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.DatasetRenderingOrder;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
@@ -38,6 +42,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.xml.DatasetReader;
 
 import BudgetPlan.Posten;
 
@@ -45,16 +53,16 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.io.*;
+import java.io.InputStream;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class Charts extends JFrame {
 	Connection connection = null;
 	Connection connec = null;
+	Connection conn	= null;
 	static int id;
 	
 	private JPanel contentPane;
@@ -84,6 +92,8 @@ public class Charts extends JFrame {
 		
 		this.id = id;
 		connection = BPDatenbank.dbCon();
+		connec = BPDatenbank.dbCon();
+		conn = BPDatenbank.dbCon();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 707);
@@ -370,11 +380,15 @@ public class Charts extends JFrame {
 		btnKategorieImDetail.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Kategorie();
+				try {
+					Kategorie();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnKategorieImDetail.setIcon(new ImageIcon(Charts.class.getResource("/Design/KategorienImDetail.png")));
-		btnKategorieImDetail.setBounds(550, 120, 282, 38);
+		btnKategorieImDetail.setBounds(550, 140, 282, 38);
 		contentPane.add(btnKategorieImDetail);
 				
 		//Button Monatsauswertung		
@@ -382,10 +396,11 @@ public class Charts extends JFrame {
 				btnMonatsauswertung.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Monat();
 					}
 				});
 				btnMonatsauswertung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Monatsauswertung.png")));
-				btnMonatsauswertung.setBounds(550, 240, 282, 38);
+				btnMonatsauswertung.setBounds(550, 200, 282, 38);
 				contentPane.add(btnMonatsauswertung);
 				
 		//Button Jahresauswertung		
@@ -393,10 +408,11 @@ public class Charts extends JFrame {
 				btnJahresauswertung.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Jahr();
 					}
 				});
 				btnJahresauswertung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Jahresauswertung.png")));
-				btnJahresauswertung.setBounds(550, 300, 282, 38);
+				btnJahresauswertung.setBounds(550, 260, 282, 38);
 				contentPane.add(btnJahresauswertung);
 				
 		//Button Ausgabeentwicklung		
@@ -404,10 +420,11 @@ public class Charts extends JFrame {
 				btnAusgabenentwicklung.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Ausgaben();
 					}
 				});
 				btnAusgabenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Ausgabenentwicklung.png")));
-				btnAusgabenentwicklung.setBounds(550, 360, 282, 38);
+				btnAusgabenentwicklung.setBounds(550, 320, 282, 38);
 				contentPane.add(btnAusgabenentwicklung);
 				
 		//Button Einnahmenentwicklung		
@@ -419,7 +436,7 @@ public class Charts extends JFrame {
 					}
 				});
 				btnEinnahmenentwicklung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenentwicklung.png")));
-				btnEinnahmenentwicklung.setBounds(550, 420, 282, 38);
+				btnEinnahmenentwicklung.setBounds(550, 380, 282, 38);
 				contentPane.add(btnEinnahmenentwicklung);
 				
 		//Button Liquiditätsentwicklung		
@@ -427,10 +444,11 @@ public class Charts extends JFrame {
 				btnLiquidität.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Liquiditaet();
 					}
 				});
 				btnLiquidität.setIcon(new ImageIcon(Charts.class.getResource("/Design/Liquidit\u00E4tsentwicklung.png")));
-				btnLiquidität.setBounds(550, 480, 282, 38);
+				btnLiquidität.setBounds(550, 440, 282, 38);
 				contentPane.add(btnLiquidität);
 				
 		//Button Ausgabeverteilung		
@@ -438,10 +456,11 @@ public class Charts extends JFrame {
 				btnAusgabeverteilung.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						AusV();
 					}
 				});
 				btnAusgabeverteilung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Ausgabenverteilung.png")));
-				btnAusgabeverteilung.setBounds(550, 540, 282, 38);
+				btnAusgabeverteilung.setBounds(550, 500, 282, 38);
 				contentPane.add(btnAusgabeverteilung);
 				
 		//Button Einnahmenverteilung		
@@ -449,10 +468,11 @@ public class Charts extends JFrame {
 				btnEinnahmenverteilung.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						EinV();
 					}
 				});
 				btnEinnahmenverteilung.setIcon(new ImageIcon(Charts.class.getResource("/Design/Einnahmenverteilung.png")));
-				btnEinnahmenverteilung.setBounds(550, 600, 282, 38);
+				btnEinnahmenverteilung.setBounds(550, 560, 282, 38);
 				contentPane.add(btnEinnahmenverteilung);
 		
 		
@@ -467,36 +487,248 @@ public class Charts extends JFrame {
 		setLocationRelativeTo(null);		
 	}
 //Kategorie
-	private void Kategorie(){
-		try{
-			String queryKat = "SELECT Kategorie,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
-			PreparedStatement stm = connection.prepareStatement(queryKat);
-			ResultSet result = stm.executeQuery();
-			
-			JDBCCategoryDataset data = new JDBCCategoryDataset (connection);
-			data.executeQuery(queryKat);
-			CategoryDataset dataset = data;
-			
-			JFreeChart PieChart = ChartFactory.createPieChart("Kategorie im Detail",(PieDataset) dataset, false, true, true);
-			
+	private void Kategorie() throws Exception{
+			DefaultPieDataset PieDataset = new DefaultPieDataset();
+			Statement stmt;
+			//fülle Daten aus der Tabelle zu JFreeChart
+			try {
+				stmt = connec.createStatement();
+				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')");
+				
+				//Prüfung
+				ResultSetMetaData rsmd = queryKat.getMetaData();
+			    System.out.println("querying SELECT * FROM XXX");
+			    int columnsNumber = rsmd.getColumnCount();
+			    while (queryKat.next()) {
+			        for (int i = 1; i <= columnsNumber; i++) {
+			            if (i > 1) System.out.print(",  ");
+			            String columnValue = queryKat.getString(i);
+			            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+			        }
+			        System.out.println("");
+			    }
+				
+				
+				while (queryKat.next()) {
+					String Kategorie = queryKat.getString("Kategorie");
+					int Betrag = queryKat.getInt("Betrag");
+					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
+				}
+				JFreeChart PieChart = ChartFactory.createPieChart("Kategorie im Detail", PieDataset);
+				PiePlot p = (PiePlot) PieChart.getPlot();
+				p.setForegroundAlpha(TOP_ALIGNMENT);
+				ChartFrame frame = new ChartFrame("Kategorie im Detail", PieChart);
+				frame.setVisible(true);
+				frame.setSize(450,600);
+				queryKat.close();
+				stmt.close();
+				connec.close();
+
+				//Abmessungen und Qualitätsfaktor für PieChart
+				int width = 400;
+				int height = 600;
+				float quality=1;
+				
+				File BarChart=new File("SQL2PieChart.png");              
+                ChartUtilities.saveChartAsJPEG(BarChart, quality, PieChart, width, height); 
+				}
+				catch (Exception i)
+                 {
+                         System.out.println(i);
+                 
+                }
+			}
+        
+				
+	
+			/*
+			JFreeChart PieChart = ChartFactory.createPieChart("Kategorie im Detail",pieDatasetKat, true, true, true);
+			PiePlot p = (PiePlot) PieChart.getPlot();
+			p.setForegroundAlpha(TOP_ALIGNMENT);
+			ChartFrame frame = new ChartFrame("Kategorie im Detail", PieChart);
+			frame.setVisible(true);
+			frame.setSize(450,600);
 			
 		}catch (Exception e){
 			JOptionPane.showMessageDialog(null, e);
 		}
+	}*/
+
+//Monat
+	private void Monat(){
+		try{		
+			String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement pst = conn.prepareStatement(queryEin);
+			ResultSet res = pst.executeQuery();
+			
+			//Prüfung
+			ResultSetMetaData rsmd = res.getMetaData();
+		    System.out.println("querying SELECT * FROM XXX");
+		    int columnsNumber = rsmd.getColumnCount();
+		    while (res.next()) {
+		        for (int i = 1; i <= columnsNumber; i++) {
+		            if (i > 1) System.out.print(",  ");
+		            String columnValue = res.getString(i);
+		            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		        }
+		        System.out.println("");
+		    }
+			
+			JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
+			dataEin.executeQuery(queryEin);
+			CategoryDataset datasetEin = dataEin;
+			
+			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+				CategoryPlot plot = BarChart.getCategoryPlot();
+				BarRenderer renderer = null;
+				renderer = new BarRenderer();
+				ChartFrame  frame = new ChartFrame("", BarChart);
+				frame.setVisible(true);
+				frame.setSize(400,650);
+			
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		
+		}
 	}
 	
+//Jahr	
+	private void Jahr(){
+		try{		
+			String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement pst = conn.prepareStatement(queryEin);
+			ResultSet res = pst.executeQuery();
+			
+			//Prüfung
+			ResultSetMetaData rsmd = res.getMetaData();
+		    System.out.println("querying SELECT * FROM XXX");
+		    int columnsNumber = rsmd.getColumnCount();
+		    while (res.next()) {
+		        for (int i = 1; i <= columnsNumber; i++) {
+		            if (i > 1) System.out.print(",  ");
+		            String columnValue = res.getString(i);
+		            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		        }
+		        System.out.println("");
+		    }
+			
+			JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
+			dataEin.executeQuery(queryEin);
+			CategoryDataset datasetEin = dataEin;
+			
+			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+				CategoryPlot plot = BarChart.getCategoryPlot();
+				BarRenderer renderer = null;
+				renderer = new BarRenderer();
+				ChartFrame  frame = new ChartFrame("", BarChart);
+				frame.setVisible(true);
+				frame.setSize(400,650);
+			
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		
+		}
+	}	
 	
-//Einnahmenentwicklung	
-		private void Einnahmen(){
-		try {
-			String queryEin = 	"SELECT BenutzerAufwendungen.Datum,BenutzerAufwendungen.Betrag "
-								+ "FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') "
-								+ "UNION SELECT BenutzerErträge.Datum,BenutzerErträge.Betrag "
-								+ "FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')"; 
-			PreparedStatement stm = connection.prepareStatement(queryEin);
+//Einnahmenentwicklung
+	private void Einnahmen(){
+		try{		
+			String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement pst = conn.prepareStatement(queryEin);
+			ResultSet res = pst.executeQuery();
+			
+			//Prüfung
+			ResultSetMetaData rsmd = res.getMetaData();
+		    System.out.println("querying SELECT * FROM XXX");
+		    int columnsNumber = rsmd.getColumnCount();
+		    while (res.next()) {
+		        for (int i = 1; i <= columnsNumber; i++) {
+		            if (i > 1) System.out.print(",  ");
+		            String columnValue = res.getString(i);
+		            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		        }
+		        System.out.println("");
+		    }
+			
+			JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
+			dataEin.executeQuery(queryEin);
+			CategoryDataset datasetEin = dataEin;
+			
+			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+				CategoryPlot plot = BarChart.getCategoryPlot();
+				BarRenderer renderer = null;
+				renderer = new BarRenderer();
+				ChartFrame  frame = new ChartFrame("", BarChart);
+				frame.setVisible(true);
+				frame.setSize(400,650);
+			
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		
+		}
+	}
+	
+//Ausgabenentwicklung
+	private void Ausgaben(){
+		try{		
+			String queryAus = "SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement pst = conn.prepareStatement(queryAus);
+			ResultSet res = pst.executeQuery();
+			
+			//Prüfung
+			ResultSetMetaData rsmd = res.getMetaData();
+		    System.out.println("querying SELECT * FROM XXX");
+		    int columnsNumber = rsmd.getColumnCount();
+		    while (res.next()) {
+		        for (int i = 1; i <= columnsNumber; i++) {
+		            if (i > 1) System.out.print(",  ");
+		            String columnValue = res.getString(i);
+		            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+		        }
+		        System.out.println("");
+		    }
+			
+			JDBCCategoryDataset dataAus = new JDBCCategoryDataset (connection);
+			dataAus.executeQuery(queryAus);
+			CategoryDataset datasetAus = dataAus;
+			
+			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetAus, PlotOrientation.VERTICAL, false, true, true);
+				CategoryPlot plot = BarChart.getCategoryPlot();
+				BarRenderer renderer = null;
+				renderer = new BarRenderer();
+				ChartFrame  frame = new ChartFrame("", BarChart);
+				frame.setVisible(true);
+				frame.setSize(400,650);
+			
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		
+		}
+	}	
+	
+	
+//Liquiditätsentwicklung	
+		private void Liquiditaet(){
+			try {
+			String queryLid = 	"SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') UNION SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
+			PreparedStatement stm = connection.prepareStatement(queryLid);
 			ResultSet result = stm.executeQuery();
 			
-		    //Prüfung für die Konsole
+			/*String queryAus	=	"SELECT Datum,Betrag "
+								+ "FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')"; 
+			PreparedStatement pstmt = connec.prepareStatement(queryAus);
+			ResultSet rs = pstmt.executeQuery();
+			*/
+			
+		    //Prüfung
 			ResultSetMetaData rsmd = result.getMetaData();
 		    System.out.println("querying SELECT * FROM XXX");
 		    int columnsNumber = rsmd.getColumnCount();
@@ -511,14 +743,14 @@ public class Charts extends JFrame {
 			
 		    //Einnahmen Barchart
 		    JDBCCategoryDataset data = new JDBCCategoryDataset (connection);
-			data.executeQuery(queryEin);
+			data.executeQuery(queryLid);
 		    CategoryDataset dataset = data;
+		    
 		    //Ausgaben Barchart
-		    //JDBCCategoryDataset data2 = new JDBCCategoryDataset (connec);
-			//data2.executeQuery(query2);
-		    //CategoryDataset dataset2 = data2;
-		
-		   
+		    /*JDBCCategoryDataset data2 = new JDBCCategoryDataset (connec);
+			data2.executeQuery(queryAus);
+		    CategoryDataset dataset2 = data2;*/
+	
 		    /*
 		    //Ausgaben und Einnahmen in ein Barchart
 		    final CategoryItemRenderer renderer = new LineAndShapeRenderer();
@@ -546,14 +778,17 @@ public class Charts extends JFrame {
 		    */
 		    
 		    
-			//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), query);
-			JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+			//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), queryLid);
+			//dataset.setTranspose();
+			
+		    JFreeChart BarChart = ChartFactory.createLineChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+			CategoryPlot plot = BarChart.getCategoryPlot();
 			BarRenderer renderer = null;
 			renderer = new BarRenderer();
 			ChartFrame  frame = new ChartFrame("", BarChart);
 			frame.setVisible(true);
 			frame.setSize(400,650);
-
+			
 			
 			//ChartPanel barPanel = new ChartPanel (BarChart);
 			//DiagrammPanel.removeAll();
@@ -567,4 +802,84 @@ public class Charts extends JFrame {
 		}
 		
 	}
+
+//Ausgabenverteilung
+		private void AusV(){
+			try{		
+				String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')";
+				PreparedStatement pst = conn.prepareStatement(queryEin);
+				ResultSet res = pst.executeQuery();
+				
+				//Prüfung
+				ResultSetMetaData rsmd = res.getMetaData();
+			    System.out.println("querying SELECT * FROM XXX");
+			    int columnsNumber = rsmd.getColumnCount();
+			    while (res.next()) {
+			        for (int i = 1; i <= columnsNumber; i++) {
+			            if (i > 1) System.out.print(",  ");
+			            String columnValue = res.getString(i);
+			            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+			        }
+			        System.out.println("");
+			    }
+				
+				JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
+				dataEin.executeQuery(queryEin);
+				CategoryDataset datasetEin = dataEin;
+				
+				 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+					CategoryPlot plot = BarChart.getCategoryPlot();
+					BarRenderer renderer = null;
+					renderer = new BarRenderer();
+					ChartFrame  frame = new ChartFrame("", BarChart);
+					frame.setVisible(true);
+					frame.setSize(400,650);
+				
+				
+				
+			}catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			
+			}
+		}
+
+//Einnahmenverteilung
+		private void EinV(){
+			try{		
+				String queryEin = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')";
+				PreparedStatement pst = conn.prepareStatement(queryEin);
+				ResultSet res = pst.executeQuery();
+				
+				//Prüfung
+				ResultSetMetaData rsmd = res.getMetaData();
+			    System.out.println("querying SELECT * FROM XXX");
+			    int columnsNumber = rsmd.getColumnCount();
+			    while (res.next()) {
+			        for (int i = 1; i <= columnsNumber; i++) {
+			            if (i > 1) System.out.print(",  ");
+			            String columnValue = res.getString(i);
+			            System.out.print(columnValue + " " + rsmd.getColumnName(i));
+			        }
+			        System.out.println("");
+			    }
+				
+				JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
+				dataEin.executeQuery(queryEin);
+				CategoryDataset datasetEin = dataEin;
+				
+				 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+					CategoryPlot plot = BarChart.getCategoryPlot();
+					BarRenderer renderer = null;
+					renderer = new BarRenderer();
+					ChartFrame  frame = new ChartFrame("", BarChart);
+					frame.setVisible(true);
+					frame.setSize(400,650);
+				
+				
+				
+			}catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			
+			}
+		}
 }
