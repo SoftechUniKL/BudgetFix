@@ -226,6 +226,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 		JLabel btnSpeichern = new JLabel();
 		btnSpeichern.addMouseListener(new MouseAdapter() {
 			@Override
+			//Speichern öffnet die SQL DB 
 			public void mouseClicked(MouseEvent e) {
 				try{
 					
