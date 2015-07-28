@@ -20,6 +20,8 @@ public class Wiederholung extends JFrame {
 	private JPanel contentPane;
 	private JTable tableFix;
 
+	static int id;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -27,7 +29,7 @@ public class Wiederholung extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Wiederholung frame = new Wiederholung();
+					Wiederholung frame = new Wiederholung(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +41,10 @@ public class Wiederholung extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Wiederholung() {
+	public Wiederholung(int id) {
+		
+		this.id = id;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 704);
 		contentPane = new JPanel();
@@ -102,7 +107,7 @@ public class Wiederholung extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Start frame = new Start(Start.id); // !!!!!!!!!!!!!!!!
+							Start frame = new Start(Start.id); 
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -155,7 +160,7 @@ public class Wiederholung extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Charts frame = new Charts();
+							Charts frame = new Charts(id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
