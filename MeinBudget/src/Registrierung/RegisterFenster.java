@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import Anmelden.AnmeldeDatenbank;
 import Anmelden.AnmeldenFenster;
+import javax.swing.SwingConstants;
 
 public class RegisterFenster extends JFrame {
 
@@ -100,12 +101,14 @@ public class RegisterFenster extends JFrame {
 
 		// Textfeld Benutzername
 		JLabel BenutzerLabel = new JLabel();
+		BenutzerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		BenutzerLabel.setIcon(new ImageIcon(RegisterFenster.class
 				.getResource("/Design/txtfeld.png")));
 		BenutzerLabel.setBounds(78, 120, 145, 30);
 		contentPane.add(BenutzerLabel);
 
 		textBenutzername = new JTextField();
+		textBenutzername.setHorizontalAlignment(SwingConstants.CENTER);
 		textBenutzername.setBorder(null);
 		textBenutzername.setForeground(Color.GRAY);
 		textBenutzername.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -115,12 +118,14 @@ public class RegisterFenster extends JFrame {
 
 		// Textfeld Passwort
 		JLabel PasswortLabel = new JLabel();
+		PasswortLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PasswortLabel.setIcon(new ImageIcon(RegisterFenster.class
 				.getResource("/Design/txtfeld.png")));
 		PasswortLabel.setBounds(78, 160, 145, 30);
 		contentPane.add(PasswortLabel);
 
 		txtPasswort = new JPasswordField();
+		txtPasswort.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPasswort.setForeground(Color.GRAY);
 		txtPasswort.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtPasswort.setBorder(null);
@@ -129,6 +134,7 @@ public class RegisterFenster extends JFrame {
 
 		// Textfeld Passwort wiederholen
 		JLabel PasswortWdhLabel = new JLabel();
+		PasswortWdhLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		PasswortWdhLabel.setIcon(new ImageIcon(RegisterFenster.class
 				.getResource("/Design/txtfeld.png")));
@@ -146,6 +152,7 @@ public class RegisterFenster extends JFrame {
 		});
 
 		txtPasswortWdh = new JPasswordField();
+		txtPasswortWdh.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPasswortWdh.addKeyListener(new KeyAdapter() {
 			// Registrieren über Enter
 			@Override

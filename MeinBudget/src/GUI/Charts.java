@@ -590,10 +590,10 @@ public class Charts extends JFrame {
 					int Betrag = queryKat.getInt("Betrag");
 					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
 				}
-				JFreeChart PieChart = ChartFactory.createPieChart("Kategorie im Detail", PieDataset);
-				PiePlot p = (PiePlot) PieChart.getPlot();
+				JFreeChart PieChartKat = ChartFactory.createPieChart("Kategorie im Detail", PieDataset, true, true, false);
+				PiePlot p = (PiePlot) PieChartKat.getPlot();
 				p.setForegroundAlpha(TOP_ALIGNMENT);
-				ChartFrame frame = new ChartFrame("Kategorie im Detail", PieChart);
+				ChartFrame frame = new ChartFrame("", PieChartKat);
 				frame.setVisible(true);
 				frame.setSize(450,600);
 				queryKat.close();
@@ -601,12 +601,13 @@ public class Charts extends JFrame {
 				connec.close();
 
 				//Abmessungen und Qualitätsfaktor für PieChart
-				int width = 400;
+				int width = 450;
 				int height = 600;
 				float quality=1;
 				
+				//Speichert PieChart als Bild
 				File BarChart=new File("SQL2PieChart.png");              
-                ChartUtilities.saveChartAsJPEG(BarChart, quality, PieChart, width, height); 
+                ChartUtilities.saveChartAsJPEG(BarChart, quality, PieChartKat, width, height); 
 				}
 				catch (Exception i)
                  {

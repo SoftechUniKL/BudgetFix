@@ -87,7 +87,7 @@ public class Impressum extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Einstellungen frame = new Einstellungen();
+							Einstellungen frame = new Einstellungen(Einstellungen.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
