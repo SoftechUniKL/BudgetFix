@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -7,7 +8,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -25,16 +25,12 @@ import javax.swing.event.PopupMenuListener;
 
 import com.toedter.calendar.JDateChooser;
 
-public class HinzufuegenEinnahmen extends JFrame {
-
-	Connection connection = null;
-	Connection conn = null;
-	static int id;
+public class BearbeitenEinnahmen extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
 	private JTextField txtBetrag;
 	private JTextField txtBemerkung;
-	private JTextField txtBezeichnung;
 
 	/**
 	 * Launch the application.
@@ -43,7 +39,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen(id);
+					BearbeitenEinnahmen frame = new BearbeitenEinnahmen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,15 +51,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HinzufuegenEinnahmen(int id) {
-
-		this.id = id;
-
-		// Verbindung zur BPDatenbank - Erträge
-		connection = BPDatenbank.dbCon();
-		// Verbindung zur BPDB - Kategorien
-		conn = BPDatenbank.dbCon();
-
+	public BearbeitenEinnahmen() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -71,9 +59,9 @@ public class HinzufuegenEinnahmen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		// btnSchliessen
+// btnSchliessen
 		JLabel btnSchliessen = new JLabel();
-		btnSchliessen.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
+		btnSchliessen.setIcon(new ImageIcon(BearbeitenEinnahmen.class
 				.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.addMouseListener(new MouseAdapter() {
 			@Override
@@ -95,78 +83,74 @@ public class HinzufuegenEinnahmen extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnSchliessen.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
+		btnSchliessen.setIcon(new ImageIcon(BearbeitenEinnahmen.class
 				.getResource("/Design/Schliessen_Button.png")));
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
 
-		// Überschrift "Hinzufügen der Einnahmen"
+// Überschrift "Bearbeiten der Einnahmen"
 		JLabel lblHinzuE = new JLabel(
-				"<html><u>Einnahmen hinzufügen</u></html>");
+				"<html><u>Einnahmen bearbeiten</u></html>");
 		lblHinzuE.setForeground(Color.WHITE);
 		lblHinzuE.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblHinzuE.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinzuE.setBounds(10, 11, 460, 38);
 		contentPane.add(lblHinzuE);
+		
+		// lblBezeichnung
+				JLabel lblBezeichnung = new JLabel("Bezeichnung:");
+				lblBezeichnung.setForeground(Color.WHITE);
+				lblBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
+				lblBezeichnung.setBounds(100, 70, 118, 27);
+				contentPane.add(lblBezeichnung);
+		
+		JComboBox cboBezeichnung = new JComboBox();
+		cboBezeichnung.setBounds(222, 70, 145, 30);
+		contentPane.add(cboBezeichnung);
 
-		// Betrag
+// Betrag
 		JLabel lblBetrag = new JLabel("Betrag:");
 		lblBetrag.setForeground(Color.WHITE);
 		lblBetrag.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBetrag.setBounds(100, 70, 86, 27);
+		lblBetrag.setBounds(100, 120, 86, 27);
 		contentPane.add(lblBetrag);
 
-		// txtBetrag
+
+// txtBetrag		
 		txtBetrag = new JTextField();
 		txtBetrag.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBetrag.setForeground(Color.GRAY);
-		txtBetrag.setColumns(10);
-		txtBetrag.setBorder(null);
 		txtBetrag.setBackground(Color.WHITE);
-		txtBetrag.setBounds(223, 70, 144, 30);
+		txtBetrag.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtBetrag.setForeground(Color.GRAY);
+		txtBetrag.setBorder(null);
+		txtBetrag.setBounds(222, 120, 144, 30);
+		txtBetrag.setColumns(10);
 		contentPane.add(txtBetrag);
-
-		// lblBezeichnung
-		JLabel lblBezeichnung = new JLabel("Bezeichnung:");
-		lblBezeichnung.setForeground(Color.WHITE);
-		lblBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBezeichnung.setBounds(100, 130, 118, 27);
-		contentPane.add(lblBezeichnung);
-
-		// txtBezeichnung
-		txtBezeichnung = new JTextField();
-		txtBezeichnung.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBezeichnung.setForeground(Color.GRAY);
-		txtBezeichnung.setColumns(10);
-		txtBezeichnung.setBorder(null);
-		txtBezeichnung.setBackground(Color.WHITE);
-		txtBezeichnung.setBounds(223, 130, 144, 30);
-		contentPane.add(txtBezeichnung);
-
-		// Datum
+		
+// Datum
 		JLabel lblDatum = new JLabel("Datum:");
 		lblDatum.setForeground(Color.WHITE);
 		lblDatum.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDatum.setBounds(100, 190, 81, 27);
+		lblDatum.setBounds(100, 170, 81, 27);
 		contentPane.add(lblDatum);
 
-		// Datum auswählen
+// Datum auswählen
 		JDateChooser Datum = new JDateChooser();
 		Datum.setDateFormatString("yyyy-MM-dd");
 		Datum.setForeground(Color.GRAY);
 		Datum.getCalendarButton().setForeground(Color.GRAY);
-		Datum.setBounds(222, 190, 145, 30);
+		Datum.setBounds(222, 170, 145, 30);
 		contentPane.add(Datum);
 
-		// Kategorie
+// Kategorie
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
-		Kategorie.setBounds(100, 250, 118, 27);
+		Kategorie.setBounds(100, 220, 118, 27);
 		contentPane.add(Kategorie);
 
-		// Kategorie Combobox, die bereits angelegten Kategorien hier als
-		// Auswahl wählen
+// Kategorie Combobox, die bereits angelegten Kategorien hier als
+// Auswahl wählen
 		JComboBox cboKategorie = new JComboBox();
 		cboKategorie.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
@@ -180,7 +164,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 			}
 		});
-		cboKategorie.setBounds(222, 250, 145, 30);
+		cboKategorie.setBounds(222, 220, 145, 30);
 		contentPane.add(cboKategorie);
 
 		try {
@@ -202,10 +186,10 @@ public class HinzufuegenEinnahmen extends JFrame {
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
 		lblBemerkung.setForeground(Color.WHITE);
 		lblBemerkung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBemerkung.setBounds(100, 310, 118, 27);
+		lblBemerkung.setBounds(100, 270, 118, 27);
 		contentPane.add(lblBemerkung);
 
-		// txtBemerkung
+// txtBemerkung
 		txtBemerkung = new JTextField();
 		txtBemerkung.addKeyListener(new KeyAdapter() {
 			// speichern über Enter
@@ -222,7 +206,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 		txtBemerkung.setColumns(10);
 		txtBemerkung.setBorder(null);
 		txtBemerkung.setBackground(Color.WHITE);
-		txtBemerkung.setBounds(222, 310, 144, 30);
+		txtBemerkung.setBounds(222, 270, 144, 30);
 		contentPane.add(txtBemerkung);
 
 		// btnSpeichern
@@ -271,12 +255,13 @@ public class HinzufuegenEinnahmen extends JFrame {
 				}
 			}
 		});
+
 		btnSpeichern.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(175, 370, 144, 38);
+		btnSpeichern.setBounds(175, 330, 144, 38);
 		contentPane.add(btnSpeichern);
 
-		// btnZurueck
+// btnZurueck
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
 			@Override
@@ -294,13 +279,20 @@ public class HinzufuegenEinnahmen extends JFrame {
 				});
 			}
 		});
+		
+		JLabel btnLoeschen = new JLabel();
+		btnLoeschen.setIcon(new ImageIcon(BearbeitenEinnahmen.class.getResource("/Design/Loeschen.png")));
+		btnLoeschen.setBounds(175, 379, 144, 38);
+		contentPane.add(btnLoeschen);
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 410, 144, 14);
+		btnZurueck.setBounds(170, 420, 144, 14);
 		contentPane.add(btnZurueck);
+		
 
-		// Hintergrund
+		
+// Hintergrund
 		JLabel Hintergrund = new JLabel();
 		Hintergrund.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Hintergrund.setHorizontalAlignment(SwingConstants.CENTER);
@@ -308,13 +300,11 @@ public class HinzufuegenEinnahmen extends JFrame {
 		Hintergrund.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
 				.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
-		contentPane.add(Hintergrund);
-
-		// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
-		// des Bildschirms
+		contentPane.add(Hintergrund);		
+		
+// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
+// des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);
-
 	}
-
 }

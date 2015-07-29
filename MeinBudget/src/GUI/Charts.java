@@ -197,7 +197,7 @@ public class Charts extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Wiederholung frame = new Wiederholung();
+							Wiederholung frame = new Wiederholung(Wiederholung.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

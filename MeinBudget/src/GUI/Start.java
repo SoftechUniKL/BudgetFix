@@ -516,7 +516,7 @@ public class Start extends JFrame {
 		txtGesamtbilanz.setColumns(10);
 		txtGesamtbilanz.setBorder(null);
 		txtGesamtbilanz.setBackground(SystemColor.menu);
-		txtGesamtbilanz.setBounds(997, 130, 253, 34);
+		txtGesamtbilanz.setBounds(997, 130, 264, 34);
 		contentPane.add(txtGesamtbilanz);
 
 		// lblGesamtbilanz
@@ -541,7 +541,7 @@ public class Start extends JFrame {
 		txtAusgabenSumme.setForeground(Color.GRAY);
 		txtAusgabenSumme.setFont(new Font("Tahoma", Font.BOLD, 11));
 		txtAusgabenSumme.setColumns(10);
-		txtAusgabenSumme.setBounds(528, 210, 125, 34);
+		txtAusgabenSumme.setBounds(528, 210, 264, 34);
 		contentPane.add(txtAusgabenSumme);
 
 		// lblAusgaben
@@ -555,7 +555,7 @@ public class Start extends JFrame {
 		JLabel lblHinzufgen = new JLabel("Hinzuf\u00FCgen");
 		lblHinzufgen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinzufgen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHinzufgen.setBounds(689, 210, 103, 34);
+		lblHinzufgen.setBounds(555, 270, 103, 34);
 		contentPane.add(lblHinzufgen);
 
 		// Button Ausgaben hinzufügen
@@ -563,8 +563,7 @@ public class Start extends JFrame {
 		btnHinzuA.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				btnHinzuA.setIcon(new javax.swing.ImageIcon(getClass()
-						.getResource("/Design/Plus2.png")));
+				btnHinzuA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus2.png")));
 			}
 
 			// Plusbutton ist blau
@@ -593,32 +592,79 @@ public class Start extends JFrame {
 		});
 		btnHinzuA.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Plus.png")));
-		btnHinzuA.setBounds(674, 216, 25, 25);
+		btnHinzuA.setBounds(540, 275, 25, 25);
 		contentPane.add(btnHinzuA);
 
 		// lblHinzuA
 		JLabel lblHinzuA = new JLabel();
 		lblHinzuA.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Textfeldgross.png")));
-		lblHinzuA.setBounds(662, 210, 125, 34);
+		lblHinzuA.setBounds(528, 270, 125, 34);
 		contentPane.add(lblHinzuA);
 
 		JScrollPane scrollPane_TabelleAusgaben = new JScrollPane();
 		scrollPane_TabelleAusgaben.setForeground(Color.GRAY);
 		scrollPane_TabelleAusgaben.setBorder(null);
-		scrollPane_TabelleAusgaben.setBounds(440, 290, 352, 346);
-		scrollPane_TabelleAusgaben.getViewport().setBackground(
-				new Color(27, 109, 220));
+		scrollPane_TabelleAusgaben.setBounds(440, 350, 352, 290);
+		scrollPane_TabelleAusgaben.getViewport().setBackground(new Color(27, 109, 220));
+		
+//Bearbeiten		
+		JLabel lblBearbeiten = new JLabel("Bearbeiten");
+		lblBearbeiten.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBearbeiten.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBearbeiten.setBounds(692, 270, 103, 34);
+		contentPane.add(lblBearbeiten);	
+		
+//Button für bearbeiten von Ausgaben		
+		JLabel btnBearbeitenA = new JLabel();
+		btnBearbeitenA.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnBearbeitenA.setIcon(new javax.swing.ImageIcon(getClass()
+						.getResource("/Design/Plus2.png")));
+			}
+
+			// Plusbutton ist blau
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnBearbeitenA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Design/Plus.png")));
+			}
+			
+			// Öffnet BearbeitenAusgaben-Fenster
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										BearbeitenAusgaben frame = new BearbeitenAusgaben();
+										frame.setVisible(true);
+										dispose();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+						}
+		});
+		btnBearbeitenA.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
+		btnBearbeitenA.setBounds(678, 275, 25, 25);
+		contentPane.add(btnBearbeitenA);
+		
+//lblBearbeiten
+		JLabel lblBearbeitenA = new JLabel();
+		lblBearbeitenA.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross.png")));
+		lblBearbeitenA.setBounds(667, 270, 125, 34);
+		contentPane.add(lblBearbeitenA);
 		contentPane.add(scrollPane_TabelleAusgaben);
 
-		// Tabelle Ausgaben Übersicht
+// Tabelle Ausgaben Übersicht
 		tableAusgaben = new JTable();
 		tableAusgaben.setFont(new Font("Tahoma", Font.BOLD, 11));
 		tableAusgaben.setForeground(Color.WHITE);
 		tableAusgaben.setBackground(new Color(27, 109, 220));
 		scrollPane_TabelleAusgaben.setViewportView(tableAusgaben);
 
-		// Einnahmen
+// Einnahmen
 		JLabel Einnahmen = new JLabel("Einnahmen:");
 		Einnahmen.setForeground(Color.WHITE);
 		Einnahmen.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -631,7 +677,7 @@ public class Start extends JFrame {
 		txtEinnahmenSumme.setForeground(Color.GRAY);
 		txtEinnahmenSumme.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEinnahmenSumme.setBackground(new Color(240, 240, 240));
-		txtEinnahmenSumme.setBounds(997, 210, 125, 34);
+		txtEinnahmenSumme.setBounds(997, 210, 264, 34);
 		contentPane.add(txtEinnahmenSumme);
 		txtEinnahmenSumme.setColumns(10);
 		// txtEinnahmenSumme.setText(sum);
@@ -647,7 +693,7 @@ public class Start extends JFrame {
 		JLabel lblHinzufuegen = new JLabel("Hinzuf\u00FCgen");
 		lblHinzufuegen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinzufuegen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHinzufuegen.setBounds(1157, 210, 103, 34);
+		lblHinzufuegen.setBounds(1024, 270, 103, 34);
 		contentPane.add(lblHinzufuegen);
 
 		// Button für hinzufügen der Einnahmen
@@ -672,8 +718,7 @@ public class Start extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen(
-									id);
+							HinzufuegenEinnahmen frame = new HinzufuegenEinnahmen(id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -685,22 +730,68 @@ public class Start extends JFrame {
 		});
 		btnHinzuE.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Plus.png")));
-		btnHinzuE.setBounds(1141, 216, 25, 25);
+		btnHinzuE.setBounds(1010, 275, 25, 25);
 		contentPane.add(btnHinzuE);
 
 		// lblHinzuE
 		JLabel lblHinzuE = new JLabel();
 		lblHinzuE.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Textfeldgross.png")));
-		lblHinzuE.setBounds(1128, 210, 125, 34);
+		lblHinzuE.setBounds(997, 270, 125, 34);
 		contentPane.add(lblHinzuE);
 
 		JScrollPane scrollPane_TabelleEinnahmen = new JScrollPane();
 		scrollPane_TabelleEinnahmen.setForeground(Color.GRAY);
 		scrollPane_TabelleEinnahmen.setBorder(null);
-		scrollPane_TabelleEinnahmen.setBounds(900, 290, 352, 346);
-		scrollPane_TabelleEinnahmen.getViewport().setBackground(
-				new Color(27, 109, 220));
+		scrollPane_TabelleEinnahmen.setBounds(900, 350, 352, 290);
+		scrollPane_TabelleEinnahmen.getViewport().setBackground(new Color(27, 109, 220));
+		
+//Button Bearbeiten für Einnahmen		
+		JLabel btnBearbeitenE = new JLabel();
+		btnBearbeitenE.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnBearbeitenE.setIcon(new javax.swing.ImageIcon(getClass()
+						.getResource("/Design/Plus2.png")));
+			}
+
+			// Plusbutton ist blau
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnBearbeitenE.setIcon(new javax.swing.ImageIcon(getClass()
+						.getResource("/Design/Plus.png")));
+			}
+			
+			// Öffnet BearbeitenEinnahmen-Fenster
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										BearbeitenEinnahmen frame = new BearbeitenEinnahmen();
+										frame.setVisible(true);
+										dispose();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+						}
+		});
+		btnBearbeitenE.setIcon(new ImageIcon(Start.class.getResource("/Design/Plus.png")));
+		btnBearbeitenE.setBounds(1150, 275, 25, 25);
+		contentPane.add(btnBearbeitenE);
+		
+		JLabel BearbeitenE = new JLabel("Bearbeiten");
+		BearbeitenE.setHorizontalAlignment(SwingConstants.CENTER);
+		BearbeitenE.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		BearbeitenE.setBounds(1163, 270, 103, 34);
+		contentPane.add(BearbeitenE);
+		
+		JLabel lblBearbeitenE = new JLabel();
+		lblBearbeitenE.setIcon(new ImageIcon(Start.class.getResource("/Design/Textfeldgross.png")));
+		lblBearbeitenE.setBounds(1137, 270, 125, 34);
+		contentPane.add(lblBearbeitenE);
 		contentPane.add(scrollPane_TabelleEinnahmen);
 
 		// Einnahmen Tabellenübersicht
