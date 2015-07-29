@@ -362,7 +362,7 @@ public class Start extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Tools frame = new Tools();
+							Tools frame = new Tools(Tools.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
