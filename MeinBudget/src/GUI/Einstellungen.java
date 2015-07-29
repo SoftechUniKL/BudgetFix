@@ -413,7 +413,7 @@ public class Einstellungen extends JFrame {
 		lblNeuesPasswortEingeben.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortEingeben.setForeground(Color.WHITE);
 		lblNeuesPasswortEingeben.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNeuesPasswortEingeben.setBounds(430, 320, 460, 38);
+		lblNeuesPasswortEingeben.setBounds(430, 300, 460, 38);
 		contentPane.add(lblNeuesPasswortEingeben);
 
 		pwNeues = new JPasswordField();
@@ -421,7 +421,7 @@ public class Einstellungen extends JFrame {
 		pwNeues.setForeground(Color.GRAY);
 		pwNeues.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pwNeues.setBorder(null);
-		pwNeues.setBounds(529, 370, 262, 30);
+		pwNeues.setBounds(529, 350, 262, 30);
 		contentPane.add(pwNeues);
 
 		JLabel lblNeuesPasswortWiederholen = new JLabel(
@@ -430,7 +430,7 @@ public class Einstellungen extends JFrame {
 				.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNeuesPasswortWiederholen.setForeground(Color.WHITE);
 		lblNeuesPasswortWiederholen.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNeuesPasswortWiederholen.setBounds(430, 400, 460, 38);
+		lblNeuesPasswortWiederholen.setBounds(430, 380, 460, 38);
 		contentPane.add(lblNeuesPasswortWiederholen);
 
 		// Password-Feld neues PW wiederholen eingeben
@@ -449,7 +449,7 @@ public class Einstellungen extends JFrame {
 		pwNeuesWiederholen.setForeground(Color.GRAY);
 		pwNeuesWiederholen.setHorizontalAlignment(SwingConstants.CENTER);
 		pwNeuesWiederholen.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pwNeuesWiederholen.setBounds(529, 450, 262, 30);
+		pwNeuesWiederholen.setBounds(529, 430, 262, 30);
 		contentPane.add(pwNeuesWiederholen);
 
 		// Button Speichern
@@ -463,7 +463,7 @@ public class Einstellungen extends JFrame {
 		});
 		btnSpeichern.setIcon(new ImageIcon(Einstellungen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(587, 530, 144, 38);
+		btnSpeichern.setBounds(587, 480, 144, 38);
 		contentPane.add(btnSpeichern);
 
 		// Button Impressum der Gruppe
@@ -485,6 +485,12 @@ public class Einstellungen extends JFrame {
 				});
 			}
 		});
+		
+		//Account löschen
+		JLabel btnAccount = new JLabel();
+		btnAccount.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Account.png")));
+		btnAccount.setBounds(584, 530, 163, 38);
+		contentPane.add(btnAccount);
 		btnImpressum.setIcon(new ImageIcon(Einstellungen.class
 				.getResource("/Design/Impressum.png")));
 		btnImpressum.setBounds(587, 580, 144, 38);
