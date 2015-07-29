@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,10 +23,12 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 public class KategorieAnlegen extends JFrame {
+	
+	Connection connection = null;
 
 	private JPanel contentPane;
 	private JTextField txtKategorie;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -43,6 +49,10 @@ public class KategorieAnlegen extends JFrame {
 	 * Create the frame.
 	 */
 	public KategorieAnlegen() {
+		
+		// Verbindung zur BPDB - Kategorien
+		connection = BPDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -129,6 +139,21 @@ public class KategorieAnlegen extends JFrame {
 		rdbtnEinnahmen.setBounds(222, 207, 145, 30);
 		contentPane.add(rdbtnEinnahmen);
 
+					//rdbtnAusgaben.setSelected(true);
+		//Radiobutton in Group zusammenfassen
+		ButtonGroup wahl = new ButtonGroup();
+		wahl.add(rdbtnEinnahmen);
+		wahl.add(rdbtnAusgaben);
+		
+					//JRadioButton selectedButton = (JRadioButton)wahl.getSelection();
+		//Auswahl
+		if(rdbtnEinnahmen.isSelected()){
+			String selected = "Einkommen";
+		}else{
+			String selected = "Ausgaben";
+		}
+		
+		
 		// Button Auswahl für Icons
 		JLabel lblIcon = new JLabel("Icon:");
 		lblIcon.setForeground(Color.WHITE);
@@ -155,13 +180,7 @@ public class KategorieAnlegen extends JFrame {
 		lblAuswahl.setBounds(222, 272, 124, 30);
 		contentPane.add(lblAuswahl);
 
-		// Button Speichern
-		JLabel btnSpeichern = new JLabel();
-		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
-				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(170, 372, 144, 38);
-		contentPane.add(btnSpeichern);
-
+		
 		// Button Zurück zu z.B. Start
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
@@ -394,6 +413,39 @@ public class KategorieAnlegen extends JFrame {
 				.getResource("/Icons/write.png")));
 		cboAuswahl.setBounds(222, 272, 145, 30);
 		contentPane.add(cboAuswahl);
+		
+		
+		// Button Speichern
+				JLabel btnSpeichern = new JLabel();
+				btnSpeichern.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						try {
+							String sqlQuery = "INSERT INTO BenutzerKategorien (Kategorie,Typ,Icon) VALUES(?,?,?) ";
+							PreparedStatement pst = connection
+									.prepareStatement(sqlQuery);
+							
+							// Kategorie
+							pst.setString(1, txtKategorie.getText());
+							
+							// Typ
+							
+							//pst.setString(2, selected);
+							
+							// Icon
+							String ausgewaelteKategorie = cboAuswahl.getSelectedItem().getResource().toString();
+							pst.setString(3, ausgewaelteKategorie);
+							
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
+				btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
+						.getResource("/Design/Speichern.png")));
+				btnSpeichern.setBounds(170, 372, 144, 38);
+				contentPane.add(btnSpeichern);
+
 
 		// Hintergrund
 		JLabel Hintergrund = new JLabel();

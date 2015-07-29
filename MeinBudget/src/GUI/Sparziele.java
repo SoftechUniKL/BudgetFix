@@ -174,7 +174,7 @@ public class Sparziele extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Wiederholung frame = new Wiederholung();
+							Wiederholung frame = new Wiederholung(Start.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -214,7 +214,7 @@ public class Sparziele extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Charts frame = new Charts();
+							Charts frame = new Charts(Start.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

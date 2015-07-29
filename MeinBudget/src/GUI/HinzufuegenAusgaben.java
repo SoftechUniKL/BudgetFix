@@ -198,7 +198,7 @@ public class HinzufuegenAusgaben extends JFrame {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		String ausgewaelteKategorie = cboKategorie.getSelectedItem().toString();
+		//String ausgewaelteKategorie = cboKategorie.getSelectedItem().toString();
 
 		// Bemerkung
 		JLabel lblBemerkung = new JLabel("Bemerkung:");

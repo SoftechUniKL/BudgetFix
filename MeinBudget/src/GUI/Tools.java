@@ -149,7 +149,7 @@ public class Tools extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Wiederholung frame = new Wiederholung();
+							Wiederholung frame = new Wiederholung(Start.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
