@@ -9,13 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -23,12 +22,12 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 public class KategorieAnlegen extends JFrame {
-	
+
 	Connection connection = null;
 
 	private JPanel contentPane;
 	private JTextField txtKategorie;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -49,10 +48,10 @@ public class KategorieAnlegen extends JFrame {
 	 * Create the frame.
 	 */
 	public KategorieAnlegen() {
-		
+
 		// Verbindung zur BPDB - Kategorien
 		connection = BPDatenbank.dbCon();
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -129,31 +128,46 @@ public class KategorieAnlegen extends JFrame {
 		Typ.setBounds(100, 230, 91, 27);
 		contentPane.add(Typ);
 
-		// Auswahl Ausgaben
-		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
-		rdbtnAusgaben.setBounds(222, 230, 145, 30);
-		contentPane.add(rdbtnAusgaben);
+		/*
+		 * // Auswahl Ausgaben JRadioButton rdbtnAusgaben = new
+		 * JRadioButton("Ausgaben"); rdbtnAusgaben.setBounds(222, 230, 145, 30);
+		 * contentPane.add(rdbtnAusgaben);
+		 * 
+		 * // Auswahl Einnahmen JRadioButton rdbtnEinnahmen = new
+		 * JRadioButton("Einnahmen"); rdbtnEinnahmen.setBounds(222, 264, 145,
+		 * 30); contentPane.add(rdbtnEinnahmen);
+		 * 
+		 * //Radiobutton in Group zusammenfassen ButtonGroup wahl = new
+		 * ButtonGroup(); wahl.add(rdbtnEinnahmen); wahl.add(rdbtnAusgaben);
+		 * 
+		 * //Auswahl if(rdbtnEinnahmen.isSelected()){
+		 * System.out.println("Einkommen"); //String selected =
+		 * rdbtnEinnahmen.getText().toString(); String selection = "Einkommen";
+		 * }else{ //System.out.println("Ausgabe"); //String selected =
+		 * rdbtnAusgaben.getText().toString(); //System.out.println(selected);
+		 * //String selected = "Ausgaben"; }
+		 */
 
-		// Auswahl Einnahmen
-		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
-		rdbtnEinnahmen.setBounds(222, 264, 145, 30);
-		contentPane.add(rdbtnEinnahmen);
+		// Combobox für Einnahme oder Ausgabe
+		String[] strWahl = { "Einkommen", "Ausgabe" };
+		JComboBox cboTyp = new JComboBox(strWahl);
+		cboTyp.setFont(new Font("Tahoma", Font.BOLD, 11));
+		cboTyp.setBorder(null);
+		cboTyp.setBounds(222, 230, 145, 30);
+		contentPane.add(cboTyp);
+		cboTyp.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
 
-					//rdbtnAusgaben.setSelected(true);
-		//Radiobutton in Group zusammenfassen
-		ButtonGroup wahl = new ButtonGroup();
-		wahl.add(rdbtnEinnahmen);
-		wahl.add(rdbtnAusgaben);
-		
-					//JRadioButton selectedButton = (JRadioButton)wahl.getSelection();
-		//Auswahl
-		if(rdbtnEinnahmen.isSelected()){
-			String selected = "Einkommen";
-		}else{
-			String selected = "Ausgaben";
-		}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				String selectedItem = (String) cboTyp.getSelectedItem();
+				System.out.println(selectedItem);
+			}
 
-		
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
+
 		// Button Zurück zu z.B. Start
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
@@ -172,44 +186,44 @@ public class KategorieAnlegen extends JFrame {
 				});
 			}
 		});
+
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnZurueck.setBounds(170, 410, 144, 14);
 		contentPane.add(btnZurueck);
-		
-		
-		// Button Speichern
-				JLabel btnSpeichern = new JLabel();
-				btnSpeichern.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						try {
-							String sqlQuery = "INSERT INTO BenutzerKategorien (Kategorie,Typ,Icon) VALUES(?,?,?) ";
-							PreparedStatement pst = connection
-									.prepareStatement(sqlQuery);
-							
-							// Kategorie
-							pst.setString(1, txtKategorie.getText());
-							
-							// Typ
-							
-							//pst.setString(2, selected);
-							
-							// Icon
-							String ausgewaelteKategorie = cboAuswahl.getSelectedItem().getResource().toString();
-							pst.setString(3, ausgewaelteKategorie);
-							
-						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
-					}
-				});
-				btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
-						.getResource("/Design/Speichern.png")));
-				btnSpeichern.setBounds(170, 372, 144, 38);
-				contentPane.add(btnSpeichern);
 
+		// Button Speichern
+		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String sqlQuery = "INSERT INTO BenutzerKategorien (Kategorie,Typ) VALUES(?,?) ";
+					PreparedStatement pst = connection
+							.prepareStatement(sqlQuery);
+
+					// Kategorie
+					pst.setString(1, txtKategorie.getText());
+
+					// Typ
+					String ausgewaelteKategorie = cboTyp.getSelectedItem()
+							.toString();
+					pst.setString(2, ausgewaelteKategorie);
+
+					pst.execute();
+					JOptionPane.showMessageDialog(null,
+							"Erfolgreich gespeichert!");
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
+				.getResource("/Design/Speichern.png")));
+		btnSpeichern.setBounds(170, 372, 144, 38);
+		contentPane.add(btnSpeichern);
 
 		// Hintergrund
 		JLabel Hintergrund = new JLabel();

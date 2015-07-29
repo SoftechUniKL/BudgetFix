@@ -193,24 +193,22 @@ public class RegisterFenster extends JFrame {
 			char[] passInput2 = txtPasswortWdh.getPassword();
 			String passString2 = new String(passInput2);
 
-			if (passString.equals(passString2)) {
-				System.out.println("Registrierung erfolgreich");
-				JOptionPane.showMessageDialog(null,
-						"Benutzerkonto erfolgreich erstellt!");
-				String sqlQuery = "INSERT INTO Benutzer (Benutzername,Passwortkombination) VALUES(?,?)";
-				PreparedStatement stm = connect.prepareStatement(sqlQuery);
-				stm.setString(1, textBenutzername.getText());
-				stm.setString(2, passString);
-
-				// ResultSet result = stm.executeQuery();
-				stm.execute();
-
-				Anmelden.AnmeldenFenster frame = new AnmeldenFenster();
-				frame.setVisible(true);
-
-				// Fenster verschwindet
-				dispose();
-			} else {
+			if (passString.equals(passString2) || null !=passString || "DELETE" != passString ) {
+					System.out.println("Registrierung erfolgreich");
+					JOptionPane.showMessageDialog(null,
+							"Benutzerkonto erfolgreich erstellt!");
+					String sqlQuery = "INSERT INTO Benutzer (Benutzername,Passwortkombination) VALUES(?,?)";
+					PreparedStatement stm = connect.prepareStatement(sqlQuery);
+					stm.setString(1, textBenutzername.getText());
+					stm.setString(2, passString);
+					// ResultSet result = stm.executeQuery();
+					stm.execute();
+					Anmelden.AnmeldenFenster frame = new AnmeldenFenster();
+					frame.setVisible(true);
+					// Fenster verschwindet
+					dispose();
+				
+			} else  {
 				System.out.println("Passwörter stimmen nicht überein!");
 				JOptionPane.showMessageDialog(null, "Überprüfe deine Eingabe!");
 			}
