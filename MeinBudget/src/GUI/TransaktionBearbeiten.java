@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -17,13 +18,13 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-public class TransaktionAnlegen extends JFrame {
+public class TransaktionBearbeiten extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtBezeichnung;
-	private JTextField txtIntervall;
 	private JTextField txtBetrag;
 	private JTextField txtBemerkung;
+	private JTextField txtIntervall;
 
 	/**
 	 * Launch the application.
@@ -32,7 +33,7 @@ public class TransaktionAnlegen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TransaktionAnlegen frame = new TransaktionAnlegen();
+					TransaktionBearbeiten frame = new TransaktionBearbeiten();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,14 +45,14 @@ public class TransaktionAnlegen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TransaktionAnlegen() {
+	public TransaktionBearbeiten() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		// Schliessenbutton
 		JLabel btnSchliessen = new JLabel();
 		btnSchliessen.addMouseListener(new MouseAdapter() {
@@ -89,12 +90,22 @@ public class TransaktionAnlegen extends JFrame {
 		lblTransaktionAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTransaktionAnlegen.setBounds(10, 15, 460, 38);
 		contentPane.add(lblTransaktionAnlegen);
+		
+		JLabel lblBearbeiten = new JLabel("Bearbeiten:");
+		lblBearbeiten.setForeground(Color.WHITE);
+		lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBearbeiten.setBounds(75, 72, 118, 27);
+		contentPane.add(lblBearbeiten);
+		
+		JComboBox cboBearbeiten = new JComboBox();
+		cboBearbeiten.setBounds(222, 70, 183, 30);
+		contentPane.add(cboBearbeiten);
 
 		// Bezeichung
 		JLabel Bezeichnung = new JLabel("Bezeichnung:");
 		Bezeichnung.setForeground(Color.WHITE);
 		Bezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		Bezeichnung.setBounds(75, 72, 118, 27);
+		Bezeichnung.setBounds(75, 112, 118, 27);
 		contentPane.add(Bezeichnung);
 
 		// Textfeld Bezeichnung zum Eingeben, wie die Transaktion heissen soll
@@ -104,34 +115,27 @@ public class TransaktionAnlegen extends JFrame {
 		txtBezeichnung.setColumns(10);
 		txtBezeichnung.setBorder(null);
 		txtBezeichnung.setBackground(Color.WHITE);
-		txtBezeichnung.setBounds(222, 70, 183, 30);
+		txtBezeichnung.setBounds(222, 110, 183, 30);
 		contentPane.add(txtBezeichnung);
-
-		// lblBezeichnung
-		JLabel lblBezeichnung = new JLabel();
-		lblBezeichnung.setIcon(new ImageIcon(TransaktionAnlegen.class
-				.getResource("/Design/Textfeldgross.png")));
-		lblBezeichnung.setBounds(222, 70, 184, 30);
-		contentPane.add(lblBezeichnung);
 
 		// Kategorie
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
-		Kategorie.setBounds(75, 122, 118, 27);
+		Kategorie.setBounds(75, 152, 118, 27);
 		contentPane.add(Kategorie);
 
 		// Kategorie Combobox, die bereits angelegten Kategorien hier als
 		// Auswahl wählen
 		JComboBox cboKategorie = new JComboBox();
-		cboKategorie.setBounds(222, 120, 183, 30);
+		cboKategorie.setBounds(222, 150, 183, 30);
 		contentPane.add(cboKategorie);
 
 		// Intervall
 		JLabel lblIntervall = new JLabel("Intervall:");
 		lblIntervall.setForeground(Color.WHITE);
 		lblIntervall.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblIntervall.setBounds(75, 172, 118, 27);
+		lblIntervall.setBounds(75, 192, 118, 27);
 		contentPane.add(lblIntervall);
 
 		// Intervall-Feld --> Soll Zahlen eingeben können
@@ -141,31 +145,24 @@ public class TransaktionAnlegen extends JFrame {
 		txtIntervall.setColumns(10);
 		txtIntervall.setBorder(null);
 		txtIntervall.setBackground(Color.WHITE);
-		txtIntervall.setBounds(222, 170, 54, 30);
+		txtIntervall.setBounds(222, 190, 54, 30);
 		contentPane.add(txtIntervall);
-
-		// lblIntervall
-		JLabel lblIntervallEingeben = new JLabel();
-		lblIntervallEingeben.setIcon(new ImageIcon(TransaktionAnlegen.class
-				.getResource("/Design/Textfeldgross.png")));
-		lblIntervallEingeben.setBounds(222, 170, 55, 30);
-		contentPane.add(lblIntervallEingeben);
 
 		// Hier kann man Auswählen zwischen Tag, Woche, Monat, Jahr
 		JComboBox cboIntervall = new JComboBox();
-		cboIntervall.setBounds(285, 170, 120, 30);
+		cboIntervall.setBounds(285, 190, 120, 30);
 		contentPane.add(cboIntervall);
 
 		// Nächste Fälligkeit
 		JLabel lblNchsteFlligkeit = new JLabel("N\u00E4chste F\u00E4lligkeit:");
 		lblNchsteFlligkeit.setForeground(Color.WHITE);
 		lblNchsteFlligkeit.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNchsteFlligkeit.setBounds(75, 222, 135, 27);
+		lblNchsteFlligkeit.setBounds(75, 232, 135, 27);
 		contentPane.add(lblNchsteFlligkeit);
 
 		// Datum auswählen
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(222, 220, 183, 30);
+		dateChooser.setBounds(222, 230, 183, 30);
 		contentPane.add(dateChooser);
 
 		// Betrag
@@ -194,7 +191,7 @@ public class TransaktionAnlegen extends JFrame {
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
 		lblBemerkung.setForeground(Color.WHITE);
 		lblBemerkung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBemerkung.setBounds(75, 322, 118, 27);
+		lblBemerkung.setBounds(75, 312, 118, 27);
 		contentPane.add(lblBemerkung);
 
 		// Bemerkung-Textfeld
@@ -204,19 +201,14 @@ public class TransaktionAnlegen extends JFrame {
 		txtBemerkung.setColumns(10);
 		txtBemerkung.setBorder(null);
 		txtBemerkung.setBackground(Color.WHITE);
-		txtBemerkung.setBounds(222, 320, 183, 30);
+		txtBemerkung.setBounds(222, 310, 183, 30);
 		contentPane.add(txtBemerkung);
-
-		// lblBemerkung
-		JLabel Bemerkung = new JLabel();
-		Bemerkung.setBounds(222, 320, 184, 30);
-		contentPane.add(Bemerkung);
 
 		// btnSpeichern
 		JLabel btnSpeichern = new JLabel();
 		btnSpeichern.setIcon(new ImageIcon(TransaktionAnlegen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(175, 370, 144, 38);
+		btnSpeichern.setBounds(90, 380, 144, 38);
 		contentPane.add(btnSpeichern);
 
 		// btnZurueck
@@ -227,7 +219,7 @@ public class TransaktionAnlegen extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Wiederholung frame = new Wiederholung(Start.id);
+							Wiederholung frame = new Wiederholung(Wiederholung.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -237,10 +229,15 @@ public class TransaktionAnlegen extends JFrame {
 				});
 			}
 		});
+		
+		JLabel btnLoeschen = new JLabel("New label");
+		btnLoeschen.setIcon(new ImageIcon(TransaktionBearbeiten.class.getResource("/Design/Loeschen.png")));
+		btnLoeschen.setBounds(250, 380, 144, 38);
+		contentPane.add(btnLoeschen);
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 410, 144, 14);
+		btnZurueck.setBounds(170, 420, 144, 14);
 		contentPane.add(btnZurueck);
 
 		// Hintergrund
@@ -256,6 +253,7 @@ public class TransaktionAnlegen extends JFrame {
 		// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
 		// des Bildschirms
 		setUndecorated(true);
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(null);		
 	}
+
 }

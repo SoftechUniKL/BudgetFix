@@ -1,3 +1,4 @@
+
 package GUI;
 
 import java.awt.BorderLayout;
@@ -31,6 +32,7 @@ public class BearbeitenEinnahmen extends JFrame {
 	private JTextField textField;
 	private JTextField txtBetrag;
 	private JTextField txtBemerkung;
+	private JTextField txtBezeichnung;
 
 	/**
 	 * Launch the application.
@@ -98,41 +100,57 @@ public class BearbeitenEinnahmen extends JFrame {
 		contentPane.add(lblHinzuE);
 		
 		// lblBezeichnung
-				JLabel lblBezeichnung = new JLabel("Bezeichnung:");
-				lblBezeichnung.setForeground(Color.WHITE);
-				lblBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
-				lblBezeichnung.setBounds(100, 70, 118, 27);
-				contentPane.add(lblBezeichnung);
+				JLabel lblBearbeiten = new JLabel("Bearbeiten:");
+				lblBearbeiten.setForeground(Color.WHITE);
+				lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
+				lblBearbeiten.setBounds(100, 72, 118, 27);
+				contentPane.add(lblBearbeiten);
 		
-		JComboBox cboBezeichnung = new JComboBox();
-		cboBezeichnung.setForeground(Color.GRAY);
-		cboBezeichnung.setBounds(222, 70, 145, 30);
-		contentPane.add(cboBezeichnung);
+		JComboBox cboBearbeiten = new JComboBox();
+		cboBearbeiten.setForeground(Color.GRAY);
+		cboBearbeiten.setBounds(222, 70, 145, 30);
+		contentPane.add(cboBearbeiten);
+		
+		JLabel lblBezeichnung = new JLabel("Bezeichnung:");
+		lblBezeichnung.setForeground(Color.WHITE);
+		lblBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBezeichnung.setBounds(100, 112, 123, 27);
+		contentPane.add(lblBezeichnung);
+		
+		txtBezeichnung = new JTextField();
+		txtBezeichnung.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBezeichnung.setForeground(Color.GRAY);
+		txtBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtBezeichnung.setColumns(10);
+		txtBezeichnung.setBorder(null);
+		txtBezeichnung.setBackground(Color.WHITE);
+		txtBezeichnung.setBounds(222, 110, 144, 30);
+		contentPane.add(txtBezeichnung);
 
 // Betrag
 		JLabel lblBetrag = new JLabel("Betrag:");
 		lblBetrag.setForeground(Color.WHITE);
 		lblBetrag.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBetrag.setBounds(100, 120, 86, 27);
+		lblBetrag.setBounds(100, 152, 86, 27);
 		contentPane.add(lblBetrag);
-
-
-// txtBetrag		
-		txtBetrag = new JTextField();
-		txtBetrag.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBetrag.setBackground(Color.WHITE);
-		txtBetrag.setFont(new Font("Tahoma", Font.BOLD, 11));
-		txtBetrag.setForeground(Color.GRAY);
-		txtBetrag.setBorder(null);
-		txtBetrag.setBounds(222, 120, 144, 30);
-		txtBetrag.setColumns(10);
-		contentPane.add(txtBetrag);
+		
+		
+		// txtBetrag		
+				txtBetrag = new JTextField();
+				txtBetrag.setHorizontalAlignment(SwingConstants.CENTER);
+				txtBetrag.setBackground(Color.WHITE);
+				txtBetrag.setFont(new Font("Tahoma", Font.BOLD, 11));
+				txtBetrag.setForeground(Color.GRAY);
+				txtBetrag.setBorder(null);
+				txtBetrag.setBounds(222, 150, 144, 30);
+				txtBetrag.setColumns(10);
+				contentPane.add(txtBetrag);
 		
 // Datum
 		JLabel lblDatum = new JLabel("Datum:");
 		lblDatum.setForeground(Color.WHITE);
 		lblDatum.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDatum.setBounds(100, 170, 81, 27);
+		lblDatum.setBounds(100, 192, 81, 27);
 		contentPane.add(lblDatum);
 
 // Datum auswählen
@@ -140,20 +158,20 @@ public class BearbeitenEinnahmen extends JFrame {
 		Datum.setDateFormatString("yyyy-MM-dd");
 		Datum.setForeground(Color.GRAY);
 		Datum.getCalendarButton().setForeground(Color.GRAY);
-		Datum.setBounds(222, 170, 145, 30);
+		Datum.setBounds(222, 190, 145, 30);
 		contentPane.add(Datum);
 
 // Kategorie
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
-		Kategorie.setBounds(100, 220, 118, 27);
+		Kategorie.setBounds(100, 232, 118, 27);
 		contentPane.add(Kategorie);
 
 // Kategorie Combobox, die bereits angelegten Kategorien hier als
 // Auswahl wählen
 		JComboBox cboKategorie = new JComboBox();
-		cboKategorie.setBounds(222, 220, 145, 30);
+		cboKategorie.setBounds(222, 230, 145, 30);
 		contentPane.add(cboKategorie);
 
 
@@ -161,7 +179,7 @@ public class BearbeitenEinnahmen extends JFrame {
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
 		lblBemerkung.setForeground(Color.WHITE);
 		lblBemerkung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBemerkung.setBounds(100, 270, 118, 27);
+		lblBemerkung.setBounds(100, 272, 118, 27);
 		contentPane.add(lblBemerkung);
 
 // txtBemerkung
