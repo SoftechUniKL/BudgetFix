@@ -781,11 +781,11 @@ public class Charts extends JFrame {
 			//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), queryLid);
 			//dataset.setTranspose();
 			
-		    JFreeChart BarChart = ChartFactory.createLineChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
-			CategoryPlot plot = BarChart.getCategoryPlot();
+		    JFreeChart LineChart = ChartFactory.createLineChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+			CategoryPlot plot = LineChart.getCategoryPlot();
 			BarRenderer renderer = null;
 			renderer = new BarRenderer();
-			ChartFrame  frame = new ChartFrame("", BarChart);
+			ChartFrame  frame = new ChartFrame("", LineChart);
 			frame.setVisible(true);
 			frame.setSize(400,650);
 			

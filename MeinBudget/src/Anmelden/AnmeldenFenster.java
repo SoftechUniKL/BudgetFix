@@ -238,7 +238,7 @@ public class AnmeldenFenster extends JFrame {
 									frame.setVisible(true);
 								} catch (Exception e) {
 									e.printStackTrace();
-								}
+								}							
 							}
 						});
 						//BudgetPlanModel budget = new BudgetPlanModel(); // Modell
