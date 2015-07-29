@@ -104,6 +104,7 @@ public class BearbeitenAusgaben extends JFrame {
 						contentPane.add(lblBezeichnung);
 				
 				JComboBox cboBezeichnung = new JComboBox();
+				cboBezeichnung.setForeground(Color.GRAY);
 				cboBezeichnung.setBounds(222, 70, 145, 30);
 				contentPane.add(cboBezeichnung);
 
@@ -152,35 +153,8 @@ public class BearbeitenAusgaben extends JFrame {
 		// Kategorie Combobox, die bereits angelegten Kategorien hier als
 		// Auswahl wählen
 				JComboBox cboKategorie = new JComboBox();
-				cboKategorie.addPopupMenuListener(new PopupMenuListener() {
-					public void popupMenuCanceled(PopupMenuEvent e) {
-					}
-
-					public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-						String selectedItem = (String) cboKategorie.getSelectedItem();
-						System.out.println(selectedItem);
-					}
-
-					public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-					}
-				});
 				cboKategorie.setBounds(222, 220, 145, 30);
 				contentPane.add(cboKategorie);
-
-				try {
-					String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Einkommen' ";
-					PreparedStatement stm = conn.prepareStatement(sql);
-					ResultSet result = stm.executeQuery();
-
-					while (result.next()) {
-						String kategorie = result.getString("Kategorie");
-						cboKategorie.addItem(kategorie);
-					}
-					result.close();
-					stm.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
 
 		// Bemerkung
 				JLabel lblBemerkung = new JLabel("Bemerkung:");
@@ -191,16 +165,6 @@ public class BearbeitenAusgaben extends JFrame {
 
 		// txtBemerkung
 				txtBemerkung = new JTextField();
-				txtBemerkung.addKeyListener(new KeyAdapter() {
-					// speichern über Enter
-					@Override
-					public void keyPressed(KeyEvent e) {
-						if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-							// speichern ausführen
-
-						}
-					}
-				});
 				txtBemerkung.setHorizontalAlignment(SwingConstants.CENTER);
 				txtBemerkung.setForeground(Color.GRAY);
 				txtBemerkung.setColumns(10);

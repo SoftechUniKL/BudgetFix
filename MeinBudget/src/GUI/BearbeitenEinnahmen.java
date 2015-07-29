@@ -105,6 +105,7 @@ public class BearbeitenEinnahmen extends JFrame {
 				contentPane.add(lblBezeichnung);
 		
 		JComboBox cboBezeichnung = new JComboBox();
+		cboBezeichnung.setForeground(Color.GRAY);
 		cboBezeichnung.setBounds(222, 70, 145, 30);
 		contentPane.add(cboBezeichnung);
 
