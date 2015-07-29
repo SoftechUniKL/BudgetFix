@@ -407,7 +407,7 @@ public class Start extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Einstellungen frame = new Einstellungen();
+							Einstellungen frame = new Einstellungen(Einstellungen.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -438,23 +438,6 @@ public class Start extends JFrame {
 		// lblEinstellungen
 		JLabel lblEinstellungen = new JLabel("Einstellungen");
 		lblEinstellungen.setBounds(110, 632, 174, 25);
-		lblEinstellungen.addMouseListener(new MouseAdapter() {
-			@Override
-			// Einstellungen öffnen
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Einstellungen frame = new Einstellungen();
-							frame.setVisible(true);
-							dispose();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
 		lblEinstellungen.setIcon(null);
 		lblEinstellungen.setForeground(Color.WHITE);
 		lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));

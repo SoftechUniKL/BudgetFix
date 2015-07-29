@@ -5,18 +5,27 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class Tools extends JFrame {
 
+	Connection connection = null;
+	static int id;
+	
 	private JPanel contentPane;
+	private JTextField txtMonat;
+	private JTextField txtVormonat;
+	private JTextField txtJahr;
+	private JTextField txtGesamt;
 
 	/**
 	 * Launch the application.
@@ -25,7 +34,7 @@ public class Tools extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Tools frame = new Tools();
+					Tools frame = new Tools(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +46,12 @@ public class Tools extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Tools() {
+	public Tools(int id) {
+		
+		this.id = id;
+		// Verbindung zur BPDatenbank - Erträge und Aufwendungen
+		connection = BPDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 706);
 		contentPane = new JPanel();
@@ -87,13 +101,84 @@ public class Tools extends JFrame {
 		txtMenue.setBounds(130, 50, 150, 34);
 		contentPane.add(txtMenue);
 
-		// Tabelle für Gesamtübersicht
-		JTable tableGesamt = new JTable();
-		tableGesamt.setFont(new Font("Tahoma", Font.BOLD, 11));
-		tableGesamt.setForeground(Color.WHITE);
-		tableGesamt.setBounds(50, 107, 200, 200);
-		tableGesamt.setBackground(new Color(27, 109, 220));
-		contentPane.add(tableGesamt);
+		//Gesamtübersicht
+				JLabel lblUebersicht = new JLabel("<html><u>Gesamtbilanz:</u><html>");
+				lblUebersicht.setForeground(Color.WHITE);
+				lblUebersicht.setFont(new Font("Tahoma", Font.BOLD, 14));
+				lblUebersicht.setBounds(50, 120, 108, 25);
+				contentPane.add(lblUebersicht);
+			
+		//Aktueller Monat		
+				JLabel lblMonat = new JLabel("Monat:");
+				lblMonat.setForeground(Color.WHITE);
+				lblMonat.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblMonat.setBounds(50, 160, 108, 25);
+				contentPane.add(lblMonat);	
+				
+		//txtMonat		
+				txtMonat = new JTextField();
+				txtMonat.setHorizontalAlignment(SwingConstants.CENTER);
+				txtMonat.setForeground(Color.WHITE);
+				txtMonat.setFont(new Font("Tahoma", Font.BOLD, 12));
+				txtMonat.setColumns(10);
+				txtMonat.setBorder(null);
+				txtMonat.setBackground(new Color (27, 109, 220));
+				txtMonat.setBounds(157, 163, 103, 20);
+				contentPane.add(txtMonat);		
+
+		//Vormonat
+				JLabel lblVormonat = new JLabel("Vormonat:");
+				lblVormonat.setForeground(Color.WHITE);
+				lblVormonat.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblVormonat.setBounds(50, 200, 108, 25);
+				contentPane.add(lblVormonat);	
+
+		//txtVormonat		
+				txtVormonat = new JTextField();
+				txtVormonat.setHorizontalAlignment(SwingConstants.CENTER);
+				txtVormonat.setForeground(Color.WHITE);
+				txtVormonat.setFont(new Font("Tahoma", Font.BOLD, 12));
+				txtVormonat.setColumns(10);
+				txtVormonat.setBorder(null);
+				txtVormonat.setBackground(new Color (27, 109, 220));
+				txtVormonat.setBounds(157, 203, 103, 20);
+				contentPane.add(txtVormonat);	
+				
+		//Aktuelles Jahr
+				JLabel lblJahr = new JLabel("Aktuelles Jahr:");
+				lblJahr.setForeground(Color.WHITE);
+				lblJahr.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblJahr.setBounds(50, 240, 108, 25);
+				contentPane.add(lblJahr);			
+				
+		//txtJahr		
+				txtJahr = new JTextField();
+				txtJahr.setHorizontalAlignment(SwingConstants.CENTER);
+				txtJahr.setBackground(new Color (27, 109, 220));
+				txtJahr.setForeground(Color.WHITE);
+				txtJahr.setFont(new Font("Tahoma", Font.BOLD, 12));
+				txtJahr.setBorder(null);
+				txtJahr.setBounds(157, 243, 103, 20);
+				contentPane.add(txtJahr);
+				txtJahr.setColumns(10);
+
+		//Gesamt seit Benutzung		
+				JLabel lblBenutzung = new JLabel("Gesamt:");
+				lblBenutzung.setForeground(Color.WHITE);
+				lblBenutzung.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblBenutzung.setBounds(50, 280, 108, 25);
+				contentPane.add(lblBenutzung);			
+				
+		//TxtGesamt		
+				txtGesamt = new JTextField();
+				txtGesamt.setHorizontalAlignment(SwingConstants.CENTER);
+				txtGesamt.setForeground(Color.WHITE);
+				txtGesamt.setFont(new Font("Tahoma", Font.BOLD, 12));
+				txtGesamt.setColumns(10);
+				txtGesamt.setBorder(null);
+				txtGesamt.setBackground(new Color (27, 109, 220));
+				txtGesamt.setBounds(157, 283, 103, 20);
+				contentPane.add(txtGesamt);
 
 		// btnStart
 		JLabel btnStart = new JLabel();
@@ -298,7 +383,7 @@ public class Tools extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Einstellungen frame = new Einstellungen();
+							Einstellungen frame = new Einstellungen(Einstellungen.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

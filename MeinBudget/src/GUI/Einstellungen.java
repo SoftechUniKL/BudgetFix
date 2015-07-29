@@ -26,6 +26,8 @@ public class Einstellungen extends JFrame {
 
 	Connection connect = null;
 	Connection connection = null;
+
+	static int id;
 	/**
 	 * 
 	 */
@@ -43,7 +45,7 @@ public class Einstellungen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Einstellungen frame = new Einstellungen();
+					Einstellungen frame = new Einstellungen(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +57,12 @@ public class Einstellungen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Einstellungen() {
+	public Einstellungen(int id) {
 
+		this.id = id;
+		// Verbindung zur BPDatenbank - Erträge und Aufwendungen
+		connection = BPDatenbank.dbCon();
+		
 		connect = Anmelden.AnmeldeDatenbank.dbCon();
 		connection = Anmelden.AnmeldeDatenbank.dbCon();
 
@@ -306,7 +312,7 @@ public class Einstellungen extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Tools frame = new Tools();
+							Tools frame = new Tools(Tools.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

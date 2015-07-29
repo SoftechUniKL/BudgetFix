@@ -153,35 +153,9 @@ public class BearbeitenEinnahmen extends JFrame {
 // Kategorie Combobox, die bereits angelegten Kategorien hier als
 // Auswahl wählen
 		JComboBox cboKategorie = new JComboBox();
-		cboKategorie.addPopupMenuListener(new PopupMenuListener() {
-			public void popupMenuCanceled(PopupMenuEvent e) {
-			}
-
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				String selectedItem = (String) cboKategorie.getSelectedItem();
-				System.out.println(selectedItem);
-			}
-
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-			}
-		});
 		cboKategorie.setBounds(222, 220, 145, 30);
 		contentPane.add(cboKategorie);
 
-		try {
-			String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Einkommen' ";
-			PreparedStatement stm = conn.prepareStatement(sql);
-			ResultSet result = stm.executeQuery();
-
-			while (result.next()) {
-				String kategorie = result.getString("Kategorie");
-				cboKategorie.addItem(kategorie);
-			}
-			result.close();
-			stm.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 
 		// Bemerkung
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
@@ -212,51 +186,6 @@ public class BearbeitenEinnahmen extends JFrame {
 
 		// btnSpeichern
 		JLabel btnSpeichern = new JLabel();
-		btnSpeichern.addMouseListener(new MouseAdapter() {
-			@Override
-			// Speichern öffnet die SQL DB
-			public void mouseClicked(MouseEvent e) {
-				try {
-
-					String sqlQuery = "INSERT INTO BenutzerErträge (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
-					PreparedStatement pst = connection
-							.prepareStatement(sqlQuery);
-
-					// Datum
-					pst.setString(1, ((JTextField) Datum.getDateEditor()
-							.getUiComponent()).getText());
-
-					// Bezeichnung
-					pst.setString(2, txtBezeichnung.getText());
-
-					// Kategorie
-					String ausgewaelteKategorie = cboKategorie
-							.getSelectedItem().toString();
-					pst.setString(3, ausgewaelteKategorie);
-
-					// Art
-					pst.setString(4, "variabel");
-
-					// Betrag
-					pst.setString(5, txtBetrag.getText());
-
-					// BenutzerID
-					pst.setLong(6, id);
-
-					// Bemerkung
-					pst.setString(7, txtBemerkung.getText());
-
-					pst.execute();
-					pst.close();
-					JOptionPane.showMessageDialog(null,
-							"Erfolgreich gespeichert!");
-
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		});
-
 		btnSpeichern.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
 				.getResource("/Design/Speichern.png")));
 		btnSpeichern.setBounds(175, 330, 144, 38);
