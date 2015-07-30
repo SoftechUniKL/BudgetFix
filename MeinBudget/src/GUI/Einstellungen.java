@@ -569,6 +569,28 @@ public class Einstellungen extends JFrame {
 		
 		//Account löschen
 		JLabel btnAccount = new JLabel();
+		btnAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				accountlöschen();
+			}
+
+			private void accountlöschen() {
+				String Benutzername=textField.getText().toString();
+				String sql = "DELETE FROM Benutzer WHERE ( Username='"
+						+ Benutzername + "') ";
+				try {
+					PreparedStatement preS = connect.prepareStatement(sql);
+					preS.execute();
+					preS.close();
+					JOptionPane.showMessageDialog(null,
+							"Account erfolgreich gelöscht!");
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
+		});
 		btnAccount.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Account.png")));
 		btnAccount.setBounds(584, 530, 163, 38);
 		contentPane.add(btnAccount);
