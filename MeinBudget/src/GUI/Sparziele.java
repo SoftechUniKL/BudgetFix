@@ -24,6 +24,16 @@ import java.awt.event.ActionEvent;
 import Registrierung.RegisterFenster;
 import Sparkonto.SparzielEingabefenster;
 
+/**
+ * Sparziele BudgetFix:
+ * 
+ * 
+ * 
+ * @author: Patrick Drucks
+ * @author Visualisierung: Que Ly Dong
+ * 
+ */
+
 public class Sparziele extends JFrame {
 
 	private JPanel contentPane;

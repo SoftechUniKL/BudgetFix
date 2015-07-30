@@ -48,8 +48,12 @@ import net.proteanit.sql.DbUtils;
 
 public class Start extends JFrame {
 
-	// Damit id nur für den Benutzer geöffnet wird! Und um die anderen Fenster
-	// auch öffnen zu können
+	/**
+	 * Damit id nur für den Benutzer geöffnet wird! Und um die anderen Fenster
+	 * auch öffnen zu können
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	Connection connection = null;
 	Connection connec = null;
 	Connection conn = null;
@@ -913,6 +917,8 @@ public class Start extends JFrame {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
+		
+		
 		// Einnahmen und Ausgaben Summe
 		try {
 			String sqlQuery3 = "SELECT ROUND(SUM(Betrag), 2)  FROM BenutzerErträge  WHERE (BenutzerID='"

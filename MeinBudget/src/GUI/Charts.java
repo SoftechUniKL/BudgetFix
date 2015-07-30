@@ -60,6 +60,26 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+/**
+ * Charts BudgetFix:
+ * 
+ * Hier kann man seine Ausgaben und Einnahmen als Grafik ausgeben lassen als:
+ * 
+ * 		> Kategorie (Kuchendiagramm)
+ * 		> Monatsauswertung (Kuchendiagramm)
+ * 		> Jahresauswertung (Kuchendiagramm)
+ * 		> Ausgabenentwicklung (Balkendiagramm)
+ * 		> Einnahmenentwicklung (Balkendiagramm)
+ * 		> Liquiditätsentwicklung (Balkendiagramm)
+ * 		> Ausgabenverteilung (Kuchendiagramm)
+ * 		> Einnahmeverteilung (Kuchendiagramm)
+ * 
+ * 
+ * @author Que Ly Dong
+ * 
+ */
+
+
 public class Charts extends JFrame {
 	Connection connection = null;
 	Connection connec = null;
@@ -91,7 +111,7 @@ public class Charts extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public Charts(int id) {
 		
@@ -570,16 +590,34 @@ public class Charts extends JFrame {
 			//fülle Daten aus der Tabelle zu JFreeChart
 			try {
 				stmt = connec.createStatement();
-				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,(Betrag) FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')");
+				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')");
+				
+				//Prüfung
+				ResultSetMetaData rsmd = queryKat.getMetaData();
+			    System.out.println("queryEin SELECT Datum,Betrag FROM BenutzerAufwendungen");
+			    int columnsNumber = rsmd.getColumnCount();
+			  //  while (queryKat.next()) {
+			  //      for (int i = 1; i <= columnsNumber; i++) {
+			  //          if (i > 1) System.out.print(",  ");
+			  //          String columnValue = queryKat.getString(i);
+			  //          System.out.print(columnValue + " " + rsmd.getColumnName(i));
+			   //     }
+			   //     System.out.println("");
+			   // }
+				
+				
+				//double dou = 3.0d;
 				
 				while (queryKat.next()) {
 					String Kategorie = queryKat.getString("Kategorie");
 					int Betrag = queryKat.getInt("Betrag");
 					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
+					//PieDataset.setValue(Kategorie, 3.0);
 				}
 				JFreeChart PieChartKat = ChartFactory.createPieChart("Kategorie im Detail", PieDataset, true, true, true);
 				PiePlot p = (PiePlot) PieChartKat.getPlot();
-				p.setForegroundAlpha(TOP_ALIGNMENT);
+				p.setForegroundAlpha(1.0f);
+				p.setCircular(true);
 				ChartFrame frame = new ChartFrame("", PieChartKat);
 				frame.setVisible(true);
 				frame.setSize(450,600);
@@ -620,8 +658,10 @@ public class Charts extends JFrame {
 
 //Monat Kreisdiagramm
 	private void Monat(){
-		try{		
-			String queryEin = "SELECT month(Datum), count(*) Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY month(Datum)";
+		try{	
+			
+			
+			String queryEin = "SELECT month(Datum), Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY month(Datum)";
 			PreparedStatement pst = conn.prepareStatement(queryEin);
 			ResultSet res = pst.executeQuery();
 			

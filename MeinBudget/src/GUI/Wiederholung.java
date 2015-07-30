@@ -24,6 +24,20 @@ import javax.swing.JScrollPane;
 
 import net.proteanit.sql.DbUtils;
 
+/**
+ * Wiederholung BudgetFix:
+ * 
+ * Hier kann man fixe  Beiträge intervallmäßig bestimmt werden,
+ * damit man, je nach dem wie man es haben möchte, die Beiträge täglich, monatlich, jährlich automatisch festlegen kann.
+ * 
+ * Bugfix: hier kann man diese Anwendung jedoch noch nicht anwenden. Folgt beim nächsten Update. Wir bitten um Geduld!
+ * 
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
+
 public class Wiederholung extends JFrame {
 	
 	Connection connection = null;
