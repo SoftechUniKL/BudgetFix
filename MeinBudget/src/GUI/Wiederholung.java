@@ -509,7 +509,7 @@ public class Wiederholung extends JFrame {
 		setLocationRelativeTo(null);
 	
 	try {
-		String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Betrag FROM BenutzerErträge  WHERE (BenutzerID='"
+		String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Betrag FROM BenutzerAufwendungen  WHERE (BenutzerID='"
 				+ this.id + "' and Art='fix') ";
 		PreparedStatement stm = connection.prepareStatement(sqlQuery);
 		ResultSet result = stm.executeQuery();
