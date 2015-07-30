@@ -484,6 +484,7 @@ public class Wiederholung extends JFrame {
 		
 //Übersicht einer Tabelle der fixen Beiträge		
 		tableFix = new JTable();
+		tableFix.setBackground(new Color(27, 109, 220));
 		scrollPane_TabelleFix.setViewportView(tableFix);
 		tableFix.setForeground(Color.WHITE);
 		tableFix.setFont(new Font("Tahoma", Font.BOLD, 11));		

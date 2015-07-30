@@ -195,7 +195,7 @@ public class BearbeitenEinnahmen extends JFrame {
 		cboKategorie.setBounds(222, 230, 145, 30);
 		contentPane.add(cboKategorie);
 		try {
-			String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Ausgaben' ";
+			String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Einkommen' ";
 			PreparedStatement stm = conn.prepareStatement(sql);
 			ResultSet result = stm.executeQuery();
 

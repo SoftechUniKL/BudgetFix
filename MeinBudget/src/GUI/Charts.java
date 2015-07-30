@@ -582,6 +582,13 @@ public class Charts extends JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);		
 	}
+
+///////////////////////
+//
+// Charts
+//
+
+	
 //Kategorie
 	private void Kategorie() {
 		
@@ -713,7 +720,7 @@ public class Charts extends JFrame {
 //Einnahmenentwicklung Balkendiagramm
 	private void Einnahmen(){
 		try{		
-			String queryEin = "SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
+			String queryEin = "SELECT Datum,Sum(Betrag) FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"') GROUP BY Datum";
 			PreparedStatement pst = conn.prepareStatement(queryEin);
 			ResultSet res = pst.executeQuery();
 			
@@ -734,7 +741,7 @@ public class Charts extends JFrame {
 			dataEin.executeQuery(queryEin);
 			CategoryDataset datasetEin = dataEin;
 			
-			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+			 JFreeChart BarChart = ChartFactory.createBarChart("Einnahmeentwicklung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
 				CategoryPlot plot = BarChart.getCategoryPlot();
 				BarRenderer renderer = null;
 				renderer = new BarRenderer();
@@ -753,7 +760,7 @@ public class Charts extends JFrame {
 //Ausgabenentwicklung Balkendiagramm
 	private void Ausgaben(){
 		try{		
-			String queryAus = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')";
+			String queryAus = "SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY Datum";
 			PreparedStatement pst = conn.prepareStatement(queryAus);
 			ResultSet res = pst.executeQuery();
 			
