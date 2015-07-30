@@ -23,6 +23,20 @@ import Anmelden.AnmeldeDatenbank;
 import Anmelden.AnmeldenFenster;
 import javax.swing.SwingConstants;
 
+
+/**
+ * Registrierung BudgetFix:
+ * 
+ * Im folgenden, um das Programm anwenden zu können, muss man sich erstmal registrieren.
+
+ * @author Verbindung mit der Datenbank: Patric Kleine
+ * @author Visualisierung: Que Ly Dong
+ * 
+ * @version Beta 1.2.0
+ * 
+ * Dieses Programm wurde in Java geschrieben in Verbindung mit SQL.
+ * 
+ */
 public class RegisterFenster extends JFrame {
 
 	Connection connect = null;
@@ -208,11 +222,10 @@ public class RegisterFenster extends JFrame {
 					PreparedStatement stm = connect.prepareStatement(sqlQuery);
 					stm.setString(1, textBenutzername.getText());
 					stm.setString(2, passString);
-					// ResultSet result = stm.executeQuery();
 					stm.execute();
 					Anmelden.AnmeldenFenster frame = new AnmeldenFenster();
 					frame.setVisible(true);
-					// Fenster verschwindet
+					// Fenster wird geschlossen
 					dispose();
 				
 			} else  {

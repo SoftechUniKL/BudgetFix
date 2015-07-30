@@ -22,6 +22,27 @@ import javax.swing.border.EmptyBorder;
 
 import net.proteanit.sql.DbUtils;
 
+/**
+ * Start BudgetFix:
+ * 
+ * Willkommen im Hauptfenster des BudgetFix!  Hier hat man nun die Möglichkeit eine Übersicht über die Einnahmen & Ausgaben zu haben.
+ * Desweiteren kann man:
+ * 		> Kategorien anlegen
+ * 		> Transaktionen nach einen bestimmten Zeitraum abfragen
+ * 		> Einnahmen & Ausgaben hinzufügen sowie bearbeiten oder löschen
+ * 
+ * Auf der linken Seite befindet sich das Menü:
+ * 		> Gesamtübersicht
+ * 		> 
+ * Man kann über die Ic
+ * 		> Wiederholungen
+ * 
+
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
+
 public class Start extends JFrame {
 
 	// Damit id nur für den Benutzer geöffnet wird! Und um die anderen Fenster
