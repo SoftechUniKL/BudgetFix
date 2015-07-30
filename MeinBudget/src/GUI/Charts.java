@@ -65,7 +65,6 @@ import java.text.SimpleDateFormat;
  * 
  * Hier kann man seine Ausgaben und Einnahmen als Grafik ausgeben lassen als:
  * 
- * 		> Kategorie (Kuchendiagramm)
  * 		> Monatsauswertung (Balkendiagramm)
  * 		> Jahresauswertung (Balkendiagramm)
  * 		> Ausgabenentwicklung (Balkendiagramm)
@@ -572,17 +571,18 @@ public class Charts extends JFrame {
 				contentPane.add(btnEinnahmenverteilung);
 				
 		
-//Hintergrund		
+		//Hintergrund		
 		JLabel Hintergrund = new JLabel();
 		Hintergrund.setIcon(new ImageIcon(Charts.class.getResource("/Design/GUI4.png")));
 		Hintergrund.setBounds(0, -31, 1381, 767);
 		contentPane.add(Hintergrund);
 
-//Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
+		//Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);		
 	}
 
+	
 ///////////////////////
 //
 // Charts
@@ -594,10 +594,14 @@ public class Charts extends JFrame {
 		
 			DefaultPieDataset PieDataset = new DefaultPieDataset();
 			Statement stmt;
+			Statement stm;
 			//fülle Daten aus der Tabelle zu JFreeChart
 			try {
 				stmt = connec.createStatement();
 				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Sum(Betrag) as AufwendungBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY Kategorie");
+				stm = connection.createStatement();
+				ResultSet queryKat2 = stm.executeQuery("SELECT Kategorie,Sum(Betrag) as ErträgeBetrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"') GROUP BY Kategorie");
+				
 				
 				//Prüfung
 				ResultSetMetaData rsmd = queryKat.getMetaData();
@@ -607,8 +611,13 @@ public class Charts extends JFrame {
 				while (queryKat.next()) {
 					String Kategorie = queryKat.getString("Kategorie");
 					double Betrag = queryKat.getDouble("AufwendungBetrag");
-					//int Betrag = queryKat.getInt("Betrag");
 					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
+				}
+				
+				while (queryKat2.next()) {
+					String Kategorie2 = queryKat2.getString("Kategorie");
+					double Betrag2 = queryKat2.getDouble("ErträgeBetrag");
+					PieDataset.setValue(Kategorie2, Betrag2);
 				}
 				
 				//Chart
@@ -788,18 +797,11 @@ public class Charts extends JFrame {
 				ChartFrame  frame = new ChartFrame("", BarChart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
-			
-			
-			
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		
 		}
 	}	
-	
-//Barchart
-	
-		
 	
 //Liquiditätsentwicklung = Ausgaben und Einnahmen im Vergleich
 		private void Liquiditaet(){
@@ -835,49 +837,11 @@ public class Charts extends JFrame {
 			    JFreeChart Chart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
 				CategoryPlot plot = Chart.getCategoryPlot();
 				BarRenderer renderer = (BarRenderer) plot.getRenderer();
-				renderer.setDrawBarOutline(false);
-				 
+				renderer.setDrawBarOutline(false);		 
 				ChartFrame  frame = new ChartFrame("", Chart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
-				
-				
-				 //Ausgaben Barchart
-			    /*JDBCCategoryDataset data2 = new JDBCCategoryDataset (connec);
-				data2.executeQuery(queryAus);
-			    CategoryDataset dataset2 = data2;*/
 		
-			    /*
-			    //Ausgaben und Einnahmen in ein Barchart
-			    final CategoryItemRenderer renderer = new LineAndShapeRenderer();
-			    renderer.setItemLabelsVisible(false);
-			    
-			    final CategoryPlot plot = new CategoryPlot();
-		        plot.setDataset(dataset);
-		        plot.setRenderer(renderer);
-		       
-		        plot.setDomainAxis(new CategoryAxis("Datum"));
-		        plot.setRangeAxis(new NumberAxis("Betrag"));
-		        
-		        plot.setOrientation(PlotOrientation.VERTICAL);
-		        plot.setRangeGridlinesVisible(true);
-		        plot.setDomainGridlinesVisible(true);
-		        
-		        final CategoryItemRenderer renderer2 = new LineAndShapeRenderer();
-		        plot.setDataset(1, dataset2);
-		        plot.setRenderer(1, renderer2);
-		        
-		        plot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
-		        plot.getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.UP_45);
-		        final JFreeChart Barchart = new JFreeChart(plot);
-		        Barchart.setTitle("Zahlungsmittelauswertung");
-			    */
-			    
-				
-				//ChartPanel barPanel = new ChartPanel (BarChart);
-				//DiagrammPanel.removeAll();
-				//DiagrammPanel.add(barPanel);
-				//DiagrammPanel.validate();
 				
 				} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1);
@@ -892,29 +856,38 @@ public class Charts extends JFrame {
 			//fülle Daten aus der Tabelle zu JFreeChart
 			try {
 				stmt = connec.createStatement();
-				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')");
+				ResultSet queryAus = stmt.executeQuery("SELECT Kategorie,Sum(Betrag) as AufwendungBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY Kategorie");
 				
-				while (queryKat.next()) {
-					String Kategorie = queryKat.getString("Kategorie");
-					int Betrag = queryKat.getInt("Betrag");
+				//Prüfung
+				ResultSetMetaData rsmd = queryAus.getMetaData();
+			    System.out.println("querying SELECT * FROM XXX");
+			    int columnsNumber = rsmd.getColumnCount();
+			 	
+				while (queryAus.next()) {
+					String Kategorie = queryAus.getString("Kategorie");
+					double Betrag = queryAus.getDouble("AufwendungBetrag");
 					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
 				}
-				JFreeChart PieChartKat = ChartFactory.createPieChart("Kategorie im Detail", PieDataset, true, true, true);
+				
+				//Chart
+				JFreeChart PieChartKat = ChartFactory.createPieChart("Ausgabenverteilung", PieDataset, true, true, true);
 				PiePlot p = (PiePlot) PieChartKat.getPlot();
-				p.setForegroundAlpha(TOP_ALIGNMENT);
+				p.setForegroundAlpha(1.0f);
+				p.setCircular(true);
 				ChartFrame frame = new ChartFrame("", PieChartKat);
 				frame.setVisible(true);
 				frame.setSize(450,600);
-				queryKat.close();
+				queryAus.close();
 				stmt.close();
 				connec.close();
-				
-				
-				
-			}catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e);
+
+				}
+				catch (Exception i)
+                 {
+                         JOptionPane.showMessageDialog(null, i);
+                 
+                }
 			
-			}
 		}
 
 //Einnahmenverteilung in den einzelnen Kategorien, prozentual
@@ -924,28 +897,37 @@ public class Charts extends JFrame {
 			//fülle Daten aus der Tabelle zu JFreeChart
 			try {
 				stmt = connec.createStatement();
-				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')");
+				ResultSet queryEin = stmt.executeQuery("SELECT Kategorie,Sum(Betrag) as ErträgeBetrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"') GROUP BY Kategorie");
 				
-				while (queryKat.next()) {
-					String Kategorie = queryKat.getString("Kategorie");
-					int Betrag = queryKat.getInt("Betrag");
+				//Prüfung
+				ResultSetMetaData rsmd = queryEin.getMetaData();
+			    System.out.println("querying SELECT * FROM XXX");
+			    int columnsNumber = rsmd.getColumnCount();
+			 	
+				while (queryEin.next()) {
+					String Kategorie = queryEin.getString("Kategorie");
+					double Betrag = queryEin.getDouble("ErträgeBetrag");
+					//int Betrag = queryKat.getInt("Betrag");
 					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
 				}
-				JFreeChart PieChartKat = ChartFactory.createPieChart("Kategorie im Detail", PieDataset, true, true, true);
+				
+				//Chart
+				JFreeChart PieChartKat = ChartFactory.createPieChart("Einnahmenverteilung", PieDataset, true, true, true);
 				PiePlot p = (PiePlot) PieChartKat.getPlot();
-				p.setForegroundAlpha(TOP_ALIGNMENT);
+				p.setForegroundAlpha(1.0f);
+				p.setCircular(true);
 				ChartFrame frame = new ChartFrame("", PieChartKat);
 				frame.setVisible(true);
 				frame.setSize(450,600);
-				queryKat.close();
+				queryEin.close();
 				stmt.close();
 				connec.close();
-				
-				
-				
-			}catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e);
-			
+
+				}
+				catch (Exception i)
+                 {
+                         JOptionPane.showMessageDialog(null, i);
+                 
+                }
 			}
-	}
 }
