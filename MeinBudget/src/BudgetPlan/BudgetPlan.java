@@ -15,7 +15,7 @@ import Anmelden.AnmeldenFenster;
  * 
  * @author Que Ly Dong & Patric Kleine
  * @version Beta 1.2.0 
- * Dieses Programm wurde in Java geschrieben in Verbindung mit SQL.
+ * Dieses Programm wurde in Java geschrieben in Verbindung mit SQLite.
  * 
  */
 

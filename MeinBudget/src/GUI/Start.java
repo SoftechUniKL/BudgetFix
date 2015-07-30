@@ -847,7 +847,7 @@ public class Start extends JFrame {
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
 									try {
-										BearbeitenEinnahmen frame = new BearbeitenEinnahmen();
+										BearbeitenEinnahmen frame = new BearbeitenEinnahmen(id);
 										frame.setVisible(true);
 										dispose();
 									} catch (Exception e) {
@@ -948,5 +948,7 @@ public class Start extends JFrame {
 			ex.printStackTrace();
 
 		}
+
 	}
+	
 }

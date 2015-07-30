@@ -934,5 +934,5 @@ public class Charts extends JFrame {
 				JOptionPane.showMessageDialog(null, e);
 			
 			}
-		}
+	}
 }
