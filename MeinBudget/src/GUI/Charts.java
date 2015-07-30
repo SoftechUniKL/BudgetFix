@@ -65,13 +65,14 @@ import java.text.SimpleDateFormat;
  * 
  * Hier kann man seine Ausgaben und Einnahmen als Grafik ausgeben lassen als:
  * 
- * 		> Monatsauswertung (Balkendiagramm)
- * 		> Jahresauswertung (Balkendiagramm)
- * 		> Ausgabenentwicklung (Balkendiagramm)
- * 		> Einnahmenentwicklung (Balkendiagramm)
- * 		> Liquiditätsentwicklung (Balkendiagramm)
- * 		> Ausgabenverteilung (Kuchendiagramm)
- * 		> Einnahmeverteilung (Kuchendiagramm)
+ * 		> "Kategorien im Detail": alle Kategorien werden als Kuchendiagramm ausgegeben
+ * 		> "Monatsauswertung" : monatliche Ausgaben als Balkendiagramm
+ * 		> "Jahresauswertung": jährliche Ausgaben als Balkendiagramm
+ * 		> "Ausgabenentwicklung": Ausgabenentwicklung über die Zeit als Balkendiagramm
+ * 		> "Einnahmenentwicklung": Einnahmenentwicklung über die Zeit als Balkendiagramm
+ * 		> "Liquiditätsentwicklung": Liquiditätsentwicklung über die Zeit als Balkendiagramm
+ * 		> "Ausgabenverteilung" (Kuchendiagramm)
+ * 		> "Einnahmeverteilung" (Kuchendiagramm)
  * 
  * 
  * @author Que Ly Dong
@@ -629,8 +630,9 @@ public class Charts extends JFrame {
 				frame.setVisible(true);
 				frame.setSize(450,600);
 				queryKat.close();
+				queryKat2.close();
 				stmt.close();
-				connec.close();
+				stm.close();
 
 				}
 				catch (Exception i)
@@ -674,6 +676,8 @@ public class Charts extends JFrame {
 				ChartFrame  frame = new ChartFrame("", BarChart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
+				pst.close();
+				res.close();
 			
 			
 			
@@ -715,7 +719,8 @@ public class Charts extends JFrame {
 				ChartFrame  frame = new ChartFrame("", BarChart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
-			
+				pst.close();
+				res.close();
 			
 			
 		}catch (Exception e) {
@@ -757,7 +762,8 @@ public class Charts extends JFrame {
 				ChartFrame  frame = new ChartFrame("", BarChart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
-			
+				pst.close();
+				res.close();
 			
 			
 		}catch (Exception e) {
@@ -797,6 +803,8 @@ public class Charts extends JFrame {
 				ChartFrame  frame = new ChartFrame("", BarChart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
+				pst.close();
+				res.close();
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		
@@ -841,6 +849,10 @@ public class Charts extends JFrame {
 				ChartFrame  frame = new ChartFrame("", Chart);
 				frame.setVisible(true);
 				frame.setSize(400,650);
+				stm.close();
+				pstmt.close();
+				resultAus.close();
+				resultEin.close();
 		
 				
 				} catch (Exception e1) {
@@ -879,7 +891,6 @@ public class Charts extends JFrame {
 				frame.setSize(450,600);
 				queryAus.close();
 				stmt.close();
-				connec.close();
 
 				}
 				catch (Exception i)
@@ -921,7 +932,6 @@ public class Charts extends JFrame {
 				frame.setSize(450,600);
 				queryEin.close();
 				stmt.close();
-				connec.close();
 
 				}
 				catch (Exception i)

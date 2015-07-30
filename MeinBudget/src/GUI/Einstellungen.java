@@ -22,15 +22,21 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Einstellungen BudgetFix:
+ * In den Einstellungen kann man sein Passwort ändern & sein Account löschen
+ * 
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class Einstellungen extends JFrame {
 
 	Connection connect = null;
 	Connection connection = null;
 
 	static int id;
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPasswordField pwAltes;
@@ -59,7 +65,7 @@ public class Einstellungen extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public Einstellungen(int id) {
 

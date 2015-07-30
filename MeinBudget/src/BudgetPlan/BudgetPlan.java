@@ -14,6 +14,10 @@ import Anmelden.AnmeldenFenster;
  * 
  * 
  * @author Que Ly Dong & Patric Kleine
+ * 
+ * 
+ * @author Que Ly Dong hauptverantwortlich für die Visualisierung
+ * @author Patric Kleine hauptverantwortlich für die Datenbank
  * @version Beta 1.2.0 
  * Dieses Programm wurde in Java geschrieben in Verbindung mit SQLite.
  * 
