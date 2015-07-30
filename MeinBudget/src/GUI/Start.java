@@ -33,11 +33,14 @@ import net.proteanit.sql.DbUtils;
  * 
  * Auf der linken Seite befindet sich das Menü:
  * 		> Gesamtübersicht
- * 		> 
- * Man kann über die Ic
- * 		> Wiederholungen
+ * 		> via Icon-Klick gelangt man zu:
+ * 				Wiederholung
+ * 				Charts
+ * 				Sparziele (work in process)
+ * 				Tools				
+ * 				Einstellungen
  * 
-
+ * 
  * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
  * 
  */
@@ -81,7 +84,7 @@ public class Start extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public Start(int id) {
 
@@ -91,9 +94,6 @@ public class Start extends JFrame {
 		connec = BPDatenbank.dbCon();
 		conn = BPDatenbank.dbCon();
 		con = BPDatenbank.dbCon();
-
-		// Erträgetabelle();
-		// Aufwendungstabelle();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1338, 713);
@@ -891,6 +891,8 @@ public class Start extends JFrame {
 		// des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+		
+		
 
 		// Einnahmen und Ausgaben Tabelle
 		try {
@@ -946,5 +948,5 @@ public class Start extends JFrame {
 			ex.printStackTrace();
 
 		}
-	}//public Start(int id) {
-}//public class Start extends JFrame {
+	}
+}
