@@ -7,16 +7,30 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
+
+import javax.swing.JRadioButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
 
 public class TransaktionBearbeiten extends JFrame {
 
@@ -25,7 +39,12 @@ public class TransaktionBearbeiten extends JFrame {
 	private JTextField txtBetrag;
 	private JTextField txtBemerkung;
 	private JTextField txtIntervall;
-
+	
+	private String auswahl;
+	static int id;
+	Connection connection = null;
+	Connection conn = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +52,7 @@ public class TransaktionBearbeiten extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TransaktionBearbeiten frame = new TransaktionBearbeiten();
+					TransaktionBearbeiten frame = new TransaktionBearbeiten(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +64,14 @@ public class TransaktionBearbeiten extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TransaktionBearbeiten() {
+	public TransaktionBearbeiten(int id) {
+		
+		this.id = id;
+		// Verbindung zur BPDatenbank - Erträge und Aufwendungen
+		connection = BPDatenbank.dbCon();
+		// Verbindung zur BPDB - Kategorien
+		conn = BPDatenbank.dbCon();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -128,8 +154,32 @@ public class TransaktionBearbeiten extends JFrame {
 		// Kategorie Combobox, die bereits angelegten Kategorien hier als
 		// Auswahl wählen
 		JComboBox cboKategorie = new JComboBox();
+		cboKategorie.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				String selectedItem = (String) cboKategorie.getSelectedItem();
+				System.out.println(selectedItem);
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
 		cboKategorie.setBounds(222, 150, 183, 30);
 		contentPane.add(cboKategorie);
+		try {
+			String sql = "SELECT * FROM BenutzerKategorien ";
+			PreparedStatement stm = conn.prepareStatement(sql);
+			ResultSet result = stm.executeQuery();
+
+			while (result.next()) {
+				String kategorie = result.getString("Kategorie");
+				cboKategorie.addItem(kategorie);
+			}
+			result.close();
+			stm.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 		// Intervall
 		JLabel lblIntervall = new JLabel("Intervall:");
@@ -150,6 +200,7 @@ public class TransaktionBearbeiten extends JFrame {
 
 		// Hier kann man Auswählen zwischen Tag, Woche, Monat, Jahr
 		JComboBox cboIntervall = new JComboBox();
+		cboIntervall.setModel(new DefaultComboBoxModel(new String[] {"Tag(e)", "Woche(n)", "Monat(e)", "Jahr(e)"}));
 		cboIntervall.setBounds(285, 190, 120, 30);
 		contentPane.add(cboIntervall);
 
@@ -161,9 +212,9 @@ public class TransaktionBearbeiten extends JFrame {
 		contentPane.add(lblNchsteFlligkeit);
 
 		// Datum auswählen
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(222, 230, 183, 30);
-		contentPane.add(dateChooser);
+		JDateChooser Datum = new JDateChooser();
+		Datum.setBounds(222, 230, 183, 30);
+		contentPane.add(Datum);
 
 		// Betrag
 		JLabel lblBetrag = new JLabel("Betrag:");
@@ -203,12 +254,124 @@ public class TransaktionBearbeiten extends JFrame {
 		txtBemerkung.setBackground(Color.WHITE);
 		txtBemerkung.setBounds(222, 310, 183, 30);
 		contentPane.add(txtBemerkung);
+		
+		JLabel lblTyp = new JLabel("Typ:");
+		lblTyp.setForeground(Color.WHITE);
+		lblTyp.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTyp.setBounds(75, 350, 118, 27);
+		contentPane.add(lblTyp);
+		
+		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
+		rdbtnAusgaben.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				auswahl = "Ausgaben";
+			}
+		});
+		rdbtnAusgaben.setBounds(221, 354, 84, 23);
+		contentPane.add(rdbtnAusgaben);
+		
+		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
+		rdbtnEinnahmen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				auswahl = "Einnahmen";
+			}
+		});
+		rdbtnEinnahmen.setBounds(321, 354, 84, 23);
+		contentPane.add(rdbtnEinnahmen);
+		
+		// Radiobutton in Group zusammenfassen
+				ButtonGroup wahl = new ButtonGroup();
+				wahl.add(rdbtnEinnahmen);
+				wahl.add(rdbtnAusgaben);
 
 		// btnSpeichern
 		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (auswahl == "Ausgabe"){
+					try{
+						String sqlQuery = "INSERT INTO BenutzerAufwendungen (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
+						PreparedStatement pst = connection
+								.prepareStatement(sqlQuery);
+
+						// Datum
+						pst.setString(1, ((JTextField) Datum.getDateEditor()
+								.getUiComponent()).getText());
+
+						// Bezeichnung
+						pst.setString(2, txtBezeichnung.getText());
+
+						// Kategorie
+						String ausgewaelteKategorie = cboKategorie
+								.getSelectedItem().toString();
+						pst.setString(3, ausgewaelteKategorie);
+
+						// Art
+						pst.setString(4, "fix");
+
+						// Betrag
+						pst.setString(5, txtBetrag.getText());
+
+						// BenutzerID
+						pst.setLong(6, id);
+
+						// Bemerkung
+						pst.setString(7, txtBemerkung.getText());
+
+						pst.execute();
+
+						JOptionPane.showMessageDialog(null,
+								"Erfolgreich gespeichert!");
+						
+					}catch (Exception ex) {
+						ex.printStackTrace();
+						}
+				}else{
+					try{
+						String sqlQuery = "INSERT INTO BenutzerErträge (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) ";
+						PreparedStatement pst = connection
+								.prepareStatement(sqlQuery);
+
+						// Datum
+						pst.setString(1, ((JTextField) Datum.getDateEditor()
+								.getUiComponent()).getText());
+
+						// Bezeichnung
+						pst.setString(2, txtBezeichnung.getText());
+
+						// Kategorie
+						String ausgewaelteKategorie = cboKategorie
+								.getSelectedItem().toString();
+						pst.setString(3, ausgewaelteKategorie);
+
+						// Art
+						pst.setString(4, "fix");
+
+						// Betrag
+						pst.setString(5, txtBetrag.getText());
+
+						// BenutzerID
+						pst.setLong(6, id);
+
+						// Bemerkung
+						pst.setString(7, txtBemerkung.getText());
+
+						pst.execute();
+						pst.close();
+						JOptionPane.showMessageDialog(null,
+								"Erfolgreich gespeichert!");
+						
+					}catch (Exception ex) {
+						ex.printStackTrace();
+						}
+					
+				}
+			}
+		});
 		btnSpeichern.setIcon(new ImageIcon(TransaktionAnlegen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(90, 380, 144, 38);
+		btnSpeichern.setBounds(90, 395, 144, 38);
 		contentPane.add(btnSpeichern);
 
 		// btnZurueck
@@ -231,13 +394,30 @@ public class TransaktionBearbeiten extends JFrame {
 		});
 		
 		JLabel btnLoeschen = new JLabel("New label");
+		btnLoeschen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String selectedItem = (String) cboBearbeiten.getSelectedItem();
+				String sql = "DELETE FROM BenutzerAufwendungen WHERE ( Bezeichnung='"
+						+ selectedItem + "') ";
+				try {
+					PreparedStatement preS = connection.prepareStatement(sql);
+					preS.execute();
+					preS.close();
+					JOptionPane.showMessageDialog(null,
+							"Eingaben erfolgreich gelöscht!");
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
+		});
 		btnLoeschen.setIcon(new ImageIcon(TransaktionBearbeiten.class.getResource("/Design/Loeschen.png")));
-		btnLoeschen.setBounds(250, 380, 144, 38);
+		btnLoeschen.setBounds(250, 395, 144, 38);
 		contentPane.add(btnLoeschen);
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 420, 144, 14);
+		btnZurueck.setBounds(170, 440, 144, 14);
 		contentPane.add(btnZurueck);
 
 		// Hintergrund

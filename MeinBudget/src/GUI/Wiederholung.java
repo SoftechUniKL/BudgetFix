@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
 
 import net.proteanit.sql.DbUtils;
 
@@ -34,6 +36,7 @@ public class Wiederholung extends JFrame {
 	private JTextField txtVormonat;
 	private JTextField txtJahr;
 	private JTextField txtGesamt;
+
 	
 	/**
 	 * Launch the application.
@@ -437,7 +440,7 @@ public class Wiederholung extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							TransaktionAnlegen frame = new TransaktionAnlegen();
+							TransaktionAnlegen frame = new TransaktionAnlegen(Wiederholung.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -456,13 +459,22 @@ public class Wiederholung extends JFrame {
 		FixeTransaktion.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Textfeldgross3.png")));
 		FixeTransaktion.setBounds(510, 150, 291, 35);
 		contentPane.add(FixeTransaktion);
+
+//Scroll Pane für Tabelle		
+		JScrollPane scrollPane_TabelleFix = new JScrollPane();
+		scrollPane_TabelleFix.setBorder(null);
+		scrollPane_TabelleFix.setForeground(Color.GRAY);
+		scrollPane_TabelleFix.setBounds(510, 220, 291, 307);
+		scrollPane_TabelleFix.getViewport().setBackground(new Color(27, 109, 220));
+		contentPane.add(scrollPane_TabelleFix);
 		
 //Übersicht einer Tabelle der fixen Beiträge		
 		tableFix = new JTable();
-		tableFix.setFont(new Font("Tahoma", Font.BOLD, 11));
-		tableFix.setBounds(510, 220, 291, 307);
-		contentPane.add(tableFix);
+		scrollPane_TabelleFix.setViewportView(tableFix);
+		tableFix.setForeground(Color.WHITE);
+		tableFix.setFont(new Font("Tahoma", Font.BOLD, 11));		
 		
+//Bearbeiten		
 		JLabel btnBearbeiten = new JLabel("New label");
 		btnBearbeiten.addMouseListener(new MouseAdapter() {
 			@Override
@@ -470,7 +482,7 @@ public class Wiederholung extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							TransaktionBearbeiten frame = new TransaktionBearbeiten();
+							TransaktionBearbeiten frame = new TransaktionBearbeiten(Wiederholung.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -489,6 +501,7 @@ public class Wiederholung extends JFrame {
 		Hintergrund.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/GUI4.png")));
 		Hintergrund.setBounds(0, -52, 985, 807);
 		contentPane.add(Hintergrund);
+		
 
 
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
