@@ -66,8 +66,8 @@ import java.text.SimpleDateFormat;
  * Hier kann man seine Ausgaben und Einnahmen als Grafik ausgeben lassen als:
  * 
  * 		> Kategorie (Kuchendiagramm)
- * 		> Monatsauswertung (Kuchendiagramm)
- * 		> Jahresauswertung (Kuchendiagramm)
+ * 		> Monatsauswertung (Balkendiagramm)
+ * 		> Jahresauswertung (Balkendiagramm)
  * 		> Ausgabenentwicklung (Balkendiagramm)
  * 		> Einnahmenentwicklung (Balkendiagramm)
  * 		> Liquiditätsentwicklung (Balkendiagramm)
@@ -590,30 +590,21 @@ public class Charts extends JFrame {
 			//fülle Daten aus der Tabelle zu JFreeChart
 			try {
 				stmt = connec.createStatement();
-				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')");
+				ResultSet queryKat = stmt.executeQuery("SELECT Kategorie,Sum(Betrag) as AufwendungBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY Kategorie");
 				
 				//Prüfung
 				ResultSetMetaData rsmd = queryKat.getMetaData();
-			    System.out.println("queryEin SELECT Datum,Betrag FROM BenutzerAufwendungen");
+			    System.out.println("querying SELECT * FROM XXX");
 			    int columnsNumber = rsmd.getColumnCount();
-			  //  while (queryKat.next()) {
-			  //      for (int i = 1; i <= columnsNumber; i++) {
-			  //          if (i > 1) System.out.print(",  ");
-			  //          String columnValue = queryKat.getString(i);
-			  //          System.out.print(columnValue + " " + rsmd.getColumnName(i));
-			   //     }
-			   //     System.out.println("");
-			   // }
-				
-				
-				//double dou = 3.0d;
-				
+			 	
 				while (queryKat.next()) {
 					String Kategorie = queryKat.getString("Kategorie");
-					int Betrag = queryKat.getInt("Betrag");
+					double Betrag = queryKat.getDouble("AufwendungBetrag");
+					//int Betrag = queryKat.getInt("Betrag");
 					PieDataset.setValue(Kategorie, Betrag); // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
-					//PieDataset.setValue(Kategorie, 3.0);
 				}
+				
+				//Chart
 				JFreeChart PieChartKat = ChartFactory.createPieChart("Kategorie im Detail", PieDataset, true, true, true);
 				PiePlot p = (PiePlot) PieChartKat.getPlot();
 				p.setForegroundAlpha(1.0f);
@@ -625,51 +616,25 @@ public class Charts extends JFrame {
 				stmt.close();
 				connec.close();
 
-				//Abmessungen und Qualitätsfaktor für PieChart
-				int width = 450;
-				int height = 600;
-				float quality=1;
-				
-				//Speichert PieChart als Bild
-				File BarChart=new File("SQL2PieChart.png");              
-                ChartUtilities.saveChartAsJPEG(BarChart, quality, PieChartKat, width, height); 
 				}
 				catch (Exception i)
                  {
-                         //System.out.println(i);
                          JOptionPane.showMessageDialog(null, i);
                  
                 }
 			}
         
 
-			/*
-			JFreeChart PieChart = ChartFactory.createPieChart("Kategorie im Detail",pieDatasetKat, true, true, true);
-			PiePlot p = (PiePlot) PieChart.getPlot();
-			p.setForegroundAlpha(TOP_ALIGNMENT);
-			ChartFrame frame = new ChartFrame("Kategorie im Detail", PieChart);
-			frame.setVisible(true);
-			frame.setSize(450,600);
-			
-		}catch (Exception e){
-			JOptionPane.showMessageDialog(null, e);
-		}
-	}*/
-
 //Monat Kreisdiagramm
 	private void Monat(){
-		try{	
-			
-			
-			String queryEin = "SELECT month(Datum), Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY month(Datum)";
-			PreparedStatement pst = conn.prepareStatement(queryEin);
+		try{			
+			String queryMonat = "SELECT  strftime('%m', Datum) AS PerDate, SUM(Betrag) AS MonthBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY strftime('%m', Datum) ";
+			PreparedStatement pst = conn.prepareStatement(queryMonat);
 			ResultSet res = pst.executeQuery();
-			
-			
 			
 			//Prüfung
 			ResultSetMetaData rsmd = res.getMetaData();
-		    System.out.println("queryEin SELECT Datum,Betrag FROM BenutzerAufwendungen");
+		    System.out.println("querying SELECT * FROM XXX"); 
 		    int columnsNumber = rsmd.getColumnCount();
 		    while (res.next()) {
 		        for (int i = 1; i <= columnsNumber; i++) {
@@ -680,11 +645,13 @@ public class Charts extends JFrame {
 		        System.out.println("");
 		    }
 			
-			JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
-			dataEin.executeQuery(queryEin);
-			CategoryDataset datasetEin = dataEin;
+		    
+		    //Chart
+			JDBCCategoryDataset dataMonat = new JDBCCategoryDataset (connection);
+			dataMonat.executeQuery(queryMonat);
+			CategoryDataset datasetMonat = dataMonat;
 			
-			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+			 JFreeChart BarChart = ChartFactory.createBarChart("Monatsauswertung", "monatliche Ausgaben", "Betrag", datasetMonat, PlotOrientation.VERTICAL, false, true, true);
 				CategoryPlot plot = BarChart.getCategoryPlot();
 				BarRenderer renderer = null;
 				renderer = new BarRenderer();
@@ -702,14 +669,15 @@ public class Charts extends JFrame {
 	
 //Jahr	 Kreisdiagramm
 	private void Jahr(){
-		try{		
-			String queryEin = "SELECT year(Datum), count(*) Betrag FROM BenutzerAufwendungen GROUP BY year(Datum) WHERE (BenutzerID='"+this.id+"')";
-			PreparedStatement pst = conn.prepareStatement(queryEin);
+		try{	
+			String queryJahr = "SELECT  strftime('%Y', Datum) AS PerDate, SUM(Betrag) AS YearBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY strftime('%Y', Datum) ";
+			PreparedStatement pst = conn.prepareStatement(queryJahr);
 			ResultSet res = pst.executeQuery();
 			
 			//Prüfung
 			ResultSetMetaData rsmd = res.getMetaData();
-		    System.out.println("querying SELECT * FROM XXX");
+		    System.out.println("queryJahr SELECT Datum,Betrag FROM BenutzerAufwendungen");
+		   
 		    int columnsNumber = rsmd.getColumnCount();
 		    while (res.next()) {
 		        for (int i = 1; i <= columnsNumber; i++) {
@@ -720,11 +688,11 @@ public class Charts extends JFrame {
 		        System.out.println("");
 		    }
 			
-			JDBCCategoryDataset dataEin = new JDBCCategoryDataset (connection);
-			dataEin.executeQuery(queryEin);
-			CategoryDataset datasetEin = dataEin;
+			JDBCCategoryDataset dataJahr = new JDBCCategoryDataset (connection);
+			dataJahr.executeQuery(queryJahr);
+			CategoryDataset datasetJahr = dataJahr;
 			
-			 JFreeChart BarChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", datasetEin, PlotOrientation.VERTICAL, false, true, true);
+			 JFreeChart BarChart = ChartFactory.createBarChart("Jahresauswertung", "jährliche Ausgaben", "Betrag", datasetJahr, PlotOrientation.VERTICAL, false, true, true);
 				CategoryPlot plot = BarChart.getCategoryPlot();
 				BarRenderer renderer = null;
 				renderer = new BarRenderer();
@@ -738,7 +706,9 @@ public class Charts extends JFrame {
 			JOptionPane.showMessageDialog(null, e);
 		
 		}
-	}	
+	}
+		
+	
 	
 //Einnahmenentwicklung Balkendiagramm
 	private void Einnahmen(){
@@ -828,36 +798,71 @@ public class Charts extends JFrame {
 		private void Liquiditaet(){
 			
 			try {
-				String queryLid = 	"SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') UNION SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
-				PreparedStatement stm = connection.prepareStatement(queryLid);
-				ResultSet result = stm.executeQuery();
 				
 				
-				/*String queryAus	=	"SELECT Datum,Betrag "
-									+ "FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')"; 
-				PreparedStatement pstmt = connec.prepareStatement(queryAus);
-				ResultSet rs = pstmt.executeQuery();
-				*/
+				//String queryLid = 	"SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') UNION SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
+				//String queryAus = "SELECT BenutzerAufwendungen.Datum AS AufwendungsDatum, BenutzerAufwendungen.Betrag AS AufwendungsBetrag,FROM BenutzerAufwendungen INNER JOIN BenutzerErträge ON BenutzerAufwendungen.BenutzerID = BenutzerErträge.BenutzerID WHERE(BenutzerAufwendungen.BenutzerID='"+this.id+"')";
+				String queryAus	=	"SELECT Datum,Sum(Betrag) as AufwendungBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')  GROUP BY Datum"; 
+				PreparedStatement stm = connection.prepareStatement(queryAus);
+				ResultSet resultAus = stm.executeQuery();
+				
+				
+				String queryEin	=	"SELECT Datum,Sum(Betrag) as ErtragBetrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"') GROUP BY Datum"; 
+				PreparedStatement pstmt = connec.prepareStatement(queryEin);
+				ResultSet resultEin = pstmt.executeQuery();
+				
 				
 			    //Prüfung
-				ResultSetMetaData rsmd = result.getMetaData();
+				//ResultSetMetaData rsmd = result.getMetaData();
 			    System.out.println("querying SELECT * FROM XXX");
-			    int columnsNumber = rsmd.getColumnCount();
-			    while (result.next()) {
-			        for (int i = 1; i <= columnsNumber; i++) {
-			            if (i > 1) System.out.print(",  ");
-			            String columnValue = result.getString(i);
-			            System.out.print(columnValue + " " + rsmd.getColumnName(i));
-			        }
-			        System.out.println("");
-			    }
+			   
+			//    int columnsNumber = rsmd.getColumnCount();
+			 //   while (result.next()) {
+			 //       for (int i = 1; i <= columnsNumber; i++) {
+			 //           if (i > 1) System.out.print(",  ");
+			 //           String columnValue = result.getString(i);
+			 //           System.out.print(columnValue + " " + rsmd.getColumnName(i));
+			 //       }
+			 //       System.out.println("");
+			 //   }
 				
-			    //Einnahmen Barchart
-			    JDBCCategoryDataset data = new JDBCCategoryDataset (connection);
-				data.executeQuery(queryLid);
-			    CategoryDataset dataset = data;
+
+				
 			    
-			    //Ausgaben Barchart
+			    //Einnahmen Barchart
+			   
+			    DefaultCategoryDataset  dataset = new DefaultCategoryDataset();
+			    
+			    while (resultAus.next()) {
+					String Datum = resultAus.getString("Datum");
+					double Betrag = resultAus.getDouble("AufwendungBetrag");
+					 dataset.addValue(Betrag, "Aufwendung", Datum);
+					 // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
+					//PieDataset.setValue(Kategorie, 3.0);
+				}
+			    
+			    while (resultEin.next()) {
+					String Datum = resultEin.getString("Datum");
+					double  Betrag = resultEin.getDouble("ErtragBetrag");
+					 dataset.addValue(Betrag, "Erträge", Datum);
+					 // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
+					//PieDataset.setValue(Kategorie, 3.0);
+				}
+			    
+				//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), queryLid);
+				//dataset.setTranspose();
+				
+			    JFreeChart Chart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
+				CategoryPlot plot = Chart.getCategoryPlot();
+				BarRenderer renderer = (BarRenderer) plot.getRenderer();
+				renderer.setDrawBarOutline(false);
+				 
+				ChartFrame  frame = new ChartFrame("", Chart);
+				frame.setVisible(true);
+				frame.setSize(400,650);
+				
+				
+				 //Ausgaben Barchart
 			    /*JDBCCategoryDataset data2 = new JDBCCategoryDataset (connec);
 				data2.executeQuery(queryAus);
 			    CategoryDataset dataset2 = data2;*/
@@ -888,18 +893,6 @@ public class Charts extends JFrame {
 		        Barchart.setTitle("Zahlungsmittelauswertung");
 			    */
 			    
-			    
-				//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), queryLid);
-				//dataset.setTranspose();
-				
-			    JFreeChart LineChart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
-				CategoryPlot plot = LineChart.getCategoryPlot();
-				BarRenderer renderer = null;
-				renderer = new BarRenderer();
-				ChartFrame  frame = new ChartFrame("", LineChart);
-				frame.setVisible(true);
-				frame.setSize(400,650);
-				
 				
 				//ChartPanel barPanel = new ChartPanel (BarChart);
 				//DiagrammPanel.removeAll();
