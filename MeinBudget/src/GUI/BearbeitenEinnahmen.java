@@ -1,14 +1,11 @@
-
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -28,6 +25,12 @@ import com.toedter.calendar.JDateChooser;
 
 public class BearbeitenEinnahmen extends JFrame {
 
+	Connection connection = null;
+	Connection connection2 = null;
+	Connection connection3 = null;
+	Connection conn = null;
+	static int id;
+
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField txtBetrag;
@@ -41,7 +44,7 @@ public class BearbeitenEinnahmen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BearbeitenEinnahmen frame = new BearbeitenEinnahmen();
+					BearbeitenEinnahmen frame = new BearbeitenEinnahmen(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +56,19 @@ public class BearbeitenEinnahmen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BearbeitenEinnahmen() {
+	public BearbeitenEinnahmen(int id) {
+
+		this.id = id;
+
+		// Verbindung zur BPDatenbank - für die Auswahl in der Combobox
+		connection = BPDatenbank.dbCon();
+		// Verbindung um Änderungen zu speichern
+		connection2 = BPDatenbank.dbCon();
+		// Verbindung zur BPDatenbank um Auswahl zu löschen
+		connection3 = BPDatenbank.dbCon();
+		// Verbindung zur BPDB - Kategorien
+		conn = BPDatenbank.dbCon();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -61,7 +76,7 @@ public class BearbeitenEinnahmen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-// btnSchliessen
+		// btnSchliessen
 		JLabel btnSchliessen = new JLabel();
 		btnSchliessen.setIcon(new ImageIcon(BearbeitenEinnahmen.class
 				.getResource("/Design/Schliessen_Button.png")));
@@ -90,7 +105,7 @@ public class BearbeitenEinnahmen extends JFrame {
 		btnSchliessen.setBounds(440, 15, 25, 25);
 		contentPane.add(btnSchliessen);
 
-// Überschrift "Bearbeiten der Einnahmen"
+		// Überschrift "Bearbeiten der Einnahmen"
 		JLabel lblHinzuE = new JLabel(
 				"<html><u>Einnahmen bearbeiten</u></html>");
 		lblHinzuE.setForeground(Color.WHITE);
@@ -98,25 +113,20 @@ public class BearbeitenEinnahmen extends JFrame {
 		lblHinzuE.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinzuE.setBounds(10, 11, 460, 38);
 		contentPane.add(lblHinzuE);
-		
+
 		// lblBezeichnung
-				JLabel lblBearbeiten = new JLabel("Bearbeiten:");
-				lblBearbeiten.setForeground(Color.WHITE);
-				lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
-				lblBearbeiten.setBounds(100, 72, 118, 27);
-				contentPane.add(lblBearbeiten);
-		
-		JComboBox cboBearbeiten = new JComboBox();
-		cboBearbeiten.setForeground(Color.GRAY);
-		cboBearbeiten.setBounds(222, 70, 145, 30);
-		contentPane.add(cboBearbeiten);
-		
+		JLabel lblBearbeiten = new JLabel("Bearbeiten:");
+		lblBearbeiten.setForeground(Color.WHITE);
+		lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBearbeiten.setBounds(100, 72, 118, 27);
+		contentPane.add(lblBearbeiten);
+
 		JLabel lblBezeichnung = new JLabel("Bezeichnung:");
 		lblBezeichnung.setForeground(Color.WHITE);
 		lblBezeichnung.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblBezeichnung.setBounds(100, 112, 123, 27);
 		contentPane.add(lblBezeichnung);
-		
+
 		txtBezeichnung = new JTextField();
 		txtBezeichnung.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBezeichnung.setForeground(Color.GRAY);
@@ -127,53 +137,77 @@ public class BearbeitenEinnahmen extends JFrame {
 		txtBezeichnung.setBounds(222, 110, 144, 30);
 		contentPane.add(txtBezeichnung);
 
-// Betrag
+		// Betrag
 		JLabel lblBetrag = new JLabel("Betrag:");
 		lblBetrag.setForeground(Color.WHITE);
 		lblBetrag.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblBetrag.setBounds(100, 152, 86, 27);
 		contentPane.add(lblBetrag);
-		
-		
-		// txtBetrag		
-				txtBetrag = new JTextField();
-				txtBetrag.setHorizontalAlignment(SwingConstants.CENTER);
-				txtBetrag.setBackground(Color.WHITE);
-				txtBetrag.setFont(new Font("Tahoma", Font.BOLD, 11));
-				txtBetrag.setForeground(Color.GRAY);
-				txtBetrag.setBorder(null);
-				txtBetrag.setBounds(222, 150, 144, 30);
-				txtBetrag.setColumns(10);
-				contentPane.add(txtBetrag);
-		
-// Datum
+
+		// txtBetrag
+		txtBetrag = new JTextField();
+		txtBetrag.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBetrag.setBackground(Color.WHITE);
+		txtBetrag.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtBetrag.setForeground(Color.GRAY);
+		txtBetrag.setBorder(null);
+		txtBetrag.setBounds(222, 150, 144, 30);
+		txtBetrag.setColumns(10);
+		contentPane.add(txtBetrag);
+
+		// Datum
 		JLabel lblDatum = new JLabel("Datum:");
 		lblDatum.setForeground(Color.WHITE);
 		lblDatum.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblDatum.setBounds(100, 192, 81, 27);
 		contentPane.add(lblDatum);
 
-// Datum auswählen
-		JDateChooser Datum = new JDateChooser();
-		Datum.setDateFormatString("yyyy-MM-dd");
-		Datum.setForeground(Color.GRAY);
-		Datum.getCalendarButton().setForeground(Color.GRAY);
-		Datum.setBounds(222, 190, 145, 30);
-		contentPane.add(Datum);
+		// Datum auswählen
+		JDateChooser txt_Datum = new JDateChooser();
+		txt_Datum.setDateFormatString("yyyy-MM-dd");
+		txt_Datum.setForeground(Color.GRAY);
+		txt_Datum.getCalendarButton().setForeground(Color.GRAY);
+		txt_Datum.setBounds(222, 190, 145, 30);
+		contentPane.add(txt_Datum);
 
-// Kategorie
+		// Kategorie
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
 		Kategorie.setBounds(100, 232, 118, 27);
 		contentPane.add(Kategorie);
 
-// Kategorie Combobox, die bereits angelegten Kategorien hier als
-// Auswahl wählen
+		// Kategorie Combobox, die bereits angelegten Kategorien hier als
+		// Auswahl wählen
 		JComboBox cboKategorie = new JComboBox();
+		cboKategorie.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				String selectedItem = (String) cboKategorie.getSelectedItem();
+				System.out.println(selectedItem);
+			}
+
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
 		cboKategorie.setBounds(222, 230, 145, 30);
 		contentPane.add(cboKategorie);
+		try {
+			String sql = "SELECT * FROM BenutzerKategorien WHERE Typ='Ausgaben' ";
+			PreparedStatement stm = conn.prepareStatement(sql);
+			ResultSet result = stm.executeQuery();
 
+			while (result.next()) {
+				String kategorie = result.getString("Kategorie");
+				cboKategorie.addItem(kategorie);
+			}
+			result.close();
+			stm.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 		// Bemerkung
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
@@ -182,18 +216,8 @@ public class BearbeitenEinnahmen extends JFrame {
 		lblBemerkung.setBounds(100, 272, 118, 27);
 		contentPane.add(lblBemerkung);
 
-// txtBemerkung
+		// txtBemerkung
 		txtBemerkung = new JTextField();
-		txtBemerkung.addKeyListener(new KeyAdapter() {
-			// speichern über Enter
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					// speichern ausführen
-
-				}
-			}
-		});
 		txtBemerkung.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBemerkung.setForeground(Color.GRAY);
 		txtBemerkung.setColumns(10);
@@ -202,14 +226,106 @@ public class BearbeitenEinnahmen extends JFrame {
 		txtBemerkung.setBounds(222, 270, 144, 30);
 		contentPane.add(txtBemerkung);
 
+		JComboBox cboBearbeiten = new JComboBox();
+		cboBearbeiten.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				try {
+					String selectedItem = (String) cboBearbeiten
+							.getSelectedItem();
+					String sql = "SELECT Datum,Bezeichnung,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE ( Bezeichnung='"
+							+ selectedItem + "') ";
+					PreparedStatement stm = connection.prepareStatement(sql);
+					ResultSet result = stm.executeQuery();
+
+					if (result.next()) {
+						String add1 = result.getString("Datum");
+						((JTextField) txt_Datum.getDateEditor()
+								.getUiComponent()).setText(add1);
+						String add2 = result.getString("Bezeichnung");
+						txtBezeichnung.setText(add2);
+						String add3 = result.getString("Betrag");
+						txtBetrag.setText(add3);
+						String add4 = result.getString("Bemerkung");
+						txtBemerkung.setText(add4);
+
+					}
+					result.close();
+					stm.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
+		cboBearbeiten.setForeground(Color.GRAY);
+		cboBearbeiten.setBounds(222, 70, 145, 30);
+		contentPane.add(cboBearbeiten);
+
+		try {
+
+			String sql = "SELECT * FROM BenutzerAufwendungen WHERE (BenutzerID='"
+					+ Start.id + "' and Art = 'variabel') ";
+			PreparedStatement stm = connection3.prepareStatement(sql);
+			ResultSet result = stm.executeQuery();
+
+			while (result.next()) {
+				String ausgaben = result.getString("Bezeichnung");
+				cboBearbeiten.addItem(ausgaben);
+			}
+
+			result.close();
+			stm.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 		// btnSpeichern
 		JLabel btnSpeichern = new JLabel();
+		btnSpeichern.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String selectedItem = (String) cboBearbeiten
+							.getSelectedItem();
+					String value1 = ((JTextField) txt_Datum.getDateEditor()
+							.getUiComponent()).getText();
+					String value2 = txtBezeichnung.getText();
+					String ausgewaelteKategorie = cboKategorie
+							.getSelectedItem().toString();
+					String value3 = ausgewaelteKategorie;
+					String value4 = txtBetrag.getText();
+					String value5 = txtBemerkung.getText();
+
+					String sqlQuery = "UPDATE BenutzerAufwendungen SET Datum='"
+							+ value1 + "', Bezeichnung='" + value2
+							+ "', Kategorie='" + value3 + "', Betrag='"
+							+ value4 + "', Bemerkung='" + value5
+							+ "'  WHERE ( Bezeichnung='" + selectedItem
+							+ "')  ";
+					PreparedStatement pstm = connection2
+							.prepareStatement(sqlQuery);
+					pstm.execute();
+					pstm.close();
+
+					JOptionPane.showMessageDialog(null,
+							"Erfolgreich gespeichert!");
+
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
 		btnSpeichern.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
 				.getResource("/Design/Speichern.png")));
 		btnSpeichern.setBounds(175, 330, 144, 38);
 		contentPane.add(btnSpeichern);
 
-// btnZurueck
+		// btnZurueck
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
 			@Override
@@ -227,9 +343,27 @@ public class BearbeitenEinnahmen extends JFrame {
 				});
 			}
 		});
-		
+
 		JLabel btnLoeschen = new JLabel();
-		btnLoeschen.setIcon(new ImageIcon(BearbeitenEinnahmen.class.getResource("/Design/Loeschen.png")));
+		btnLoeschen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String selectedItem = (String) cboBearbeiten.getSelectedItem();
+				String sql = "DELETE FROM BenutzerAufwendungen WHERE ( Bezeichnung='"
+						+ selectedItem + "') ";
+				try {
+					PreparedStatement preS = connection3.prepareStatement(sql);
+					preS.execute();
+					preS.close();
+					JOptionPane.showMessageDialog(null,
+							"Eingaben erfolgreich gelöscht!");
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
+		});
+		btnLoeschen.setIcon(new ImageIcon(BearbeitenEinnahmen.class
+				.getResource("/Design/Loeschen.png")));
 		btnLoeschen.setBounds(175, 379, 144, 38);
 		contentPane.add(btnLoeschen);
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
@@ -237,10 +371,8 @@ public class BearbeitenEinnahmen extends JFrame {
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnZurueck.setBounds(170, 420, 144, 14);
 		contentPane.add(btnZurueck);
-		
 
-		
-// Hintergrund
+		// Hintergrund
 		JLabel Hintergrund = new JLabel();
 		Hintergrund.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Hintergrund.setHorizontalAlignment(SwingConstants.CENTER);
@@ -248,10 +380,10 @@ public class BearbeitenEinnahmen extends JFrame {
 		Hintergrund.setIcon(new ImageIcon(HinzufuegenEinnahmen.class
 				.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
-		contentPane.add(Hintergrund);		
-		
-// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
-// des Bildschirms
+		contentPane.add(Hintergrund);
+
+		// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
+		// des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 	}
