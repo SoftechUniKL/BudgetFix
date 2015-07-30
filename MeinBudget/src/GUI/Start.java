@@ -9,16 +9,22 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableColumnModel;
+
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 import net.proteanit.sql.DbUtils;
 
@@ -56,6 +62,7 @@ public class Start extends JFrame {
 	
 	Connection connection = null;
 	Connection connec = null;
+	Connection conne = null;
 	Connection conn = null;
 	Connection con = null;
 	static int id;
@@ -96,6 +103,7 @@ public class Start extends JFrame {
 		// Verbindung zur BPDatenbank - Erträge und Aufwendungen
 		connection = BPDatenbank.dbCon();
 		connec = BPDatenbank.dbCon();
+		conne = BPDatenbank.dbCon();
 		conn = BPDatenbank.dbCon();
 		con = BPDatenbank.dbCon();
 
@@ -954,7 +962,21 @@ public class Start extends JFrame {
 			ex.printStackTrace();
 
 		}
-
+		
+		try{			
+			String queryMonat = "SELECT  strftime('%m', Datum) AS PerDate, SUM(Betrag) AS MonthBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY strftime('%m', Datum) ";
+			PreparedStatement pst = conne.prepareStatement(queryMonat);
+			ResultSet resu = pst.executeQuery();
+			resu.next();
+			String summe5 = resu.getString(1);
+			System.out.println(summe5);
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		
+		}
+			
 	}
 	
 }

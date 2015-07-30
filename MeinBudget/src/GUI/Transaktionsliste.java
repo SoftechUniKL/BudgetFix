@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -27,6 +28,8 @@ import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class Transaktionsliste extends JFrame {
 
@@ -126,9 +129,22 @@ public class Transaktionsliste extends JFrame {
 		
 		// Datum auswählen
 				JDateChooser txt_Datum = new JDateChooser();
-				txt_Datum.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
+				txt_Datum.addPropertyChangeListener(new PropertyChangeListener() {
+					//public void propertyChange(PropertyChangeEvent arg0) {
+						 @Override
+					        public void propertyChange(PropertyChangeEvent e){
+					            //if ("date".equals(e.getPropertyName())) {
+					              //  System.out.println(e.getPropertyName()
+					                //    + ": " + (Date) e.getNewValue());
+					               // System.out.println(((JDateChooser) e.getNewValue()).setDateFormatString("yyyy-MM-dd"));
+					                //((JDateChooser) e.getNewValue()).setDateFormatString("yyyy-MM-dd");
+							
+						 
+					}
+				});
+				
+					
+				
 						try {
 							String datum = ((JTextField) txt_Datum.getDateEditor()
 									.getUiComponent()).getText();	
@@ -142,9 +158,8 @@ public class Transaktionsliste extends JFrame {
 							stm.close();
 						} catch (Exception exc) {
 							exc.printStackTrace();
-						}
-					}
-				});
+						}	
+				
 				txt_Datum.setDateFormatString("yyyy-MM-dd");
 				txt_Datum.setBounds(150, 150, 180, 30);
 				contentPane.add(txt_Datum);
