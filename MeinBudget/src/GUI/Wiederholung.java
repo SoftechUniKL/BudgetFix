@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,8 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class Wiederholung extends JFrame {
+import net.proteanit.sql.DbUtils;
 
+public class Wiederholung extends JFrame {
+	
+	Connection connection = null;
+	
 	private JPanel contentPane;
 	private JTable tableFix;
 
@@ -50,6 +57,9 @@ public class Wiederholung extends JFrame {
 	public Wiederholung(int id) {
 		
 		this.id = id;
+		
+		// Verbindung zur BPDatenbank - Erträge und Aufwendungen
+		connection = BPDatenbank.dbCon();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 704);
@@ -484,6 +494,17 @@ public class Wiederholung extends JFrame {
 //Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten des Bildschirms
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+	
+	try {
+		String sqlQuery = "SELECT Datum,Bezeichnung,Kategorie,Betrag FROM BenutzerErträge  WHERE (BenutzerID='"
+				+ this.id + "' and Art='fix') ";
+		PreparedStatement stm = connection.prepareStatement(sqlQuery);
+		ResultSet result = stm.executeQuery();
+		tableFix.setModel(DbUtils.resultSetToTableModel(result));
+		result.close();
+		stm.close();
+	} catch (Exception exc) {
+		exc.printStackTrace();
 	}
-
+}
 }
