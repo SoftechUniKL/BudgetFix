@@ -110,22 +110,14 @@ public class TransaktionBearbeiten extends JFrame {
 
 		// Überschrift "wiederholene Transaktionen Anlegen"
 		JLabel lblTransaktionAnlegen = new JLabel(
-				"<html><u>wiederholene Transaktionen anlegen</u></html>");
+				"<html><u>wiederholene Transaktionen bearbeiten</u></html>");
 		lblTransaktionAnlegen.setForeground(Color.WHITE);
 		lblTransaktionAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTransaktionAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTransaktionAnlegen.setBounds(10, 15, 460, 38);
 		contentPane.add(lblTransaktionAnlegen);
 		
-		JLabel lblBearbeiten = new JLabel("Bearbeiten:");
-		lblBearbeiten.setForeground(Color.WHITE);
-		lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBearbeiten.setBounds(75, 72, 118, 27);
-		contentPane.add(lblBearbeiten);
 		
-		JComboBox cboBearbeiten = new JComboBox();
-		cboBearbeiten.setBounds(222, 70, 183, 30);
-		contentPane.add(cboBearbeiten);
 
 		// Bezeichung
 		JLabel Bezeichnung = new JLabel("Bezeichnung:");
@@ -212,9 +204,69 @@ public class TransaktionBearbeiten extends JFrame {
 		contentPane.add(lblNchsteFlligkeit);
 
 		// Datum auswählen
-		JDateChooser Datum = new JDateChooser();
-		Datum.setBounds(222, 230, 183, 30);
-		contentPane.add(Datum);
+		JDateChooser txt_Datum = new JDateChooser();
+		txt_Datum.setBounds(222, 230, 183, 30);
+		contentPane.add(txt_Datum);
+		
+		JLabel lblBearbeiten = new JLabel("Bearbeiten:");
+		lblBearbeiten.setForeground(Color.WHITE);
+		lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBearbeiten.setBounds(75, 72, 118, 27);
+		contentPane.add(lblBearbeiten);
+		
+		JComboBox cboBearbeiten = new JComboBox();
+		cboBearbeiten.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				try {
+					String selectedItem = (String) cboBearbeiten
+							.getSelectedItem();
+					String sql = "SELECT Datum,Bezeichnung,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE ( Bezeichnung='"
+							+ selectedItem + "') ";
+					PreparedStatement stm = connection.prepareStatement(sql);
+					ResultSet result = stm.executeQuery();
+
+					if (result.next()) {
+						String add1 = result.getString("Datum");
+						((JTextField) txt_Datum.getDateEditor()
+								.getUiComponent()).setText(add1);
+						String add2 = result.getString("Bezeichnung");
+						txtBezeichnung.setText(add2);
+						String add3 = result.getString("Betrag");
+						txtBetrag.setText(add3);
+						String add4 = result.getString("Bemerkung");
+						txtBemerkung.setText(add4);
+
+					}
+					result.close();
+					stm.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
+		cboBearbeiten.setBounds(222, 70, 183, 30);
+		contentPane.add(cboBearbeiten);
+		try {
+
+			String sql = "CREATE VIEW [Fix] AS SELECT * FROM BenutzerAufwendungen WHERE (BenutzerID='"
+					+ Start.id + "' and Art = 'fix') ";
+			PreparedStatement stm = connection.prepareStatement(sql);
+			ResultSet result = stm.executeQuery();
+
+			while (result.next()) {
+				String ausgaben = result.getString("Bezeichnung");
+				cboBearbeiten.addItem(ausgaben);
+			}
+
+			result.close();
+			stm.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 		// Betrag
 		JLabel lblBetrag = new JLabel("Betrag:");
@@ -296,7 +348,7 @@ public class TransaktionBearbeiten extends JFrame {
 								.prepareStatement(sqlQuery);
 
 						// Datum
-						pst.setString(1, ((JTextField) Datum.getDateEditor()
+						pst.setString(1, ((JTextField) txt_Datum.getDateEditor()
 								.getUiComponent()).getText());
 
 						// Bezeichnung
@@ -334,7 +386,7 @@ public class TransaktionBearbeiten extends JFrame {
 								.prepareStatement(sqlQuery);
 
 						// Datum
-						pst.setString(1, ((JTextField) Datum.getDateEditor()
+						pst.setString(1, ((JTextField) txt_Datum.getDateEditor()
 								.getUiComponent()).getText());
 
 						// Bezeichnung

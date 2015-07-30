@@ -235,7 +235,7 @@ public class BearbeitenEinnahmen extends JFrame {
 				try {
 					String selectedItem = (String) cboBearbeiten
 							.getSelectedItem();
-					String sql = "SELECT Datum,Bezeichnung,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE ( Bezeichnung='"
+					String sql = "SELECT Datum,Bezeichnung,Betrag,Bemerkung FROM BenutzerErträge WHERE ( Bezeichnung='"
 							+ selectedItem + "') ";
 					PreparedStatement stm = connection.prepareStatement(sql);
 					ResultSet result = stm.executeQuery();
@@ -268,7 +268,7 @@ public class BearbeitenEinnahmen extends JFrame {
 
 		try {
 
-			String sql = "SELECT * FROM BenutzerAufwendungen WHERE (BenutzerID='"
+			String sql = "SELECT * FROM BenutzerErträge WHERE (BenutzerID='"
 					+ Start.id + "' and Art = 'variabel') ";
 			PreparedStatement stm = connection3.prepareStatement(sql);
 			ResultSet result = stm.executeQuery();
@@ -301,7 +301,7 @@ public class BearbeitenEinnahmen extends JFrame {
 					String value4 = txtBetrag.getText();
 					String value5 = txtBemerkung.getText();
 
-					String sqlQuery = "UPDATE BenutzerAufwendungen SET Datum='"
+					String sqlQuery = "UPDATE BenutzerErträge SET Datum='"
 							+ value1 + "', Bezeichnung='" + value2
 							+ "', Kategorie='" + value3 + "', Betrag='"
 							+ value4 + "', Bemerkung='" + value5
@@ -349,7 +349,7 @@ public class BearbeitenEinnahmen extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String selectedItem = (String) cboBearbeiten.getSelectedItem();
-				String sql = "DELETE FROM BenutzerAufwendungen WHERE ( Bezeichnung='"
+				String sql = "DELETE FROM BenutzerErträge WHERE ( Bezeichnung='"
 						+ selectedItem + "') ";
 				try {
 					PreparedStatement preS = connection3.prepareStatement(sql);

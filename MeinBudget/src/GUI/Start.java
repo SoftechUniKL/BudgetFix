@@ -939,7 +939,7 @@ public class Start extends JFrame {
 			String summe2 = resSet.getString(1);
 			System.out.println(summe2);
 			txtAusgabenSumme.setText(summe2 + "€");
-
+			
 			// Gesamtbilanz
 			double summe3 = Double.parseDouble(summe1);
 			double summe4 = Double.parseDouble(summe2);
