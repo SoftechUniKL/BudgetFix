@@ -1,37 +1,29 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
-public class KategorieAnlegen extends JFrame {
-
-	Connection connection = null;
+public class KategorieBearbeiten extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtKategorie;
-	private String auswahl;
 
 	/**
 	 * Launch the application.
@@ -40,7 +32,7 @@ public class KategorieAnlegen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					KategorieAnlegen frame = new KategorieAnlegen();
+					KategorieBearbeiten frame = new KategorieBearbeiten();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,21 +44,14 @@ public class KategorieAnlegen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	/**
-	 * 
-	 */
-	public KategorieAnlegen() {
-
-		// Verbindung zur BPDB - Kategorien
-		connection = BPDatenbank.dbCon();
-
+	public KategorieBearbeiten() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		// Schliessenbutton
 		final JLabel btnSchliessen = new JLabel();
 		btnSchliessen.addMouseListener(new MouseAdapter() {
@@ -91,6 +76,18 @@ public class KategorieAnlegen extends JFrame {
 			}
 
 		});
+		
+		JLabel lblBearbeiten = new JLabel("Bearbeiten:");
+		lblBearbeiten.setForeground(Color.WHITE);
+		lblBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBearbeiten.setBounds(100, 85, 91, 27);
+		contentPane.add(lblBearbeiten);
+		
+		JComboBox cboBearbeiten = new JComboBox();
+		cboBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 12));
+		cboBearbeiten.setForeground(Color.GRAY);
+		cboBearbeiten.setBounds(222, 85, 145, 30);
+		contentPane.add(cboBearbeiten);
 
 		// Überschrift "Kategorie Anlegen"
 		JLabel lblKategorienAnlegen = new JLabel(
@@ -136,75 +133,41 @@ public class KategorieAnlegen extends JFrame {
 		Typ.setBounds(100, 230, 91, 27);
 		contentPane.add(Typ);
 
-		
-		
 		// Auswahl Ausgaben
 		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
-		rdbtnAusgaben.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				auswahl = "Ausgaben";
-			}
-		});
 		rdbtnAusgaben.setBounds(222, 230, 145, 30);
 		contentPane.add(rdbtnAusgaben);
 
 		// Auswahl Einnahmen
 		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
-		rdbtnEinnahmen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				auswahl = "Einnahmen";
-			}
-		});
 		rdbtnEinnahmen.setBounds(222, 264, 145, 30);
 		contentPane.add(rdbtnEinnahmen);
 
-		// Radiobutton in Group zusammenfassen
+					//rdbtnAusgaben.setSelected(true);
+		//Radiobutton in Group zusammenfassen
 		ButtonGroup wahl = new ButtonGroup();
 		wahl.add(rdbtnEinnahmen);
 		wahl.add(rdbtnAusgaben);
-
-		// Auswahl
-		if (rdbtnEinnahmen.isSelected()) {
-			System.out.println("Einkommen");
-			// String selected =rdbtnEinnahmen.getText().toString(); String
-			// selection = "Einkommen";
-		} else {
-			// System.out.println("Ausgabe"); //String selected =
+		
+					//JRadioButton selectedButton = (JRadioButton)wahl.getSelection();
+		//Auswahl
+		if(rdbtnEinnahmen.isSelected()){
+			String selected = "Einkommen";
+		}else{
+			String selected = "Ausgaben";
 		}
-		rdbtnAusgaben.getText().toString();
-		// System.out.println(selected);
-		// String selected = "Ausgaben";
-		 
 
-//		// Combobox für Einnahme oder Ausgabe
-//		String[] strWahl = { "Einkommen", "Ausgabe" };
-//		JComboBox cboTyp = new JComboBox(strWahl);
-//		cboTyp.setFont(new Font("Tahoma", Font.BOLD, 11));
-//		cboTyp.setBorder(null);
-//		cboTyp.setBounds(222, 230, 145, 30);
-//		contentPane.add(cboTyp);
-//		cboTyp.addPopupMenuListener(new PopupMenuListener() {
-//			public void popupMenuCanceled(PopupMenuEvent e) {
-//			}
-//
-//			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-//				String selectedItem = (String) cboTyp.getSelectedItem();
-//				System.out.println(selectedItem);
-//			}
-//
-//			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-//			}
-//		});
-
+		
 		// Button Zurück zu z.B. Start
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(new Runnable() {
+					
 					public void run() {
 						try {
-							Start frame = new Start(Start.id);
+							KategorieAnlegen frame = new KategorieAnlegen();
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -214,59 +177,41 @@ public class KategorieAnlegen extends JFrame {
 				});
 			}
 		});
-
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnZurueck.setBounds(170, 410, 144, 14);
 		contentPane.add(btnZurueck);
-
+		
+		
 		// Button Speichern
-		JLabel btnSpeichern = new JLabel();
-		btnSpeichern.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					String sqlQuery = "INSERT INTO BenutzerKategorien (Kategorie,Typ) VALUES(?,?) ";
-					PreparedStatement pst = connection
-							.prepareStatement(sqlQuery);
+				JLabel btnSpeichern = new JLabel();
+				btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
+						.getResource("/Design/Speichern.png")));
+				btnSpeichern.setBounds(170, 330, 144, 38);
+				contentPane.add(btnSpeichern);
+		
+		JLabel btnLöschen = new JLabel();
+		btnLöschen.setIcon(new ImageIcon(KategorieBearbeiten.class.getResource("/Design/Loeschen.png")));
+		btnLöschen.setBounds(170, 370, 144, 38);
+		contentPane.add(btnLöschen);
 
-					// Kategorie
-					pst.setString(1, txtKategorie.getText());
-
-					// Typ
-				//	String ausgewaelteKategorie = cboTyp.getSelectedItem()
-				//			.toString();
-					pst.setString(2, auswahl);
-
-					pst.execute();
-					JOptionPane.showMessageDialog(null,
-							"Erfolgreich gespeichert!");
-
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
-				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(170, 372, 144, 38);
-		contentPane.add(btnSpeichern);
 
 		// Hintergrund
 		JLabel Hintergrund = new JLabel();
 		Hintergrund.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Hintergrund.setHorizontalAlignment(SwingConstants.CENTER);
-		Hintergrund.setForeground(Color.BLACK);
+		Hintergrund.setForeground(Color.GRAY);
 		Hintergrund.setIcon(new ImageIcon(KategorieAnlegen.class
 				.getResource("/Design/GUI3.png")));
 		Hintergrund.setBounds(0, 0, 480, 480);
 		contentPane.add(Hintergrund);
 
+
 		// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
 		// des Bildschirms
 		setUndecorated(true);
-		setLocationRelativeTo(null);
-
+		setLocationRelativeTo(null);		
 	}
+
 }

@@ -267,7 +267,7 @@ public class Sparziele extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Tools frame = new Tools();
+							Tools frame = new Tools(Tools.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -307,7 +307,7 @@ public class Sparziele extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Einstellungen frame = new Einstellungen();
+							Einstellungen frame = new Einstellungen(Einstellungen.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

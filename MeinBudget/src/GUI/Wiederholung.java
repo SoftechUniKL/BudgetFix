@@ -449,8 +449,30 @@ public class Wiederholung extends JFrame {
 		
 //Übersicht einer Tabelle der fixen Beiträge		
 		tableFix = new JTable();
-		tableFix.setBounds(510, 220, 291, 366);
+		tableFix.setFont(new Font("Tahoma", Font.BOLD, 11));
+		tableFix.setBounds(510, 220, 291, 307);
 		contentPane.add(tableFix);
+		
+		JLabel btnBearbeiten = new JLabel("New label");
+		btnBearbeiten.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							TransaktionBearbeiten frame = new TransaktionBearbeiten();
+							frame.setVisible(true);
+							dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnBearbeiten.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Bearbeiten.png")));
+		btnBearbeiten.setBounds(585, 570, 144, 38);
+		contentPane.add(btnBearbeiten);
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
