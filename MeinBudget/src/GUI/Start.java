@@ -559,7 +559,7 @@ public class Start extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Transaktionsliste frame = new Transaktionsliste();
+							Transaktionsliste frame = new Transaktionsliste(id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {

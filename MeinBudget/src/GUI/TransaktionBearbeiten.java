@@ -252,7 +252,7 @@ public class TransaktionBearbeiten extends JFrame {
 		contentPane.add(cboBearbeiten);
 		try {
 
-			String sql = "CREATE VIEW [Fix] AS SELECT * FROM BenutzerAufwendungen WHERE (BenutzerID='"
+			String sql = "SELECT * FROM BenutzerAufwendungen WHERE (BenutzerID='"
 					+ Start.id + "' and Art = 'fix') ";
 			PreparedStatement stm = connection.prepareStatement(sql);
 			ResultSet result = stm.executeQuery();
