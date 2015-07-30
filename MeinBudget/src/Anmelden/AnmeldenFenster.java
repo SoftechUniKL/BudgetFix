@@ -24,6 +24,24 @@ import javax.swing.border.EmptyBorder;
 import GUI.Start;
 import Registrierung.RegisterFenster;
 
+/**
+ * Anmeldung BudgetFix:
+ * 
+ * Hier wird ein Anmelde-Fenster geöffnet, um sich als Benutzer anmelden zu können.
+ * Falls man noch nicht angemeldet ist, kann man sich registieren.
+ * 
+ * Die Benutzer werden in einer Datenbank gespeichert, damit man ihre Daten auf ihre ID zurückführen kann.
+ * 
+ * War die Registierung erfolgreich, kann man sich nun anmelden & das Hauptfenster des BudgetFix wird geöffnet.
+ * 
+
+ * @author Verbindung mit der Datenbank: Patric Kleine
+ * @author Visualisierung: Que Ly Dong
+
+ * 
+ */
+
+
 public class AnmeldenFenster extends JFrame {
 
 	Connection connect = null;
@@ -44,9 +62,14 @@ public class AnmeldenFenster extends JFrame {
 			}
 		});
 	}
+	
+	
+	
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
+	 * 
+	 * 
 	 */
 	public AnmeldenFenster() {
 
@@ -101,8 +124,10 @@ public class AnmeldenFenster extends JFrame {
 
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-					// Benutzer hat sich erfolgreich angemeldet und
-					// BudgetFix-Fenster öffnet sich
+					/* 
+					 * Benutzer hat sich erfolgreich angemeldet und
+					 * BudgetFix-Fenster öffnet sich
+					*/
 					anmeldung();
 
 				}
@@ -142,8 +167,6 @@ public class AnmeldenFenster extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				anmeldung();
-				// Benutzer hat sich erfolgreich angemeldet und
-				// BudgetFix-Fenster öffnet sich
 			}
 		});
 
@@ -158,7 +181,7 @@ public class AnmeldenFenster extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				// Bei Mausklick RegisterFenster zum Registrieren anmelden
+				// Bei Mausklick RegisterFenster zum registrieren anmelden
 
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {

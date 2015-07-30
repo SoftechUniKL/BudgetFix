@@ -111,7 +111,7 @@ public class Impressum extends JFrame {
 						+ "Erwin-Schrödinger-Straße 1 <p/>"
 						+ "67663 Kaiserslautern <p/><p/>"
 						+ "Programmierprojekt SoSe 2015 - Betreuerin: Dr. Annette Bieniusa <p/>"
-						+ "Programmier(in): Que Ly Dong, Patrick Drucks & Patric Kleine <p/>"
+						+ "Programmier(in): Que Ly Dong & Patric Kleine <p/>"
 						+ "Copyright 2015<p/><p/><p/>"
 						+ "<u>Haftung für Inhalte:</u>"
 						+ " Die Inhalte des BudgetFix wurden mit <p/>"
