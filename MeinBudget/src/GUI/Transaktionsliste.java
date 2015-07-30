@@ -132,7 +132,7 @@ public class Transaktionsliste extends JFrame {
 						try {
 							String datum = ((JTextField) txt_Datum.getDateEditor()
 									.getUiComponent()).getText();	
-							
+							System.out.println(datum);
 							String sqlQuery = "SELECT Bezeichnung,Kategorie,Betrag FROM BenutzerAufwendungen  WHERE (BenutzerID='"
 									+ Start.id + "' and Datum='"+datum+"') ";
 							PreparedStatement stm = connection.prepareStatement(sqlQuery);
