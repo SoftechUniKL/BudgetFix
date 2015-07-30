@@ -803,12 +803,7 @@ public class Charts extends JFrame {
 	
 //Liquiditätsentwicklung = Ausgaben und Einnahmen im Vergleich
 		private void Liquiditaet(){
-			
 			try {
-				
-				
-				//String queryLid = 	"SELECT Datum,Betrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') UNION SELECT Datum,Betrag FROM BenutzerErträge WHERE (BenutzerID='"+this.id+"')";
-				//String queryAus = "SELECT BenutzerAufwendungen.Datum AS AufwendungsDatum, BenutzerAufwendungen.Betrag AS AufwendungsBetrag,FROM BenutzerAufwendungen INNER JOIN BenutzerErträge ON BenutzerAufwendungen.BenutzerID = BenutzerErträge.BenutzerID WHERE(BenutzerAufwendungen.BenutzerID='"+this.id+"')";
 				String queryAus	=	"SELECT Datum,Sum(Betrag) as AufwendungBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"')  GROUP BY Datum"; 
 				PreparedStatement stm = connection.prepareStatement(queryAus);
 				ResultSet resultAus = stm.executeQuery();
@@ -818,47 +813,25 @@ public class Charts extends JFrame {
 				PreparedStatement pstmt = connec.prepareStatement(queryEin);
 				ResultSet resultEin = pstmt.executeQuery();
 				
-				
-			    //Prüfung
-				//ResultSetMetaData rsmd = result.getMetaData();
-			    System.out.println("querying SELECT * FROM XXX");
-			   
-			//    int columnsNumber = rsmd.getColumnCount();
-			 //   while (result.next()) {
-			 //       for (int i = 1; i <= columnsNumber; i++) {
-			 //           if (i > 1) System.out.print(",  ");
-			 //           String columnValue = result.getString(i);
-			 //           System.out.print(columnValue + " " + rsmd.getColumnName(i));
-			 //       }
-			 //       System.out.println("");
-			 //   }
-				
 
-				
+			    System.out.println("querying SELECT * FROM XXX");
 			    
-			    //Einnahmen Barchart
-			   
+			    //Barchart
 			    DefaultCategoryDataset  dataset = new DefaultCategoryDataset();
 			    
+			    //Ausgaben
 			    while (resultAus.next()) {
 					String Datum = resultAus.getString("Datum");
 					double Betrag = resultAus.getDouble("AufwendungBetrag");
 					 dataset.addValue(Betrag, "Aufwendung", Datum);
-					 // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
-					//PieDataset.setValue(Kategorie, 3.0);
 				}
 			    
+			    //Einnahmen
 			    while (resultEin.next()) {
 					String Datum = resultEin.getString("Datum");
 					double  Betrag = resultEin.getDouble("ErtragBetrag");
 					 dataset.addValue(Betrag, "Erträge", Datum);
-					 // Konvertiere Datenquelle von Tabelle zu PieChart Datasource
-					//PieDataset.setValue(Kategorie, 3.0);
-				}
-			    
-				//JDBCCategoryDataset dataset = new JDBCCategoryDataset(BPDatenbank.dbCon(), queryLid);
-				//dataset.setTranspose();
-				
+				}				
 			    JFreeChart Chart = ChartFactory.createBarChart("Zahlungsmittelauswertung", "Datum", "Betrag", dataset, PlotOrientation.VERTICAL, false, true, true);
 				CategoryPlot plot = Chart.getCategoryPlot();
 				BarRenderer renderer = (BarRenderer) plot.getRenderer();
