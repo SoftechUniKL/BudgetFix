@@ -456,32 +456,32 @@ public class Start extends JFrame {
 
 		// Neue Kategorie Label
 		JLabel lblNeueKategorie = new JLabel();
-		lblNeueKategorie.setBounds(440, 130, 160, 34);
+		lblNeueKategorie.setBounds(440, 130, 170, 34);
 		lblNeueKategorie.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Textfeldgross2.png")));
 		contentPane.add(lblNeueKategorie);
 
 		// Transaktionsliste
-		JLabel txtTransaktionsliste = new JLabel("Transaktionsliste");
-		txtTransaktionsliste.setBounds(675, 130, 117, 34);
-		txtTransaktionsliste.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		contentPane.add(txtTransaktionsliste);
+		JLabel txtKBearbeiten = new JLabel("Kategorie bearbeiten");
+		txtKBearbeiten.setBounds(660, 130, 142, 34);
+		txtKBearbeiten.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		contentPane.add(txtKBearbeiten);
 
 		// btnTransaktionsliste
-		JLabel btnTransaktionsliste = new JLabel();
-		btnTransaktionsliste.setBounds(645, 135, 25, 25);
-		btnTransaktionsliste.addMouseListener(new MouseAdapter() {
+		JLabel btnKBearbeiten = new JLabel();
+		btnKBearbeiten.setBounds(630, 135, 25, 25);
+		btnKBearbeiten.addMouseListener(new MouseAdapter() {
 			@Override
 			// Plusbutton wird grau bei drübergehen der Maus
 			public void mouseEntered(MouseEvent arg0) {
-				btnTransaktionsliste.setIcon(new javax.swing.ImageIcon(
+				btnKBearbeiten.setIcon(new javax.swing.ImageIcon(
 						getClass().getResource("/Design/Plus2.png")));
 			}
 
 			// Plusbutton ist blau
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				btnTransaktionsliste.setIcon(new javax.swing.ImageIcon(
+				btnKBearbeiten.setIcon(new javax.swing.ImageIcon(
 						getClass().getResource("/Design/Plus.png")));
 			}
 
@@ -491,7 +491,7 @@ public class Start extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Transaktionsliste frame = new Transaktionsliste(id);
+							KategorieBearbeiten frame = new KategorieBearbeiten();
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -501,16 +501,16 @@ public class Start extends JFrame {
 				});
 			}
 		});
-		btnTransaktionsliste.setIcon(new ImageIcon(Start.class
+		btnKBearbeiten.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Plus.png")));
-		contentPane.add(btnTransaktionsliste);
+		contentPane.add(btnKBearbeiten);
 
 		// lblTransaktionsliste
-		JLabel lblTransaktionsliste = new JLabel();
-		lblTransaktionsliste.setBounds(630, 130, 160, 34);
-		lblTransaktionsliste.setIcon(new ImageIcon(Start.class
+		JLabel lblKBearbeiten = new JLabel();
+		lblKBearbeiten.setBounds(622, 130, 170, 34);
+		lblKBearbeiten.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Textfeldgross2.png")));
-		contentPane.add(lblTransaktionsliste);
+		contentPane.add(lblKBearbeiten);
 
 		// Gesamtbilanz
 		JLabel Gesamtbilanz = new JLabel("Gesamtbilanz:");

@@ -198,7 +198,7 @@ public class KategorieAnlegen extends JFrame {
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 410, 144, 14);
+		btnZurueck.setBounds(170, 390, 144, 14);
 		contentPane.add(btnZurueck);
 
 		// Button Speichern
@@ -228,29 +228,8 @@ public class KategorieAnlegen extends JFrame {
 		});
 		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(170, 330, 144, 38);
+		btnSpeichern.setBounds(170, 350, 144, 38);
 		contentPane.add(btnSpeichern);
-		
-		JLabel btnBearbeiten = new JLabel("New label");
-		btnBearbeiten.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							KategorieBearbeiten frame = new KategorieBearbeiten();
-							frame.setVisible(true);
-							dispose();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnBearbeiten.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Bearbeiten.png")));
-		btnBearbeiten.setBounds(170, 370, 144, 38);
-		contentPane.add(btnBearbeiten);
 
 		// Hintergrund
 		JLabel Hintergrund = new JLabel();
