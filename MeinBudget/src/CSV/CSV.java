@@ -40,10 +40,7 @@ public class CSV {
 				//PreparedStatement pstmt = conn.prepareStatement(sqlQuery2);
 				//pstmt.close();
 				
-				
-			
-			
-			
+
 			DatabaseMetaData meta = conn.getMetaData();
  
 			// Tabellen laden
