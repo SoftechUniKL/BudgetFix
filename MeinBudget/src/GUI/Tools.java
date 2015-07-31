@@ -15,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import CSV.CSV;
 /**
  * Tools BudgetFix:
  * 
@@ -396,8 +398,15 @@ public class Tools extends JFrame {
 		btnDropbox.setBounds(548, 350, 232, 38);
 		contentPane.add(btnDropbox);
 
-		// Button zum exportieren als CSV-Datei
+		//Button zum exportieren als CSV-Datei
+		//Erstellung der CSV im Pfad: \BudgetFix\MeinBudget
 		JLabel btnCSV = new JLabel();
+		btnCSV.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CSV.main(null);
+			}
+		});
 		btnCSV.setIcon(new ImageIcon(Tools.class.getResource("/Design/csv.png")));
 		btnCSV.setBounds(548, 450, 232, 38);
 		contentPane.add(btnCSV);
