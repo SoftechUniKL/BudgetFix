@@ -14,11 +14,10 @@ import Anmelden.AnmeldenFenster;
  * 
  * Beim nächsten Update hoffen wir, dass wir die Probleme beseitigen.
  * Probleme und Bereiche, die leider nicht funktioniert haben, sind:
- * - Wiederholungen
- * - TransaktionenAnlegen
- * - TransaktionenBearbeiten
- * - Transaktionsliste
- * - Tools
+ * 		- Wiederholungen
+ * 		- TransaktionenAnlegen
+ * 		- TransaktionenBearbeiten
+ * 		- Tools
  * 
  * (- Sparziele)
  * 
