@@ -24,6 +24,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * KategorienBearbeiten BudgetFix:
@@ -39,7 +41,7 @@ public class KategorieBearbeiten extends JFrame {
 	private JTextField txtKategorie;
 	
 	Connection conn = null;
-	private String selected;
+	private String auswahl;
 	/**
 	 * Launch the application.
 	 */
@@ -107,12 +109,13 @@ public class KategorieBearbeiten extends JFrame {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 			}
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				String selectedItem = (String) cboBearbeiten.getSelectedItem();
-				System.out.println(selectedItem);
+				
+				
 				try {
-					String selectedItem = (String) cboBearbeiten
+					String selectedItem1 = (String) cboBearbeiten
 							.getSelectedItem();
-					String sql = "SELECT Kategorie,Typ FROM BenutzerKategorien WHERE ( Kategorie ='"+ selectedItem + "') ";
+					System.out.println(selectedItem1);
+					String sql = "SELECT Kategorie,Typ FROM BenutzerKategorien WHERE ( Kategorie ='"+ selectedItem1 + "') ";
 					PreparedStatement stm = conn.prepareStatement(sql);
 					ResultSet result = stm.executeQuery();
 
@@ -201,11 +204,21 @@ public class KategorieBearbeiten extends JFrame {
 
 		// Auswahl Ausgaben
 		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
+		rdbtnAusgaben.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				auswahl = "Ausgaben";
+			}
+		});
 		rdbtnAusgaben.setBounds(222, 230, 145, 30);
 		contentPane.add(rdbtnAusgaben);
 
 		// Auswahl Einnahmen
 		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
+		rdbtnEinnahmen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				auswahl = "Einnahmen";
+			}
+		});
 		rdbtnEinnahmen.setBounds(222, 264, 145, 30);
 		contentPane.add(rdbtnEinnahmen);
 
@@ -213,14 +226,6 @@ public class KategorieBearbeiten extends JFrame {
 		ButtonGroup wahl = new ButtonGroup();
 		wahl.add(rdbtnEinnahmen);
 		wahl.add(rdbtnAusgaben);
-		
-		//Auswahl
-		if(rdbtnEinnahmen.isSelected()){
-			String selected = "Einkommen";
-		}else{
-			String selected = "Ausgaben";
-		}
-
 		
 		// Button Zurück zu Start
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
@@ -231,7 +236,7 @@ public class KategorieBearbeiten extends JFrame {
 					
 					public void run() {
 						try {
-							KategorieAnlegen frame = new KategorieAnlegen();
+							Start frame = new Start(Start.id);
 							frame.setVisible(true);
 							dispose();
 						} catch (Exception e) {
@@ -261,7 +266,7 @@ public class KategorieBearbeiten extends JFrame {
 							pst.setString(1, txtKategorie.getText());
 
 							// Typ
-							pst.setString(3, selected);
+							pst.setString(2, auswahl );
 
 							
 							pst.execute();
