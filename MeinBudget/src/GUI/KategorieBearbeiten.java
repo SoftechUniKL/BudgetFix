@@ -6,19 +6,24 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
 
 /**
  * KategorienBearbeiten BudgetFix:
@@ -32,7 +37,9 @@ public class KategorieBearbeiten extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtKategorie;
-
+	
+	Connection conn = null;
+	private String selected;
 	/**
 	 * Launch the application.
 	 */
@@ -53,6 +60,10 @@ public class KategorieBearbeiten extends JFrame {
 	 * Visualisierungsfenster
 	 */
 	public KategorieBearbeiten() {
+		
+		// Verbindung zur BPDB - Kategorien
+		conn = BPDatenbank.dbCon();
+				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 480);
 		contentPane = new JPanel();
@@ -92,14 +103,61 @@ public class KategorieBearbeiten extends JFrame {
 		contentPane.add(lblBearbeiten);
 		
 		JComboBox cboBearbeiten = new JComboBox();
+		cboBearbeiten.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				String selectedItem = (String) cboBearbeiten.getSelectedItem();
+				System.out.println(selectedItem);
+				try {
+					String selectedItem = (String) cboBearbeiten
+							.getSelectedItem();
+					String sql = "SELECT Kategorie,Typ FROM BenutzerKategorien WHERE ( Kategorie ='"+ selectedItem + "') ";
+					PreparedStatement stm = conn.prepareStatement(sql);
+					ResultSet result = stm.executeQuery();
+
+					if (result.next()) {
+						
+						String add1 = result.getString("Kategorie");
+						txtKategorie.setText(add1);
+						String selected = result.getString("Typ");
+						
+					}
+					result.close();
+					stm.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			}
+		});
 		cboBearbeiten.setFont(new Font("Tahoma", Font.BOLD, 12));
 		cboBearbeiten.setForeground(Color.GRAY);
 		cboBearbeiten.setBounds(222, 85, 145, 30);
 		contentPane.add(cboBearbeiten);
+		
 
+		
+		try {
+			String sql = "SELECT * FROM BenutzerKategorien ";
+			PreparedStatement stm = conn.prepareStatement(sql);
+			ResultSet result = stm.executeQuery();
+
+			while (result.next()) {
+				String kategorie = result.getString("Kategorie");
+				cboBearbeiten.addItem(kategorie);
+			}
+			result.close();
+			stm.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		
 		// Überschrift "Kategorie Anlegen"
 		JLabel lblKategorienAnlegen = new JLabel(
-				"<html><u>Kategorien anlegen</u></html>");
+				"<html><u>Kategorien bearbeiten</u></html>");
 		lblKategorienAnlegen.setForeground(Color.WHITE);
 		lblKategorienAnlegen.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblKategorienAnlegen.setHorizontalAlignment(SwingConstants.CENTER);
@@ -192,12 +250,53 @@ public class KategorieBearbeiten extends JFrame {
 		
 		// Button Speichern
 				JLabel btnSpeichern = new JLabel();
+				btnSpeichern.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						try{
+							String sqlQuery = "INSERT INTO BenutzerKategorien (Kategorie,Typ) VALUES(?,?) ";
+							PreparedStatement pst = conn.prepareStatement(sqlQuery);
+
+							// Kategorie
+							pst.setString(1, txtKategorie.getText());
+
+							// Typ
+							pst.setString(3, selected);
+
+							
+							pst.execute();
+
+							JOptionPane.showMessageDialog(null,
+									"Erfolgreich gespeichert!");
+							
+						}catch (Exception ex) {
+							ex.printStackTrace();
+							}
+					}
+				});
 				btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
 						.getResource("/Design/Speichern.png")));
 				btnSpeichern.setBounds(170, 330, 144, 38);
 				contentPane.add(btnSpeichern);
 		
 		JLabel btnLöschen = new JLabel();
+		btnLöschen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String selectedItem = (String) cboBearbeiten.getSelectedItem();
+				String sql = "DELETE FROM BenutzerKategorien WHERE ( Kategorie='"
+						+ selectedItem + "') ";
+				try {
+					PreparedStatement preS = conn.prepareStatement(sql);
+					preS.execute();
+					preS.close();
+					JOptionPane.showMessageDialog(null,
+							"Eingaben erfolgreich gelöscht!");
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
+		});
 		btnLöschen.setIcon(new ImageIcon(KategorieBearbeiten.class.getResource("/Design/Loeschen.png")));
 		btnLöschen.setBounds(170, 370, 144, 38);
 		contentPane.add(btnLöschen);
