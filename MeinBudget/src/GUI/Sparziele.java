@@ -106,14 +106,6 @@ public class Sparziele extends JFrame {
 		txtMenue.setBounds(130, 50, 150, 34);
 		contentPane.add(txtMenue);
 		
-//Tabelle für Gesamtübersicht		
-		JTable tableGesamt = new JTable();			
-		tableGesamt.setForeground(Color.WHITE);
-		tableGesamt.setFont(new Font("Tahoma", Font.BOLD, 11));
-		tableGesamt.setBounds(50, 107, 200, 200);
-		tableGesamt.setBackground(new Color (27, 109, 220));	
-		contentPane.add(tableGesamt);
-		
 //btnStart		
 		JLabel btnStart = new JLabel();
 		btnStart.addMouseListener(new MouseAdapter() {

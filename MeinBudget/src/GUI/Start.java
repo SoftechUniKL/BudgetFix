@@ -38,7 +38,6 @@ import net.proteanit.sql.DbUtils;
  * 		> Einnahmen & Ausgaben hinzufügen sowie bearbeiten oder löschen
  * 
  * Auf der linken Seite befindet sich das Menü:
- * 		> Gesamtübersicht
  * 		> via Icon-Klick gelangt man zu:
  * 				Wiederholung
  * 				Charts
@@ -144,107 +143,28 @@ public class Start extends JFrame {
 
 		// Button Menue
 		JLabel btnMenue = new JLabel();
-		btnMenue.setBounds(50, 30, 66, 75);
+		btnMenue.setBounds(50, 150, 66, 75);
 		btnMenue.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/Men\u00FC.png")));
 		contentPane.add(btnMenue);
 
 		// lblMenue
 		JLabel Menue = new JLabel("Men\u00FC");
-		Menue.setBounds(130, 50, 150, 34);
+		Menue.setBounds(130, 170, 150, 34);
 		Menue.setFont(new Font("Tahoma", Font.BOLD, 34));
 		Menue.setForeground(Color.WHITE);
 		contentPane.add(Menue);
 		
-//Gesamtübersicht
-		JLabel lblUebersicht = new JLabel("<html><u>Gesamtbilanz:</u><html>");
-		lblUebersicht.setForeground(Color.WHITE);
-		lblUebersicht.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblUebersicht.setBounds(50, 120, 108, 25);
-		contentPane.add(lblUebersicht);
-	
-//Aktueller Monat		
-		JLabel lblMonat = new JLabel("Monat:");
-		lblMonat.setForeground(Color.WHITE);
-		lblMonat.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblMonat.setBounds(50, 160, 108, 25);
-		contentPane.add(lblMonat);	
-		
-//txtMonat		
-		txtMonat = new JTextField();
-		txtMonat.setHorizontalAlignment(SwingConstants.CENTER);
-		txtMonat.setForeground(Color.WHITE);
-		txtMonat.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txtMonat.setColumns(10);
-		txtMonat.setBorder(null);
-		txtMonat.setBackground(new Color (27, 109, 220));
-		txtMonat.setBounds(157, 163, 103, 20);
-		contentPane.add(txtMonat);		
-
-//Vormonat
-		JLabel lblVormonat = new JLabel("Vormonat:");
-		lblVormonat.setForeground(Color.WHITE);
-		lblVormonat.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblVormonat.setBounds(50, 200, 108, 25);
-		contentPane.add(lblVormonat);	
-
-//txtVormonat		
-		txtVormonat = new JTextField();
-		txtVormonat.setHorizontalAlignment(SwingConstants.CENTER);
-		txtVormonat.setForeground(Color.WHITE);
-		txtVormonat.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txtVormonat.setColumns(10);
-		txtVormonat.setBorder(null);
-		txtVormonat.setBackground(new Color (27, 109, 220));
-		txtVormonat.setBounds(157, 203, 103, 20);
-		contentPane.add(txtVormonat);	
-		
-//Aktuelles Jahr
-		JLabel lblJahr = new JLabel("Aktuelles Jahr:");
-		lblJahr.setForeground(Color.WHITE);
-		lblJahr.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblJahr.setBounds(50, 240, 108, 25);
-		contentPane.add(lblJahr);			
-		
-//txtJahr		
-		txtJahr = new JTextField();
-		txtJahr.setHorizontalAlignment(SwingConstants.CENTER);
-		txtJahr.setBackground(new Color (27, 109, 220));
-		txtJahr.setForeground(Color.WHITE);
-		txtJahr.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txtJahr.setBorder(null);
-		txtJahr.setBounds(157, 243, 103, 20);
-		contentPane.add(txtJahr);
-		txtJahr.setColumns(10);
-
-//Gesamt seit Benutzung		
-		JLabel lblBenutzung = new JLabel("Gesamt:");
-		lblBenutzung.setForeground(Color.WHITE);
-		lblBenutzung.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblBenutzung.setBounds(50, 280, 108, 25);
-		contentPane.add(lblBenutzung);			
-		
-//TxtGesamt		
-		txtGesamt = new JTextField();
-		txtGesamt.setHorizontalAlignment(SwingConstants.CENTER);
-		txtGesamt.setForeground(Color.WHITE);
-		txtGesamt.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txtGesamt.setColumns(10);
-		txtGesamt.setBorder(null);
-		txtGesamt.setBackground(new Color (27, 109, 220));
-		txtGesamt.setBounds(157, 283, 103, 20);
-		contentPane.add(txtGesamt);
-		
 		// btnStart
 		JLabel btnStart = new JLabel();
-		btnStart.setBounds(50, 320, 50, 50);
+		btnStart.setBounds(60, 255, 50, 50);
 		btnStart.setIcon(new ImageIcon(Start.class
 				.getResource("/Design/StartBlau.png")));
 		contentPane.add(btnStart);
 
 		// lblStart
 		JLabel lblStart = new JLabel("Start");
-		lblStart.setBounds(110, 332, 80, 25);
+		lblStart.setBounds(120, 267, 80, 25);
 		lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblStart.setForeground(Color.BLUE);
 		contentPane.add(lblStart);
@@ -894,9 +814,9 @@ public class Start extends JFrame {
 
 		// Hintergrund
 		JLabel Hintergrund = new JLabel();
-		Hintergrund.setBounds(-11, -53, 1378, 820);
+		Hintergrund.setBounds(-11, -57, 1378, 820);
 		Hintergrund.setIcon(new ImageIcon(Start.class
-				.getResource("/Design/GUI5.png")));
+				.getResource("/Design/GUI7.png")));
 		contentPane.add(Hintergrund);
 
 		// Deaktivieren des Standard-JFrame Design und lege die Lage in Mitten
@@ -961,22 +881,7 @@ public class Start extends JFrame {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 
-		}
-		
-		try{			
-			String queryMonat = "SELECT  strftime('%m', Datum) AS PerDate, SUM(Betrag) AS MonthBetrag FROM BenutzerAufwendungen WHERE (BenutzerID='"+this.id+"') GROUP BY strftime('%m', Datum) ";
-			PreparedStatement pst = conne.prepareStatement(queryMonat);
-			ResultSet resu = pst.executeQuery();
-			resu.next();
-			String summe5 = resu.getString(1);
-			System.out.println(summe5);
-			
-			
-		}catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		
-		}
-			
+		}	
 	}
 	
 }
