@@ -253,6 +253,7 @@ public class KategorieBearbeiten extends JFrame {
 		contentPane.add(btnZurueck);
 		
 		
+		
 		// Button Speichern
 				JLabel btnSpeichern = new JLabel();
 				btnSpeichern.addMouseListener(new MouseAdapter() {

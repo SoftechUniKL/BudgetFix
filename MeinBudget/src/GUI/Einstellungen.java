@@ -35,6 +35,7 @@ public class Einstellungen extends JFrame {
 
 	Connection connect = null;
 	Connection connection = null;
+	Connection connecti = null;
 
 	static int id;
 	private static final long serialVersionUID = 1L;
@@ -74,7 +75,7 @@ public class Einstellungen extends JFrame {
 		connection = BPDatenbank.dbCon();
 		
 		connect = Anmelden.AnmeldeDatenbank.dbCon();
-		connection = Anmelden.AnmeldeDatenbank.dbCon();
+		connecti = Anmelden.AnmeldeDatenbank.dbCon();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 985, 707);
@@ -497,21 +498,10 @@ public class Einstellungen extends JFrame {
 				accountlöschen();
 			}
 
-			private void accountlöschen() {
-				String Benutzername=textField.getText().toString();
-				String sql = "DELETE FROM Benutzer WHERE ( Username='"
-						+ Benutzername + "') ";
-				try {
-					PreparedStatement preS = connect.prepareStatement(sql);
-					preS.execute();
-					preS.close();
-					JOptionPane.showMessageDialog(null,
-							"Account erfolgreich gelöscht!");
-				} catch (Exception exc) {
-					exc.printStackTrace();
-				}
-			}
+			
+			
 		});
+		
 		btnAccount.setIcon(new ImageIcon(Einstellungen.class.getResource("/Design/Account.png")));
 		btnAccount.setBounds(584, 530, 163, 38);
 		contentPane.add(btnAccount);
@@ -624,6 +614,19 @@ public class Einstellungen extends JFrame {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
 	}
+		private void accountlöschen() {
+			String Benutzern=textField.getText().toString();
+			String sql = "DELETE FROM Benutzer WHERE ( Benutzername='"
+					+ Benutzern + "') ";
+			try {
+				PreparedStatement preS = connecti.prepareStatement(sql);
+				preS.execute();
+				preS.close();
+				JOptionPane.showMessageDialog(null,
+						"Account erfolgreich gelöscht!");
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
+			}
 }

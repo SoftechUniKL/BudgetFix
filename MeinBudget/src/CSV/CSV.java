@@ -33,9 +33,11 @@ public class CSV {
 			
 			
 				String sqlQuery = "CREATE VIEW MeineAusgaben AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE (BenutzerID='2') ";
+				PreparedStatement stm = conn.prepareStatement(sqlQuery);
+				stm.close();
 				String sqlQuery2 ="CREATE VIEW MeineEinnahmen AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerErträge WHERE (BenutzerID='2') ";
-				//PreparedStatement stm = conn.prepareStatement(sqlQuery);
-				//PreparedStatement pstmt = conn.prepareStatement(sqlQuery2);
+				
+				PreparedStatement pstmt = conn.prepareStatement(sqlQuery2);
 				//ResultSet result = stm.executeQuery();
 				//ResultSet rs = pstmt.executeQuery();
 				
@@ -80,9 +82,9 @@ public class CSV {
 			}
 			
 			//result.close();
-			//stm.close();
+			
 			//rs.close();
-			//pstmt.close();
+			pstmt.close();
 			conn.close();
 		} catch (Exception e) {
 			System.out.println("---> Verbindung zur Budget-Datenbank gescheitert!");
