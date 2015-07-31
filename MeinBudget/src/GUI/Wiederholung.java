@@ -79,7 +79,7 @@ public class Wiederholung extends JFrame {
 		connection = BPDatenbank.dbCon();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 985, 704);
+		setBounds(100, 100, 980, 704);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -107,20 +107,20 @@ public class Wiederholung extends JFrame {
 		});
 		contentPane.setLayout(null);
 		btnSchliessen.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/schliessengross.png")));
-		btnSchliessen.setBounds(930, 15, 40, 40);
+		btnSchliessen.setBounds(925, 15, 40, 40);
 		contentPane.add(btnSchliessen);
 
 //Button Menue		
 		JLabel btnMenue = new JLabel();
 		btnMenue.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Men\u00FC.png")));
-		btnMenue.setBounds(50, 30, 66, 75);
+		btnMenue.setBounds(50, 150, 66, 75);
 		contentPane.add(btnMenue);
 		
 //lblMenue		
 		JLabel txtMenue = new JLabel("Men\u00FC");
 		txtMenue.setFont(new Font("Tahoma", Font.BOLD, 34));
 		txtMenue.setForeground(Color.WHITE);
-		txtMenue.setBounds(130, 50, 150, 34);
+		txtMenue.setBounds(130, 170, 150, 34);
 		contentPane.add(txtMenue);
 
 //btnStart		
@@ -153,27 +153,27 @@ public class Wiederholung extends JFrame {
 			}
 		});
 		btnStart.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Start.png")));
-		btnStart.setBounds(50, 320, 50, 50);
+		btnStart.setBounds(60, 255, 50, 50);
 		contentPane.add(btnStart);
 		
 //lblStart
 		JLabel lblStart = new JLabel("Start");
 		lblStart.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblStart.setForeground(Color.WHITE);
-		lblStart.setBounds(110, 332, 80, 25);
+		lblStart.setBounds(120, 267, 80, 25);
 		contentPane.add(lblStart);
 		
 //Button Wiederholung		
 		JLabel btnWiederholung = new JLabel();
 		btnWiederholung.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/WiederholungenBlau.png")));
-		btnWiederholung.setBounds(50, 380, 50, 50);
+		btnWiederholung.setBounds(60, 315, 50, 50);
 		contentPane.add(btnWiederholung);
 		
 //lblWiederholung für fixe Beträge		
 		JLabel lblWiederholung = new JLabel("Wiederholung");
 		lblWiederholung.setForeground(Color.BLUE);
 		lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblWiederholung.setBounds(110, 392, 174, 25);
+		lblWiederholung.setBounds(120, 327, 174, 25);
 		contentPane.add(lblWiederholung);
 		
 //Button Charts		
@@ -206,14 +206,14 @@ public class Wiederholung extends JFrame {
 			}
 		});
 		btnCharts.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Charts.png")));
-		btnCharts.setBounds(50, 440, 50, 50);
+		btnCharts.setBounds(60, 375, 50, 50);
 		contentPane.add(btnCharts);
 		
 //lblCharts		
 		JLabel lblCharts = new JLabel("Charts");
 		lblCharts.setForeground(Color.WHITE);
 		lblCharts.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCharts.setBounds(110, 452, 174, 25);
+		lblCharts.setBounds(120, 387, 174, 25);
 		contentPane.add(lblCharts);
 		
 //Button Sparziele		
@@ -246,14 +246,14 @@ public class Wiederholung extends JFrame {
 			}
 		});
 		btnSparziele.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Sparziele.png")));
-		btnSparziele.setBounds(50, 500, 50, 50);
+		btnSparziele.setBounds(60, 435, 50, 50);
 		contentPane.add(btnSparziele);
 		
 //lblSparziele		
 		JLabel lblSparziele = new JLabel("Sparziele");
 		lblSparziele.setForeground(Color.WHITE);
 		lblSparziele.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblSparziele.setBounds(110, 512, 174, 25);
+		lblSparziele.setBounds(120, 447, 174, 25);
 		contentPane.add(lblSparziele);
 		
 //Button Tools		
@@ -286,14 +286,14 @@ public class Wiederholung extends JFrame {
 			}
 		});
 		btnTools.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Tools.png")));
-		btnTools.setBounds(50, 560, 50, 50);
+		btnTools.setBounds(60, 495, 50, 50);
 		contentPane.add(btnTools);
 		
 //lblTools		
 		JLabel lblTools = new JLabel("Tools");
 		lblTools.setForeground(Color.WHITE);
 		lblTools.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblTools.setBounds(110, 572, 174, 25);
+		lblTools.setBounds(120, 507, 174, 25);
 		contentPane.add(lblTools);
 		
 //Button Einstellungen		
@@ -326,7 +326,7 @@ public class Wiederholung extends JFrame {
 			}
 		});
 		btnEinstellungen.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/Einstellungen.png")));
-		btnEinstellungen.setBounds(50, 620, 50, 50);
+		btnEinstellungen.setBounds(60, 555, 50, 50);
 		contentPane.add(btnEinstellungen);
 		
 //lblEinstellungen		
@@ -334,7 +334,7 @@ public class Wiederholung extends JFrame {
 		lblEinstellungen.setIcon(null);
 		lblEinstellungen.setForeground(Color.WHITE);
 		lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblEinstellungen.setBounds(110, 632, 174, 25);
+		lblEinstellungen.setBounds(120, 567, 174, 25);
 		contentPane.add(lblEinstellungen);
 		
 		
@@ -434,8 +434,8 @@ public class Wiederholung extends JFrame {
 		
 //Hintergrund		
 		JLabel Hintergrund = new JLabel();
-		Hintergrund.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/GUI4.png")));
-		Hintergrund.setBounds(0, -52, 985, 807);
+		Hintergrund.setIcon(new ImageIcon(Wiederholung.class.getResource("/Design/GUI6.png")));
+		Hintergrund.setBounds(-5, -50, 985, 807);
 		contentPane.add(Hintergrund);
 		
 

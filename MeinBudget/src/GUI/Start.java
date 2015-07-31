@@ -114,7 +114,7 @@ public class Start extends JFrame {
 
 		// Button Schliessen
 		final JLabel btnSchliessen = new JLabel();
-		btnSchliessen.setBounds(1280, 20, 40, 40);
+		btnSchliessen.setBounds(1280, 15, 40, 40);
 		btnSchliessen.addMouseListener(new MouseAdapter() {
 			@Override
 			// Schliessenbutton in grau
@@ -171,7 +171,7 @@ public class Start extends JFrame {
 
 		// Button Wiederholung
 		JLabel btnWiederholung = new JLabel();
-		btnWiederholung.setBounds(50, 380, 50, 50);
+		btnWiederholung.setBounds(60, 315, 50, 50);
 		btnWiederholung.addMouseListener(new MouseAdapter() {
 			@Override
 			// Wiederholung öffnet sich Bild
@@ -210,14 +210,14 @@ public class Start extends JFrame {
 
 		// lblWiederholung für fixe Beträge
 		JLabel lblWiederholung = new JLabel("Wiederholung");
-		lblWiederholung.setBounds(110, 392, 174, 25);
+		lblWiederholung.setBounds(120, 327, 174, 25);
 		lblWiederholung.setForeground(Color.WHITE);
 		lblWiederholung.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(lblWiederholung);
 
 		// Button Charts
 		JLabel btnCharts = new JLabel();
-		btnCharts.setBounds(50, 440, 50, 50);
+		btnCharts.setBounds(60, 375, 50, 50);
 		btnCharts.addMouseListener(new MouseAdapter() {
 			@Override
 			// Charts öffnet sich
@@ -255,14 +255,14 @@ public class Start extends JFrame {
 
 		// lblCharts
 		JLabel lblCharts = new JLabel("Charts");
-		lblCharts.setBounds(110, 452, 174, 25);
+		lblCharts.setBounds(120, 387, 174, 25);
 		lblCharts.setForeground(Color.WHITE);
 		lblCharts.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(lblCharts);
 
 		// Button Sparziele
 		JLabel btnSparziele = new JLabel();
-		btnSparziele.setBounds(50, 500, 50, 50);
+		btnSparziele.setBounds(60, 435, 50, 50);
 		btnSparziele.addMouseListener(new MouseAdapter() {
 			// Sparziele öffnet sich
 			@Override
@@ -300,14 +300,14 @@ public class Start extends JFrame {
 
 		// lblSparziele
 		JLabel lblSparziele = new JLabel("Sparziele");
-		lblSparziele.setBounds(110, 512, 174, 25);
+		lblSparziele.setBounds(120, 447, 174, 25);
 		lblSparziele.setForeground(Color.WHITE);
 		lblSparziele.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(lblSparziele);
 
 		// Button Tools
 		JLabel btnTools = new JLabel("New label");
-		btnTools.setBounds(50, 560, 50, 50);
+		btnTools.setBounds(60, 495, 50, 50);
 		btnTools.addMouseListener(new MouseAdapter() {
 			@Override
 			// Tools öffnet sich Bild
@@ -345,14 +345,14 @@ public class Start extends JFrame {
 
 		// lblTools
 		JLabel lblTools = new JLabel("Tools");
-		lblTools.setBounds(110, 572, 174, 25);
+		lblTools.setBounds(120, 507, 174, 25);
 		lblTools.setForeground(Color.WHITE);
 		lblTools.setFont(new Font("Tahoma", Font.BOLD, 20));
 		contentPane.add(lblTools);
 
 		// Button Einstellungen
 		JLabel btnEinstellungen = new JLabel();
-		btnEinstellungen.setBounds(50, 620, 50, 50);
+		btnEinstellungen.setBounds(60, 555, 50, 50);
 		btnEinstellungen.addMouseListener(new MouseAdapter() {
 			@Override
 			// Einstellungen öffnet sich Bild
@@ -390,7 +390,7 @@ public class Start extends JFrame {
 
 		// lblEinstellungen
 		JLabel lblEinstellungen = new JLabel("Einstellungen");
-		lblEinstellungen.setBounds(110, 632, 174, 25);
+		lblEinstellungen.setBounds(120, 567, 174, 25);
 		lblEinstellungen.setIcon(null);
 		lblEinstellungen.setForeground(Color.WHITE);
 		lblEinstellungen.setFont(new Font("Tahoma", Font.BOLD, 20));
