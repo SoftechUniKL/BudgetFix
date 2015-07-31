@@ -5,3 +5,4 @@ id;Datum;Bezeichnung;Kategorie;Art;Betrag;BenutzerID;Bemerkung;
 4;2015-06-01;Sparkasse Sparbuch;Zinsertrag;variabel;5;2;;
 5;2015-06-03;Uni;Gehalt;fix;300;4;;
 6;2015-07-09;Mama;Taschengeld;variabel;100;2;für den Urlaub;
+7;2015-06-30;Bafög;Gehalt;variabel;210.15;2;;

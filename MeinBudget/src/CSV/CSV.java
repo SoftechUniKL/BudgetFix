@@ -32,14 +32,13 @@ public class CSV {
 			conn = DriverManager.getConnection("jdbc:sqlite:src/BudgetPlan/Budget‹bersicht");	
 			
 			
-				String sqlQuery = "CREATE VIEW MeineAusgaben AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE (BenutzerID='2') ";
-				PreparedStatement stm = conn.prepareStatement(sqlQuery);
-				stm.close();
-				String sqlQuery2 ="CREATE VIEW MeineEinnahmen AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerErtr‰ge WHERE (BenutzerID='2') ";
+				//String sqlQuery = "CREATE VIEW MeineAusgaben AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE (BenutzerID='2') ";
+				//PreparedStatement stm = conn.prepareStatement(sqlQuery);
+				//stm.close();
+				//String sqlQuery2 ="CREATE VIEW MeineEinnahmen AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerErtr‰ge WHERE (BenutzerID='2') ";
 				
-				PreparedStatement pstmt = conn.prepareStatement(sqlQuery2);
-				//ResultSet result = stm.executeQuery();
-				//ResultSet rs = pstmt.executeQuery();
+				//PreparedStatement pstmt = conn.prepareStatement(sqlQuery2);
+				//pstmt.close();
 				
 				
 			
@@ -48,7 +47,7 @@ public class CSV {
 			DatabaseMetaData meta = conn.getMetaData();
  
 			// Tabellen laden
-			ResultSet resGetTables = meta.getTables(null, null, null, new String[] { "VIEW" });
+			ResultSet resGetTables = meta.getTables(null, null, null, new String[] { "TABLE" });
 			Collection<String> collectionTables = new ArrayList<String>();
 			while (resGetTables.next()) {
 				collectionTables.add(resGetTables.getString("TABLE_NAME"));
@@ -81,10 +80,7 @@ public class CSV {
 				JOptionPane.showMessageDialog(null, "CSV erfolgreich erstellt!" );
 			}
 			
-			//result.close();
 			
-			//rs.close();
-			pstmt.close();
 			conn.close();
 		} catch (Exception e) {
 			System.out.println("---> Verbindung zur Budget-Datenbank gescheitert!");

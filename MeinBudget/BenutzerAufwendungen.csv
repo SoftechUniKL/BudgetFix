@@ -4,5 +4,5 @@ id;Datum;Bezeichnung;Kategorie;Art;Betrag;BenutzerID;Bemerkung;
 3;2015-06-30;Steuer;Auto;fix;81;2;null;
 4;2015-06-01;Miete;Wohnung/ Haus;fix;280;3;null;
 5;2015-06-01;Miete;Wohnung/ Haus;fix;250;4;null;
-7;2015-07-14;Tanken;Auto;variabel;20.56;2;Jet;
+7;2015-07-14;Tanken;Auto;variabel;30.85;2;Jet;
 8;2015-07-01;Studiengebüren;Tägliches Leben;variabel;220;2;Uni;
