@@ -32,7 +32,7 @@ public class CSV {
 			conn = DriverManager.getConnection("jdbc:sqlite:src/BudgetPlan/Budget‹bersicht");	
 			
 			
-				//String sqlQuery = "CREATE VIEW MeineAusgaben AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE (BenutzerID='2') ";
+				String sqlQuery = "CREATE TEMP VIEW MeineAusgaben AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerAufwendungen WHERE (BenutzerID='2') ";
 				//PreparedStatement stm = conn.prepareStatement(sqlQuery);
 				//stm.close();
 				//String sqlQuery2 ="CREATE VIEW MeineEinnahmen AS SELECT Datum,Bezeichnung,Kategorie,Art,Betrag,Bemerkung FROM BenutzerErtr‰ge WHERE (BenutzerID='2') ";
