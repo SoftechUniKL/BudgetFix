@@ -228,8 +228,29 @@ public class KategorieAnlegen extends JFrame {
 		});
 		btnSpeichern.setIcon(new ImageIcon(KategorieAnlegen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(170, 372, 144, 38);
+		btnSpeichern.setBounds(170, 330, 144, 38);
 		contentPane.add(btnSpeichern);
+		
+		JLabel btnBearbeiten = new JLabel("New label");
+		btnBearbeiten.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							KategorieBearbeiten frame = new KategorieBearbeiten();
+							frame.setVisible(true);
+							dispose();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnBearbeiten.setIcon(new ImageIcon(KategorieAnlegen.class.getResource("/Design/Bearbeiten.png")));
+		btnBearbeiten.setBounds(170, 370, 144, 38);
+		contentPane.add(btnBearbeiten);
 
 		// Hintergrund
 		JLabel Hintergrund = new JLabel();
