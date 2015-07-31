@@ -14,6 +14,13 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Impressum BudgetFix
+ * 
+ * @author Que Ly Dong
+ * 
+ */
+
 public class Impressum extends JFrame {
 
 	private JPanel contentPane;

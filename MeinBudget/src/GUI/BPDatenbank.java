@@ -3,6 +3,15 @@ package GUI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * BPDatenbank BudgetFix:
+ * Verbindung mit der SQLite, wo die Budget‹bersicht der Ausgaben und Einnahmen hinterlegt sind
+ * 
+ * 
+ * @author Patric Kleine
+ * 
+ */
+
 public class BPDatenbank {
 
 	static Connection conn = null;

@@ -23,6 +23,15 @@ import javax.swing.event.PopupMenuListener;
 
 import com.toedter.calendar.JDateChooser;
 
+/**
+ * Hinzufügen der Ausgaben BudgetFix:
+ * 
+ * Hier kann man seine Ausgaben hinzugefügen. Diese wird direkt in der Tabelle im Start-Fenster ausgelesen
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class HinzufuegenAusgaben extends JFrame {
 
 	Connection connection = null;
@@ -51,7 +60,7 @@ public class HinzufuegenAusgaben extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public HinzufuegenAusgaben(int id) {
 
@@ -309,43 +318,4 @@ public class HinzufuegenAusgaben extends JFrame {
 		setLocationRelativeTo(null);
 
 	}
-
-	/*
-	 * public void neueAusgaben(String ausgewaelteKategorie, String datum1) {
-	 * 
-	 * 
-	 * try{
-	 * 
-	 * String sqlQuery =
-	 * "INSERT INTO BenutzerAufwendungen (Datum,Bezeichnung,Kategorie,Art,Betrag,BenutzerID,Bemerkung) VALUES(?,?,?,?,?,?,?) "
-	 * ; PreparedStatement pst = connection.prepareStatement(sqlQuery);
-	 * 
-	 * //Datum pst.setString(1, datum1);
-	 * 
-	 * //Bezeichnung pst.setString(2, txtBezeichnung.getText());
-	 * 
-	 * //Kategorie
-	 * 
-	 * pst.setString(3, ausgewaelteKategorie);
-	 * 
-	 * //Art pst.setString(4, "variabel");
-	 * 
-	 * //Betrag pst.setString(5, txtBetrag.getText());
-	 * 
-	 * //BenutzerID pst.setLong(6, id);
-	 * 
-	 * //Bemerkung pst.setString(7, txtBemerkung.getText() );
-	 * 
-	 * 
-	 * pst.execute();
-	 * 
-	 * JOptionPane.showMessageDialog(null, "Erfolgreich gespeichert!");
-	 * 
-	 * 
-	 * }catch(Exception ex){ ex.printStackTrace(); }
-	 * 
-	 * 
-	 * }
-	 */
-
 }

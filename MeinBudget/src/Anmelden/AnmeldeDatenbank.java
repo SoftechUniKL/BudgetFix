@@ -2,6 +2,15 @@ package Anmelden;
 
 import java.sql.*;
 
+/**
+ * AnmeldeDatenbank BudgetFix:
+ *
+ * Verbindung mit der SQLite zu Anmeldedatenbank, dort wo die Benutzer hinterlegt sind
+ * 
+ * @author Patric Kleine
+ * 
+ */
+
 public class AnmeldeDatenbank {
 
 	static Connection con = null;

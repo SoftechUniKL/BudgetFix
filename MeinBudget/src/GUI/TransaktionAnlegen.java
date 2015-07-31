@@ -30,6 +30,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * TransaktionenAnlegen BudgetFix:
+ * 
+ * Hier kann man seine Ausgaben und Einnahmen als fixe Beiträge festsetzen.
+ * Man kann im Fenster einige Sachen auslesen, jedoch haben wir Probleme gehabt,
+ * die Beträge z.B. monatlich automatisch ausgeben zu lassen.
+ * 
+ * Auch hier hoffen wir mit dem nächsten Update des Programms auf mehr.
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class TransaktionAnlegen extends JFrame {
 
 	private JPanel contentPane;
@@ -61,7 +74,7 @@ public class TransaktionAnlegen extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public TransaktionAnlegen(int id) {
 		
@@ -144,7 +157,7 @@ public class TransaktionAnlegen extends JFrame {
 		JLabel Kategorie = new JLabel("Kategorie:");
 		Kategorie.setForeground(Color.WHITE);
 		Kategorie.setFont(new Font("Tahoma", Font.BOLD, 14));
-		Kategorie.setBounds(75, 122, 118, 27);
+		Kategorie.setBounds(75, 112, 118, 27);
 		contentPane.add(Kategorie);
 
 		// Kategorie Combobox, die bereits angelegten Kategorien hier als
@@ -160,7 +173,7 @@ public class TransaktionAnlegen extends JFrame {
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 			}
 		});
-		cboKategorie.setBounds(222, 120, 183, 30);
+		cboKategorie.setBounds(222, 110, 183, 30);
 		contentPane.add(cboKategorie);
 		try {
 			String sql = "SELECT * FROM BenutzerKategorien ";
@@ -181,7 +194,7 @@ public class TransaktionAnlegen extends JFrame {
 		JLabel lblIntervall = new JLabel("Intervall:");
 		lblIntervall.setForeground(Color.WHITE);
 		lblIntervall.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblIntervall.setBounds(75, 172, 118, 27);
+		lblIntervall.setBounds(75, 152, 118, 27);
 		contentPane.add(lblIntervall);
 
 		// Intervall-Feld --> Soll Zahlen eingeben können
@@ -191,15 +204,8 @@ public class TransaktionAnlegen extends JFrame {
 		txtIntervall.setColumns(10);
 		txtIntervall.setBorder(null);
 		txtIntervall.setBackground(Color.WHITE);
-		txtIntervall.setBounds(222, 170, 54, 30);
+		txtIntervall.setBounds(222, 150, 54, 30);
 		contentPane.add(txtIntervall);
-
-		// lblIntervall
-		JLabel lblIntervallEingeben = new JLabel();
-		lblIntervallEingeben.setIcon(new ImageIcon(TransaktionAnlegen.class
-				.getResource("/Design/Textfeldgross.png")));
-		lblIntervallEingeben.setBounds(222, 170, 55, 30);
-		contentPane.add(lblIntervallEingeben);
 
 		// Hier kann man Auswählen zwischen Tag, Woche, Monat, Jahr
 		//String intervall
@@ -215,27 +221,27 @@ public class TransaktionAnlegen extends JFrame {
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 			}
 		});
-		cboIntervall.setBounds(285, 170, 120, 30);
+		cboIntervall.setBounds(285, 150, 120, 30);
 		contentPane.add(cboIntervall);
 
 		// Nächste Fälligkeit
 		JLabel lblNchsteFlligkeit = new JLabel("N\u00E4chste F\u00E4lligkeit:");
 		lblNchsteFlligkeit.setForeground(Color.WHITE);
 		lblNchsteFlligkeit.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNchsteFlligkeit.setBounds(75, 222, 135, 27);
+		lblNchsteFlligkeit.setBounds(75, 192, 135, 27);
 		contentPane.add(lblNchsteFlligkeit);
 
 		// Datum auswählen
 		JDateChooser Datum = new JDateChooser();
 		Datum.setDateFormatString("yyyy-MM-dd");
-		Datum.setBounds(222, 220, 183, 30);
+		Datum.setBounds(222, 190, 183, 30);
 		contentPane.add(Datum);
 
 		// Betrag
 		JLabel lblBetrag = new JLabel("Betrag:");
 		lblBetrag.setForeground(Color.WHITE);
 		lblBetrag.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBetrag.setBounds(75, 272, 118, 27);
+		lblBetrag.setBounds(75, 232, 118, 27);
 		contentPane.add(lblBetrag);
 
 		// Betrag-Textfeld --> Einnahmen/Ausgaben
@@ -245,7 +251,7 @@ public class TransaktionAnlegen extends JFrame {
 		txtBetrag.setColumns(10);
 		txtBetrag.setBorder(null);
 		txtBetrag.setBackground(Color.WHITE);
-		txtBetrag.setBounds(222, 270, 183, 30);
+		txtBetrag.setBounds(222, 230, 183, 30);
 		contentPane.add(txtBetrag);
 
 		// lblBetrag
@@ -257,7 +263,7 @@ public class TransaktionAnlegen extends JFrame {
 		JLabel lblBemerkung = new JLabel("Bemerkung:");
 		lblBemerkung.setForeground(Color.WHITE);
 		lblBemerkung.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBemerkung.setBounds(75, 322, 118, 27);
+		lblBemerkung.setBounds(75, 272, 118, 27);
 		contentPane.add(lblBemerkung);
 
 		// Bemerkung-Textfeld
@@ -267,7 +273,7 @@ public class TransaktionAnlegen extends JFrame {
 		txtBemerkung.setColumns(10);
 		txtBemerkung.setBorder(null);
 		txtBemerkung.setBackground(Color.WHITE);
-		txtBemerkung.setBounds(222, 320, 183, 30);
+		txtBemerkung.setBounds(222, 270, 183, 30);
 		contentPane.add(txtBemerkung);
 
 		// lblBemerkung
@@ -282,7 +288,7 @@ public class TransaktionAnlegen extends JFrame {
 				auswahl = "Ausgaben";
 			}
 		});
-		rdbtnAusgaben.setBounds(222, 370, 84, 23);
+		rdbtnAusgaben.setBounds(222, 315, 88, 23);
 		contentPane.add(rdbtnAusgaben);
 		
 		JRadioButton rdbtnEinnahmen = new JRadioButton("Einnahmen");
@@ -291,7 +297,7 @@ public class TransaktionAnlegen extends JFrame {
 				auswahl = "Einnahmen";
 			}
 		});
-		rdbtnEinnahmen.setBounds(321, 370, 84, 23);
+		rdbtnEinnahmen.setBounds(222, 341, 88, 23);
 		contentPane.add(rdbtnEinnahmen);
 		
 		// Radiobutton in Group zusammenfassen
@@ -388,12 +394,12 @@ public class TransaktionAnlegen extends JFrame {
 		JLabel lblTyp = new JLabel("Typ:");
 		lblTyp.setForeground(Color.WHITE);
 		lblTyp.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTyp.setBounds(75, 360, 118, 27);
+		lblTyp.setBounds(75, 312, 118, 27);
 		contentPane.add(lblTyp);
 		
 		btnSpeichern.setIcon(new ImageIcon(TransaktionAnlegen.class
 				.getResource("/Design/Speichern.png")));
-		btnSpeichern.setBounds(175, 405, 144, 38);
+		btnSpeichern.setBounds(175, 390, 144, 38);
 		contentPane.add(btnSpeichern);
 
 		// btnZurueck
@@ -417,7 +423,7 @@ public class TransaktionAnlegen extends JFrame {
 		btnZurueck.setHorizontalAlignment(SwingConstants.CENTER);
 		btnZurueck.setForeground(Color.WHITE);
 		btnZurueck.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnZurueck.setBounds(170, 445, 144, 14);
+		btnZurueck.setBounds(175, 428, 144, 14);
 		contentPane.add(btnZurueck);
 		
 		

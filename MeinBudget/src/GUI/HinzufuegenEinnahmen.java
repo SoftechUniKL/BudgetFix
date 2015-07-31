@@ -25,6 +25,15 @@ import javax.swing.event.PopupMenuListener;
 
 import com.toedter.calendar.JDateChooser;
 
+/**
+ * Hinzufügen der Einnahmen BudgetFix:
+ * 
+ * Hier kann man seine Einnahmen hinzugefügen. Diese wird direkt in der Tabelle im Start-Fenster ausgelesen
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class HinzufuegenEinnahmen extends JFrame {
 
 	Connection connection = null;
@@ -53,7 +62,7 @@ public class HinzufuegenEinnahmen extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public HinzufuegenEinnahmen(int id) {
 

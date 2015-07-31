@@ -31,6 +31,20 @@ import java.awt.event.InputMethodEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
+/**
+ * TransaktionsListe BudgetFix:
+ * 
+ * Hier hat man ein Übersicht der fixen Beträge.
+ * Man kann auch nach Datum auswählen und die fixen Beiträge einsehen.
+ * Vorausgesetzt an dem Tag wurde was eingetragen.
+ * 
+ * Leider hat es nicht funktioniert.
+ * Auch hier hoffen wir mit dem nächsten Update des Programms auf mehr.
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class Transaktionsliste extends JFrame {
 
 	private JPanel contentPane;
@@ -55,7 +69,7 @@ public class Transaktionsliste extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public Transaktionsliste(int id) {
 		

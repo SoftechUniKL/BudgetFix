@@ -15,6 +15,20 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+/**
+ * Tools BudgetFix:
+ * 
+ * Hier kann man seine Übersicht speichern:
+ * 		> in Cloud synchronisieren lassen
+ * 		> in die Dropbox hinzufügen
+ * 		> als CSV.Datei speichern
+ * 
+ * Leider hatten wir hier einige Schwierigkeiten und hoffen auf den nächsten Update auf Erfolg.
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 
 public class Tools extends JFrame {
 
@@ -44,7 +58,7 @@ public class Tools extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public Tools(int id) {
 		

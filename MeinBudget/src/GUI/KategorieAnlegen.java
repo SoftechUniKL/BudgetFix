@@ -25,6 +25,17 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * KategorieAnlegen BudgetFix:
+ * 
+ * Hier kann man seine Kategorien anlegen.
+ * Mit dem nächsten Update klappt bestimmt die Auswahl zu den Icons - work in process.
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
+
 public class KategorieAnlegen extends JFrame {
 
 	Connection connection = null;
@@ -50,10 +61,7 @@ public class KategorieAnlegen extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
-	/**
-	 * 
+	 * Visualisierungsfenster
 	 */
 	public KategorieAnlegen() {
 
@@ -135,8 +143,6 @@ public class KategorieAnlegen extends JFrame {
 		Typ.setFont(new Font("Tahoma", Font.BOLD, 14));
 		Typ.setBounds(100, 230, 91, 27);
 		contentPane.add(Typ);
-
-		
 		
 		// Auswahl Ausgaben
 		JRadioButton rdbtnAusgaben = new JRadioButton("Ausgaben");
@@ -166,37 +172,11 @@ public class KategorieAnlegen extends JFrame {
 		// Auswahl
 		if (rdbtnEinnahmen.isSelected()) {
 			System.out.println("Einkommen");
-			// String selected =rdbtnEinnahmen.getText().toString(); String
-			// selection = "Einkommen";
 		} else {
-			// System.out.println("Ausgabe"); //String selected =
 		}
 		rdbtnAusgaben.getText().toString();
-		// System.out.println(selected);
-		// String selected = "Ausgaben";
-		 
 
-//		// Combobox für Einnahme oder Ausgabe
-//		String[] strWahl = { "Einkommen", "Ausgabe" };
-//		JComboBox cboTyp = new JComboBox(strWahl);
-//		cboTyp.setFont(new Font("Tahoma", Font.BOLD, 11));
-//		cboTyp.setBorder(null);
-//		cboTyp.setBounds(222, 230, 145, 30);
-//		contentPane.add(cboTyp);
-//		cboTyp.addPopupMenuListener(new PopupMenuListener() {
-//			public void popupMenuCanceled(PopupMenuEvent e) {
-//			}
-//
-//			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-//				String selectedItem = (String) cboTyp.getSelectedItem();
-//				System.out.println(selectedItem);
-//			}
-//
-//			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-//			}
-//		});
-
-		// Button Zurück zu z.B. Start
+		// Button Zurück zu Start
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
 			@Override
@@ -235,8 +215,6 @@ public class KategorieAnlegen extends JFrame {
 					pst.setString(1, txtKategorie.getText());
 
 					// Typ
-				//	String ausgewaelteKategorie = cboTyp.getSelectedItem()
-				//			.toString();
 					pst.setString(2, auswahl);
 
 					pst.execute();

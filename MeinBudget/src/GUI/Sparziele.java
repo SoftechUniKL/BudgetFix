@@ -26,7 +26,7 @@ import Sparkonto.SparzielEingabefenster;
 
 /**
  * Sparziele BudgetFix:
- * 
+ * work in process ...
  * 
  * 
  * @author: Patrick Drucks

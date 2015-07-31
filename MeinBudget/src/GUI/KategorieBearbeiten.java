@@ -20,6 +20,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 
+/**
+ * KategorienBearbeiten BudgetFix:
+ * Die Kategorien, die ausversehen falsch eingegeben worden sind, können hier verändert werden
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class KategorieBearbeiten extends JFrame {
 
 	private JPanel contentPane;
@@ -42,7 +50,7 @@ public class KategorieBearbeiten extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public KategorieBearbeiten() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -143,13 +151,11 @@ public class KategorieBearbeiten extends JFrame {
 		rdbtnEinnahmen.setBounds(222, 264, 145, 30);
 		contentPane.add(rdbtnEinnahmen);
 
-					//rdbtnAusgaben.setSelected(true);
 		//Radiobutton in Group zusammenfassen
 		ButtonGroup wahl = new ButtonGroup();
 		wahl.add(rdbtnEinnahmen);
 		wahl.add(rdbtnAusgaben);
 		
-					//JRadioButton selectedButton = (JRadioButton)wahl.getSelection();
 		//Auswahl
 		if(rdbtnEinnahmen.isSelected()){
 			String selected = "Einkommen";
@@ -158,7 +164,7 @@ public class KategorieBearbeiten extends JFrame {
 		}
 
 		
-		// Button Zurück zu z.B. Start
+		// Button Zurück zu Start
 		JLabel btnZurueck = new JLabel("<html><u>Zur\u00FCck</u></html>");
 		btnZurueck.addMouseListener(new MouseAdapter() {
 			@Override

@@ -32,6 +32,21 @@ import java.sql.ResultSet;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
 
+/**
+ * TransaktionenBearbeiten BudgetFix:
+ * 
+ * Hier kann man seine Ausgaben und Einnahmen als fixe Beiträge bearbeiten oder löschen,
+ * die man versehentlich falsch eingegeben werden.
+ * 
+ * Man kann im Fenster einige Sachen auslesen, jedoch haben wir Probleme gehabt,
+ * die Beträge z.B. monatlich automatisch ausgeben zu lassen.
+ * 
+ * Auch hier hoffen wir mit dem nächsten Update des Programms auf mehr.
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class TransaktionBearbeiten extends JFrame {
 
 	private JPanel contentPane;
@@ -62,7 +77,7 @@ public class TransaktionBearbeiten extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public TransaktionBearbeiten(int id) {
 		

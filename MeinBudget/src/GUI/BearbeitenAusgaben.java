@@ -23,6 +23,17 @@ import javax.swing.event.PopupMenuListener;
 
 import com.toedter.calendar.JDateChooser;
 
+/**
+ * Bearbeiten der Ausgaben BudgetFix:
+ * 
+ * Hier kann man seine Ausgaben bearbeiten, die man ausversehen falsch eingetragen hat
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
+
+
 public class BearbeitenAusgaben extends JFrame {
 
 	Connection connection = null;
@@ -53,7 +64,7 @@ public class BearbeitenAusgaben extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public BearbeitenAusgaben(int id) {
 

@@ -23,6 +23,15 @@ import javax.swing.event.PopupMenuListener;
 
 import com.toedter.calendar.JDateChooser;
 
+/**
+ * Bearbeiten der Einnahmen BudgetFix:
+ * 
+ * Hier kann man seine Einnahmen bearbeiten, die man ausversehen falsch eingetragen hat
+ * 
+ * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
+ * 
+ */
+
 public class BearbeitenEinnahmen extends JFrame {
 
 	Connection connection = null;
@@ -54,7 +63,7 @@ public class BearbeitenEinnahmen extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Visualisierungsfenster
 	 */
 	public BearbeitenEinnahmen(int id) {
 
