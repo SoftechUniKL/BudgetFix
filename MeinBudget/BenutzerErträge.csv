@@ -1,0 +1,7 @@
+id;Datum;Bezeichnung;Kategorie;Art;Betrag;BenutzerID;Bemerkung;
+1;2015-06-01;Eltern;Unterhalt;fix;2000;2;null;
+2;2015-06-01;Uni;Gehalt;fix;250;3;IT-Service;
+3;2015-06-01;Bafög;Bafög;fix;200;3;null;
+4;2015-06-01;Sparkasse Sparbuch;Zinsertrag;variabel;5;2;;
+5;2015-06-03;Uni;Gehalt;fix;300;4;;
+6;2015-07-09;Mama;Taschengeld;variabel;100;2;für den Urlaub;

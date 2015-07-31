@@ -1,0 +1,8 @@
+id;Datum;Bezeichnung;Kategorie;Art;Betrag;BenutzerID;Bemerkung;
+1;2015-06-01;Miete;Wohnung/ Haus;fix;300;2;null;
+2;2015-06-05;LIDL;Tägliches Leben;variabel;56.59;2;Einkauf;
+3;2015-06-30;Steuer;Auto;fix;81;2;null;
+4;2015-06-01;Miete;Wohnung/ Haus;fix;280;3;null;
+5;2015-06-01;Miete;Wohnung/ Haus;fix;250;4;null;
+7;2015-07-14;Tanken;Auto;variabel;20.56;2;Jet;
+8;2015-07-01;Studiengebüren;Tägliches Leben;variabel;220;2;Uni;
