@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
  * 		> in die Dropbox hinzufügen
  * 		> als CSV.Datei speichern
  * 
+ * Nur CSV.Datei klappt.
  * Leider hatten wir hier einige Schwierigkeiten und hoffen auf den nächsten Update auf Erfolg.
  * 
  * @author Zusammenarbeit: Que Ly Dong & Patric Kleine
